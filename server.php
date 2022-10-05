@@ -16,6 +16,7 @@ $uri = urldecode(
 // application without having installed a "real" web server software here.
 if ($uri !== '/' && file_exists(__DIR__.'/public'.$uri)) {
     return false; // serve the requested resource as-is.
+    //Hola
 }
  
 require_once __DIR__.'/public/index.php';
