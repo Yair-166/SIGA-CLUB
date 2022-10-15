@@ -6,7 +6,7 @@
 @section('content')
     @component('components.breadcrumb')
         @slot('li_1') Apps @endslot
-        @slot('title') Calendar @endslot
+        @slot('title') Calendario @endslot
     @endcomponent
     <div class="row">
         <div class="col-12">
@@ -15,34 +15,31 @@
                     <div class="card card-h-100">
                         <div class="card-body">
                             <button class="btn btn-primary w-100" id="btn-new-event"><i
-                                    class="mdi mdi-plus"></i> Create New Event</button>
+                                    class="mdi mdi-plus"></i> Crear evento</button>
 
                             <div id="external-events">
                                 <br>
-                                <p class="text-muted">Drag and drop your event or click in the calendar</p>
+                                <p class="text-muted">Arrastra y suelta tu evento o haz clic en el calendario</p>
                                 <div class="external-event fc-event bg-soft-success text-success" data-class="bg-soft-success">
-                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>New Event
-                                    Planning
+                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>planificación de nuevo evento 
                                 </div>
                                 <div class="external-event fc-event bg-soft-info text-info" data-class="bg-soft-info">
-                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Meeting
+                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Reunion
                                 </div>
                                 <div class="external-event fc-event bg-soft-warning text-warning" data-class="bg-soft-warning">
                                     <i
-                                        class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Generating
-                                    Reports
+                                        class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Generación de reportes
                                 </div>
                                 <div class="external-event fc-event bg-soft-danger text-danger" data-class="bg-soft-danger">
-                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Create
-                                    New theme
+                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Crear nuevo tema
                                 </div>
                             </div>
 
                         </div>
                     </div>
                     <div>
-                        <h5 class="mb-1">Upcoming Events</h5>
-                        <p class="text-muted">Don't miss scheduled events</p>
+                        <h5 class="mb-1">Proximos eventos</h5>
+                        <p class="text-muted">No te pierdas los eventos programados</p>
                         <div class="pe-2 me-n1 mb-3" data-simplebar style="height: 400px">
                             <div id="upcoming-event-list"></div>
                         </div>
@@ -55,8 +52,8 @@
                                     <i data-feather="calendar" class="text-info icon-dual-info"></i>
                                 </div>
                                 <div class="flex-grow-1 ms-3">
-                                    <h6 class="fs-15">Welcome to your Calendar!</h6>
-                                    <p class="text-muted mb-0">Event that applications book will appear here. Click on an event to see the details and manage applicants event.</p>
+                                    <h6 class="fs-15">Bienvenido al calendario</h6>
+                                    <p class="text-muted mb-0">Los eventos que agende se mostrarán aqui. Haga clic en un evento para ver los detalles y administrar el evento de los solicitantes.</p>
                                 </div>
                             </div>
                         </div>
@@ -126,30 +123,30 @@
                                 <div class="row event-form">
                                     <div class="col-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Type</label>
+                                            <label class="form-label">Tipo</label>
                                             <select class="form-select d-none" name="category" id="event-category"  required>
-                                                <option value="bg-soft-danger">Danger</option>
-                                                <option value="bg-soft-success">Success</option>
-                                                <option value="bg-soft-primary">Primary</option>
-                                                <option value="bg-soft-info">Info</option>
-                                                <option value="bg-soft-dark">Dark</option>
-                                                <option value="bg-soft-warning">Warning</option>
+                                                <option value="bg-soft-danger">Peligro</option>
+                                                <option value="bg-soft-success">Éxito</option>
+                                                <option value="bg-soft-primary">Primario</option>
+                                                <option value="bg-soft-info">Información</option>
+                                                <option value="bg-soft-dark">Obscuro</option>
+                                                <option value="bg-soft-warning">Advertencia</option>
                                             </select>
-                                            <div class="invalid-feedback">Please select a valid event category</div>
+                                            <div class="invalid-feedback">Por favor, seleccione una categoria valia</div>
                                         </div>
                                     </div><!--end col-->
                                     <div class="col-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Event Name</label>
-                                            <input class="form-control d-none" placeholder="Enter event name" type="text" name="title" id="event-title" required value="" />
-                                            <div class="invalid-feedback">Please provide a valid event name</div>
+                                            <label class="form-label">Nombre del evento</label>
+                                            <input class="form-control d-none" placeholder="Nombre del evento" type="text" name="title" id="event-title" required value="" />
+                                            <div class="invalid-feedback">Proporcione un nombre de evento válido</div>
                                         </div>
                                     </div><!--end col-->
                                     <div class="col-12">
                                         <div class="mb-3">
-                                            <label>Event Date</label>
+                                            <label>Fecha del evento</label>
                                             <div class="input-group d-none">
-                                                <input type="text" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Select date" readonly required>
+                                                <input type="text" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Seleccione una fecha" readonly required>
                                                 <span class="input-group-text"><i class="ri-calendar-event-line"></i></span>
                                             </div>
                                         </div>
@@ -158,19 +155,19 @@
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label">Start Time</label>
+                                                    <label class="form-label">Hora de inicio</label>
                                                     <div class="input-group d-none">
                                                         <input id="timepicker1" type="text"
-                                                            class="form-control flatpickr flatpickr-input" placeholder="Select start time" readonly>
+                                                            class="form-control flatpickr flatpickr-input" placeholder="Seleccione la hora de inicio" readonly>
                                                         <span class="input-group-text"><i class="ri-time-line"></i></span>
                                                     </div>
                                                 </div>
                                             </div>
                                             <div class="col-6">
                                                 <div class="mb-3">
-                                                    <label class="form-label">End Time</label>
+                                                    <label class="form-label">Hora de fin</label>
                                                     <div class="input-group d-none">
-                                                        <input id="timepicker2" type="text" class="form-control flatpickr flatpickr-input" placeholder="Select end time" readonly>
+                                                        <input id="timepicker2" type="text" class="form-control flatpickr flatpickr-input" placeholder="Seleccione la hora de fin" readonly>
                                                         <span class="input-group-text"><i class="ri-time-line"></i></span>
                                                     </div>
                                                 </div>
@@ -179,23 +176,23 @@
                                     </div><!--end col-->
                                     <div class="col-12">
                                         <div class="mb-3">
-                                            <label for="event-location">Location</label>
+                                            <label for="event-location">Lugar del evento</label>
                                             <div>
-                                                <input type="text" class="form-control d-none" name="event-location" id="event-location" placeholder="Event location">
+                                                <input type="text" class="form-control d-none" name="event-location" id="event-location" placeholder="Lugar del evento">
                                             </div>
                                         </div>
                                     </div><!--end col-->
                                     <input type="hidden" id="eventid" name="eventid" value="" />
                                     <div class="col-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Description</label>
-                                            <textarea class="form-control d-none" id="event-description" placeholder="Enter a description" rows="3" spellcheck="false"></textarea>
+                                            <label class="form-label">Descripción</label>
+                                            <textarea class="form-control d-none" id="event-description" placeholder="Descripción del evento" rows="3" spellcheck="false"></textarea>
                                         </div>
                                     </div><!--end col-->
                                 </div><!--end row-->
                                 <div class="hstack gap-2 justify-content-end">
-                                    <button type="button" class="btn btn-soft-danger" id="btn-delete-event"><i class="ri-close-line align-bottom"></i> Delete</button>
-                                    <button type="submit" class="btn btn-success" id="btn-save-event">Add Event</button>
+                                    <button type="button" class="btn btn-soft-danger" id="btn-delete-event"><i class="ri-close-line align-bottom"></i> Borrar</button>
+                                    <button type="submit" class="btn btn-success" id="btn-save-event">Agregar evento</button>
                                 </div>
                             </form>
                         </div>
