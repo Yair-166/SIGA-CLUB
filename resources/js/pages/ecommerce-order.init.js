@@ -7,7 +7,7 @@ File: Ecommerce-order Init Js File
 */
 
 var str_dt = function formatDate(date) {
-    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var monthNames = ["Enr", "Feb", "Mar", "Abr", "Mayo", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
     var d = new Date(date),
         time_s = (d.getHours() + ':' + d.getMinutes());
     var t = time_s.split(":");

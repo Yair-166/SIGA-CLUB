@@ -307,7 +307,7 @@ if (chartHeatMapColors) {
         max: 55
       })
     }, {
-      name: 'May',
+      name: 'Mayo',
       data: generateData(20, {
         min: -30,
         max: 55

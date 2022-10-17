@@ -563,7 +563,7 @@ if (barchartColors) {
             horizontalAlign: 'right',
         },
         xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug'],
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mayo', 'Jun', 'Jul', 'Aug'],
             labels: {
                 rotate: -90
             }
@@ -610,7 +610,7 @@ if (linechartBasicColors) {
         },
         colors: linechartBasicColors,
         xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mayo', 'Jun', 'Jul', 'Aug', 'Sep'],
         }
     };
 

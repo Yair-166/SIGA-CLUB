@@ -40,15 +40,15 @@ try {
     }
   };
 
-  var setEndDate1 = "March 19, 2024 6:0:0";
-  var setEndDate2 = "April 16, 2023 5:3:1";
+  var setEndDate1 = "Marzo 19, 2024 6:0:0";
+  var setEndDate2 = "Abril 16, 2023 5:3:1";
   var setEndDate3 = "Dec 01, 2023 1:0:1";
   var setEndDate4 = "Nov 26, 2024 1:2:1";
-  var setEndDate5 = "May 27, 2023 1:6:6";
-  var setEndDate6 = "May 20, 2023 2:5:5";
+  var setEndDate5 = "Mayo 27, 2023 1:6:6";
+  var setEndDate6 = "Mayo 20, 2023 2:5:5";
   var setEndDate7 = "June 10, 2023 5:1:4";
   var setEndDate8 = "June 25, 2023 1:6:3";
-  var setEndDate9 = "July 08, 2023 1:5:2";
+  var setEndDate9 = "Julio 08, 2023 1:5:2";
   var cdd1 = startCountDownDate(setEndDate1);
   var cdd2 = startCountDownDate(setEndDate2);
   var cdd3 = startCountDownDate(setEndDate3);

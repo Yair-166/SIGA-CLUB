@@ -103,7 +103,7 @@
                       </div>
                       <div class="timeline-item right">
                           <i class="icon ri-shield-star-line"></i>
-                          <div class="date">18 May 2021</div>
+                          <div class="date">18 Mayo 2021</div>
                           <div class="content shadow-none">
                               <h5>Donald Palmer <small class="text-muted fs-13 fw-normal">- Has changed 2 attributes</small></h5>
                               <p class="text-muted fst-italic mb-2">" This is an awesome admin dashboard template. It is extremely well structured and uses state of the art components (e.g. one of the only templates using boostrap 5.1.3 so far). I integrated it into a Rails 6 project. Needs manual integration work of course but the template structure made it easy. "</p>
@@ -301,7 +301,7 @@
                                   <div class="card pt-2 border-0 item-box text-center">
                                       <div class="timeline-content p-3 rounded">
                                           <div>
-                                              <p class="text-muted fw-medium mb-0">December, 2020</p>
+                                              <p class="text-muted fw-medium mb-0">Diciembre, 2020</p>
                                               <h6 class="mb-0">Plateform Development</h6>
                                           </div>
                                       </div>
@@ -312,7 +312,7 @@
                                   <div class="card pt-2 border-0 item-box text-center">
                                       <div class="timeline-content p-3 rounded">
                                           <div>
-                                              <p class="text-muted mb-1">January, 2021</p>
+                                              <p class="text-muted mb-1">Enero, 2021</p>
                                               <h6 class="mb-0">Release Bank & Cards Phase</h6>
                                           </div>
                                       </div>
@@ -323,7 +323,7 @@
                                   <div class="card pt-2 border-0 item-box text-center">
                                       <div class="timeline-content p-3 rounded">
                                           <div>
-                                              <p class="text-muted mb-1">March, 2021</p>
+                                              <p class="text-muted mb-1">Marzo, 2021</p>
                                               <h6 class="mb-0">Beta Launch of Plateform</h6>
                                           </div>
                                       </div>
@@ -334,7 +334,7 @@
                                   <div class="card pt-2 border-0 item-box text-center">
                                       <div class="timeline-content p-3 rounded">
                                           <div>
-                                              <p class="text-muted mb-1">April, 2021</p>
+                                              <p class="text-muted mb-1">Abril, 2021</p>
                                               <h6 class="mb-0">First Crypto Bank Transfers</h6>
                                           </div>
                                       </div>
@@ -345,7 +345,7 @@
                                   <div class="card pt-2 border-0 item-box text-center">
                                       <div class="timeline-content p-3 rounded">
                                           <div>
-                                              <p class="text-muted mb-1">May, 2021</p>
+                                              <p class="text-muted mb-1">Mayo, 2021</p>
                                               <h6 class="mb-0">Launch Ethbay Services</h6>
                                           </div>
                                       </div>
@@ -367,7 +367,7 @@
                                   <div class="card pt-2 border-0 item-box text-center">
                                       <div class="timeline-content p-3 rounded">
                                           <div>
-                                              <p class="text-muted mb-1">July, 2021</p>
+                                              <p class="text-muted mb-1">Julio, 2021</p>
                                               <h6 class="mb-0">Crypto Blockchain Release</h6>
                                           </div>
                                       </div>
@@ -378,7 +378,7 @@
                                   <div class="card pt-2 border-0 item-box text-center">
                                       <div class="timeline-content p-3 rounded">
                                           <div>
-                                              <p class="text-muted mb-1">August, 2021</p>
+                                              <p class="text-muted mb-1">Agosto, 2021</p>
                                               <h6 class="mb-0">Launch Ethereum Classifieds</h6>
                                           </div>
                                       </div>

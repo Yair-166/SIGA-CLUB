@@ -529,8 +529,8 @@ var options = {
             }
         }],
         yaxis: [{
-            y: 'July',
-            y2: 'September',
+            y: 'Julio',
+            y2: 'Septiembre',
             label: {
                 text: 'Y annotation'
             }
@@ -546,7 +546,7 @@ var options = {
         enabled: true
     },
     xaxis: {
-        categories: ['June', 'July', 'August', 'September', 'October', 'November', 'December'],
+        categories: ['June', 'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre'],
     },
     grid: {
         xaxis: {

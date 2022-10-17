@@ -9,7 +9,7 @@ File: CRM-leads Js File
 
 // list js
 function formatDate(date) {
-    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun",
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "Mayo", "Jun",
         "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"
     ];
     var d = new Date(date),

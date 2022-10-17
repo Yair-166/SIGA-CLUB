@@ -773,7 +773,7 @@ Loading...
                     </div>
                 </div><!-- end card header -->
                 <div class="card-body">
-                    <p class="text-muted">Use <code >btn</code> class with different HTML elements. (though some browsers may apply a slightly different rendering)<p>
+                    <p class="text-muted">Use <code >btn</code> class with different HTML elements. (though some browsers Mayo apply a slightly different rendering)<p>
                     <div class="live-preview">
                         <div class="d-flex flex-wrap gap-2">
                             <a class="btn btn-primary waves-effect waves-light" href="#" role="button">Link</a>

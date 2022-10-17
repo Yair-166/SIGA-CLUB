@@ -72,7 +72,7 @@ if (linechartBasicColors) {
         },
 
         xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep'],
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mayo', 'Jun', 'Jul', 'Aug', 'Sep'],
         }
     };
 
@@ -588,7 +588,7 @@ if (linechartDatalabelColors) {
             size: 6
         },
         xaxis: {
-            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+            categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mayo', 'Jun', 'Jul'],
             title: {
                 text: 'Month'
             }

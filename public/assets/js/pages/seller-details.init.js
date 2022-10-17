@@ -74,7 +74,7 @@ if (TableProductListAll) {
       limit: 10
     },
     sort: true,
-    data: [[["img-1.png", "Half Sleeve Round Neck T-Shirts", "Clothes"], "12", "$ 115.00", "48", "4.2", ["12 Oct, 2021", "10:05 AM"]], [["img-2.png", "Urban Ladder Pashe Chair", "Furniture"], "06", "$ 160.00", "30", "4.3", ["06 Jan, 2021", "01:31 PM"]], [["img-3.png", "350 ml Glass Grocery Container", "Kitchen Storage & Containers"], "10", "$ 25.00", "48", "4.5", ["26 Mar, 2021", "11:40 AM"]], [["img-4.png", "Fabric Dual Tone Living Room Chair", "Furniture"], "15", "$ 140.00", "40", "4.2", ["19 Apr, 2021", "02:51 PM"]], [["img-5.png", "Crux Motorsports Helmet", "Bike Accessories"], "08", "$ 135.00", "55", "4.4", ["30 Mar, 2021", "09:42 AM"]], [["img-6.png", "Half Sleeve T-Shirts (Blue)", "Clothes"], "15", "$ 125.00", "48", "4.2", ["12 Oct, 2021", "04:55 PM"]], [["img-7.png", "Noise Evolve Smartwatch", "Watches"], "12", "$ 95.00", "45", "4.3", ["15 May, 2021", "03:40 PM"]], [["img-8.png", "Sweatshirt for Men (Pink)", "Clothes"], "20", "$ 120.00", "48", "4.2", ["21 Jun, 2021", "12:18 PM"]], [["img-9.png", "Reusable Ecological Coffee Cup", "Tableware & Dinnerware"], "14", "$ 125.00", "55", "4.3", ["15 Jan, 2021", "10:29 AM"]], [["img-10.png", "Travel Carrying Pouch Bag", "Bags, Wallets and Luggage"], "20", "$ 115.00", "60", "4.3", ["15 Jun, 2021", "03:51 Pm"]], [["img-1.png", "Half Sleeve Round Neck T-Shirts", "Clothes"], "12", "$ 115.00", "48", "4.2", ["12 Oct, 2021", "10:05 AM"]], [["img-2.png", "Urban Ladder Pashe Chair", "Furniture"], "06", "$ 160.00", "30", "4.3", ["06 Jan, 2021", "01:31 PM"]]]
+    data: [[["img-1.png", "Half Sleeve Round Neck T-Shirts", "Clothes"], "12", "$ 115.00", "48", "4.2", ["12 Oct, 2021", "10:05 AM"]], [["img-2.png", "Urban Ladder Pashe Chair", "Furniture"], "06", "$ 160.00", "30", "4.3", ["06 Jan, 2021", "01:31 PM"]], [["img-3.png", "350 ml Glass Grocery Container", "Kitchen Storage & Containers"], "10", "$ 25.00", "48", "4.5", ["26 Mar, 2021", "11:40 AM"]], [["img-4.png", "Fabric Dual Tone Living Room Chair", "Furniture"], "15", "$ 140.00", "40", "4.2", ["19 Apr, 2021", "02:51 PM"]], [["img-5.png", "Crux Motorsports Helmet", "Bike Accessories"], "08", "$ 135.00", "55", "4.4", ["30 Mar, 2021", "09:42 AM"]], [["img-6.png", "Half Sleeve T-Shirts (Blue)", "Clothes"], "15", "$ 125.00", "48", "4.2", ["12 Oct, 2021", "04:55 PM"]], [["img-7.png", "Noise Evolve Smartwatch", "Watches"], "12", "$ 95.00", "45", "4.3", ["15 Mayo, 2021", "03:40 PM"]], [["img-8.png", "Sweatshirt for Men (Pink)", "Clothes"], "20", "$ 120.00", "48", "4.2", ["21 Jun, 2021", "12:18 PM"]], [["img-9.png", "Reusable Ecological Coffee Cup", "Tableware & Dinnerware"], "14", "$ 125.00", "55", "4.3", ["15 Jan, 2021", "10:29 AM"]], [["img-10.png", "Travel Carrying Pouch Bag", "Bags, Wallets and Luggage"], "20", "$ 115.00", "60", "4.3", ["15 Jun, 2021", "03:51 Pm"]], [["img-1.png", "Half Sleeve Round Neck T-Shirts", "Clothes"], "12", "$ 115.00", "48", "4.2", ["12 Oct, 2021", "10:05 AM"]], [["img-2.png", "Urban Ladder Pashe Chair", "Furniture"], "06", "$ 160.00", "30", "4.3", ["06 Jan, 2021", "01:31 PM"]]]
   }).render(document.getElementById("table-product-list-all"));
 } // get colors array from the string
 
@@ -148,7 +148,7 @@ if (linechartcustomerColors) {
       }
     },
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      categories: ["Jan", "Feb", "Mar", "Apr", "Mayo", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       axisTicks: {
         show: false
       },

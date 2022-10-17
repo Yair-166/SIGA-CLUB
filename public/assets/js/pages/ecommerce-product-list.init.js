@@ -113,7 +113,7 @@ var productListAllData = [{
   "orders": "45",
   "rating": "4.3",
   "published": {
-    "publishDate": "15 May, 2021",
+    "publishDate": "15 Mayo, 2021",
     "publishTime": "03:40 PM"
   }
 }, {

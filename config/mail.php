@@ -8,7 +8,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This option controls the default mailer that is used to send any email
-    | messages sent by your application. Alternative mailers may be setup
+    | messages sent by your application. Alternative mailers Mayo be setup
     | and used as needed; however, this mailer will be used by default.
     |
     */
@@ -20,7 +20,7 @@ return [
     | Mailer Configurations
     |--------------------------------------------------------------------------
     |
-    | Here you may configure all of the mailers used by your application plus
+    | Here you Mayo configure all of the mailers used by your application plus
     | their respective settings. Several examples have been configured for
     | you and you are free to add your own as your application requires.
     |
@@ -85,8 +85,8 @@ return [
     | Global "From" Address
     |--------------------------------------------------------------------------
     |
-    | You may wish for all e-mails sent by your application to be sent from
-    | the same address. Here, you may specify a name and address that is
+    | You Mayo wish for all e-mails sent by your application to be sent from
+    | the same address. Here, you Mayo specify a name and address that is
     | used globally for all e-mails that are sent by your application.
     |
     */
@@ -101,9 +101,9 @@ return [
     | Markdown Mail Settings
     |--------------------------------------------------------------------------
     |
-    | If you are using Markdown based email rendering, you may configure your
+    | If you are using Markdown based email rendering, you Mayo configure your
     | theme and component paths here, allowing you to customize the design
-    | of the emails. Or, you may simply stick with the Laravel defaults!
+    | of the emails. Or, you Mayo simply stick with the Laravel defaults!
     |
     */
 

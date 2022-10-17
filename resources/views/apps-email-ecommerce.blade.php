@@ -49,7 +49,7 @@
                                                             </th>
                                                             <th style="padding: 5px;">
                                                                 <p style="color: #878a99; font-size: 13px; margin-bottom: 2px; font-weight: 400;">Order Date</p>
-                                                                <span>05 April, 2022</span>
+                                                                <span>05 Abril, 2022</span>
                                                             </th>
                                                             <th style="padding: 5px;">
                                                                 <p style="color: #878a99; font-size: 13px; margin-bottom: 2px; font-weight: 400;">Payment Method</p>

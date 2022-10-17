@@ -219,7 +219,7 @@ if (chartAudienceColumnChartsColors) {
     },
     colors: chartAudienceColumnChartsColors,
     xaxis: {
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mayo', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
       axisTicks: {
         show: false
       },
@@ -381,7 +381,7 @@ if (chartHeatMapColors) {
         max: 55
       })
     }, {
-      name: 'May',
+      name: 'Mayo',
       data: generateData(20, {
         min: -30,
         max: 55

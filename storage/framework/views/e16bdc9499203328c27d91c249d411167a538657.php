@@ -585,7 +585,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -1192,7 +1192,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -1799,7 +1799,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -2403,7 +2403,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -3010,7 +3010,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -3618,7 +3618,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -4224,7 +4224,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -4833,7 +4833,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -5442,7 +5442,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -6803,7 +6803,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -7412,7 +7412,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -8021,7 +8021,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -9241,7 +9241,7 @@ Must be 8-20 characters long.
                                 <h5 class="fs-15">Wrapping</h5>
                                 <p class="text-muted">Input groups wrap by default via
                                     <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                    validation within an input group. You may disable this with
+                                    validation within an input group. You Mayo disable this with
                                     <code>flex-nowrap</code> class.
                                 </p>
                                 <div class="input-group flex-nowrap">
@@ -9853,7 +9853,7 @@ Must be 8-20 characters long.
                                 <h5 class="fs-15">Wrapping</h5>
                                 <p class="text-muted">Input groups wrap by default via
                                     <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                    validation within an input group. You may disable this with
+                                    validation within an input group. You Mayo disable this with
                                     <code>flex-nowrap</code> class.
                                 </p>
                                 <div class="input-group flex-nowrap">
@@ -10465,7 +10465,7 @@ Must be 8-20 characters long.
                                 <h5 class="fs-15">Wrapping</h5>
                                 <p class="text-muted">Input groups wrap by default via
                                     <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                    validation within an input group. You may disable this with
+                                    validation within an input group. You Mayo disable this with
                                     <code>flex-nowrap</code> class.
                                 </p>
                                 <div class="input-group flex-nowrap">
@@ -12276,7 +12276,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -12885,7 +12885,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -13494,7 +13494,7 @@ Must be 8-20 characters long.
                             <h5 class="fs-15">Wrapping</h5>
                             <p class="text-muted">Input groups wrap by default via
                                 <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                validation within an input group. You may disable this with
+                                validation within an input group. You Mayo disable this with
                                 <code>flex-nowrap</code> class.
                             </p>
                             <div class="input-group flex-nowrap">
@@ -14714,7 +14714,7 @@ Must be 8-20 characters long.
                                 <h5 class="fs-15">Wrapping</h5>
                                 <p class="text-muted">Input groups wrap by default via
                                     <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                    validation within an input group. You may disable this with
+                                    validation within an input group. You Mayo disable this with
                                     <code>flex-nowrap</code> class.
                                 </p>
                                 <div class="input-group flex-nowrap">
@@ -15326,7 +15326,7 @@ Must be 8-20 characters long.
                                 <h5 class="fs-15">Wrapping</h5>
                                 <p class="text-muted">Input groups wrap by default via
                                     <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                    validation within an input group. You may disable this with
+                                    validation within an input group. You Mayo disable this with
                                     <code>flex-nowrap</code> class.
                                 </p>
                                 <div class="input-group flex-nowrap">
@@ -15938,7 +15938,7 @@ Must be 8-20 characters long.
                                 <h5 class="fs-15">Wrapping</h5>
                                 <p class="text-muted">Input groups wrap by default via
                                     <code>flex-wrap: wrap</code> in order to accommodate custom form field
-                                    validation within an input group. You may disable this with
+                                    validation within an input group. You Mayo disable this with
                                     <code>flex-nowrap</code> class.
                                 </p>
                                 <div class="input-group flex-nowrap">

@@ -36,28 +36,28 @@
                                     <tr>
                                         <th scope="row"><a href="#" class="fw-medium">#VZ2110</a></th>
                                         <td>Bobby Davis</td>
-                                        <td>October 15, 2021</td>
+                                        <td>Octubre 15, 2021</td>
                                         <td>$2,300</td>
                                         <td><a href="javascript:void(0);" class="link-success">View More <i class="ri-arrow-right-line align-middle"></i></a></td>
                                     </tr>
                                     <tr>
                                         <th scope="row"><a href="#" class="fw-medium">#VZ2109</a></th>
                                         <td>Christopher Neal</td>
-                                        <td>October 7, 2021</td>
+                                        <td>Octubre 7, 2021</td>
                                         <td>$5,500</td>
                                         <td><a href="javascript:void(0);" class="link-success">View More <i class="ri-arrow-right-line align-middle"></i></a></td>
                                     </tr>
                                     <tr>
                                         <th scope="row"><a href="#" class="fw-medium">#VZ2108</a></th>
                                         <td>Monkey Karry</td>
-                                        <td>October 5, 2021</td>
+                                        <td>Octubre 5, 2021</td>
                                         <td>$2,420</td>
                                         <td><a href="javascript:void(0);" class="link-success">View More <i class="ri-arrow-right-line align-middle"></i></a></td>
                                     </tr>
                                     <tr>
                                         <th scope="row"><a href="#" class="fw-medium">#VZ2107</a></th>
                                         <td>James White</td>
-                                        <td>October 2, 2021</td>
+                                        <td>Octubre 2, 2021</td>
                                         <td>$7,452</td>
                                         <td><a href="javascript:void(0);" class="link-success">View More <i class="ri-arrow-right-line align-middle"></i></a></td>
                                     </tr>
@@ -81,28 +81,28 @@
 &lt;tr&gt;
 &lt;th scope=&quot;row&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;fw-semibold&quot;&gt;#VZ2110&lt;/a&gt;&lt;/th&gt;
 &lt;td&gt;Bobby Davis&lt;/td&gt;
-&lt;td&gt;October 15, 2021&lt;/td&gt;
+&lt;td&gt;Octubre 15, 2021&lt;/td&gt;
 &lt;td&gt;$2,300&lt;/td&gt;
 &lt;td&gt;&lt;a href=&quot;javascript:void(0);&quot; class=&quot;link-success&quot;&gt;View More &lt;i class=&quot;ri-arrow-right-line align-middle&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;th scope=&quot;row&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;fw-semibold&quot;&gt;#VZ2109&lt;/a&gt;&lt;/th&gt;
 &lt;td&gt;Christopher Neal&lt;/td&gt;
-&lt;td&gt;October 7, 2021&lt;/td&gt;
+&lt;td&gt;Octubre 7, 2021&lt;/td&gt;
 &lt;td&gt;$5,500&lt;/td&gt;
 &lt;td&gt;&lt;a href=&quot;javascript:void(0);&quot; class=&quot;link-success&quot;&gt;View More &lt;i class=&quot;ri-arrow-right-line align-middle&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;th scope=&quot;row&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;fw-semibold&quot;&gt;#VZ2108&lt;/a&gt;&lt;/th&gt;
 &lt;td&gt;Monkey Karry&lt;/td&gt;
-&lt;td&gt;October 5, 2021&lt;/td&gt;
+&lt;td&gt;Octubre 5, 2021&lt;/td&gt;
 &lt;td&gt;$2,420&lt;/td&gt;
 &lt;td&gt;&lt;a href=&quot;javascript:void(0);&quot; class=&quot;link-success&quot;&gt;View More &lt;i class=&quot;ri-arrow-right-line align-middle&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
 &lt;th scope=&quot;row&quot;&gt;&lt;a href=&quot;#&quot; class=&quot;fw-semibold&quot;&gt;#VZ2107&lt;/a&gt;&lt;/th&gt;
 &lt;td&gt;James White&lt;/td&gt;
-&lt;td&gt;October 2, 2021&lt;/td&gt;
+&lt;td&gt;Octubre 2, 2021&lt;/td&gt;
 &lt;td&gt;$7,452&lt;/td&gt;
 &lt;td&gt;&lt;a href=&quot;javascript:void(0);&quot; class=&quot;link-success&quot;&gt;View More &lt;i class=&quot;ri-arrow-right-line align-middle&quot;&gt;&lt;/i&gt;&lt;/a&gt;&lt;/td&gt;
 &lt;/tr&gt;

@@ -55,7 +55,7 @@ if (chartRadarBasicColors) {
     },
     colors: chartRadarBasicColors,
     xaxis: {
-      categories: ['January', 'February', 'March', 'April', 'May', 'June']
+      categories: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'June']
     }
   };
   var chart = new ApexCharts(document.querySelector("#basic_radar"), options);
@@ -153,7 +153,7 @@ if (chartRadarPolyradarColors) {
       }
     },
     xaxis: {
-      categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+      categories: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
     },
     yaxis: {
       tickAmount: 7,

@@ -43,7 +43,7 @@ islinechart.setAttribute("width", islinechart.parentElement.offsetWidth);
 var lineChart = new Chart(islinechart, {
     type: 'line',
     data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July", "August", "September", "October"],
+        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "June", "Julio", "Agosto", "Septiembre", "Octubre"],
         datasets: [
             {
                 label: "Sales Analytics",
@@ -127,7 +127,7 @@ isbarchart.setAttribute("width", isbarchart.parentElement.offsetWidth);
 var barChart = new Chart(isbarchart, {
     type: 'bar',
     data: {
-        labels: ["January", "February", "March", "April", "May", "June", "July"],
+        labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "June", "Julio"],
         datasets: [
             {
                 label: "Sales Analytics",

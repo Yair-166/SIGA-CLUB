@@ -153,7 +153,7 @@
                     <div class="d-flex flex-column h-100">
                         <div class="d-flex">
                             <div class="flex-grow-1">
-                                <p class="text-muted mb-4">Last update : 08 May</p>
+                                <p class="text-muted mb-4">Last update : 08 Mayo</p>
                             </div>
                             <div class="flex-shrink-0">
                                 <div class="d-flex gap-1 align-items-center">
@@ -259,7 +259,7 @@
                         </div>
                         <div class="flex-shrink-0">
                             <div class="text-muted">
-                                <i class="ri-calendar-event-fill me-1 align-bottom"></i> 18 May, 2021
+                                <i class="ri-calendar-event-fill me-1 align-bottom"></i> 18 Mayo, 2021
                             </div>
                         </div>
 

@@ -340,7 +340,7 @@
                                         </div>
                                         <h5>Verification Completed</h5>
                                         <p class="text-muted mb-4">To stay verified, don't remove the meta tag form your
-                                            site's home page. To avoid losing verification, you may want to add multiple
+                                            site's home page. To avoid losing verification, you Mayo want to add multiple
                                             methods form the <span class="fw-medium">Crypto > KYC Application.</span>
                                         </p>
 

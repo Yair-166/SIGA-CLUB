@@ -111,7 +111,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -122,7 +122,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -176,7 +176,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -187,7 +187,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -242,7 +242,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -253,7 +253,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -307,7 +307,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -318,7 +318,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -387,7 +387,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -398,7 +398,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -452,7 +452,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -506,7 +506,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -560,7 +560,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -571,7 +571,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -625,7 +625,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -636,7 +636,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -704,7 +704,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -758,7 +758,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -769,7 +769,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -823,7 +823,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -834,7 +834,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -889,7 +889,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -900,7 +900,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -955,7 +955,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -966,7 +966,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1020,7 +1020,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1031,7 +1031,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1085,7 +1085,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1096,7 +1096,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1164,7 +1164,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1175,7 +1175,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1229,7 +1229,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1240,7 +1240,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1294,7 +1294,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1305,7 +1305,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1373,7 +1373,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1384,7 +1384,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1439,7 +1439,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1450,7 +1450,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1504,7 +1504,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1515,7 +1515,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1562,7 +1562,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1573,7 +1573,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1628,7 +1628,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1639,7 +1639,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1694,7 +1694,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1705,7 +1705,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1759,7 +1759,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1770,7 +1770,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1824,7 +1824,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Product Demo</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>
@@ -1835,7 +1835,7 @@
                                         </div>
                                         <div class="flex-grow-1">
                                             <h6 class="mb-0">Marketing Team Meeting</h6>
-                                            <small class="text-muted">Monday at 04:41PM</small>
+                                            <small class="text-muted">Lunes at 04:41PM</small>
                                         </div>
                                     </div>
                                 </li>

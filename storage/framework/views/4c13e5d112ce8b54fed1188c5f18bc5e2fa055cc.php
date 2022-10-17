@@ -57,7 +57,7 @@
                         <div class="vr"></div>
                         <div class="text-muted">Seller : <span class="text-body fw-medium">Rickey Teran</span></div>
                         <div class="vr"></div>
-                        <div class="text-muted">Published : <span class="text-body fw-medium">29 April, 2022</span></div>
+                        <div class="text-muted">Published : <span class="text-body fw-medium">29 Abril, 2022</span></div>
                     </div>
                     <div class="d-flex flex-wrap gap-2 align-items-center mt-3">
                         <div class="text-muted fs-16">

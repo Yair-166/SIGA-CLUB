@@ -381,7 +381,7 @@
                                         </div>
                                     </div>
                                     <p class="mb-0">
-                                        This may be the most commonly encountered tip I received from the designers I spoke with. They highly encourage that you use different fonts in one design, but do not over-exaggerate and go overboard.
+                                        This Mayo be the most commonly encountered tip I received from the designers I spoke with. They highly encourage that you use different fonts in one design, but do not over-exaggerate and go overboard.
                                     </p>
                                 </div>
                                 <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">
@@ -407,7 +407,7 @@
                                         </div>
                                     </div>
                                     <p class="mb-0">
-                                        They highly encourage that you use different fonts in one design, but do not over-exaggerate and go overboard This may be the most commonly encountered tip I received from the designers I spoke with.
+                                        They highly encourage that you use different fonts in one design, but do not over-exaggerate and go overboard This Mayo be the most commonly encountered tip I received from the designers I spoke with.
                                     </p>
                                 </div>
                                 <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">
@@ -878,7 +878,7 @@
                                 Blowzy red vixens fight for a quick jump. Joaquin Phoenix was gazed by MTV for luck. A wizard’s job is to vex chumps quickly in fog. Watch "Jeopardy! ", Alex Trebek's fun TV quiz game. Woven silk pyjamas exchanged for blue quartz. Brawny gods just flocked up to quiz and vex him.
                             </p>
                             <p class="mb-0">
-                                Big July earthquakes confound zany experimental vow.  My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz.
+                                Big Julio earthquakes confound zany experimental vow.  My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz.
                             </p>
                         </div>
                     </div>
@@ -1835,7 +1835,7 @@
                                     <img src="{{ URL::asset('assets/images/small/img-5.jpg') }}" alt="" width="150" class="rounded">
                                 </div>
                             </div>
-                            <p class="mb-0">Big July earthquakes confound zany experimental vow. My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz. try again until it looks right, and each assumenda labore aes Homo nostrud organic, assumenda labore aesthetic magna elements, buttons, everything.</p>
+                            <p class="mb-0">Big Julio earthquakes confound zany experimental vow. My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz. try again until it looks right, and each assumenda labore aes Homo nostrud organic, assumenda labore aesthetic magna elements, buttons, everything.</p>
                         </div>
                     </div>
                 </div><!-- end card-body -->

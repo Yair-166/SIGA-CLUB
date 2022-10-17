@@ -333,7 +333,7 @@
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <h6>iPhone 12 Pro</h6>
-                                    <p class="text-muted mb-0">Los Angeles, United States - March 16 at
+                                    <p class="text-muted mb-0">Los Angeles, United States - Marzo 16 at
                                         2:47PM</p>
                                 </div>
                                 <div>
@@ -348,7 +348,7 @@
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <h6>Apple iPad Pro</h6>
-                                    <p class="text-muted mb-0">Washington, United States - November 06
+                                    <p class="text-muted mb-0">Washington, United States - Noviembre 06
                                         at 10:43AM</p>
                                 </div>
                                 <div>
@@ -378,7 +378,7 @@
                                 </div>
                                 <div class="flex-grow-1 ms-3">
                                     <h6>Dell Inspiron 14</h6>
-                                    <p class="text-muted mb-0">Phoenix, United States - July 26 at
+                                    <p class="text-muted mb-0">Phoenix, United States - Julio 26 at
                                         8:10AM</p>
                                 </div>
                                 <div>

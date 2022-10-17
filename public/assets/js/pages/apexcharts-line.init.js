@@ -77,7 +77,7 @@ if (linechartBasicColors) {
       }
     },
     xaxis: {
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep']
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mayo', 'Jun', 'Jul', 'Aug', 'Sep']
     }
   };
   var chart = new ApexCharts(document.querySelector("#line_chart_basic"), options);
@@ -589,7 +589,7 @@ if (linechartDatalabelColors) {
       size: 6
     },
     xaxis: {
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul'],
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mayo', 'Jun', 'Jul'],
       title: {
         text: 'Month'
       }

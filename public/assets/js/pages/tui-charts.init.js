@@ -32,7 +32,7 @@ var barchartColors = getChartColorsArray("bar-charts");
 var barChartWidth = document.getElementById("bar-charts").offsetWidth;
 var container = document.getElementById('bar-charts');
 var data = {
-  categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June'],
+  categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mayo', 'June'],
   series: [{
     name: 'Budget',
     data: [5000, 3000, 5000, 7000, 6000, 4000]
@@ -205,7 +205,7 @@ var barchartColors = getChartColorsArray("line-charts");
 var lineChartWidth = document.getElementById("line-charts").offsetWidth;
 var container = document.getElementById('line-charts');
 var data = {
-  categories: ['June', 'July', 'Aug', 'Sep', 'Oct', 'Nov'],
+  categories: ['June', 'Julio', 'Aug', 'Sep', 'Oct', 'Nov'],
   series: [{
     name: 'Budget',
     data: [5000, 3000, 6000, 3000, 6000, 4000]
@@ -294,7 +294,7 @@ var barchartColors = getChartColorsArray("area-charts");
 var areaChartWidth = document.getElementById("area-charts").offsetWidth;
 var container = document.getElementById('area-charts');
 var data = {
-  categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+  categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mayo', 'June', 'Julio', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
   series: [{
     name: 'Seoul',
     data: [20, 40, 25, 50, 15, 45, 33, 34, 20, 30, 22, 13]
@@ -385,7 +385,7 @@ var barchartColors = getChartColorsArray("radial-charts");
 var radialChartWidth = document.getElementById("radial-charts").offsetWidth;
 var container = document.getElementById('radial-charts');
 var data = {
-  categories: ["Jan", "Feb", "Mar", "April", "May", "Jun"],
+  categories: ["Jan", "Feb", "Mar", "Abril", "Mayo", "Jun"],
   series: [{
     name: 'Budget',
     data: [5000, 3000, 5000, 7000, 6000, 4000]
@@ -2738,7 +2738,7 @@ var heatmapchartsWidth = document.getElementById("heatmap-charts").offsetWidth;
 var container = document.getElementById('heatmap-charts');
 var data = {
   categories: {
-    x: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
+    x: ['Jan', 'Feb', 'Mar', 'Apr', 'Mayo', 'June', 'Julio', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'],
     y: ['Seoul', 'Seattle', 'Sydney', 'Moskva', 'Jungfrau']
   },
   series: [[-3.5, -1.1, 4.0, 11.3, 17.5, 21.5, 24.9, 25.2, 20.4, 13.9, 6.6, -0.6], [3.8, 5.6, 7.0, 9.1, 12.4, 15.3, 17.5, 17.8, 15.0, 10.6, 6.4, 3.7], [22.1, 22.0, 20.9, 18.3, 15.2, 12.8, 11.8, 13.0, 15.2, 17.6, 19.4, 21.2], [-10.3, -9.1, -4.1, 4.4, 12.2, 16.3, 18.5, 16.7, 10.9, 4.2, -2.0, -7.5], [-13.2, -13.7, -13.1, -10.3, -6.1, -3.2, 0.0, -0.1, -1.8, -4.5, -9.0, -10.9]]
@@ -3208,7 +3208,7 @@ var barchartColors = getChartColorsArray("bullet-charts");
 var bulletchartsWidth = document.getElementById("bullet-charts").offsetWidth;
 var container = document.getElementById('bullet-charts');
 var data = {
-  categories: ['July', 'August'],
+  categories: ['Julio', 'Agosto'],
   series: [{
     name: 'Budget',
     data: 25,

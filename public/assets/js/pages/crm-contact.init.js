@@ -22,7 +22,7 @@ function timeConvert(time) {
 }
 
 function formatDate(date) {
-    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var monthNames = ["Jan", "Feb", "Mar", "Apr", "Mayo", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
     var d = new Date(date),
         month = '' + monthNames[(d.getMonth())],
         day = '' + d.getDate(),

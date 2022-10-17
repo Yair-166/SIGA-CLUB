@@ -21,7 +21,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | This value determines the "environment" your application is currently
-    | running in. This may determine how you prefer to configure various
+    | running in. This Mayo determine how you prefer to configure various
     | services the application utilizes. Set this in your ".env" file.
     |
     */
@@ -61,7 +61,7 @@ return [
     | Application Timezone
     |--------------------------------------------------------------------------
     |
-    | Here you may specify the default timezone for your application, which
+    | Here you Mayo specify the default timezone for your application, which
     | will be used by the PHP date and date-time functions. We have gone
     | ahead and set this to a sensible default for you out of the box.
     |
@@ -88,7 +88,7 @@ return [
     |--------------------------------------------------------------------------
     |
     | The fallback locale determines the locale to use when the current one
-    | is not available. You may change the value to correspond to any of
+    | is not available. You Mayo change the value to correspond to any of
     | the language folders that are provided through your application.
     |
     */

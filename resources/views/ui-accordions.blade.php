@@ -42,7 +42,7 @@
                                 </h2>
                                 <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#default-accordion-example">
                                     <div class="accordion-body">
-                                        No charges are put in place by SlickText when subscribers join your text list. This does not mean however that charges 100% will not occur. Charges that may occur fall under part of the compliance statement stating "Message and Data rates may apply."
+                                        No charges are put in place by SlickText when subscribers join your text list. This does not mean however that charges 100% will not occur. Charges that Mayo occur fall under part of the compliance statement stating "Message and Data rates Mayo apply."
                                     </div>
                                 </div>
                             </div>
@@ -84,7 +84,7 @@ Why do we use it ?
 &lt;/h2&gt;
 &lt;div id=&quot;collapseTwo&quot; class=&quot;accordion-collapse collapse&quot; aria-labelledby=&quot;headingTwo&quot; data-bs-parent=&quot;#default-accordion-example&quot;&gt;
 &lt;div class=&quot;accordion-body&quot;&gt;
-No charges are put in place by SlickText when subscribers join your text list. This does not mean however that charges 100% will not occur. Charges that may occur fall under part of the compliance statement stating "Message and Data rates may apply."
+No charges are put in place by SlickText when subscribers join your text list. This does not mean however that charges 100% will not occur. Charges that Mayo occur fall under part of the compliance statement stating "Message and Data rates Mayo apply."
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -434,7 +434,7 @@ Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in
                                 </h2>
                                 <div id="accor_plusExamplecollapse1" class="accordion-collapse collapse show" aria-labelledby="accordionwithplusExample1" data-bs-parent="#accordionWithplusicon">
                                     <div class="accordion-body">
-                                        Big July earthquakes confound zany experimental vow. My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz. try again until it looks right, and each assumenda labore aes Homo nostrud organic, assumenda labore aesthetic magna elements, buttons, everything.
+                                        Big Julio earthquakes confound zany experimental vow. My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz. try again until it looks right, and each assumenda labore aes Homo nostrud organic, assumenda labore aesthetic magna elements, buttons, everything.
                                     </div>
                                 </div>
                             </div>
@@ -476,7 +476,7 @@ What is User Interface Design?
 &lt;/h2&gt;
 &lt;div id=&quot;accor_plusExamplecollapse1&quot; class=&quot;accordion-collapse collapse show&quot; aria-labelledby=&quot;accordionwithplusExample1&quot; data-bs-parent=&quot;#accordionWithplusicon&quot;&gt;
 &lt;div class=&quot;accordion-body&quot;&gt;
-Big July earthquakes confound zany experimental vow. My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz. try again until it looks right, and each assumenda labore aes Homo nostrud organic, assumenda labore aesthetic magna elements, buttons, everything.
+Big Julio earthquakes confound zany experimental vow. My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz. try again until it looks right, and each assumenda labore aes Homo nostrud organic, assumenda labore aesthetic magna elements, buttons, everything.
 &lt;/div&gt;
 &lt;/div&gt;
 &lt;/div&gt;
@@ -736,7 +736,7 @@ Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in
                                 </h2>
                                 <div id="accor_nestingExamplecollapse1" class="accordion-collapse collapse show" aria-labelledby="accordionnestingExample1" data-bs-parent="#accordionnesting">
                                     <div class="accordion-body">
-                                        This opt in method is perfect for those looking to integrate a different software such Shopify or Hubspot with Slicktext. For example, upon cashing out online, a subscriber may submit to have their mobile number to receive marketing messages. The API will pass this information from said software over to Slicktext via API integration.
+                                        This opt in method is perfect for those looking to integrate a different software such Shopify or Hubspot with Slicktext. For example, upon cashing out online, a subscriber Mayo submit to have their mobile number to receive marketing messages. The API will pass this information from said software over to Slicktext via API integration.
                                         <div class="accordion nesting2-accordion custom-accordionwithicon accordion-border-box mt-3" id="accordionnesting2">
                                             <div class="accordion-item">
                                                 <h2 class="accordion-header" id="accordionnesting2Example1">
@@ -788,7 +788,7 @@ Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in
                                 </h2>
                                 <div id="accor_nestingExamplecollapse2" class="accordion-collapse collapse" aria-labelledby="accordionnestingExample2" data-bs-parent="#accordionnesting">
                                     <div class="accordion-body">
-                                        Personalization allows you to provide a personal touch to your outbound text marketing campaigns. SlickText uses merge tags as placeholders that are replaced with contact-specific information when a text message is sent. These merge tags may also be known as personalization fields.
+                                        Personalization allows you to provide a personal touch to your outbound text marketing campaigns. SlickText uses merge tags as placeholders that are replaced with contact-specific information when a text message is sent. These merge tags Mayo also be known as personalization fields.
                                         <div class="accordion nesting3-accordion custom-accordionwithicon accordion-border-box mt-3" id="accordionnesting3">
                                             <div class="accordion-item mt-2">
                                                 <h2 class="accordion-header" id="accordionnesting3Example2">
@@ -832,7 +832,7 @@ How Do I Add Contacts/Subscribers?
 &lt;/h2&gt;
 &lt;div id=&quot;accor_nestingExamplecollapse1&quot; class=&quot;accordion-collapse collapse show&quot; aria-labelledby=&quot;accordionnestingExample1&quot; data-bs-parent=&quot;#accordionnesting&quot;&gt;
 &lt;div class=&quot;accordion-body&quot;&gt;
-This opt in method is perfect for those looking to integrate a different software such Shopify or Hubspot with Slicktext. For example, upon cashing out online, a subscriber may submit to have their mobile number to receive marketing messages. The API will pass this information from said software over to Slicktext via API integration.
+This opt in method is perfect for those looking to integrate a different software such Shopify or Hubspot with Slicktext. For example, upon cashing out online, a subscriber Mayo submit to have their mobile number to receive marketing messages. The API will pass this information from said software over to Slicktext via API integration.
 &lt;div class=&quot;accordion nesting2-accordion custom-accordionwithicon accordion-border-box mt-3&quot; id=&quot;accordionnesting2&quot;&gt;
 &lt;div class=&quot;accordion-item&quot;&gt;
     &lt;h2 class=&quot;accordion-header&quot; id=&quot;accordionnesting2Example1&quot;&gt;
@@ -884,7 +884,7 @@ How Does Personalization Work?
 &lt;/h2&gt;
 &lt;div id=&quot;accor_nestingExamplecollapse2&quot; class=&quot;accordion-collapse collapse&quot; aria-labelledby=&quot;accordionnestingExample2&quot; data-bs-parent=&quot;#accordionnesting&quot;&gt;
 &lt;div class=&quot;accordion-body&quot;&gt;
-Personalization allows you to provide a personal touch to your outbound text marketing campaigns. SlickText uses merge tags as placeholders that are replaced with contact-specific information when a text message is sent. These merge tags may also be known as personalization fields.
+Personalization allows you to provide a personal touch to your outbound text marketing campaigns. SlickText uses merge tags as placeholders that are replaced with contact-specific information when a text message is sent. These merge tags Mayo also be known as personalization fields.
 &lt;div class=&quot;accordion nesting3-accordion custom-accordionwithicon accordion-border-box mt-3&quot; id=&quot;accordionnesting3&quot;&gt;
 &lt;div class=&quot;accordion-item mt-2&quot;&gt;
     &lt;h2 class=&quot;accordion-header&quot; id=&quot;accordionnesting3Example2&quot;&gt;

@@ -430,7 +430,7 @@ Please enter a message in the textarea.
                             <code>.{valid|invalid}-feedback</code> classes for <code>.{valid|invalid}-tooltip</code> classes
                             to display validation feedback in a styled tooltip. Be sure to have a parent with
                             <code>position: relative</code> on it for tooltip positioning. In the example below, our column
-                            classes have this already, but your project may require an alternative setup.</p>
+                            classes have this already, but your project Mayo require an alternative setup.</p>
 
                         <div class="live-preview">
                             <form class="row g-3 needs-validation" novalidate>

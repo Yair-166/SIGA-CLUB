@@ -458,7 +458,7 @@ function isPriority(val) {
 
 function fomateDate(date) {
     var dateObj = new Date(date);
-    var month = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][dateObj.getMonth()];
+    var month = ["Jan", "Feb", "Mar", "Apr", "Mayo", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"][dateObj.getMonth()];
     return dateObj.getDate() + ' ' + month + ', ' + dateObj.getFullYear();
 }
 

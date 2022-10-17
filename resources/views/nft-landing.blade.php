@@ -325,7 +325,7 @@
                     <div class="col-lg-8">
                         <div class="text-center mb-5">
                             <h2 class="mb-3 fw-bold lh-base">Create and Sell Your NFTs</h2>
-                            <p class="text-muted">The process of creating an NFT may cost less than a dollar, but the process of selling it can cost up to a thousand dollars. For example, Allen Gannett, a software developer.</p>
+                            <p class="text-muted">The process of creating an NFT Mayo cost less than a dollar, but the process of selling it can cost up to a thousand dollars. For example, Allen Gannett, a software developer.</p>
                         </div>
                     </div><!-- end col -->
                 </div><!-- end row -->
@@ -387,7 +387,7 @@
                     <div class="col-lg-5">
                         <div class="text-center mb-5">
                             <h2 class="mb-3 fw-bold lh-base">Trending All Categories</h2>
-                            <p class="text-muted">The process of creating an NFT may cost less than a dollar, but the process of selling it can cost up to a thousand dollars. For example, Allen Gannett, a software developer.</p>
+                            <p class="text-muted">The process of creating an NFT Mayo cost less than a dollar, but the process of selling it can cost up to a thousand dollars. For example, Allen Gannett, a software developer.</p>
                         </div>
                     </div><!-- end col -->
                 </div><!-- end row -->

@@ -116,7 +116,7 @@ if (TableProductListAll) {
                 ["img-6.png", "Half Sleeve T-Shirts (Blue)", "Clothes"], "15", "$ 125.00", "48", "4.2", ["12 Oct, 2021", "04:55 PM"]
             ],
             [
-                ["img-7.png", "Noise Evolve Smartwatch", "Watches"], "12", "$ 95.00", "45", "4.3", ["15 May, 2021", "03:40 PM"]
+                ["img-7.png", "Noise Evolve Smartwatch", "Watches"], "12", "$ 95.00", "45", "4.3", ["15 Mayo, 2021", "03:40 PM"]
             ],
             [
                 ["img-8.png", "Sweatshirt for Men (Pink)", "Clothes"], "20", "$ 120.00", "48", "4.2", ["21 Jun, 2021", "12:18 PM"]
@@ -221,7 +221,7 @@ if (linechartcustomerColors) {
                 "Feb",
                 "Mar",
                 "Apr",
-                "May",
+                "Mayo",
                 "Jun",
                 "Jul",
                 "Aug",

@@ -307,7 +307,7 @@ var options = {
     height: 300,
     type: 'pie'
   },
-  labels: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
+  labels: ["Lunes", "Martes", "Miércoles", "Jueves", "Viernes", "Sábado"],
   theme: {
     monochrome: {
       enabled: true,

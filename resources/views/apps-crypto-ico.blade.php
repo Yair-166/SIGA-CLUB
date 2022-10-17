@@ -262,7 +262,7 @@
                         <div class="flex-grow-1">
                             <h6 class="mb-0">3.9 <i class="ri-star-fill align-bottom text-warning"></i></h6>
                         </div>
-                        <h6 class="flex-shrink-0 text-primary mb-0"><i class="ri-time-line align-bottom"></i> 05 March, 2022</h6>
+                        <h6 class="flex-shrink-0 text-primary mb-0"><i class="ri-time-line align-bottom"></i> 05 Marzo, 2022</h6>
                     </div>
                 </div>
             </div><!--end card-->

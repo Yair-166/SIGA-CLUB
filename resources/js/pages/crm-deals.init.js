@@ -4,7 +4,7 @@ var contactNo = new Cleave("#contactNumber", {
 });
 
 var str_dt = function formatDate(date) {
-    var monthNames = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"];
+    var monthNames = ["Enr", "Feb", "Mar", "Abr", "Mayo", "Jun", "Jul", "Ago", "Sep", "Oct", "Nov", "Dic"];
     var d = new Date(date),
         month = '' + monthNames[(d.getMonth())],
         day = '' + d.getDate(),
@@ -80,7 +80,7 @@ form.addEventListener('submit', function (event) {
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="mb-0">Product Demo</h6>
-                                                    <small class="text-muted">Monday at 04:41PM</small>
+                                                    <small class="text-muted">Lunes at 04:41PM</small>
                                                 </div>
                                             </div>
                                         </li>
@@ -91,7 +91,7 @@ form.addEventListener('submit', function (event) {
                                                 </div>
                                                 <div class="flex-grow-1">
                                                     <h6 class="mb-0">Marketing Team Meeting</h6>
-                                                    <small class="text-muted">Monday at 04:41PM</small>
+                                                    <small class="text-muted">Lunes at 04:41PM</small>
                                                 </div>
                                             </div>
                                         </li>

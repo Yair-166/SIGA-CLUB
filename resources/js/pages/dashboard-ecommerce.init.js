@@ -89,7 +89,7 @@ if (linechartcustomerColors) {
                 "Feb",
                 "Mar",
                 "Apr",
-                "May",
+                "Mayo",
                 "Jun",
                 "Jul",
                 "Aug",

@@ -216,7 +216,7 @@ if (revenueExpensesChartsColors) {
       width: 2
     },
     xaxis: {
-      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
+      categories: ['Jan', 'Feb', 'Mar', 'Apr', 'Mayo', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec']
     },
     yaxis: {
       labels: {

@@ -336,7 +336,7 @@ if (document.getElementById("custom-sa-email-verify")) document.getElementById("
 
 if (document.getElementById("custom-sa-notification")) document.getElementById("custom-sa-notification").addEventListener("click", function () {
   Swal.fire({
-    html: '<div class="mt-3">' + '<div class="avatar-lg mx-auto">' + '<img src="assets/images/users/avatar-2.jpg" class="rounded-circle img-thumbnail" alt="thumbnail">' + '</div>' + '<div class="mt-4 pt-2 fs-15">' + '<h4 class="fs-18 fw-semibold">Welcome <span class="fw-semibold">Mike Mayer</span></h4>' + '<p class="text-muted mb-0 fs-13">You have <span class="fw-semibold text-success">2</span> Notifications</p>' + '</div>' + '</div>',
+    html: '<div class="mt-3">' + '<div class="avatar-lg mx-auto">' + '<img src="assets/images/users/avatar-2.jpg" class="rounded-circle img-thumbnail" alt="thumbnail">' + '</div>' + '<div class="mt-4 pt-2 fs-15">' + '<h4 class="fs-18 fw-semibold">Welcome <span class="fw-semibold">Mike Mayoer</span></h4>' + '<p class="text-muted mb-0 fs-13">You have <span class="fw-semibold text-success">2</span> Notifications</p>' + '</div>' + '</div>',
     showCancelButton: false,
     confirmButtonClass: 'btn btn-primary mb-1',
     confirmButtonText: 'Show Me <i class="ri-arrow-right-line ms-1 align-bottom"></i>',

@@ -1089,7 +1089,7 @@
                                     <div id="genques-collapseThree" class="accordion-collapse collapse"
                                         aria-labelledby="genques-headingThree" data-bs-parent="#genques-accordion">
                                         <div class="accordion-body ff-secondary">
-                                            Theme features is a set of specific functionality that may be enabled by theme
+                                            Theme features is a set of specific functionality that Mayo be enabled by theme
                                             authors. Themes must register each
                                             individual Theme Feature that the author wishes to support. Theme support
                                             functions should be called in the theme's
@@ -1181,7 +1181,7 @@
                                         <div class="accordion-body ff-secondary">
                                             A short story, novella, or novel presents a narrative to its reader. Perhaps
                                             that narrative involves mystery, terror,
-                                            romance, comedy, or all of the above. These works of fiction may also contain
+                                            romance, comedy, or all of the above. These works of fiction Mayo also contain
                                             memorable characters, vivid
                                             world-building, literary devices.
                                         </div>

@@ -362,7 +362,7 @@
                                             together and try to limit the number of fonts you use to
                                             three or less. Experiment and play around with the fonts
                                             that you already have in the software you’re working with
-                                            reputable font websites. This may be the most commonly
+                                            reputable font websites. This Mayo be the most commonly
                                             encountered tip I received from the designers I spoke with.
                                             They highly encourage that you use different fonts in one
                                             design, but do not over-exaggerate and go overboard.</p>

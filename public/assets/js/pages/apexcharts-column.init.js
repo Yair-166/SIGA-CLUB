@@ -81,7 +81,7 @@ if (chartColumnColors) {
     }],
     colors: chartColumnColors,
     xaxis: {
-      categories: ['Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
+      categories: ['Feb', 'Mar', 'Apr', 'Mayo', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct']
     },
     yaxis: {
       title: {
@@ -146,7 +146,7 @@ if (chartColumnDatatalabelColors) {
       borderColor: '#f1f1f1'
     },
     xaxis: {
-      categories: ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
+      categories: ["Jan", "Feb", "Mar", "Apr", "Mayo", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"],
       position: 'top',
       labels: {
         offsetY: -18

@@ -63,7 +63,7 @@ new gridjs.Grid({
       ["", "#DS0214",  "05 Oct, 2021",  "Paul Reynolds",    "$24.20",  "Paid",      "View Details"],
       ["", "#DS0214",  "06 Oct, 2021",  "Ronald Patterson", "$65.32",  "Pending",   "View Details"],
       ["", "#DS0212",  "07 Oct, 2021",  "Adella Perez",     "$53.32",  "Paid",      "View Details"],
-      ["", "#DS0211",  "07 Oct, 2021",  "Theresa Mayers",   "$13.21",  "Paid",      "View Details" ],
+      ["", "#DS0211",  "07 Oct, 2021",  "Theresa Mayoers",   "$13.21",  "Paid",      "View Details" ],
       ["", "#DS0210",  "06 Oct, 2021",  "Michael Wallace",  "$23.41",  "Pending",   "View Details"],
       ["", "#DS0209",  "07 Oct, 2021",  "Oliver Gonzales",  "$41.23",  "Pending",   "View Details"],
       ["", "#DS0208",  "08 Oct, 2021",  "David Burke",      "$32.25",  "Paid",      "View Details"],

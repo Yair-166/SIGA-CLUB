@@ -599,7 +599,7 @@ Erica Kernan
                                         <p class="list-text mb-0 fs-12">12 min Ago</p>
                                     </div>
                                 </div>
-                                <p class="list-text mb-0">Big July earthquakes confound zany experimental vow. My girl wove
+                                <p class="list-text mb-0">Big Julio earthquakes confound zany experimental vow. My girl wove
                                     six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to
                                     waltz. try again until it looks right, and each assumenda labore aes Homo nostrud
                                     organic, assumenda labore aesthetic magna elements, buttons, everything.</p>
@@ -671,7 +671,7 @@ Rejected
 &lt;p class=&quot;list-text mb-0 fs-12&quot;&gt;12 min Ago&lt;/p&gt;
 &lt;/div&gt;
 &lt;/div&gt;
-&lt;p class=&quot;list-text mb-0&quot;&gt;Big July earthquakes confound zany experimental vow. My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz. try again until it looks right, and each assumenda labore aes Homo nostrud organic, assumenda labore aesthetic magna elements, buttons, everything.&lt;/p&gt;
+&lt;p class=&quot;list-text mb-0&quot;&gt;Big Julio earthquakes confound zany experimental vow. My girl wove six dozen plaid jackets before she quit. Six big devils from Japan quickly forgot how to waltz. try again until it looks right, and each assumenda labore aes Homo nostrud organic, assumenda labore aesthetic magna elements, buttons, everything.&lt;/p&gt;
 &lt;/a&gt;</code>
 <code>&lt;a href=&quot;javascript:void(0);&quot; class=&quot;list-group-item list-group-item-action&quot;&gt;
 &lt;div class=&quot;float-end&quot;&gt;

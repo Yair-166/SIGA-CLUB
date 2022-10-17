@@ -49,7 +49,7 @@ var options = {
     },
     colors: chartRadarBasicColors,
     xaxis: {
-        categories: ['January', 'February', 'March', 'April', 'May', 'June']
+        categories: ['Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'June']
     }
 };
 
@@ -150,7 +150,7 @@ var options = {
         }
     },
     xaxis: {
-        categories: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday']
+        categories: ['Domingo', 'Lunes', 'Martes', 'Miércoles', 'Jueves', 'Viernes', 'Sábado']
     },
     yaxis: {
         tickAmount: 7,

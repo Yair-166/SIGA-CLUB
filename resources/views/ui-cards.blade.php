@@ -509,7 +509,7 @@
                             <i class="ri-checkbox-circle-fill text-primary"></i>
                         </div>
                         <div class="flex-grow-1 ms-2 text-muted">
-                            This may be the most commonly encountered tip I received from the designers I spoke with. They
+                            This Mayo be the most commonly encountered tip I received from the designers I spoke with. They
                             highly encourage that you use different fonts in one design, but do not over-exaggerate and go
                             overboard.
                         </div>
@@ -571,7 +571,7 @@
                             <i class="ri-checkbox-circle-fill text-primary"></i>
                         </div>
                         <div class="flex-grow-1 ms-2 text-muted">
-                            This may be the most commonly encountered tip I received from the designers I spoke with. They
+                            This Mayo be the most commonly encountered tip I received from the designers I spoke with. They
                             highly encourage that you use different fonts in one design, but do not over-exaggerate and go
                             overboard.
                         </div>
@@ -633,7 +633,7 @@
                             <i class="ri-checkbox-circle-fill text-primary"></i>
                         </div>
                         <div class="flex-grow-1 ms-2 text-muted">
-                            This may be the most commonly encountered tip I received from the designers I spoke with. They
+                            This Mayo be the most commonly encountered tip I received from the designers I spoke with. They
                             highly encourage that you use different fonts in one design, but do not over-exaggerate and go
                             overboard.
                         </div>
@@ -1311,7 +1311,7 @@
                 </div>
                 <img class="img-fluid" src="{{ URL::asset('assets/images/small/img-11.jpg') }}" alt="Card image cap" />
                 <div class="card-body">
-                    <p class="card-text">This may be the most commonly encountered tip I received from the designers I
+                    <p class="card-text">This Mayo be the most commonly encountered tip I received from the designers I
                         spoke with. They highly encourage that you use different fonts in one design, but do not
                         over-exaggerate and go overboard.</p>
                 </div>
