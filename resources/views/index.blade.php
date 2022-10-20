@@ -94,24 +94,25 @@
                                 <div class="flex-grow-1 overflow-hidden">
                                     <p
                                         class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                        Club</p>
+                                        Clubes</p>
                                 </div>
                             </div>
                             <div class="d-flex align-items-end justify-content-between mt-4">
                                 <div>
-                                    <a href="/pages-profile-settings" class="link-secondary text-decoration-underline">
-                                        Ver detalles del club.
+                                    <a href="/apps-crm-companies" class="link-secondary text-decoration-underline">
+                                        Administra tus clubs.
                                     </a>
                                 </div>
                                 <div class="avatar-sm flex-shrink-0">
                                     <span class="avatar-title bg-soft-primary rounded fs-3">
-                                        <i class="bx bx-user-circle text-primary"></i>
+                                        <i class="bx bx-user-plus text-primary"></i>
                                     </span>
                                 </div>
                             </div>
                         </div><!-- end card body -->
                     </div><!-- end card -->
                 </div><!-- end col -->
+
             </div> <!-- end row-->
 
             <div class="row">

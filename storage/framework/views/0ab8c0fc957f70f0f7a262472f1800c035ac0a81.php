@@ -13,7 +13,7 @@
             CRM
         <?php $__env->endSlot(); ?>
         <?php $__env->slot('title'); ?>
-            Companies
+            Clubes
         <?php $__env->endSlot(); ?>
     <?php echo $__env->renderComponent(); ?>
     <div class="row">
@@ -22,20 +22,11 @@
                 <div class="card-header">
                     <div class="d-flex align-items-center flex-wrap gap-2">
                         <div class="flex-grow-1">
-                            <button class="btn btn-primary add-btn" data-bs-toggle="modal" data-bs-target="#showModal"><i class="ri-add-fill me-1 align-bottom"></i> Add Company</button>
+                            <button class="btn btn-primary add-btn" data-bs-toggle="modal" data-bs-target="#showModal"><i class="ri-add-fill me-1 align-bottom"></i> Agregar club</button>
                         </div>
                         <div class="flex-shrink-0">
                             <div class="hstack text-nowrap gap-2">
                                 <button class="btn btn-soft-danger" onClick="deleteMultiple()"><i class="ri-delete-bin-2-line"></i></button>
-                                <button class="btn btn-soft-primary" data-bs-toggle="modal" data-bs-target="#addmembers"><i class="ri-filter-2-line me-1 align-bottom"></i> Filters</button>
-                                <button class="btn btn-soft-success">Import</button>
-                                <button type="button"  id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false" class="btn btn-soft-danger"><i class="ri-more-2-fill"></i></button>
-                                <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                                    <li><a class="dropdown-item" href="#">All</a></li>
-                                    <li><a class="dropdown-item" href="#">Last Week</a></li>
-                                    <li><a class="dropdown-item" href="#">Last Month</a></li>
-                                    <li><a class="dropdown-item" href="#">Last Year</a></li>
-                                </ul>
                             </div>
                         </div>
                     </div>
@@ -44,27 +35,6 @@
         </div><!--end col-->
         <div class="col-xxl-9">
             <div class="card" id="companyList">
-                <div class="card-header">
-                    <div class="row g-2">
-                        <div class="col-md-3">
-                            <div class="search-box">
-                                <input type="text" class="form-control search"
-                                    placeholder="Search for company...">
-                                <i class="ri-search-line search-icon"></i>
-                            </div>
-                        </div>
-                        <div class="col-md-auto ms-auto">
-                            <div class="d-flex align-items-center gap-2">
-                                <span class="text-muted">Sort by: </span>
-                                <select class="form-control mb-0" data-choices data-choices-search-false id="choices-single-default">
-                                    <option value="Owner">Owner</option>
-                                    <option value="Company">Company</option>
-                                    <option value="location">Location</option>
-                                </select>
-                            </div>
-                        </div>
-                    </div>
-                </div>
                 <div class="card-body">
                     <div>
                         <div class="table-responsive table-card mb-3">
@@ -76,13 +46,10 @@
                                                 <input class="form-check-input" type="checkbox" id="checkAll" value="option">
                                             </div>
                                         </th>
-                                        <th class="sort" data-sort="name" scope="col">Company Name</th>
-                                        <th class="sort" data-sort="owner" scope="col">Owner</th>
-                                        <th class="sort" data-sort="industry_type" scope="col">Industry
-                                            Type</th>
-                                        <th class="sort" data-sort="star_value" scope="col">Rating</th>
-                                        <th class="sort" data-sort="location" scope="col">Location</th>
-                                        <th scope="col">Action</th>
+                                        <th class="sort" data-sort="name" scope="col">Nombre del club</th>
+                                        <th class="sort" data-sort="owner" scope="col">Coordinador</th>
+                                        <th class="sort" data-sort="location" scope="col">Localización</th>
+                                        <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list form-check-all">
@@ -104,8 +71,6 @@
                                             </div>
                                         </td>
                                         <td class="owner">Tonya Noble</td>
-                                        <td class="industry_type">Computer Industry</td>
-                                        <td><span class="star_value">4.5</span> <i class="ri-star-fill text-warning align-bottom"></i></td>
                                         <td class="location">Los Angeles, USA</td>
                                         <td>
                                             <ul class="list-inline hstack gap-2 mb-0">
@@ -148,20 +113,19 @@
                                     <lord-icon src="https://cdn.lordicon.com/msoeawqm.json" trigger="loop"
                                         colors="primary:#25a0e2,secondary:#00bd9d" style="width:75px;height:75px">
                                     </lord-icon>
-                                    <h5 class="mt-2">Sorry! No Result Found</h5>
-                                    <p class="text-muted mb-0">We've searched more than 150+ companies We did not find any
-                                        companies for you search.</p>
+                                    <h5 class="mt-2">No hay resultados</h5>
+                                    <p class="text-muted mb-0">No se han encontrado resultados de su busqueda</p>
                                 </div>
                             </div>
                         </div>
                         <div class="d-flex justify-content-end mt-3">
                             <div class="pagination-wrap hstack gap-2">
                                 <a class="page-item pagination-prev disabled" href="#">
-                                    Previous
+                                    Anterior
                                 </a>
                                 <ul class="pagination listjs-pagination mb-0"></ul>
                                 <a class="page-item pagination-next" href="#">
-                                    Next
+                                    Siguiente
                                 </a>
                             </div>
                         </div>
@@ -199,11 +163,11 @@
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <h5 class="fs-13 mt-3">Company Logo</h5>
+                                                    <h5 class="fs-13 mt-3">Logo</h5>
                                                 </div>
                                                 <div>
                                                     <label for="companyname-field"
-                                                        class="form-label">Name</label>
+                                                        class="form-label">Nombre</label>
                                                     <input type="text" id="companyname-field"
                                                         class="form-control"
                                                         placeholder="Enter company name" required />
@@ -211,66 +175,35 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div>
-                                                    <label for="owner-field" class="form-label">Owner Name</label>
-                                                    <input type="text" id="owner-field" class="form-control" placeholder="Enter owner name" required />
+                                                    <label for="owner-field" class="form-label">Nombre del coordinador</label>
+                                                    <input type="text" id="owner-field" class="form-control" value="<?php echo e(Auth::user()->id); ?>" disabled/>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div>
-                                                    <label for="industry_type-field" class="form-label">Industry Type</label>
-                                                    <select class="form-select" id="industry_type-field" >
-                                                        <option value="">Select industry type</option>
-                                                        <option value="Computer Industry">Computer Industry</option>
-                                                        <option value="Chemical Industries">Chemical Industries</option>
-                                                        <option value="Health Services">Health Services</option>
-                                                        <option value="Telecommunications Services">Telecommunications Services</option>
-                                                        <option value="Textiles: Clothing, Footwear">Textiles: Clothing, Footwear</option>
-                                                    </select>
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div>
-                                                    <label for="star_value-field" class="form-label">Rating</label>
-                                                    <input type="text" id="star_value-field" class="form-control"  placeholder="Enter rating" required />
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div>
-                                                    <label for="location-field" class="form-label">Location</label>
-                                                    <input type="text" id="location-field" class="form-control"  placeholder="Enter location" required />
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-4">
-                                                <div>
-                                                    <label for="employee-field" class="form-label">Employee</label>
-                                                    <input type="text" id="employee-field" class="form-control" placeholder="Enter employee" required />
+                                                    <label for="nomenclatura-field" class="form-label">Nomenclatura</label>
+                                                    <input type="text" id="nomenclatura-field" class="form-control"  placeholder="Nomenclatura" required />
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div>
-                                                    <label for="website-field" class="form-label">Website</label>
-                                                    <input type="text" id="website-field" class="form-control" placeholder="Enter website" required />
-                                                </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div>
-                                                    <label for="contact_email-field" class="form-label">Contact Email</label>
-                                                    <input type="text" id="contact_email-field" class="form-control" placeholder="Enter contact email" required />
+                                                    <label for="location-field" class="form-label">Localización</label>
+                                                    <input type="text" id="location-field" class="form-control"  placeholder="Localización" required />
                                                 </div>
                                             </div>
                                             <div class="col-lg-12">
                                                 <div>
-                                                    <label for="since-field" class="form-label">Since</label>
-                                                    <input type="text" id="since-field" class="form-control" placeholder="Enter since" required />
+                                                    <label for="since-field" class="form-label">Descripción</label>
+                                                    <textarea id="description-field" class="form-control" rows="3" placeholder="Descripción del club"></textarea>
                                                 </div>
                                             </div>
                                         </div>
                                     </div>
                                     <div class="modal-footer">
                                         <div class="hstack gap-2 justify-content-end">
-                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Close</button>
-                                            <button type="submit" class="btn btn-primary" id="add-btn">Add Company</button>
-                                            <button type="button" class="btn btn-primary" id="edit-btn">Update</button>
+                                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
+                                            <button type="submit" class="btn btn-primary" id="add-btn">Agregar club</button>
+                                            <button type="button" class="btn btn-primary" id="edit-btn">Actualizar</button>
                                         </div>
                                     </div>
                                 </form>
@@ -288,11 +221,11 @@
                                 <div class="modal-body p-5 text-center">
                                     <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#00bd9d,secondary:#25a0e2" style="width:90px;height:90px"></lord-icon>
                                     <div class="mt-4 text-center">
-                                        <h4 class="fs-semibold">You are about to delete a company ?</h4>
-                                        <p class="text-muted fs-14 mb-4 pt-1">Deleting your company will remove all of your information from our database.</p>
+                                        <h4 class="fs-semibold">¿Quiéres eliminar el club?</h4>
+                                        <p class="text-muted fs-14 mb-4 pt-1">Eliminar el club implica borrar todo su contenido.</p>
                                         <div class="hstack gap-2 justify-content-center remove">
-                                            <button class="btn btn-link link-primary fw-medium text-decoration-none" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Close</button>
-                                            <button class="btn btn-primary" id="delete-record">Yes, Delete It!!</button>
+                                            <button class="btn btn-link link-primary fw-medium text-decoration-none" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Cerrar</button>
+                                            <button class="btn btn-primary" id="delete-record">Si</button>
                                         </div>
                                     </div>
                                 </div>
@@ -310,66 +243,24 @@
                     <div class="position-relative d-inline-block">
                         <div class="avatar-md">
                             <div class="avatar-title bg-light rounded-circle">
-                                <img src="<?php echo e(URL::asset('assets/images/brands/mail_chimp.png')); ?>" alt="" class="avatar-sm rounded-circle object-cover">
+                                <img src="<?php echo e(URL::asset('assets/images/users/multi-user.jpg')); ?>" alt="" class="avatar-sm rounded-circle object-cover">
                             </div>
                         </div>
                     </div>
-                    <h5 class="mt-3 mb-1">Syntyce Solution</h5>
-                    <p class="text-muted">Michael Morris</p>
-
-                    <ul class="list-inline mb-0">
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-soft-success text-success fs-15 rounded">
-                                <i class="ri-global-line"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-soft-danger text-danger fs-15 rounded">
-                                <i class="ri-mail-line"></i>
-                            </a>
-                        </li>
-                        <li class="list-inline-item avatar-xs">
-                            <a href="javascript:void(0);" class="avatar-title bg-soft-primary text-primary fs-15 rounded">
-                                <i class="ri-question-answer-line"></i>
-                            </a>
-                        </li>
-                    </ul>
+                    <h5 class="mt-3 mb-1">Club</h5>
+                    <p class="text-muted">Administrador</p>
                 </div>
                 <div class="card-body">
-                    <h6 class="text-muted text-uppercase fw-semibold mb-3">Information</h6>
-                    <p class="text-muted mb-4">A company incurs fixed and variable costs such as the purchase of raw materials, salaries and overhead, as explained by AccountingTools, Inc. Business owners have the discretion to determine the actions.</p>
+                    <h6 class="text-muted text-uppercase fw-semibold mb-3">Información</h6>
+                    <p class="text-muted mb-4">
+                        Descripción del club
+                    </p>
                     <div class="table-responsive table-card">
                         <table class="table table-borderless mb-0">
                             <tbody>
                                 <tr>
-                                    <td class="fw-medium" scope="row">Industry Type</td>
-                                    <td>Chemical Industries</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Location</td>
-                                    <td>Damascus, Syria</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Employee</td>
-                                    <td>10-50</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Rating</td>
-                                    <td>4.0 <i class="ri-star-fill text-warning align-bottom"></i></td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Website</td>
-                                    <td>
-                                        <a href="javascript:void(0);" class="link-primary text-decoration-underline">www.syntycesolution.com</a>
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Contact Email</td>
-                                    <td>info@syntycesolution.com</td>
-                                </tr>
-                                <tr>
-                                    <td class="fw-medium" scope="row">Since</td>
-                                    <td>1995</td>
+                                    <td class="fw-medium" scope="row">Localización</td>
+                                    <td>ESCOM, México</td>
                                 </tr>
                             </tbody>
                         </table>

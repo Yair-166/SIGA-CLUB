@@ -16,10 +16,12 @@ return new class extends Migration
         Schema::create('_main', function (Blueprint $table) {
             $table->id();
             $table->string('nombre');
+            $table->string('idAdministrador');
             $table->text('descripcion');
             $table->text('foto');
             $table->string('nomenclatura');
             $table->string('constanciasExpedidas');
+            $table->string('localizacion');
             $table->timestamps();
         });
     }
