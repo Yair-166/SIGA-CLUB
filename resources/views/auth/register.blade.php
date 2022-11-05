@@ -62,19 +62,52 @@
                                                 Por favor introduce el correo electronico.
                                             </div>
                                         </div>
+
                                         <div class="mb-3">
-                                            <label for="username" class="form-label">Nombre de usuario <span
+                                            <label for="username" class="form-label">Nombre <span
                                                     class="text-danger">*</span></label>
                                             <input type="text" class="form-control @error('name') is-invalid @enderror"
                                                 name="name" value="{{ old('name') }}" id="username"
-                                                placeholder="Nombre de usuario" required>
+                                                placeholder="Nombre del usuario" required>
                                             @error('name')
                                                 <span class="invalid-feedback" role="alert">
                                                     <strong>{{ $message }}</strong>
                                                 </span>
                                             @enderror
                                             <div class="invalid-feedback">
-                                                Por favor introduce el nombre de usuario.
+                                                Por favor introduce el nombre.
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="apaterno" class="form-label">Apellido Paterno <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control @error('apaterno') is-invalid @enderror"
+                                                name="apaterno" value="{{ old('apaterno') }}" id="apaterno"
+                                                placeholder="Apellido Paterno" required>
+                                            @error('apaterno')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <div class="invalid-feedback">
+                                                Por favor introduce el apellido paterno.
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="amaterno" class="form-label">Apellido Materno <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control @error('amaterno') is-invalid @enderror"
+                                                name="amaterno" value="{{ old('amaterno') }}" id="amaterno"
+                                                placeholder="Apellido Materno" required>
+                                            @error('amaterno')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <div class="invalid-feedback">
+                                                Por favor introduce el apellido materno.
                                             </div>
                                         </div>
 
@@ -93,7 +126,7 @@
                                                 Por favor introduce la contraseña.
                                             </div>
                                         </div>
-                                        <div class=" mb-4">
+                                        <div class="mb-3">
                                             <label for="input-password">Confirma la contraseña</label>
                                             <input type="password"
                                                 class="form-control @error('password_confirmation') is-invalid @enderror"
@@ -104,6 +137,25 @@
                                                 <i data-feather="lock"></i>
                                             </div>
                                         </div>
+
+                                        <div class="mb-3">
+                                            <label for="rol" class="form-label">Rol <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-control @error('roles') is-invalid @enderror" name="rol"
+                                                id="rol" required>
+                                                <option value="colaborador">Colaborador</option>
+                                                <option value="administrador">Administrador</option>
+                                            </select>
+                                            @error('rol')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <div class="invalid-feedback">
+                                                Por favor selecciona un rol.
+                                            </div>
+                                        </div>
+
                                         <div class=" mb-4">
                                             <input type="file" class="form-control @error('avatar') is-invalid @enderror"
                                                 name="avatar" id="input-avatar" required>
@@ -116,6 +168,15 @@
                                                 <i data-feather="file"></i>
                                             </div>
                                         </div>
+
+                                        {{-- 
+                                        El swtich de administrador
+                                        <div class=" mb-4">
+                                            <div class="form-check form-switch form-switch-md" dir="ltr">
+                                                <input type="checkbox" class="form-check-input" id="customSwitchsizemd">
+                                                <label class="form-check-label" for="customSwitchsizemd">Administrador</label>
+                                            </div>
+                                        </div> --}}
 
                                         <div class="mb-4">
                                             <p class="mb-0 fs-12 text-muted fst-italic">Al registrarte aceptas los <a href="#"

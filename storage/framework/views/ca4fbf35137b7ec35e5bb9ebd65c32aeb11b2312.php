@@ -76,8 +76,9 @@ unset($__errorArgs, $__bag); ?>
                                                 Por favor introduce el correo electronico.
                                             </div>
                                         </div>
+
                                         <div class="mb-3">
-                                            <label for="username" class="form-label">Nombre de usuario <span
+                                            <label for="username" class="form-label">Nombre <span
                                                     class="text-danger">*</span></label>
                                             <input type="text" class="form-control <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -88,7 +89,7 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>"
                                                 name="name" value="<?php echo e(old('name')); ?>" id="username"
-                                                placeholder="Nombre de usuario" required>
+                                                placeholder="Nombre del usuario" required>
                                             <?php $__errorArgs = ['name'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :
@@ -102,7 +103,67 @@ if (isset($__messageOriginal)) { $message = $__messageOriginal; }
 endif;
 unset($__errorArgs, $__bag); ?>
                                             <div class="invalid-feedback">
-                                                Por favor introduce el nombre de usuario.
+                                                Por favor introduce el nombre.
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="apaterno" class="form-label">Apellido Paterno <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control <?php $__errorArgs = ['apaterno'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                name="apaterno" value="<?php echo e(old('apaterno')); ?>" id="apaterno"
+                                                placeholder="Apellido Paterno" required>
+                                            <?php $__errorArgs = ['apaterno'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?php echo e($message); ?></strong>
+                                                </span>
+                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                            <div class="invalid-feedback">
+                                                Por favor introduce el apellido paterno.
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-3">
+                                            <label for="amaterno" class="form-label">Apellido Materno <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="text" class="form-control <?php $__errorArgs = ['amaterno'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                name="amaterno" value="<?php echo e(old('amaterno')); ?>" id="amaterno"
+                                                placeholder="Apellido Materno" required>
+                                            <?php $__errorArgs = ['amaterno'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?php echo e($message); ?></strong>
+                                                </span>
+                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                            <div class="invalid-feedback">
+                                                Por favor introduce el apellido materno.
                                             </div>
                                         </div>
 
@@ -135,7 +196,7 @@ unset($__errorArgs, $__bag); ?>
                                                 Por favor introduce la contraseña.
                                             </div>
                                         </div>
-                                        <div class=" mb-4">
+                                        <div class="mb-3">
                                             <label for="input-password">Confirma la contraseña</label>
                                             <input type="password"
                                                 class="form-control <?php $__errorArgs = ['password_confirmation'];
@@ -153,6 +214,39 @@ unset($__errorArgs, $__bag); ?>"
                                                 <i data-feather="lock"></i>
                                             </div>
                                         </div>
+
+                                        <div class="mb-3">
+                                            <label for="rol" class="form-label">Rol <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-control <?php $__errorArgs = ['roles'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>" name="rol"
+                                                id="rol" required>
+                                                <option value="colaborador">Colaborador</option>
+                                                <option value="administrador">Administrador</option>
+                                            </select>
+                                            <?php $__errorArgs = ['rol'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?php echo e($message); ?></strong>
+                                                </span>
+                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                            <div class="invalid-feedback">
+                                                Por favor selecciona un rol.
+                                            </div>
+                                        </div>
+
                                         <div class=" mb-4">
                                             <input type="file" class="form-control <?php $__errorArgs = ['avatar'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -179,6 +273,8 @@ unset($__errorArgs, $__bag); ?>
                                                 <i data-feather="file"></i>
                                             </div>
                                         </div>
+
+                                        
 
                                         <div class="mb-4">
                                             <p class="mb-0 fs-12 text-muted fst-italic">Al registrarte aceptas los <a href="#"

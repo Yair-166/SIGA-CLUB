@@ -56,6 +56,8 @@ class HomeController extends Controller
     {
         $request->validate([
             'name' => ['required', 'string', 'max:255'],
+            'apaterno' => ['required', 'string', 'max:255'],
+            'amaterno' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email'],
             'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
         ]);
