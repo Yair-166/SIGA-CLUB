@@ -47,7 +47,7 @@
                                             </div>
                                         </th>
                                         <th class="sort" data-sort="name" scope="col">Nombre del club</th>
-                                        <th class="sort" data-sort="owner" scope="col">Coordinador</th>
+                                        <th class="sort" data-sort="owner" scope="col">Administrador</th>
                                         <th class="sort" data-sort="location" scope="col">Localización</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
@@ -138,7 +138,9 @@
                                     <h5 class="modal-title" id="exampleModalLabel"></h5>
                                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="close-modal"></button>
                                 </div>
-                                <form action="">
+
+                                
+                                <form action="" method="POST" enctype="multipart/form-data">
                                     <div class="modal-body">
                                         <input type="hidden" id="id-field" />
                                         <div class="row g-3">
@@ -170,13 +172,16 @@
                                                         class="form-label">Nombre</label>
                                                     <input type="text" id="companyname-field"
                                                         class="form-control"
-                                                        placeholder="Enter company name" required />
+                                                        placeholder="Nombre de tu club" required />
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
                                                 <div>
-                                                    <label for="owner-field" class="form-label">Nombre del coordinador</label>
-                                                    <input type="text" id="owner-field" class="form-control" value="<?php echo e(Auth::user()->id); ?>" disabled/>
+                                                    <label for="owner-field" class="form-label">Nombre del administrador</label>
+                                                    <input type="text" class="form-control"
+                                                        value="<?php echo e(Auth::user()->name); ?> <?php echo e(Auth::user()->apaterno); ?> <?php echo e(Auth::user()->amaterno); ?>" 
+                                                        disabled/>
+                                                    <input type="hidden" id="owner-field" class="form-control" value="<?php echo e(Auth::user()->id); ?>" disabled/>
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">

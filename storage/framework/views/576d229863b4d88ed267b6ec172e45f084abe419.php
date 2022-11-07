@@ -193,8 +193,8 @@
                                     </div><!--end col-->
                                 </div><!--end row-->
                                 <div class="hstack gap-2 justify-content-end">
-                                    <button type="button" class="btn btn-soft-danger" id="btn-delete-event"><i class="ri-close-line align-bottom"></i> Delete</button>
-                                    <button type="submit" class="btn btn-success" id="btn-save-event">Add Event</button>
+                                    <button type="button" class="btn btn-soft-danger" id="btn-delete-event"><i class="ri-close-line align-bottom"></i> Borrar</button>
+                                    <button type="submit" class="btn btn-success" id="btn-save-event">Agregar Evento</button>
                                 </div>
                             </form>
                         </div>

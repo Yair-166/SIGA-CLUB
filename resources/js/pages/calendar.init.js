@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", function () {
         formEvent.classList.remove("was-validated");
         formEvent.reset();
         selectedEvent = null;
-        modalTitle.innerText = 'Add Event';
+        modalTitle.innerText = 'Agregar Evento';
         newEventData = info;
         document.getElementById("edit-event-btn").setAttribute("data-id", "new-event");
         document.getElementById('edit-event-btn').click();
@@ -403,8 +403,8 @@ function editEvent(data) {
     var data_id = data.getAttribute("data-id");
     if (data_id == 'new-event') {
         document.getElementById('modal-title').innerHTML = "";
-        document.getElementById('modal-title').innerHTML = "Add Event";
-        document.getElementById("btn-save-event").innerHTML = "Add Event";
+        document.getElementById('modal-title').innerHTML = "Agregar Evento";
+        document.getElementById("btn-save-event").innerHTML = "Agregar Evento";
         eventTyped();
     } else if (data_id == 'edit-event') {
         data.innerHTML = "Cancel";

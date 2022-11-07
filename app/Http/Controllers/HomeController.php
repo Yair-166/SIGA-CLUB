@@ -128,4 +128,45 @@ class HomeController extends Controller
             }
         }
     }
+
+    public function updateClub(Request $request, $id){
+        $request->validate([
+            'club_name' => ['required', 'string', 'max:255'],
+            'club_email' => ['required', 'string', 'email'],
+            'club_logo' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
+        ]);
+
+        $user = User::find($id);
+        $user->club_name = $request->get('club_name');
+        $user->club_email = $request->get('club_email');
+
+        if ($request->file('club_logo')) {
+            $club_logo = $request->file('club_logo');
+            $club_logoName = time() . '.' . $club_logo->getClientOriginalExtension();
+            $club_logoPath = public_path('/images/');
+            $club_logo->move($club_logoPath, $club_logoName);
+            $user->club_logo =  $club_logoName;
+        }
+
+        $user->update();
+        if ($user) {
+            Session::flash('message', 'Club Details Updated successfully!');
+            Session::flash('alert-class', 'alert-success');
+            // return response()->json([
+            //     'isSuccess' => true,
+            //     'Message' => "Club Details Updated successfully!"
+            // ], 200); // Status code here
+            return redirect()->back();
+        } else {
+            Session::flash('message', 'Something went wrong!');
+            Session::flash('alert-class', 'alert-danger');
+            // return response()->json([
+            //     'isSuccess' => true,
+            //     'Message' => "Something went wrong!"
+            // ], 200); // Status code here
+            return redirect()->back();
+
+        }
+    }
+    
 }

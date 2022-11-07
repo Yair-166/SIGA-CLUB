@@ -124,17 +124,30 @@
                                     <div class="col-12">
                                         <div class="mb-3">
                                             <label class="form-label">Tipo</label>
-                                            <select class="form-select d-none" name="category" id="event-category"  required>
-                                                <option value="bg-soft-danger">Peligro</option>
-                                                <option value="bg-soft-success">Éxito</option>
-                                                <option value="bg-soft-primary">Primario</option>
-                                                <option value="bg-soft-info">Información</option>
-                                                <option value="bg-soft-dark">Obscuro</option>
-                                                <option value="bg-soft-warning">Advertencia</option>
+                                            <select class="form-select" name="category" id="event-category"  required>
+                                                <option value="bg-soft-danger">Clase</option>
+                                                <option value="bg-soft-success">Entrenamiento</option>
+                                                <option value="bg-soft-primary">Evaluación</option>
+                                                <option value="bg-soft-info">Concurso</option>
+                                                <option value="bg-soft-dark">Conferencia</option>
+                                                <option value="bg-soft-warning">Exposición</option>
                                             </select>
                                             <div class="invalid-feedback">Por favor, seleccione una categoria valia</div>
                                         </div>
                                     </div><!--end col-->
+
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Modalidad</label>
+                                            <select class="form-select" name="modalidad" id="event-modalidad"  required>
+                                                <option value="bg-soft-danger">Presencial</option>
+                                                <option value="bg-soft-success">A distancia</option>
+                                                <option value="bg-soft-primary">Híbrida</option>
+                                            </select>
+                                            <div class="invalid-feedback">Por favor, seleccione una modalidad valia</div>
+                                        </div>
+                                    </div><!--end col-->
+
                                     <div class="col-12">
                                         <div class="mb-3">
                                             <label class="form-label">Nombre del evento</label>
