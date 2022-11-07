@@ -140,7 +140,8 @@
                                 </div>
 
                                 
-                                <form action="" method="POST" enctype="multipart/form-data">
+                                <form action="<?php echo e(route('updatePassword')); ?>" method="POST" enctype="multipart/form-data">
+                                    <?php echo csrf_field(); ?>
                                     <div class="modal-body">
                                         <input type="hidden" id="id-field" />
                                         <div class="row g-3">

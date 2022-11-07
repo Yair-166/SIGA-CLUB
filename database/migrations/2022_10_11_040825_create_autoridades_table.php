@@ -13,11 +13,13 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('_constancias', function (Blueprint $table) {
+        Schema::create('autoridades', function (Blueprint $table) {
             $table->id();
-            $table->string('idAsistencia');
-            $table->text('redaccion');
-            $table->date('fechaExpedicion');
+            $table->string('idClub');
+            $table->string('nombre');
+            $table->string('aPaterno');
+            $table->string('aMaterno');
+            $table->string('cargo');
             $table->timestamps();
         });
     }
@@ -29,6 +31,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_constancias');
+        Schema::dropIfExists('_autoridades');
     }
 };

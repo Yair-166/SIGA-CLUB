@@ -13,16 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('_asistencias', function (Blueprint $table) {
+        Schema::create('constancias', function (Blueprint $table) {
             $table->id();
-            $table->string('idEvento');
-            $table->string('idUsuario');
-            $table->string('rolUsuario');
-            $table->integer('tipoAsistencia');
-            $table->time('horaEntrada');
-            $table->time('horaSalida');
-            $table->float('asistenciaTotal');
-            $table->text('constanciaGenerada');
+            $table->string('idAsistencia');
+            $table->text('redaccion');
+            $table->date('fechaExpedicion');
             $table->timestamps();
         });
     }
@@ -34,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_asistencias');
+        Schema::dropIfExists('_constancias');
     }
 };

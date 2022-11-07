@@ -13,13 +13,17 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('_confi_eventos', function (Blueprint $table) {
+        Schema::create('eventos', function (Blueprint $table) {
             $table->id();
-            $table->string('idEvento');
-            $table->string('secondId');
-            $table->string('ultimoQR');
-            $table->string('qrActual');
-            $table->integer('isPrivate');
+            $table->string('nombre');
+            $table->string('tipo');
+            $table->text('descripcion');
+            $table->string('modalidad');
+            $table->integer('tipoAsistencia');
+            $table->date('fechaInicio');
+            $table->date('fechaFin');
+            $table->time('horaInicio');
+            $table->time('horaFin');
             $table->timestamps();
         });
     }
@@ -31,6 +35,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_confi_eventos');
+        Schema::dropIfExists('_eventos');
     }
 };

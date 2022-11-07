@@ -13,13 +13,11 @@ return new class extends Migration
      */
     public function up()
     {
-        Schema::create('_autoridades', function (Blueprint $table) {
+        Schema::create('evidencias', function (Blueprint $table) {
             $table->id();
-            $table->string('idClub');
-            $table->string('nombre');
-            $table->string('aPaterno');
-            $table->string('aMaterno');
-            $table->string('cargo');
+            $table->string('idEvento');
+            $table->text('nota');
+            $table->text('archivo');
             $table->timestamps();
         });
     }
@@ -31,6 +29,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_autoridades');
+        Schema::dropIfExists('_evidencias');
     }
 };
