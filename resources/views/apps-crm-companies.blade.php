@@ -179,7 +179,6 @@
                                                         </div>
                                                         <div class="avatar-lg p-1">
                                                             <div class="avatar-title bg-light rounded-circle">
-                                                                //etiqueta img que cambia la imagen cuando se sube una nueva imagen
                                                                 <img src="{{ URL::asset('assets/images/users/multi-user.jpg') }}"
                                                         alt="" id="companylogo-img" class="avatar-md rounded-circle object-cover">
                                                             </div>

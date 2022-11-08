@@ -24,3 +24,8 @@ Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class,
 Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
+
+//clubes details
+Route::post('/club', [App\Http\Controllers\HomeController::class, 'updateClub'])->name('updateClub');
+Route::post('/clubeditar', [App\Http\Controllers\HomeController::class, 'editarClub'])->name('editarClub');
+Route::post('/clubeliminar', [App\Http\Controllers\HomeController::class, 'deleteClub'])->name('deleteClub');
