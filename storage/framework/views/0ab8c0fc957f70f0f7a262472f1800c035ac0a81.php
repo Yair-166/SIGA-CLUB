@@ -21,7 +21,10 @@
         $clubs = DB::table('clubes')->get();
         //Obtener los usuarios de la base de datos 
         $users = DB::table('users')->get();
+        //Obtener los datos de la tabla inscripciones
+        $inscripciones = DB::table('inscripciones')->get();
         $eliminar = 0;
+        $inscrito = 0;
     ?>
     <div class="row">
     <?php if(Auth::user()->rol == 'administrador'): ?>
@@ -114,12 +117,33 @@
                                                         </a>
                                                     </li>
                                                 <?php endif; ?>
+
                                                 <?php if(Auth::user()->rol == 'colaborador'): ?>
-                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                        data-bs-placement="top" title="Inscribirse">
-                                                        <a href="javascript:void(0);" class="inscribirse-item-btn"><i
-                                                                class="ri-user-add-fill align-bottom text-muted"></i></a>
-                                                    </li>
+                                                    <?php $__currentLoopData = $inscripciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $inscripcion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <?php if($inscripcion->id_club == $club->id && $inscripcion->id_alumno == Auth::user()->id): ?>
+                                                            <?php
+                                                                $inscrito = 1;
+                                                            ?>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if($inscrito != 1): ?>
+                                                        <form action="<?php echo e(route('inscribirse')); ?>" method="POST">
+                                                            <?php echo csrf_field(); ?>
+                                                            <input type="hidden" name="id_club" value="<?php echo e($club->id); ?>">
+                                                            <input type="hidden" name="id_alumno" value="<?php echo e(Auth::user()->id); ?>">
+                                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                                data-bs-placement="top" title="Inscribirse">
+                                                                <a href="javascript:void(0);" class="inscribirse-item-btn">
+                                                                    <button type="submit" style="border: none; background: none;">
+                                                                        <i class="ri-user-add-fill align-bottom text-muted"></i>
+                                                                    </button>
+                                                                </a>
+                                                            </li>
+                                                        </form>
+                                                    <?php endif; ?>
+                                                    <?php
+                                                        $inscrito = 0;
+                                                    ?>
                                                 <?php endif; ?>
                                             </ul>
                                         </td>

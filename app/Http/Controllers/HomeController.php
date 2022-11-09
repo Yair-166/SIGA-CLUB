@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\User;
 use App\Models\Clubes;
+use App\Models\Inscripciones;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -190,5 +191,16 @@ class HomeController extends Controller
         $clubes = Clubes::find($request->post('id'));
         $clubes->delete();
         return redirect()->back()->with('success', 'Club eliminado correctamente');
+    }
+
+    public function inscribirse(Request $request){
+        $inscripciones = new Inscripciones();
+
+        $inscripciones->id_club = $request->post('id_club');
+        $inscripciones->id_alumno = $request->post('id_alumno');
+        
+        $inscripciones->save();
+
+        return redirect()->back()->with('success', 'Inscripción realizada correctamente');
     }
 }

@@ -21,7 +21,10 @@
         $clubs = DB::table('clubes')->get();
         //Obtener los usuarios de la base de datos 
         $users = DB::table('users')->get();
+        //Obtener los datos de la tabla inscripciones
+        $inscripciones = DB::table('inscripciones')->get();
         $eliminar = 0;
+        $inscrito = 0;
     @endphp
     <div class="row">
     @if (Auth::user()->rol == 'administrador')
@@ -112,12 +115,33 @@
                                                         </a>
                                                     </li>
                                                 @endif
+
                                                 @if (Auth::user()->rol == 'colaborador')
-                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                        data-bs-placement="top" title="Inscribirse">
-                                                        <a href="javascript:void(0);" class="inscribirse-item-btn"><i
-                                                                class="ri-user-add-fill align-bottom text-muted"></i></a>
-                                                    </li>
+                                                    @foreach ($inscripciones as $inscripcion)
+                                                        @if ($inscripcion->id_club == $club->id && $inscripcion->id_alumno == Auth::user()->id)
+                                                            @php
+                                                                $inscrito = 1;
+                                                            @endphp
+                                                        @endif
+                                                    @endforeach
+                                                    @if ($inscrito != 1)
+                                                        <form action="{{ route('inscribirse') }}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="id_club" value="{{$club->id}}">
+                                                            <input type="hidden" name="id_alumno" value="{{Auth::user()->id}}">
+                                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                                data-bs-placement="top" title="Inscribirse">
+                                                                <a href="javascript:void(0);" class="inscribirse-item-btn">
+                                                                    <button type="submit" style="border: none; background: none;">
+                                                                        <i class="ri-user-add-fill align-bottom text-muted"></i>
+                                                                    </button>
+                                                                </a>
+                                                            </li>
+                                                        </form>
+                                                    @endif
+                                                    @php
+                                                        $inscrito = 0;
+                                                    @endphp
                                                 @endif
                                             </ul>
                                         </td>
