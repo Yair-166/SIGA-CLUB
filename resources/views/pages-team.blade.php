@@ -5,12 +5,35 @@
 @section('content')
     @component('components.breadcrumb')
         @slot('li_1')
-            Pages
+            Clubes
         @endslot
         @slot('title')
-            Team
+            Participantes
         @endslot
     @endcomponent
+    @php
+        //Obtener todos los clubes cuyo idAdministrador sea igual al id del usuario logueado
+        $clubes = DB::table('clubes')->where('idAdministrador', Auth::user()->id)->get();
+        //Obtener un array con los id de los clubes del usuario logueado
+        $clubesId = array();
+        foreach ($clubes as $club) {
+            array_push($clubesId, $club->id);
+        }
+        //Obtener todas las inscripciones cuyo idClub sea igual a alguno de los id de los clubes del usuario logueado
+        $inscripciones = DB::table('inscripciones')->whereIn('id_club', $clubesId)->get();
+        //Eliminar createdAt y updatedAt de $inscripciones
+        foreach ($inscripciones as $inscripcion) {
+            unset($inscripcion->created_at);
+            unset($inscripcion->updated_at);
+        }
+        //print_r($inscripciones);
+        //Obtener un array con los id de los participantes de las inscripciones del usuario logueado
+        $participantesId = array();
+        foreach ($inscripciones as $inscripcion) {
+            array_push($participantesId, $inscripcion->id_alumno);
+        }
+    @endphp
+
     <div class="card">
         <div class="card-body">
             <div class="row g-2">
@@ -51,972 +74,80 @@
     <div class="row">
         <div class="col-lg-12">
             <div>
-                <div class="team-list grid-view-filter row">
-                    <div class="col">
-                        <div class="card team-box">
-                            <div class="team-cover">
-                                <img src="{{ URL::asset('assets/images/small/img-9.jpg') }}" alt="" class="img-fluid" />
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row align-items-center team-row">
-                                    <div class="col team-settings">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="bookmark-icon flex-shrink-0 me-2">
-                                                    <input type="checkbox" id="favourite1"
-                                                        class="bookmark-input bookmark-hide">
-                                                    <label for="favourite1" class="btn-star">
-                                                        <svg width="20" height="20">
-                                                            <use xlink:href="#icon-star" />
-                                                        </svg>
-                                                    </label>
+                <div class="team-list grid-view-filter row">                    
+                    @foreach ($inscripciones as $inscripcion) 
+                        @php
+                            //obtener el id del participante de la inscripcion
+                            $idParticipante = $inscripcion->id_alumno;
+                            //Obtener los datos del participante
+                            $participante = DB::table('users')->where('id', $idParticipante)->first();
+                            //Obtener el club al que pertenece el participante
+                            $club = DB::table('clubes')->where('id', $inscripcion->id_club)->first();
+                        @endphp
+                        <div class="col">
+                            <div class="card team-box">
+                                <div class="team-cover">
+                                    <img src="{{ URL::asset('images/' . $club->foto) }}" alt="" class="img-fluid" />
+                                </div>
+                                <div class="card-body p-4">
+                                    <div class="row align-items-center team-row">
+                                        <div class="col team-settings">
+                                            <div class="row">
+                                                <div class="col">
+                                                    <div class="bookmark-icon flex-shrink-0 me-2">
+                                                        <input type="checkbox" id="favourite1"
+                                                            class="bookmark-input bookmark-hide">
+                                                        <label for="favourite1" class="btn-star">
+                                                            <svg width="20" height="20">
+                                                                <use xlink:href="#icon-star" />
+                                                            </svg>
+                                                        </label>
+                                                    </div>
+                                                </div>
+                                                <div class="col text-end dropdown">
+                                                    <a href="javascript:void(0);" id="dropdownMenuLink2"
+                                                        data-bs-toggle="dropdown" aria-expanded="false">
+                                                        <i class="ri-more-fill fs-17"></i>
+                                                    </a>
+                                                    <ul class="dropdown-menu dropdown-menu-end"
+                                                        aria-labelledby="dropdownMenuLink2">
+                                                        <li><a class="dropdown-item" href="javascript:void(0);"><i
+                                                                    class="ri-eye-line me-2 align-middle"></i>Ver</a></li>
+                                                        <li><a class="dropdown-item" href="javascript:void(0);"><i
+                                                                    class="ri-delete-bin-5-line me-2 align-middle"></i>Dar de baja</a>
+                                                        </li>
+                                                    </ul>
                                                 </div>
                                             </div>
-                                            <div class="col text-end dropdown">
-                                                <a href="javascript:void(0);" id="dropdownMenuLink2"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill fs-17"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenuLink2">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-eye-line me-2 align-middle"></i>View</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-star-line me-2 align-middle"></i>Favorites</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-5-line me-2 align-middle"></i>Delete</a>
-                                                    </li>
-                                                </ul>
+                                        </div>
+                                        <div class="col-lg-4 col">
+                                            <div class="team-profile-img">
+                                                <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
+                                                    <img src="{{ URL::asset('images/' . $participante->avatar) }}" alt=""
+                                                        class="img-fluid d-block rounded-circle" />
+                                                </div>
+                                                <div class="team-content">
+                                                    <a data-bs-toggle="offcanvas" href="#offcanvasExample"
+                                                        aria-controls="offcanvasExample">
+                                                        <h5 class="fs-16 mb-1">{{$participante->name}}</h5>
+                                                    </a>
+                                                    <p class="text-muted mb-0">{{$club->nombre}}</p>
+                                                </div>
                                             </div>
                                         </div>
-                                    </div>
-                                    <div class="col-lg-4 col">
-                                        <div class="team-profile-img">
-                                            <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
-                                                <img src="{{ URL::asset('assets/images/users/avatar-2.jpg') }}" alt=""
-                                                    class="img-fluid d-block rounded-circle" />
+                                        <div class="col-lg-2 col">
+                                            <div class="text-end">
+                                                <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">Ver participaciones</a>
                                             </div>
-                                            <div class="team-content">
-                                                <a data-bs-toggle="offcanvas" href="#offcanvasExample"
-                                                    aria-controls="offcanvasExample">
-                                                    <h5 class="fs-16 mb-1">Nancy Martino</h5>
-                                                </a>
-                                                <p class="text-muted mb-0">Team Leader & HR</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col">
-                                        <div class="row text-muted text-center">
-                                            <div class="col-6 border-end border-end-dashed">
-                                                <h5 class="mb-1">225</h5>
-                                                <p class="text-muted mb-0">Projects</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-1">197</h5>
-                                                <p class="text-muted mb-0">Tasks</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col">
-                                        <div class="text-end">
-                                            <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">View Profile</a>
                                         </div>
                                     </div>
                                 </div>
                             </div>
+                            <!--end card-->
                         </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
-                    <div class="col">
-                        <div class="card team-box">
-                            <div class="team-cover">
-                                <img src="{{ URL::asset('assets/images/small/img-12.jpg') }}" alt="" class="img-fluid" />
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row align-items-center team-row">
-                                    <div class="col team-settings">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="bookmark-icon flex-shrink-0 me-2">
-                                                    <input type="checkbox" id="favourite12"
-                                                        class="bookmark-input bookmark-hide" checked />
-                                                    <label for="favourite12" class="btn-star">
-                                                        <svg width="20" height="20">
-                                                            <use xlink:href="#icon-star" />
-                                                        </svg>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col text-end dropdown">
-                                                <a href="javascript:void(0);" id="dropdownMenuLink3"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill fs-17"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenuLink3">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-eye-line me-2 align-middle"></i>View</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-star-line me-2 align-middle"></i>Favorites</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-5-line me-2 align-middle"></i>Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="team-profile-img">
-                                            <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
-                                                <div class="avatar-title bg-soft-primary text-primary rounded-circle">
-                                                    HB
-                                                </div>
-                                            </div>
-                                            <div class="team-content">
-                                                <a data-bs-toggle="offcanvas" href="#offcanvasExample"
-                                                    aria-controls="offcanvasExample">
-                                                    <h5 class="fs-16 mb-1">Henry Baird</h5>
-                                                </a>
-                                                <p class="text-muted mb-0">Full Stack Developer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="row text-muted text-center">
-                                            <div class="col-6 border-end border-end-dashed">
-                                                <h5 class="mb-1">352</h5>
-                                                <p class="text-muted mb-0">Projects</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-1">376</h5>
-                                                <p class="text-muted mb-0">Tasks</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-2 col">
-                                        <div class="text-end">
-                                            <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">View Profile</a>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                </div>
-                                <!--end row-->
-                            </div>
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
-                    <div class="col">
-                        <div class="card team-box">
-                            <div class="team-cover">
-                                <img src="{{ URL::asset('assets/images/small/img-11.jpg') }}" alt="" class="img-fluid" />
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row align-items-center team-row">
-                                    <div class="col team-settings">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="bookmark-icon flex-shrink-0 me-2">
-                                                    <input type="checkbox" id="favourite2"
-                                                        class="bookmark-input bookmark-hide">
-                                                    <label for="favourite2" class="btn-star">
-                                                        <svg width="20" height="20">
-                                                            <use xlink:href="#icon-star" />
-                                                        </svg>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col text-end dropdown">
-                                                <a href="javascript:void(0);" id="dropdownMenuLink4"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill fs-17"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenuLink4">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-eye-line me-2 align-middle"></i>View</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-star-line me-2 align-middle"></i>Favorites</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-5-line me-2 align-middle"></i>Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col">
-                                        <div class="team-profile-img">
-                                            <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
-                                                <img src="{{ URL::asset('assets/images/users/avatar-3.jpg') }}" alt=""
-                                                    class="img-fluid d-block rounded-circle" />
-                                            </div>
-                                            <div class="team-content">
-                                                <a data-bs-toggle="offcanvas" href="#offcanvasExample"
-                                                    aria-controls="offcanvasExample">
-                                                    <h5 class="fs-16 mb-1">Frank Hook</h5>
-                                                </a>
-                                                <p class="text-muted mb-0">Project Manager</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col">
-                                        <div class="row text-muted text-center">
-                                            <div class="col-6 border-end border-end-dashed">
-                                                <h5 class="mb-1">164</h5>
-                                                <p class="text-muted mb-0">Projects</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-1">182</h5>
-                                                <p class="text-muted mb-0">Tasks</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col">
-                                        <div class="text-end">
-                                            <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">View Profile</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
-                    <div class="col">
-                        <div class="card team-box">
-                            <div class="team-cover">
-                                <img src="{{ URL::asset('assets/images/small/img-1.jpg') }}" alt="" class="img-fluid" />
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row align-items-center team-row">
-                                    <div class="col team-settings">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="bookmark-icon flex-shrink-0 me-2">
-                                                    <input type="checkbox" id="favourite3"
-                                                        class="bookmark-input bookmark-hide" checked>
-                                                    <label for="favourite3" class="btn-star">
-                                                        <svg width="20" height="20">
-                                                            <use xlink:href="#icon-star" />
-                                                        </svg>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col text-end dropdown">
-                                                <a href="javascript:void(0);" id="dropdownMenuLink5"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill fs-17"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenuLink5">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-eye-line me-2 align-middle"></i>View</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-star-line me-2 align-middle"></i>Favorites</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-5-line me-2 align-middle"></i>Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col">
-                                        <div class="team-profile-img">
-                                            <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
-                                                <img src="{{ URL::asset('assets/images/users/avatar-8.jpg') }}" alt=""
-                                                    class="img-fluid d-block rounded-circle" />
-                                            </div>
-                                            <div class="team-content">
-                                                <a data-bs-toggle="offcanvas" href="#offcanvasExample"
-                                                    aria-controls="offcanvasExample">
-                                                    <h5 class="fs-16 mb-1">Jennifer Carter</h5>
-                                                </a>
-                                                <p class="text-muted mb-0">UI/UX Designer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col">
-                                        <div class="row text-muted text-center">
-                                            <div class="col-6 border-end border-end-dashed">
-                                                <h5 class="mb-1">241</h5>
-                                                <p class="text-muted mb-0">Projects</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-1">204</h5>
-                                                <p class="text-muted mb-0">Tasks</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col">
-                                        <div class="text-end">
-                                            <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">View Profile</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
-                    <div class="col">
-                        <div class="card team-box">
-                            <div class="team-cover">
-                                <img src="{{ URL::asset('assets/images/small/img-10.jpg') }}" alt="" class="img-fluid" />
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row align-items-center team-row">
-                                    <div class="col team-settings">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="bookmark-icon flex-shrink-0 me-2">
-                                                    <input type="checkbox" id="favourite4"
-                                                        class="bookmark-input bookmark-hide">
-                                                    <label for="favourite4" class="btn-star">
-                                                        <svg width="20" height="20">
-                                                            <use xlink:href="#icon-star" />
-                                                        </svg>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col text-end dropdown">
-                                                <a href="javascript:void(0);" id="dropdownMenuLink6"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill fs-17"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenuLink6">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-eye-line me-2 align-middle"></i>View</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-star-line me-2 align-middle"></i>Favorites</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-5-line me-2 align-middle"></i>Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col">
-                                        <div class="team-profile-img">
-                                            <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
-                                                <div class="avatar-title bg-soft-success text-success rounded-circle">
-                                                    ME
-                                                </div>
-                                            </div>
-                                            <div class="team-content">
-                                                <a data-bs-toggle="offcanvas" href="#offcanvasExample"
-                                                    aria-controls="offcanvasExample">
-                                                    <h5 class="fs-16 mb-1">Megan Elmore</h5>
-                                                </a>
-                                                <p class="text-muted mb-0">Team Leader & Web Developer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col">
-                                        <div class="row text-muted text-center">
-                                            <div class="col-6 border-end border-end-dashed">
-                                                <h5 class="mb-1">201</h5>
-                                                <p class="text-muted mb-0">Projects</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-1">263</h5>
-                                                <p class="text-muted mb-0">Tasks</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col">
-                                        <div class="text-end">
-                                            <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">View Profile</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
-                    <div class="col">
-                        <div class="card team-box">
-                            <div class="team-cover">
-                                <img src="{{ URL::asset('assets/images/small/img-2.jpg') }}" alt="" class="img-fluid" />
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row align-items-center team-row">
-                                    <div class="col team-settings">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="bookmark-icon flex-shrink-0 me-2">
-                                                    <input type="checkbox" id="favourite6"
-                                                        class="bookmark-input bookmark-hide">
-                                                    <label for="favourite6" class="btn-star">
-                                                        <svg width="20" height="20">
-                                                            <use xlink:href="#icon-star" />
-                                                        </svg>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col text-end dropdown">
-                                                <a href="javascript:void(0);" id="dropdownMenuLink7"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill fs-17"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenuLink7">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-eye-line me-2 align-middle"></i>View</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-star-line me-2 align-middle"></i>Favorites</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-5-line me-2 align-middle"></i>Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col">
-                                        <div class="team-profile-img">
-                                            <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
-                                                <img src="{{ URL::asset('assets/images/users/avatar-4.jpg') }}" alt=""
-                                                    class="img-fluid d-block rounded-circle" />
-                                            </div>
-                                            <div class="team-content">
-                                                <a data-bs-toggle="offcanvas" href="#offcanvasExample"
-                                                    aria-controls="offcanvasExample">
-                                                    <h5 class="fs-16 mb-1">Alexis Clarke</h5>
-                                                </a>
-                                                <p class="text-muted mb-0">Backend Developer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-4 col">
-                                        <div class="row text-muted text-center">
-                                            <div class="col-6 border-end border-end-dashed">
-                                                <h5 class="mb-1">132</h5>
-                                                <p class="text-muted mb-0">Projects</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-1">147</h5>
-                                                <p class="text-muted mb-0">Tasks</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <div class="col-lg-2 col">
-                                        <div class="text-end">
-                                            <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">View Profile</a>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
-                    <div class="col">
-                        <div class="card team-box">
-                            <div class="team-cover">
-                                <img src="{{ URL::asset('assets/images/small/img-4.jpg') }}" alt="" class="img-fluid" />
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row align-items-center team-row">
-                                    <div class="col team-settings">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="bookmark-icon flex-shrink-0 me-2">
-                                                    <input type="checkbox" id="favourite9"
-                                                        class="bookmark-input bookmark-hide" checked />
-                                                    <label for="favourite9" class="btn-star">
-                                                        <svg width="20" height="20">
-                                                            <use xlink:href="#icon-star" />
-                                                        </svg>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col text-end dropdown">
-                                                <a href="javascript:void(0);" id="dropdownMenuLink8"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill fs-17"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenuLink8">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-eye-line me-2 align-middle"></i>View</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-star-line me-2 align-middle"></i>Favorites</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-5-line me-2 align-middle"></i>Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="team-profile-img">
-                                            <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
-                                                <div class="avatar-title bg-soft-primary text-primary rounded-circle">
-                                                    NC
-                                                </div>
-                                            </div>
-                                            <div class="team-content">
-                                                <a data-bs-toggle="offcanvas" href="#offcanvasExample"
-                                                    aria-controls="offcanvasExample">
-                                                    <h5 class="fs-16 mb-1">Nathan Cole</h5>
-                                                </a>
-                                                <p class="text-muted mb-0">Front-End Developer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="row text-muted text-center">
-                                            <div class="col-6 border-end border-end-dashed">
-                                                <h5 class="mb-1">352</h5>
-                                                <p class="text-muted mb-0">Projects</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-1">376</h5>
-                                                <p class="text-muted mb-0">Tasks</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-2 col">
-                                        <div class="text-end">
-                                            <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">View Profile</a>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                </div>
-                                <!--end row-->
-                            </div>
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
-                    <div class="col">
-                        <div class="card team-box">
-                            <div class="team-cover">
-                                <img src="{{ URL::asset('assets/images/small/img-7.jpg') }}" alt="" class="img-fluid" />
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row align-items-center team-row">
-                                    <div class="col team-settings">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="bookmark-icon flex-shrink-0 me-2">
-                                                    <input type="checkbox" id="favourite7"
-                                                        class="bookmark-input bookmark-hide" checked>
-                                                    <label for="favourite7" class="btn-star">
-                                                        <svg width="20" height="20">
-                                                            <use xlink:href="#icon-star" />
-                                                        </svg>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col text-end dropdown">
-                                                <a href="javascript:void(0);" id="dropdownMenuLink9"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill fs-17"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenuLink9">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-eye-line me-2 align-middle"></i>View</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-star-line me-2 align-middle"></i>Favorites</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-5-line me-2 align-middle"></i>Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="team-profile-img">
-                                            <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
-                                                <img src="{{ URL::asset('assets/images/users/avatar-6.jpg') }}" alt=""
-                                                    class="img-fluid d-block rounded-circle" />
-                                            </div>
-                                            <div class="team-content">
-                                                <a data-bs-toggle="offcanvas" href="#offcanvasExample"
-                                                    aria-controls="offcanvasExample">
-                                                    <h5 class="fs-16 mb-1">Joseph Parker</h5>
-                                                </a>
-                                                <p class="text-muted mb-0">Full Stack Developer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="row text-muted text-center">
-                                            <div class="col-6 border-end border-end-dashed">
-                                                <h5 class="mb-1">64</h5>
-                                                <p class="text-muted mb-0">Projects</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-1">93</h5>
-                                                <p class="text-muted mb-0">Tasks</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-2 col">
-                                        <div class="text-end">
-                                            <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">View Profile</a>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                </div>
-                                <!--end row-->
-                            </div>
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
-                    <div class="col">
-                        <div class="card team-box">
-                            <div class="team-cover">
-                                <img src="{{ URL::asset('assets/images/small/img-3.jpg') }}" alt="" class="img-fluid" />
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row align-items-center team-row">
-                                    <div class="col team-settings">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="bookmark-icon flex-shrink-0 me-2">
-                                                    <input type="checkbox" id="favourite8"
-                                                        class="bookmark-input bookmark-hide">
-                                                    <label for="favourite8" class="btn-star">
-                                                        <svg width="20" height="20">
-                                                            <use xlink:href="#icon-star" />
-                                                        </svg>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col text-end dropdown">
-                                                <a href="javascript:void(0);" id="dropdownMenuLink10"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill fs-17"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenuLink10">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-eye-line me-2 align-middle"></i>View</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-star-line me-2 align-middle"></i>Favorites</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-5-line me-2 align-middle"></i>Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="team-profile-img">
-                                            <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
-                                                <img src="{{ URL::asset('assets/images/users/avatar-5.jpg') }}" alt=""
-                                                    class="img-fluid d-block rounded-circle" />
-                                            </div>
-                                            <div class="team-content">
-                                                <a data-bs-toggle="offcanvas" href="#offcanvasExample"
-                                                    aria-controls="offcanvasExample">
-                                                    <h5 class="fs-16 mb-1">Erica Kernan</h5>
-                                                </a>
-                                                <p class="text-muted mb-0">Web Designer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="row text-muted text-center">
-                                            <div class="col-6 border-end border-end-dashed">
-                                                <h5 class="mb-1">345</h5>
-                                                <p class="text-muted mb-0">Projects</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-1">298</h5>
-                                                <p class="text-muted mb-0">Tasks</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-2 col">
-                                        <div class="text-end">
-                                            <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">View Profile</a>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                </div>
-                                <!--end row-->
-                            </div>
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
-                    <div class="col">
-                        <div class="card team-box">
-                            <div class="team-cover">
-                                <img src="{{ URL::asset('assets/images/small/img-5.jpg') }}" alt="" class="img-fluid" />
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row align-items-center team-row">
-                                    <div class="col team-settings">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="bookmark-icon flex-shrink-0 me-2">
-                                                    <input type="checkbox" id="favourite10"
-                                                        class="bookmark-input bookmark-hide" checked>
-                                                    <label for="favourite10" class="btn-star">
-                                                        <svg width="20" height="20">
-                                                            <use xlink:href="#icon-star" />
-                                                        </svg>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col text-end dropdown">
-                                                <a href="javascript:void(0);" id="dropdownMenuLink11"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill fs-17"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenuLink11">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-eye-line me-2 align-middle"></i>View</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-star-line me-2 align-middle"></i>Favorites</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-5-line me-2 align-middle"></i>Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="team-profile-img">
-                                            <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
-                                                <div
-                                                    class="avatar-title border bg-soft-primary text-primary rounded-circle">
-                                                    DP
-                                                </div>
-                                            </div>
-                                            <div class="team-content">
-                                                <a data-bs-toggle="offcanvas" href="#offcanvasExample"
-                                                    aria-controls="offcanvasExample">
-                                                    <h5 class="fs-16 mb-1">Donald Palmer</h5>
-                                                </a>
-                                                <p class="text-muted mb-0">Wed Developer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="row text-muted text-center">
-                                            <div class="col-6 border-end border-end-dashed">
-                                                <h5 class="mb-1">97</h5>
-                                                <p class="text-muted mb-0">Projects</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-1">135</h5>
-                                                <p class="text-muted mb-0">Tasks</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-2 col">
-                                        <div class="text-end">
-                                            <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">View Profile</a>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                </div>
-                                <!--end row-->
-                            </div>
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
-                    <div class="col">
-                        <div class="card team-box">
-                            <div class="team-cover">
-                                <img src="{{ URL::asset('assets/images/small/img-8.jpg') }}" alt="" class="img-fluid" />
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row align-items-center team-row">
-                                    <div class="col team-settings">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="bookmark-icon flex-shrink-0 me-2">
-                                                    <input type="checkbox" id="favourite5"
-                                                        class="bookmark-input bookmark-hide">
-                                                    <label for="favourite5" class="btn-star">
-                                                        <svg width="20" height="20">
-                                                            <use xlink:href="#icon-star" />
-                                                        </svg>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col text-end dropdown">
-                                                <a href="javascript:void(0);" id="dropdownMenuLink12"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill fs-17"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenuLink12">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-eye-line me-2 align-middle"></i>View</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-star-line me-2 align-middle"></i>Favorites</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-5-line me-2 align-middle"></i>Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="team-profile-img">
-                                            <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
-                                                <img src="{{ URL::asset('assets/images/users/avatar-7.jpg') }}" alt=""
-                                                    class="img-fluid d-block rounded-circle" />
-                                            </div>
-                                            <div class="team-content">
-                                                <a data-bs-toggle="offcanvas" href="#offcanvasExample"
-                                                    aria-controls="offcanvasExample">
-                                                    <h5 class="fs-16 mb-1">Jack Gough</h5>
-                                                </a>
-                                                <p class="text-muted mb-0">React Js Developer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="row text-muted text-center">
-                                            <div class="col-6 border-end border-end-dashed">
-                                                <h5 class="mb-1">87</h5>
-                                                <p class="text-muted mb-0">Projects</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-1">121</h5>
-                                                <p class="text-muted mb-0">Tasks</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-2 col">
-                                        <div class="text-end">
-                                            <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">View Profile</a>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                </div>
-                                <!--end row-->
-                            </div>
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
-                    <div class="col">
-                        <div class="card team-box">
-                            <div class="team-cover">
-                                <img src="{{ URL::asset('assets/images/small/img-6.jpg') }}" alt="" class="img-fluid" />
-                            </div>
-                            <div class="card-body p-4">
-                                <div class="row align-items-center team-row">
-                                    <div class="col team-settings">
-                                        <div class="row">
-                                            <div class="col">
-                                                <div class="bookmark-icon flex-shrink-0 me-2">
-                                                    <input type="checkbox" id="favourite11"
-                                                        class="bookmark-input bookmark-hide">
-                                                    <label for="favourite11" class="btn-star">
-                                                        <svg width="20" height="20">
-                                                            <use xlink:href="#icon-star" />
-                                                        </svg>
-                                                    </label>
-                                                </div>
-                                            </div>
-                                            <div class="col text-end dropdown">
-                                                <a href="javascript:void(0);" id="dropdownMenuLink13"
-                                                    data-bs-toggle="dropdown" aria-expanded="false">
-                                                    <i class="ri-more-fill fs-17"></i>
-                                                </a>
-                                                <ul class="dropdown-menu dropdown-menu-end"
-                                                    aria-labelledby="dropdownMenuLink13">
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-eye-line me-2 align-middle"></i>View</a></li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-star-line me-2 align-middle"></i>Favorites</a>
-                                                    </li>
-                                                    <li><a class="dropdown-item" href="javascript:void(0);"><i
-                                                                class="ri-delete-bin-5-line me-2 align-middle"></i>Delete</a>
-                                                    </li>
-                                                </ul>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="team-profile-img">
-                                            <div class="avatar-lg img-thumbnail rounded-circle flex-shrink-0">
-                                                <div class="avatar-title bg-soft-success text-success rounded-circle">
-                                                    MW
-                                                </div>
-                                            </div>
-                                            <div class="team-content">
-                                                <a data-bs-toggle="offcanvas" href="#offcanvasExample"
-                                                    aria-controls="offcanvasExample">
-                                                    <h5 class="fs-16 mb-1">Marie Ward</h5>
-                                                </a>
-                                                <p class="text-muted mb-0">Backend Developer</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-4 col">
-                                        <div class="row text-muted text-center">
-                                            <div class="col-6 border-end border-end-dashed">
-                                                <h5 class="mb-1">145</h5>
-                                                <p class="text-muted mb-0">Projects</p>
-                                            </div>
-                                            <div class="col-6">
-                                                <h5 class="mb-1">210</h5>
-                                                <p class="text-muted mb-0">Tasks</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                    <div class="col-lg-2 col">
-                                        <div class="text-end">
-                                            <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">View Profile</a>
-                                        </div>
-                                    </div>
-                                    <!--end col-->
-                                </div>
-                                <!--end row-->
-                            </div>
-                        </div>
-                        <!--end card-->
-                    </div>
-                    <!--end col-->
+                        <!--end col-->
+                    @endforeach
+
                     <div class="col-lg-12">
                         <div class="text-center mb-3">
                             <a href="javascript:void(0);" class="text-primary"><i

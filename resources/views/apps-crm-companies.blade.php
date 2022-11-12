@@ -98,14 +98,14 @@
                                                     </a>
                                                 </li>
                                                 @if ($club->idAdministrador == Auth::user()->id)
-                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                    {{-- <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
                                                         data-bs-placement="top" title="Editar">
                                                         <a class="edit-item-btn" href="#editModal"  data-bs-toggle="modal">
                                                             <button onClick="eliminarid({{$clubData}})" style="border: none; background: none;">
                                                                 <i class="ri-pencil-fill align-bottom text-muted"></i></a>
                                                             </button>
                                                     </li>
-                                                    
+                                                     --}}
                                                     <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
                                                         data-bs-placement="top" title="Eliminar">
                                                         <a id="adelete" class="delete-item-btn" href="#deleteRecordModal" data-bs-toggle="modal" data-bs-id="{{$club->id}}">
