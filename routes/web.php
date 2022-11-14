@@ -21,7 +21,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('roo
 
 //Update User Details
 Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
-Route::post('/update-password/{id}', [App\Http\Controllers\HomeController::class, 'updatePassword'])->name('updatePassword');
+Route::post('/editarPassword', [App\Http\Controllers\HomeController::class, 'editarPassword'])->name('editarPassword');
+Route::post('/edituser', [App\Http\Controllers\HomeController::class, 'edituser'])->name('edituser');
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 

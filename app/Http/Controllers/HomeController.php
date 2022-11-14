@@ -62,6 +62,7 @@ class HomeController extends Controller
             'amaterno' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email'],
             'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
+            'descripcion' => ['nullable', 'string', 'max:255'],
         ]);
 
         $user = User::find($id);
@@ -97,26 +98,25 @@ class HomeController extends Controller
         }
     }
 
-    public function updatePassword(Request $request, $id)
+    public function editarPassword(Request $request)
     {
-        $request->validate([
-            'current_password' => ['required', 'string'],
-            'password' => ['required', 'string', 'min:6', 'confirmed'],
-        ]);
+        $id = $request->post('id');
+        echo $request->post('current_password');
+        echo $request->post('password');
 
-        if (!(Hash::check($request->get('current_password'), Auth::user()->password))) {
-            return response()->json([
-                'isSuccess' => false,
-                'Message' => "Your Current password does not matches with the password you provided. Please try again."
-            ], 200); // Status code
+        if (!(Hash::check($request->post('current_password'), Auth::user()->password))) {
+            return redirect()->back()->with("error","La contraseña actual no coincide.");
         } else {
             $user = User::find($id);
-            $user->password = Hash::make($request->get('password'));
+            $user->password = Hash::make($request->post('password'));
+            echo $user->password;
             $user->update();
+            
             if ($user) {
                 Session::flash('message', 'Password updated successfully!');
                 Session::flash('alert-class', 'alert-success');
-                return response()->json([
+                return redirect()->back()->with("success","La contraseña ha sido cambiada.");
+                response()->json([
                     'isSuccess' => true,
                     'Message' => "Password updated successfully!"
                 ], 200); // Status code here
@@ -129,6 +129,26 @@ class HomeController extends Controller
                 ], 200); // Status code here
             }
         }
+    }
+
+    public function edituser(request $request)
+    {
+        $user = new User();
+
+        $user->id = $request->post('id');
+
+        //obtener el usuario por el id
+        $user = User::find($user->id);
+
+        $user->name = $request->post('name');
+        $user->apaterno = $request->post('apaterno');
+        $user->amaterno = $request->post('amaterno');
+        $user->email = $request->post('email');
+        $user->descripcion = $request->post('descripcion');
+
+        $user->save();
+
+        return redirect()->back();
     }
 
     public function updateClub(Request $request)

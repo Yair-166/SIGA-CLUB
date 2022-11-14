@@ -9,8 +9,14 @@
 <?php
     //Recibir datos via get
     $uid = $_GET['uid'];
+    //Obtener los datos de la tabla inscripciones con el uid
+    $inscripcion = DB::table('inscripciones')->where('id', $uid)->first();
+    //Obtener todas las asistencias del usuario con el uid
+    $asistencias = DB::table('asistencias')->where('idUsuario', $uid)->get();
+    //Obtener los datos del club con el id del club
+    $club = DB::table('clubes')->where('id', $inscripcion->id_club)->first();
     //Obtener el usuario de la base de datos por el id
-    $user = DB::table('users')->where('id', $uid)->first();
+    $user = DB::table('users')->where('id', $inscripcion->id_alumno)->first();
     $texto = $numero = "";
 ?>
     <div class="profile-foreground position-relative mx-n4 mt-n4">
@@ -77,12 +83,11 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-pills animation-nav profile-nav gap-2 gap-lg-3 flex-grow-1" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link fs-14 active" data-bs-toggle="tab" href="#overview-tab" role="tab">
+                            <a class="nav-link fs-14 active border" data-bs-toggle="tab" href="#overview-tab" role="tab">
                                 <i class="ri-airplay-fill d-inline-block d-md-none"></i> <span
                                     class="d-none d-md-inline-block">Sobre <?php echo e($user->name); ?></span>
                             </a>
                         </li>
-                        
                     </ul>
                 </div>
                 <!-- Tab panes -->
@@ -93,11 +98,7 @@
                                 <div class="card">
                                     <div class="card-body">
                                         <h5 class="card-title mb-5">
-                                            <?php
-                                                //Obtener el created_at del usuario y convertirlo a formato de fecha
-                                                $fecha = date("d-m-Y", strtotime($user->created_at));
-                                            ?>
-                                            Fecha de registro: <?php echo e($fecha); ?>
+                                            <?php echo e($club->nombre); ?>
 
                                         </h5>
                                     </div>
@@ -118,7 +119,48 @@
                                 </div><!-- end card -->
 
                                 
-                            
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-4">
+                                        <h5 class="card-title flex-grow-1 mb-0">Asistencias</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="table-responsive">
+                                                <table class="table table-borderless align-middle mb-0">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th scope="col">Nombre del evento</th>
+                                                            <th scope="col">Fecha inicio del evento</th>
+                                                            <th scope="col">Fecha final del evento</th>
+                                                            <th scope="col">Total de horas registradas</th>
+                                                            <th scope="col">Generar constancia</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php $__currentLoopData = $asistencias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asistencia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            //Obtener el nombre del evento 
+                                                            <?php
+                                                                $evento = DB::table('eventos')->where('id', $asistencia->idEvento)->first();
+                                                            ?>
+                                                            <tr>
+                                                                <td><?php echo e($evento->nombre); ?></td>
+                                                                <td><?php echo e($evento->fechaInicio); ?></td>
+                                                                <td><?php echo e($evento->fechaFin); ?></td>
+                                                                <td><?php echo e($asistencia->asistenciaTotal); ?></td>
+                                                                <td>
+                                                                    <a href="<?php echo e(route('constancia', $asistencia->id)); ?>" class="btn btn-primary btn-sm">Generar</a>
+                                                                </td>
+                                                            </tr>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                            
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
 
                                 
 
@@ -143,4 +185,4 @@
     <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
-<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\SIGA-CLUB\resources\views/pages-profile.blade.php ENDPATH**/ ?>
+<?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\SIGA-CLUB\resources\views/pages-profile-view.blade.php ENDPATH**/ ?>

@@ -36,14 +36,7 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="row g-2">
-                <div class="col-sm-4">
-                    <div class="search-box">
-                        <input type="text" class="form-control"
-                            placeholder="Search for name, tasks, projects or something...">
-                        <i class="ri-search-line search-icon"></i>
-                    </div>
-                </div>
+            <div class="row g-2"
                 <!--end col-->
                 <div class="col-sm-auto ms-auto">
                     <div class="list-grid-nav hstack gap-1">
@@ -53,16 +46,6 @@
                         <button type="button" id="list-view-button"
                             class="btn btn-soft-primary nav-link  btn-icon fs-14 filter-button"><i
                                 class="ri-list-unordered"></i></button>
-                        <button type="button" id="dropdownMenuLink1" data-bs-toggle="dropdown" aria-expanded="false"
-                            class="btn btn-soft-secondary btn-icon fs-14"><i class="ri-more-2-fill"></i></button>
-                        <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink1">
-                            <li><a class="dropdown-item" href="#">All</a></li>
-                            <li><a class="dropdown-item" href="#">Last Week</a></li>
-                            <li><a class="dropdown-item" href="#">Last Month</a></li>
-                            <li><a class="dropdown-item" href="#">Last Year</a></li>
-                        </ul>
-                        <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addmembers"><i
-                                class="ri-add-fill me-1 align-bottom"></i> Add Members</button>
                     </div>
                 </div>
                 <!--end col-->
@@ -105,10 +88,6 @@
                                                     </div>
                                                 </div>
                                                 <div class="col text-end dropdown">
-                                                    <a href="javascript:void(0);" id="dropdownMenuLink2"
-                                                        data-bs-toggle="dropdown" aria-expanded="false">
-                                                        <i class="ri-more-fill fs-17"></i>
-                                                    </a>
                                                     <ul class="dropdown-menu dropdown-menu-end"
                                                         aria-labelledby="dropdownMenuLink2">
                                                         <li><a class="dropdown-item" href="javascript:void(0);"><i
@@ -127,17 +106,15 @@
                                                         class="img-fluid d-block rounded-circle" />
                                                 </div>
                                                 <div class="team-content">
-                                                    <a data-bs-toggle="offcanvas" href="#offcanvasExample"
-                                                        aria-controls="offcanvasExample">
-                                                        <h5 class="fs-16 mb-1">{{$participante->name}}</h5>
-                                                    </a>
+                                                    <h3 class="fs-16 mb-1">{{$participante->name}}</h3>
+                                                    <h3 class="fs-16 mb-1">{{$participante->apaterno}} {{$participante->amaterno}}</h3>
                                                     <p class="text-muted mb-0">{{$club->nombre}}</p>
                                                 </div>
                                             </div>
                                         </div>
                                         <div class="col-lg-2 col">
                                             <div class="text-end">
-                                                <a href="{{URL::asset('/pages-profile')}}" class="btn btn-light view-btn">Ver participaciones</a>
+                                                <a href="pages-profile-view?uid={{$inscripcion->id}}" class="btn btn-light view-btn">Ver participaciones</a>
                                             </div>
                                         </div>
                                     </div>
@@ -220,7 +197,7 @@
                 </div>
                 <!--end modal-->
 
-                <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="offcanvasExample">
+                {{-- <div class="offcanvas offcanvas-end border-0" tabindex="-1" id="offcanvasExample">
                     <!--end offcanvas-header-->
                     <div class="offcanvas-body profile-offcanvas p-0">
                         <div class="team-cover">
@@ -395,7 +372,7 @@
                         <a href="{{URL::asset('/pages-profile')}}" class="btn btn-primary w-100"><i
                                 class="ri-user-3-fill align-bottom ms-1"></i> View Profile</a>
                     </div>
-                </div>
+                </div> --}}
                 <!--end offcanvas-->
             </div>
         </div><!-- end col -->
