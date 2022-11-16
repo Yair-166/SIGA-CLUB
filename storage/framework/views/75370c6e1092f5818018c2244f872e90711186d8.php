@@ -26,8 +26,8 @@
 
         //Eliminar el ][ entre cada evento
         //$eventosj = str_replace("][", ",", $eventosj);
-        echo $eventosj;
-
+        //echo $eventosj;
+        
         //Hasta aquiiiiii
 
         //echo $eventos;
