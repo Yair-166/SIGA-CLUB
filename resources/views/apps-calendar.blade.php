@@ -8,6 +8,41 @@
         @slot('li_1') Apps @endslot
         @slot('title') Calendario @endslot
     @endcomponent
+    @php
+        //Obtener los clubes donde idAdmin = id del usuario logueado
+        $clubes = DB::table('clubes')->where('idAdministrador', Auth::user()->id)->get();
+        //Obtener los eventos de cada club y guardarlos en un solo string
+        $eventos = "";
+        foreach ($clubes as $club) {
+            $eventos .= DB::table('eventos')->where('id_club', $club->id)->get();
+        }
+        //Dar formato de json a los eventos
+        $eventosj = json_encode($eventos);
+        //Eliminar la primera y ultima llave
+        $eventosj = str_replace("[{", "{", $eventosj);
+        $eventosj = str_replace("}]", "}", $eventosj);
+
+        $eventosj = str_replace("}{", "}],[{", $eventosj);
+
+        //Eliminar el ][ entre cada evento
+        //$eventosj = str_replace("][", ",", $eventosj);
+        //echo $eventosj;
+        
+        //Hasta aquiiiiii
+
+        //echo $eventos;
+        //Quitar los corchetes de apertura y cierre de cada evento
+        $eventos = str_replace("[", "", $eventos);
+        $eventos = str_replace("]", "", $eventos);
+        //Agregar comas entre cada evento
+        $eventos = str_replace("}", "},", $eventos);
+        //Eliminar los espacios entre cada evento
+        $eventos = str_replace("}, ", "},", $eventos);
+        
+        //echo $eventos;
+        
+    @endphp
+    <input type="hidden" id="eventos_usr" value="{{$eventosj}}"/>
     <div class="row">
         <div class="col-12">
             <div class="row">
@@ -80,7 +115,9 @@
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                         </div>
                         <div class="modal-body p-4">
-                            <form class="needs-validation" name="event-form" id="form-event" novalidate>
+
+                            <form action="{{ route('creaEvento') }}" method="POST" class="needs-validation" name="event-form" id="form-event" >
+                            @csrf
                                 <div class="text-end">
                                     <a href="#" class="btn btn-sm btn-soft-primary" id="edit-event-btn" data-id="edit-event" onclick="editEvent(this)" role="button">Edit</a>
                                 </div>
@@ -123,43 +160,68 @@
                                 <div class="row event-form">
                                     <div class="col-12">
                                         <div class="mb-3">
-                                            <label class="form-label">Tipo</label>
-                                            <select class="form-select" name="category" id="event-category"  required>
-                                                <option value="bg-soft-danger">Clase</option>
-                                                <option value="bg-soft-success">Entrenamiento</option>
-                                                <option value="bg-soft-primary">Evaluación</option>
-                                                <option value="bg-soft-info">Concurso</option>
-                                                <option value="bg-soft-dark">Conferencia</option>
-                                                <option value="bg-soft-warning">Exposición</option>
+                                            <label class="form-label">Club</label>
+                                            <select class="form-select" name="id_club" id="event-club" required>
+                                                @foreach($clubes as $club)
+                                                    <option value="{{$club->id}}">{{$club->nombre}}</option>
+                                                @endforeach
                                             </select>
-                                            <div class="invalid-feedback">Por favor, seleccione una categoria valia</div>
+                                        <div class="invalid-feedback">Por favor, seleccione un club</div>
+                                        </div>
+                                    </div>
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Tipo</label>
+                                            <select class="form-select" name="category" id="event-category" required>
+                                                <option value="Clase">Clase</option>
+                                                <option value="Campamento">Campamento</option>
+                                                <option value="Curso">Curso</option>
+                                                <option value="Seminario">Seminario</option>
+                                                <option value="Entrenamiento">Entrenamiento</option>
+                                                <option value="Evaluación">Evaluación</option>
+                                                <option value="Concurso">Concurso</option>
+                                                <option value="Torneo">Torneo</option>
+                                                <option value="Conferencia">Conferencia</option>
+                                                <option value="Exposición">Exposición</option>
+                                                <option value="Exhibición">Exhibición</option>
+                                            </select>
+                                            <div class="invalid-feedback">Por favor, seleccione una categoria valida</div>
                                         </div>
                                     </div><!--end col-->
 
                                     <div class="col-12">
                                         <div class="mb-3">
                                             <label class="form-label">Modalidad</label>
-                                            <select class="form-select" name="modalidad" id="event-modalidad"  required>
-                                                <option value="bg-soft-danger">Presencial</option>
-                                                <option value="bg-soft-success">A distancia</option>
-                                                <option value="bg-soft-primary">Híbrida</option>
+                                            <select class="form-select" name="modalidad" id="event-modalidad" required>
+                                                <option value="Presencial">Presencial</option>
+                                                <option value="A distancia">A distancia</option>
+                                                <option value="Híbrida">Híbrida</option>
                                             </select>
-                                            <div class="invalid-feedback">Por favor, seleccione una modalidad valia</div>
+                                            <div class="invalid-feedback">Por favor, seleccione una modalidad valida</div>
                                         </div>
                                     </div><!--end col-->
-
                                     <div class="col-12">
                                         <div class="mb-3">
                                             <label class="form-label">Nombre del evento</label>
-                                            <input class="form-control d-none" placeholder="Nombre del evento" type="text" name="title" id="event-title" required value="" />
+                                            <input class="form-control d-none" placeholder="Nombre del evento" type="text" name="title" id="event-title" required/>
                                             <div class="invalid-feedback">Proporcione un nombre de evento válido</div>
+                                        </div>
+                                    </div><!--end col-->
+                                    <div class="col-12">
+                                        <div class="mb-3">
+                                            <label class="form-label">Tipo de asitencia</label>
+                                            <select class="form-select" name="tipoAsistencia" id="event-astype" required>
+                                                <option value="Total">Total</option>
+                                                <option value="Parcial">Parcial</option>
+                                            </select>
+                                            <div class="invalid-feedback">Por favor, seleccione un tipo valido</div>
                                         </div>
                                     </div><!--end col-->
                                     <div class="col-12">
                                         <div class="mb-3">
                                             <label>Fecha del evento</label>
                                             <div class="input-group d-none">
-                                                <input type="text" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Seleccione una fecha" readonly required>
+                                                <input name="fecha" type="text" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Seleccione una fecha" readonly required>
                                                 <span class="input-group-text"><i class="ri-calendar-event-line"></i></span>
                                             </div>
                                         </div>
@@ -170,8 +232,8 @@
                                                 <div class="mb-3">
                                                     <label class="form-label">Hora de inicio</label>
                                                     <div class="input-group d-none">
-                                                        <input id="timepicker1" type="text"
-                                                            class="form-control flatpickr flatpickr-input" placeholder="Seleccione la hora de inicio" readonly>
+                                                        <input name="horaInicio" id="timepicker1" type="text"
+                                                            class="form-control flatpickr flatpickr-input" placeholder="Seleccione la hora de inicio" value="00:00" readonly>
                                                         <span class="input-group-text"><i class="ri-time-line"></i></span>
                                                     </div>
                                                 </div>
@@ -180,14 +242,14 @@
                                                 <div class="mb-3">
                                                     <label class="form-label">Hora de fin</label>
                                                     <div class="input-group d-none">
-                                                        <input id="timepicker2" type="text" class="form-control flatpickr flatpickr-input" placeholder="Seleccione la hora de fin" readonly>
+                                                        <input name="horaFin" id="timepicker2" type="text" class="form-control flatpickr flatpickr-input" placeholder="Seleccione la hora de fin" value="23:59" readonly>
                                                         <span class="input-group-text"><i class="ri-time-line"></i></span>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
                                     </div><!--end col-->
-                                    <div class="col-12">
+                                    <div class="col-12" hidden>
                                         <div class="mb-3">
                                             <label for="event-location">Lugar del evento</label>
                                             <div>
@@ -199,7 +261,7 @@
                                     <div class="col-12">
                                         <div class="mb-3">
                                             <label class="form-label">Descripción</label>
-                                            <textarea class="form-control d-none" id="event-description" placeholder="Descripción del evento" rows="3" spellcheck="false"></textarea>
+                                            <textarea name="descripcion" class="form-control d-none" id="event-description" placeholder="Descripción del evento" rows="3" spellcheck="false"></textarea>
                                         </div>
                                     </div><!--end col-->
                                 </div><!--end row-->

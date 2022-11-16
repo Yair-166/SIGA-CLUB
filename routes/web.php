@@ -33,3 +33,6 @@ Route::post('/clubeliminar', [App\Http\Controllers\HomeController::class, 'delet
 
 //inscripciones
 Route::post('/inscribirse', [App\Http\Controllers\HomeController::class, 'inscribirse'])->name('inscribirse');
+
+//eventos
+Route::post('/creaEvento', [App\Http\Controllers\HomeController::class, 'creaEvento'])->name('creaEvento');

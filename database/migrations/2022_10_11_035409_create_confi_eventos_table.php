@@ -16,6 +16,7 @@ return new class extends Migration
         Schema::create('confi_eventos', function (Blueprint $table) {
             $table->id();
             $table->string('idEvento');
+            $table->string('id_coordinador');
             $table->string('secondId');
             $table->string('ultimoQR');
             $table->string('qrActual');
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('_confi_eventos');
+        Schema::dropIfExists('confi_eventos');
     }
 };

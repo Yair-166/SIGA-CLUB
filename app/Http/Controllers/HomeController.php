@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use App\Models\Clubes;
 use App\Models\Inscripciones;
+use App\Models\Eventos;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -53,6 +54,8 @@ class HomeController extends Controller
             return redirect()->back();
         }
     }
+
+    //Para usuarios
 
     public function updateProfile(Request $request, $id)
     {
@@ -151,6 +154,8 @@ class HomeController extends Controller
         return redirect()->back();
     }
 
+    //Para clubes
+
     public function updateClub(Request $request)
     {
         $clubes = new Clubes();
@@ -222,5 +227,40 @@ class HomeController extends Controller
         $inscripciones->save();
 
         return redirect()->back()->with('success', 'Inscripción realizada correctamente');
+    }
+
+    //Para eventos
+    public function creaEvento(Request $request)
+    {
+        $eventos = new Eventos();
+
+        $fecha = $request->post('fecha');
+        //Si la longitud de la fecha es 10, es decir, no tiene hora, se le agrega la hora 00:00:00
+        if (strlen($fecha) == 10) {
+            $eventos->fechaInicio = $fecha;
+            $eventos->fechaFin = $fecha;
+            $eventos->horaInicio = $request->post('horaInicio');
+            $eventos->horaFin = $request->post('horaFin');
+        } else {
+            //Quitar de la cadena  to 
+            $eventos->fechaInicio = substr($fecha, 0, 10);
+            $eventos->fechaFin = substr($fecha, 14, 23);
+            $eventos->horaInicio = $request->post('horaInicio') . "00:00";
+            $eventos->horaFin = $request->post('horaFin') . "23:59";
+        }
+        
+        $eventos->id_club = $request->post('id_club');
+        $eventos->nombre = $request->post('title');
+        $eventos->tipoAsistencia = $request->post('tipoAsistencia');
+        $eventos->tipo = $request->post('category');
+        $eventos->modalidad = $request->post('modalidad');
+        $eventos->horaInicio = $request->post('horaInicio');
+        $eventos->horaFin = $request->post('horaFin');
+        $eventos->descripcion = $request->post('descripcion');
+
+        //print_r($eventos->tipo);
+        $eventos->save();
+
+        return redirect()->back()->with('success', 'Evento creado correctamente');
     }
 }

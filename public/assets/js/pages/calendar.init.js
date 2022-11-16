@@ -30,14 +30,53 @@ document.addEventListener("DOMContentLoaded", function () {
     var y = date.getFullYear();
     var Draggable = FullCalendar.Draggable;
     var externalEventContainerEl = document.getElementById('external-events');
-    var defaultEvents = [{
-            id: 1,
-            title: "ICPC",
-            start: "2022-10-04",
+    var eventos_usr = document.getElementById('eventos_usr').value;
+
+    //Partir el string en un array de objetos
+    var eventos_usr = eventos_usr.split("],[");
+    //Quitar las primeras y ultimas comillas
+    eventos_usr[0] = eventos_usr[0].substring(1);
+    eventos_usr[eventos_usr.length - 1] = eventos_usr[eventos_usr.length - 1].substring(0, eventos_usr[eventos_usr.length - 1].length - 1);
+    console.log(eventos_usr);
+
+    //console.log(eventos_usr);
+    //var eventos_usr = JSON.parse(eventos_usr);
+
+    //Imprimir el numero de eventos
+    console.log(eventos_usr.length);
+
+    
+    //Obtener id, nombre, fecha y hora de los eventos
+    var defaultEvents = [];
+    for (var i = 0; i < eventos_usr.length; i++) {
+        var evento = eventos_usr[i].split(",");
+        var id = evento[0];
+        //Eliminar el substring {\\\"id\\\": de la cadena
+        id = id.substring(8); 
+        
+        var title = evento[1];
+        //Eliminar el substring \\\"nombre\\\":\\\ de la cadena
+        title = title.substring(13);
+        //Eliminar el substring \\" de la cadena
+        title = title.substring(0, title.length - 2);
+
+        var start = evento[6];
+        //Eliminar el substring \\\"fechaInicio\\\":\\\ de la cadena
+        start = start.substring(18);
+        //Eliminar el substring \\\" de la cadena
+        start = start.substring(0, start.length - 2);
+        var evento = {
+            id: id,
+            title: title,
+            start: start,
             className: "bg-soft-info",
             allDay: true
-        },
-    ];
+        };
+        defaultEvents.push(evento);
+    }
+   
+
+    console.log(defaultEvents);
 
     // init draggable
     new Draggable(externalEventContainerEl, {
@@ -245,7 +284,7 @@ document.addEventListener("DOMContentLoaded", function () {
     /*Add new event*/
     // Form to add new event
     formEvent.addEventListener('submit', function (ev) {
-        ev.preventDefault();
+        //ev.preventDefault();
         var updatedTitle = document.getElementById("event-title").value;
         var updatedCategory = document.getElementById('event-category').value;
         var start_date = (document.getElementById("event-start-date").value).split("to");
