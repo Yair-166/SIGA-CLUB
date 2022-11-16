@@ -18,11 +18,22 @@
         }
         //Dar formato de json a los eventos
         $eventosj = json_encode($eventos);
-        //Eliminar la primera y ultima llave
-        $eventosj = str_replace("[{", "{", $eventosj);
-        $eventosj = str_replace("}]", "}", $eventosj);
 
-        $eventosj = str_replace("}{", "}],[{", $eventosj);
+        //Eliminar "[{ y }]" de cada evento
+        $eventosj = str_replace('"[{', '"{', $eventosj);
+        $eventosj = str_replace('}]"', '}"', $eventosj);
+
+        //Sustituir }{ por }],[{ para separar cada evento
+        $eventosj = str_replace("},{", "}],[{", $eventosj);
+
+        //Eliminar la primera y ultima llave
+        //$eventosj = str_replace("[{", "{", $eventosj);
+        //$eventosj = str_replace("}]", "}", $eventosj);
+
+        //$eventosj = str_replace("}{", "}],[{", $eventosj);
+
+        //Eliminar ],[ entre cada evento
+        //$eventosj = str_replace("],[", ",", $eventosj);
 
         //Eliminar el ][ entre cada evento
         //$eventosj = str_replace("][", ",", $eventosj);
@@ -54,20 +65,7 @@
 
                             <div id="external-events">
                                 <br>
-                                <p class="text-muted">Arrastra y suelta tu evento o haz clic en el calendario</p>
-                                <div class="external-event fc-event bg-soft-success text-success" data-class="bg-soft-success">
-                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>planificación de nuevo evento 
-                                </div>
-                                <div class="external-event fc-event bg-soft-info text-info" data-class="bg-soft-info">
-                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Reunion
-                                </div>
-                                <div class="external-event fc-event bg-soft-warning text-warning" data-class="bg-soft-warning">
-                                    <i
-                                        class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Generación de reportes
-                                </div>
-                                <div class="external-event fc-event bg-soft-danger text-danger" data-class="bg-soft-danger">
-                                    <i class="mdi mdi-checkbox-blank-circle font-size-11 me-2"></i>Crear nuevo tema
-                                </div>
+                                <p class="text-muted">Crea tu evento o haz clic en el calendario</p>
                             </div>
 
                         </div>

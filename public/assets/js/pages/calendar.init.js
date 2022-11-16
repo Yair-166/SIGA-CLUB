@@ -74,16 +74,39 @@ document.addEventListener("DOMContentLoaded", function () {
             title = title.substring(13);
             //Eliminar el substring \\" de la cadena
             title = title.substring(0, title.length - 2);
+            //Permitir los acentos 
+            title = title.replace(/\\u00e1/g, "á");
+            title = title.replace(/\\u00e9/g, "é");
+            title = title.replace(/\\u00ed/g, "í");
+            title = title.replace(/\\u00f3/g, "ó");
+            title = title.replace(/\\u00fa/g, "ú");
+            title = title.replace(/\\u00f1/g, "ñ");
+            title = title.replace(/\\u00c1/g, "Á");
+            title = title.replace(/\\u00c9/g, "É");
+            title = title.replace(/\\u00cd/g, "Í");
+            title = title.replace(/\\u00d3/g, "Ó");
+            title = title.replace(/\\u00da/g, "Ú");
+            title = title.replace(/\\u00d1/g, "Ñ");
+            //Eliminar todos los \ de la cadena
+            title = title.replace(/\\/g, "");
 
             var start = evento[6];
             //Eliminar el substring \\\"fechaInicio\\\":\\\ de la cadena
             start = start.substring(18);
             //Eliminar el substring \\\" de la cadena
             start = start.substring(0, start.length - 2);
+
+            var end = evento[7];
+            //Eliminar el substring \\\"fechaFin\\\":\\\ de la cadena
+            end = end.substring(15);
+            //Eliminar el substring \\\" de la cadena
+            end = end.substring(0, end.length - 2);
+
             var evento = {
                 id: id,
                 title: title,
                 start: start,
+                end: end,
                 className: "bg-soft-info",
                 allDay: true
             };
