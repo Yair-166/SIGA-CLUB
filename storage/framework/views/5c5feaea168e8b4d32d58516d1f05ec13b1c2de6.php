@@ -133,7 +133,7 @@
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
-                                        <a href="/apps-crm-companies" class="link-secondary text-decoration-underline">
+                                        <a href="/apps-clubes-admin" class="link-secondary text-decoration-underline">
                                             Administra tus clubes.
                                         </a>
                                     </div>
