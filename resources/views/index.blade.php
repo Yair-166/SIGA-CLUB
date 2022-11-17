@@ -64,90 +64,147 @@
 
                 @if (Auth::user()->rol == ('administrador'))
 
-                <div class="col-xl-3 col-md-6">
-                    <!-- card -->
-                    <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1 overflow-hidden">
-                                    <p
-                                        class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                        Crear evento</p>
+                    <div class="col-xl-3 col-md-6">
+                        <!-- card -->
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1 overflow-hidden">
+                                        <p
+                                            class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                            Crear evento</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                <div>
-                                    <a href="/apps-calendar"
-                                        class="link-secondary text-decoration-underline">
-                                            Crea un nuevo evento.
-                                        </a>
+                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                    <div>
+                                        <a href="/apps-calendar"
+                                            class="link-secondary text-decoration-underline">
+                                                Crea un nuevo evento.
+                                            </a>
+                                    </div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-soft-primary rounded fs-3">
+                                            <i class="bx bx-calendar text-primary"></i>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="avatar-sm flex-shrink-0">
-                                    <span class="avatar-title bg-soft-primary rounded fs-3">
-                                        <i class="bx bx-calendar text-primary"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
+                            </div><!-- end card body -->
+                        </div><!-- end card -->
+                    </div><!-- end col -->
 
-                <div class="col-xl-3 col-md-6">
-                    <!-- card -->
-                    <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1 overflow-hidden">
-                                    <p
-                                        class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                        Participantes</p>
+                    <div class="col-xl-3 col-md-6">
+                        <!-- card -->
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1 overflow-hidden">
+                                        <p
+                                            class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                            Participantes</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                <div>
-                                    <a href="/pages-team"
-                                        class="link-secondary text-decoration-underline">
-                                            Editar participantes.
-                                        </a>
+                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                    <div>
+                                        <a href="/pages-team"
+                                            class="link-secondary text-decoration-underline">
+                                                Editar participantes.
+                                            </a>
+                                    </div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-soft-primary rounded fs-3">
+                                            <i class="bx bx-user-circle text-primary"></i>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="avatar-sm flex-shrink-0">
-                                    <span class="avatar-title bg-soft-primary rounded fs-3">
-                                        <i class="bx bx-user-circle text-primary"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
+                            </div><!-- end card body -->
+                        </div><!-- end card -->
+                    </div><!-- end col -->
 
-                <div class="col-xl-3 col-md-6">
-                    <!-- card -->
-                    <div class="card card-animate">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center">
-                                <div class="flex-grow-1 overflow-hidden">
-                                    <p
-                                        class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                        Mis clubes</p>
+                    <div class="col-xl-3 col-md-6">
+                        <!-- card -->
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1 overflow-hidden">
+                                        <p
+                                            class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                            Mis clubes</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div class="d-flex align-items-end justify-content-between mt-4">
-                                <div>
-                                    <a href="/apps-crm-companies" class="link-secondary text-decoration-underline">
-                                        Administra tus clubes.
-                                    </a>
+                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                    <div>
+                                        <a href="/apps-crm-companies" class="link-secondary text-decoration-underline">
+                                            Administra tus clubes.
+                                        </a>
+                                    </div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-soft-primary rounded fs-3">
+                                            <i class="bx bx-user-plus text-primary"></i>
+                                        </span>
+                                    </div>
                                 </div>
-                                <div class="avatar-sm flex-shrink-0">
-                                    <span class="avatar-title bg-soft-primary rounded fs-3">
-                                        <i class="bx bx-user-plus text-primary"></i>
-                                    </span>
-                                </div>
-                            </div>
-                        </div><!-- end card body -->
-                    </div><!-- end card -->
-                </div><!-- end col -->
+                            </div><!-- end card body -->
+                        </div><!-- end card -->
+                    </div><!-- end col -->
+
+                @else
+                    
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <p
+                                                class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                                Mis eventos</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                        <div>
+                                            <a href="/apps-calendario-participante" class="link-secondary text-decoration-underline">
+                                                Eventos organizados por tu club.
+                                            </a>
+                                        </div>
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-soft-primary rounded fs-3">
+                                                <i class="bx bx-calendar text-primary"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col -->
+
+                        <div class="col-xl-3 col-md-6">
+                            <!-- card -->
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <p
+                                                class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                                Mis constancias</p>
+                                        </div>
+                                    </div>
+                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                        <div>
+                                            <a href="/apps-crm-companies" class="link-secondary text-decoration-underline">
+                                                Solicita tus constancias.
+                                            </a>
+                                        </div>
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-soft-primary rounded fs-3">
+                                                <i class="bx bx-file text-primary"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </div><!-- end col -->
 
                 @endif
+
 
             </div> <!-- end row-->
 

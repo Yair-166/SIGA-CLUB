@@ -537,9 +537,11 @@
                         <a class="dropdown-item" href="pages-profile?uid={{Auth::user()->id}}"><i
                                 class="mdi mdi-account-circle text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Mi perfil</span></a>
-                        <a class="dropdown-item" href="apps-tasks-kanban"><i
-                                class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span
-                                class="align-middle">Eventos</span></a>
+                        @if(Auth::user()->rol == 'administrador')
+                            <a class="dropdown-item" href="apps-mis-clubes"><i
+                                    class="mdi mdi-calendar-check-outline text-muted fs-16 align-middle me-1"></i> <span
+                                    class="align-middle">Mis clubes</span></a>
+                        @endif
                         <a class="dropdown-item" href="pages-faqs"><i
                                 class="mdi mdi-lifebuoy text-muted fs-16 align-middle me-1"></i> <span
                                 class="align-middle">Ayuda</span></a>

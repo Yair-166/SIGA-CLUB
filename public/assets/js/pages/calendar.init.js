@@ -102,13 +102,21 @@ document.addEventListener("DOMContentLoaded", function () {
             //Eliminar el substring \\\" de la cadena
             end = end.substring(0, end.length - 2);
 
+            var description = evento[3];
+            //Eliminar el substring \\\"descripcion\\\":\\\ de la cadena
+            description = description.substring(18);
+            //Eliminar el substring \\\" de la cadena
+            description = description.substring(0, description.length - 2);
+
             var evento = {
                 id: id,
                 title: title,
                 start: start,
                 end: end,
                 className: "bg-soft-info",
-                allDay: true
+                allDay: true,
+                description: description
+
             };
             defaultEvents.push(evento);
         }
@@ -481,7 +489,13 @@ function editEvent(data) {
     var data_id = data.getAttribute("data-id");
     if (data_id == 'new-event') {
         document.getElementById('modal-title').innerHTML = "";
-        document.getElementById('modal-title').innerHTML = "Agregar Evento";
+        //Obtener el valor del input rol_usr
+        var rol_usr = document.getElementById('rol_usr').value;
+        if (rol_usr == 'colaborador') {
+            document.getElementById('modal-title').innerHTML = "Sin evento programado";
+        } else {
+            document.getElementById('modal-title').innerHTML = "Agregar Evento";
+        }
         document.getElementById("btn-save-event").innerHTML = "Agregar Evento"; 
         eventTyped();
     } else if (data_id == 'edit-event') {
@@ -557,7 +571,7 @@ function upcomingEvent(a) {
         var e_time_s = tConvert(getTime(element.start));
         var e_time_e = tConvert(getTime(element.end));
         if (e_time_s == e_time_e) {
-            var e_time_s = "Full day event";
+            var e_time_s = "Todo el día";
             var e_time_e = null;
         }
         var e_time_e = (e_time_e) ? " to " + e_time_e : "";

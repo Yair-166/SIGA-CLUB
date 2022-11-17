@@ -25,35 +25,10 @@
 
         //Sustituir }{ por }],[{ para separar cada evento
         $eventosj = str_replace("},{", "}],[{", $eventosj);
-
-        //Eliminar la primera y ultima llave
-        //$eventosj = str_replace("[{", "{", $eventosj);
-        //$eventosj = str_replace("}]", "}", $eventosj);
-
-        //$eventosj = str_replace("}{", "}],[{", $eventosj);
-
-        //Eliminar ],[ entre cada evento
-        //$eventosj = str_replace("],[", ",", $eventosj);
-
-        //Eliminar el ][ entre cada evento
-        //$eventosj = str_replace("][", ",", $eventosj);
-        //echo $eventosj;
-        
-        //Hasta aquiiiiii
-
-        //echo $eventos;
-        //Quitar los corchetes de apertura y cierre de cada evento
-        $eventos = str_replace("[", "", $eventos);
-        $eventos = str_replace("]", "", $eventos);
-        //Agregar comas entre cada evento
-        $eventos = str_replace("}", "},", $eventos);
-        //Eliminar los espacios entre cada evento
-        $eventos = str_replace("}, ", "},", $eventos);
-        
-        //echo $eventos;
         
     @endphp
     <input type="hidden" id="eventos_usr" value="{{$eventosj}}"/>
+    <input type="hidden" id="rol_usr" value="{{Auth::user()->rol}}"/>
     <div class="row">
         <div class="col-12">
             <div class="row">
@@ -109,7 +84,7 @@
                 <div class="modal-dialog modal-dialog-centered">
                     <div class="modal-content border-0">
                         <div class="modal-header p-3 bg-soft-info">
-                            <h5 class="modal-title" id="modal-title">Event</h5>
+                            <h5 class="modal-title" id="modal-title">Evento</h5>
                             <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                         </div>
                         <div class="modal-body p-4">
@@ -117,7 +92,7 @@
                             <form action="{{ route('creaEvento') }}" method="POST" class="needs-validation" name="event-form" id="form-event" >
                             @csrf
                                 <div class="text-end">
-                                    <a href="#" class="btn btn-sm btn-soft-primary" id="edit-event-btn" data-id="edit-event" onclick="editEvent(this)" role="button">Edit</a>
+                                    <a href="#" class="btn btn-sm btn-soft-primary" id="edit-event-btn" data-id="edit-event" onclick="editEvent(this)" role="button">Editar</a>
                                 </div>
                                 <div class="event-details">
                                     <div class="d-flex mb-2">
@@ -138,11 +113,11 @@
                                             <h6 class="d-block fw-semibold mb-0"><span id="event-timepicker1-tag"></span> - <span id="event-timepicker2-tag"></span></h6>
                                         </div>
                                     </div>
-                                    <div class="d-flex align-items-center mb-2">
-                                        <div class="flex-shrink-0 me-3">
+                                    <div class="d-flex align-items-center mb-2" hidden>
+                                        <div class="flex-shrink-0 me-3" hidden>
                                             <i class="ri-map-pin-line text-muted fs-16"></i>
                                         </div>
-                                        <div class="flex-grow-1">
+                                        <div class="flex-grow-1" hidden>
                                             <h6 class="d-block fw-semibold mb-0"> <span id="event-location-tag"></span></h6>
                                         </div>
                                     </div>
