@@ -7,6 +7,7 @@ use App\Models\Clubes;
 use App\Models\Inscripciones;
 use App\Models\Eventos;
 use App\Models\Confi_eventos;
+use App\Models\Autoridades;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -272,5 +273,47 @@ class HomeController extends Controller
         $confi_eventos->save();
 
         return redirect()->back()->with('success', 'Evento creado correctamente');
+    }
+
+    //Para Confi_eventos
+    public function asignarCoordinador(Request $request)
+    {
+        $confi_eventos = new Confi_eventos();
+
+        $confi_eventos->idEvento = $request->post('idEvento');
+        $confi_eventos->secondId = NULL;
+        $confi_eventos->id_coordinador = $request->post('id_coordinador');
+        $confi_eventos->ultimoQR = NULL;
+        $confi_eventos->qrActual = NULL;
+        $confi_eventos->isPrivate = 0;
+
+        $confi_eventos->save();
+        
+        return redirect()->back()->with('success', 'Coordinador asignado correctamente');
+    }
+
+    //Para autoridades
+    public function agregarAutoridad(Request $request)
+    {
+        $autoridades = new Autoridades();
+
+        $autoridades->idClub = $request->post('idClub');
+        $autoridades->nombre = $request->post('nombreautoridad');
+        $autoridades->aPaterno = $request->post('aPaterno');
+        $autoridades->aMaterno = $request->post('aMaterno');
+        $autoridades->cargo = $request->post('cargo');
+
+        //print_r($autoridades);
+
+        $autoridades->save();
+
+        return redirect()->back()->with('success', 'Autoridad agregada correctamente');
+    }
+
+    public function eliminarAutoridad($id)
+    {
+        $autoridades = Autoridades::find($id);
+        $autoridades->delete();
+        return redirect()->back()->with('success', 'Autoridad eliminada correctamente');
     }
 }

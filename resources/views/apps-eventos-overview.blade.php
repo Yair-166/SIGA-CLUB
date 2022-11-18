@@ -26,10 +26,17 @@
          //Si no, mostrar la fecha de inicio y la fecha de fin
          $hora = date("h:i a", strtotime($evento->horaInicio))." - ".date("h:i a", strtotime($evento->horaFin));
     }
-    //Obtener el coordinador del evento de la tabla confi_Eventos
-    $coordinador = DB::table('confi_eventos')->where('idEvento', $evento->id)->first();
-    //Obtener el nombre del coordinador del evento
-    $coordinador = DB::table('users')->where('id', $coordinador->id_coordinador)->first();
+    
+    //Obtener los coordinadores del evento en la tabla confi_eventos
+    $coordinadores = DB::table('confi_eventos')->where('idEvento', $getId)->get();
+    
+    //Obtener los nombres de los coordinadores del evento
+    $coordinadoresNombres = array();
+    foreach($coordinadores as $coordinador){
+        $coordinador = DB::table('users')->where('id', $coordinador->id_coordinador)->first();
+        array_push($coordinadoresNombres, $coordinador);
+    }
+
     //Obtener todas las inscripciones del club
     $inscripciones = DB::table('inscripciones')->where('id_club', $club->id)->get();
     //Guardar en un array los usuarios que estan inscritos al club
@@ -84,7 +91,7 @@
                                     Archivos
                                 </a>
                             </li>
-                            @if(Auth::user()->rol == "administrador")
+                            @if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id)
                                 <li class="nav-item">
                                     <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#project-activities" role="tab">
                                         Evidencias
@@ -120,100 +127,6 @@
                                         <p>
                                             {{$evento->descripcion}}
                                         </p>
-                                        <div class="pt-3 border-top border-top-dashed mt-4">
-                                            <h6 class="mb-3 fw-semibold text-uppercase">Recursos</h6>
-                                            <div class="row g-3">
-                                                <div class="col-xxl-4 col-lg-6">
-                                                    <div class="border rounded border-dashed p-2">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-shrink-0 me-3">
-                                                                <div class="avatar-sm">
-                                                                    <div
-                                                                        class="avatar-title bg-light text-primary rounded fs-24">
-                                                                        <i class="ri-folder-zip-line"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="flex-grow-1 overflow-hidden">
-                                                                <h5 class="fs-13 mb-1"><a href="#"
-                                                                        class="text-body text-truncate d-block">App
-                                                                        pages.zip</a></h5>
-                                                                <div>2.2MB</div>
-                                                            </div>
-                                                            <div class="flex-shrink-0 ms-2">
-                                                                <div class="d-flex gap-1">
-                                                                    <button type="button"
-                                                                        class="btn btn-icon text-muted btn-sm fs-18"><i
-                                                                            class="ri-download-2-line"></i></button>
-                                                                    <div class="dropdown">
-                                                                        <button
-                                                                            class="btn btn-icon text-muted btn-sm fs-18 dropdown"
-                                                                            type="button" data-bs-toggle="dropdown"
-                                                                            aria-expanded="false">
-                                                                            <i class="ri-more-fill"></i>
-                                                                        </button>
-                                                                        <ul class="dropdown-menu">
-                                                                            <li><a class="dropdown-item" href="#"><i
-                                                                                        class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                                                    Rename</a></li>
-                                                                            <li><a class="dropdown-item" href="#"><i
-                                                                                        class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                                                    Delete</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- end col -->
-                                                <div class="col-xxl-4 col-lg-6">
-                                                    <div class="border rounded border-dashed p-2">
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="flex-shrink-0 me-3">
-                                                                <div class="avatar-sm">
-                                                                    <div
-                                                                        class="avatar-title bg-light text-primary rounded fs-24">
-                                                                        <i class="ri-file-ppt-2-line"></i>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                            <div class="flex-grow-1 overflow-hidden">
-                                                                <h5 class="fs-13 mb-1"><a href="#"
-                                                                        class="text-body text-truncate d-block">Velzon
-                                                                        admin.ppt</a></h5>
-                                                                <div>2.4MB</div>
-                                                            </div>
-                                                            <div class="flex-shrink-0 ms-2">
-                                                                <div class="d-flex gap-1">
-                                                                    <button type="button"
-                                                                        class="btn btn-icon text-muted btn-sm fs-18"><i
-                                                                            class="ri-download-2-line"></i></button>
-                                                                    <div class="dropdown">
-                                                                        <button
-                                                                            class="btn btn-icon text-muted btn-sm fs-18 dropdown"
-                                                                            type="button" data-bs-toggle="dropdown"
-                                                                            aria-expanded="false">
-                                                                            <i class="ri-more-fill"></i>
-                                                                        </button>
-                                                                        <ul class="dropdown-menu">
-                                                                            <li><a class="dropdown-item" href="#"><i
-                                                                                        class="ri-pencil-fill align-bottom me-2 text-muted"></i>
-                                                                                    Rename</a></li>
-                                                                            <li><a class="dropdown-item" href="#"><i
-                                                                                        class="ri-delete-bin-fill align-bottom me-2 text-muted"></i>
-                                                                                    Delete</a></li>
-                                                                        </ul>
-                                                                    </div>
-                                                                </div>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                                <!-- end col -->
-                                            </div>
-                                            <!-- end row -->
-                                        </div>
                                     </div>
                                 </div>
                                 <!-- end card body -->
@@ -230,40 +143,28 @@
 
                                 <div class="card-body">
                                     <div data-simplebar style="height: 235px;" class="mx-n3 px-3">
-                                        <div class="vstack gap-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar-xs flex-shrink-0 me-3">
-                                                    <img src="{{ URL::asset('images/'.$coordinador->avatar) }}" alt=""
-                                                        class="img-fluid rounded-circle">
+                                        @foreach($coordinadoresNombres as $coordinador)
+                                            <div class="vstack gap-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar-xs flex-shrink-0 me-3">
+                                                        <img src="{{ URL::asset('images/'.$coordinador->avatar) }}" alt=""
+                                                            class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h5 class="fs-13 mb-0"><a href="#" class="text-body d-block">
+                                                        {{$coordinador->name . ' ' . $coordinador->apaterno . ' ' . $coordinador->amaterno}}</a></h5>
+                                                        </a></h5>
+                                                    </div>
                                                 </div>
-                                                <div class="flex-grow-1">
-                                                    <h5 class="fs-13 mb-0"><a href="#" class="text-body d-block">
-                                                    {{$coordinador->name . ' ' . $coordinador->apaterno . ' ' . $coordinador->amaterno}}</a></h5>
-                                                    </a></h5>
-                                                </div>
+                                                <!-- end member item -->
                                             </div>
-                                            <!-- end member item -->
-                                        </div>
-                                        <!-- end list -->
+                                            <br>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <!-- end card body -->
                             </div>
                             <!-- end card -->
-
-                            @if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id)
-                                <div class="card">
-                                    <div class="card-header align-items-center d-flex border-bottom-dashed">
-                                        <h4 class="card-title mb-0 flex-grow-1">Recursos</h4>
-                                        <div class="flex-shrink-0">
-                                            <button type="button" class="btn btn-soft-primary btn-sm"><i
-                                                    class="ri-upload-2-fill me-1 align-bottom"></i> Subir</button>
-                                        </div>
-                                    </div>
-                                    <!-- end card body -->
-                                </div>
-                                <!-- end card -->
-                            @endif
                         </div>
                         <!-- end col -->
                     </div>
@@ -284,9 +185,10 @@
                                             <thead class="table-light">
                                                 <tr>
                                                     <th scope="col">Nombre del archivo</th>
-                                                    <th scope="col">Tipo</th>
-                                                    <th scope="col">Ocultar</th>
-                                                    <th scope="col">Eliminar</th>
+                                                    @if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id)
+                                                        <th scope="col">Ocultar</th>
+                                                        <th scope="col">Eliminar</th>
+                                                    @endif
                                                 </tr>
                                             </thead>
                                             <tbody>
@@ -306,18 +208,19 @@
                                                             </div>
                                                         </div>
                                                     </td>
-                                                    <td>Zip File</td>
-                                                    <td>
-                                                        {{-- Aqui va una condicion de si esta oculto que diga mostrar y si esta visible que diga ocultar --}}
-                                                        <button type="button" class="btn btn-soft-primary btn-sm"><i
-                                                                class="ri-eye-off-fill me-1 align-bottom"></i> Ocultar</button>
-                                                        <button type="button" class="btn btn-soft-primary btn-sm"><i
-                                                                class="ri-eye-fill me-1 align-bottom"></i> Mostrar</button>
-                                                    </td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-sm btn-soft-danger"><i
-                                                                class="ri-delete-bin-2-line"></i></button>
-                                                    </td>
+                                                    @if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id)
+                                                        <td>
+                                                            {{-- Aqui va una condicion de si esta oculto que diga mostrar y si esta visible que diga ocultar --}}
+                                                            <button type="button" class="btn btn-soft-primary btn-sm"><i
+                                                                    class="ri-eye-off-fill me-1 align-bottom"></i> Ocultar</button>
+                                                            <button type="button" class="btn btn-soft-primary btn-sm"><i
+                                                                    class="ri-eye-fill me-1 align-bottom"></i> Mostrar</button>
+                                                        </td>
+                                                        <td>
+                                                            <button type="button" class="btn btn-sm btn-soft-danger"><i
+                                                                    class="ri-delete-bin-2-line"></i></button>
+                                                        </td>
+                                                    @endif
                                                 </tr>
                                             </tbody>
                                         </table>
@@ -387,36 +290,64 @@
                                     <div class="text-muted">
                                         <h6 class="mb-3 fw-semibold text-uppercase">Asignar coordinador</h6>
                                         <div class="row">
-                                            <div class="col-lg-6">
-                                                <div class="mb-3">
-                                                    <label for="formrow-firstname-input" class="form-label">Coordinador</label>
-                                                    <select class="form-select" aria-label="Default select example">
-                                                        <option selected>Selecciona un coordinador</option>
-                                                        @foreach ($usuarios as $usuario)
-                                                            <option value="{{ $usuario->id }}">
-                                                                {{ $usuario->name . ' ' . $usuario->apaterno . ' ' . $usuario->amaterno }}
-                                                            </option>
-                                                        @endforeach
-                                                    </select>
+                                            <form action="{{ route('asignarCoordinador') }}" method="POST">
+                                                @csrf
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <input type="hidden" name="idEvento" value="{{ $evento->id }}">
+                                                        <label for="formrow-firstname-input" class="form-label">Coordinador</label>
+                                                        <select name="id_coordinador" class="form-select" aria-label="Default select example">
+                                                            <option selected>Selecciona un coordinador</option>
+                                                            @foreach ($usuarios as $usuario)
+                                                                <option value="{{ $usuario->id }}">
+                                                                    {{ $usuario->name . ' ' . $usuario->apaterno . ' ' . $usuario->amaterno }}
+                                                                </option>
+                                                            @endforeach
+                                                        </select>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <div class="col-lg-6">
-                                                <div class="mb-3">
-                                                    <br>
-                                                    <button type="button" class="btn btn-primary btn-lg ">Asignar</button>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <br>
+                                                        <button type="submit" class="btn btn-primary ">Asignar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
+                                        <div class="pt-3 border-top border-top-dashed mt-4">
+                                            <h4 class="card-title mb-0 flex-grow-1">Recursos</h4>
+                                            <div class="row g-3">
+                                                <div class="flex-shrink-0">
+                                                    <label class="form-label">Agregar recurso para descargar</label>
+                                                    <input type="text" class="form-control col-sm-6" placeholder="Nombre del recurso">
+                                                    <hr>
+                                                    <input type="file" class="form-control col-sm-6" id="formFile">
+                                                    <hr>
+                                                    <button type="button" class="btn btn-soft-primary btn-sm"><i
+                                                            class="ri-upload-2-fill me-1 align-bottom"></i> Subir</button>
                                                 </div>
                                             </div>
                                         </div>
+                                        <!-- end card body -->
+
                                         <div class="pt-3 border-top border-top-dashed mt-4">
                                             <h6 class="mb-3 fw-semibold text-uppercase">Subir evidencias</h6>
                                             <div class="row g-3">
                                                 <div class="flex-shrink-0">
+                                                    <label class="form-label">Agregar evidencia</label>
+                                                    <input type="text" class="form-control col-sm-6" placeholder="Nombre del recurso">
+                                                    <hr>
+                                                    <input type="file" class="form-control col-sm-6" id="formFile">
+                                                    <hr>
                                                     <button type="button" class="btn btn-soft-primary btn-sm"><i
                                                             class="ri-upload-2-fill me-1 align-bottom"></i> Subir</button>
                                                 </div>
                                             </div>
                                             <!-- end row -->
                                         </div>
+                                        <!-- end subir evidencia -->
+
                                     </div>
                                 </div>
                                 <!-- end card body -->
@@ -433,21 +364,23 @@
 
                                 <div class="card-body">
                                     <div data-simplebar style="height: 235px;" class="mx-n3 px-3">
-                                        <div class="vstack gap-3">
-                                            <div class="d-flex align-items-center">
-                                                <div class="avatar-xs flex-shrink-0 me-3">
-                                                    <img src="{{ URL::asset('images/'.$coordinador->avatar) }}" alt=""
-                                                        class="img-fluid rounded-circle">
+                                         @foreach($coordinadoresNombres as $coordinador)
+                                            <div class="vstack gap-3">
+                                                <div class="d-flex align-items-center">
+                                                    <div class="avatar-xs flex-shrink-0 me-3">
+                                                        <img src="{{ URL::asset('images/'.$coordinador->avatar) }}" alt=""
+                                                            class="img-fluid rounded-circle">
+                                                    </div>
+                                                    <div class="flex-grow-1">
+                                                        <h5 class="fs-13 mb-0"><a href="#" class="text-body d-block">
+                                                        {{$coordinador->name . ' ' . $coordinador->apaterno . ' ' . $coordinador->amaterno}}</a></h5>
+                                                        </a></h5>
+                                                    </div>
                                                 </div>
-                                                <div class="flex-grow-1">
-                                                    <h5 class="fs-13 mb-0"><a href="#" class="text-body d-block">
-                                                    {{$coordinador->name . ' ' . $coordinador->apaterno . ' ' . $coordinador->amaterno}}</a></h5>
-                                                    </a></h5>
-                                                </div>
+                                                <!-- end member item -->
                                             </div>
-                                            <!-- end member item -->
-                                        </div>
-                                        <!-- end list -->
+                                            <br>
+                                        @endforeach
                                     </div>
                                 </div>
                                 <!-- end card body -->

@@ -36,3 +36,10 @@ Route::post('/inscribirse', [App\Http\Controllers\HomeController::class, 'inscri
 
 //eventos
 Route::post('/creaEvento', [App\Http\Controllers\HomeController::class, 'creaEvento'])->name('creaEvento');
+
+//confi_eventos
+Route::post('/asignarCoordinador', [App\Http\Controllers\HomeController::class, 'asignarCoordinador'])->name('asignarCoordinador');
+
+//autoridades
+Route::post('/agregarAutoridad', [App\Http\Controllers\HomeController::class, 'agregarAutoridad'])->name('agregarAutoridad');
+Route::get('/eliminarAutoridad/{id}', [App\Http\Controllers\HomeController::class, 'eliminarAutoridad'])->name('eliminarAutoridad');

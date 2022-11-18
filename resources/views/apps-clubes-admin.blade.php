@@ -48,6 +48,8 @@
                             <a href="{{URL::asset('/pages-team?club='.$club->id)}}" class="btn btn-light w-100">Ver participantes</a>
                             <hr>
                             <a href="{{URL::asset('/apps-eventos-list?club='.$club->id)}}" class="btn btn-light w-100">Ver eventos</a>
+                            <hr>
+                            <a href="{{URL::asset('/apps-clubes-editar?club='.$club->id)}}" class="btn btn-light w-100">Ver detalles</a>
                         </div>
                     </div>
                 </div>
