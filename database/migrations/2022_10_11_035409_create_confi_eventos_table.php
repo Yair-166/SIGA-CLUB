@@ -16,11 +16,11 @@ return new class extends Migration
         Schema::create('confi_eventos', function (Blueprint $table) {
             $table->id();
             $table->string('idEvento');
-            $table->string('id_coordinador');
-            $table->string('secondId');
-            $table->string('ultimoQR');
-            $table->string('qrActual');
-            $table->integer('isPrivate');
+            $table->string('id_coordinador') -> nullable();
+            $table->string('secondId') -> nullable();
+            $table->string('ultimoQR') -> nullable();
+            $table->string('qrActual') -> nullable();
+            $table->integer('isPrivate') -> nullable();
             $table->timestamps();
         });
     }

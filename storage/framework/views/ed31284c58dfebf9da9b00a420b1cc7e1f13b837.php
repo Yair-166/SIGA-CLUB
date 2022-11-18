@@ -53,13 +53,22 @@
                         <div class="p-2">
                             <?php if(Auth::user()->rol == 'administrador'): ?>
                                 <?php
-                                    $texto = "Clubes administrados";
+                                    if($numero==1){
+                                        $texto = "Club administrado";
+                                    }else{
+                                        $texto = "Clubes administrados";
+                                    }
+                                    
                                     //obtener el numero de clubes administrados por el usuario
                                     $numero = DB::table('clubes')->where('idAdministrador', Auth::user()->id)->count();
                                 ?>
                             <?php elseif(Auth::user()->rol == 'colaborador'): ?>
                                 <?php
-                                    $texto = "Clubes inscritos";
+                                    if($numero==1){
+                                        $texto = "Club inscrito";
+                                    }else{
+                                        $texto = "Clubes inscritos";   
+                                    }
                                     //obtener el numero de clubes en los que el usuario esta inscrito
                                     $numero = DB::table('inscripciones')->where('id_alumno', Auth::user()->id)->count();
                                 ?>

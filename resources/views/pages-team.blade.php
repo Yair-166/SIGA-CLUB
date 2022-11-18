@@ -12,15 +12,27 @@
         @endslot
     @endcomponent
     @php
-        //Obtener todos los clubes cuyo idAdministrador sea igual al id del usuario logueado
-        $clubes = DB::table('clubes')->where('idAdministrador', Auth::user()->id)->get();
-        //Obtener un array con los id de los clubes del usuario logueado
-        $clubesId = array();
-        foreach ($clubes as $club) {
-            array_push($clubesId, $club->id);
+        //Obtener variable club de la url
+        $getClub = $_GET['club'];
+
+        if($getClub == "all"){
+            //Obtener todos los clubes cuyo idAdministrador sea igual al id del usuario logueado
+            $clubes = DB::table('clubes')->where('idAdministrador', Auth::user()->id)->get();
+            //Obtener un array con los id de los clubes del usuario logueado
+            $clubesId = array();
+            foreach ($clubes as $club) {
+                array_push($clubesId, $club->id);
+            }
+            //Obtener todas las inscripciones cuyo idClub sea igual a alguno de los id de los clubes del usuario logueado
+            $inscripciones = DB::table('inscripciones')->whereIn('id_club', $clubesId)->get();
         }
-        //Obtener todas las inscripciones cuyo idClub sea igual a alguno de los id de los clubes del usuario logueado
-        $inscripciones = DB::table('inscripciones')->whereIn('id_club', $clubesId)->get();
+        else{
+            //Obtener el club cuyo id sea igual al id del club de la url
+            $clubes = DB::table('clubes')->where('id', $getClub)->first();
+            //Obtener todas las inscripciones cuyo idClub sea igual al id del club de la url
+            $inscripciones = DB::table('inscripciones')->where('id_club', $getClub)->get();
+        }
+
         //Eliminar createdAt y updatedAt de $inscripciones
         foreach ($inscripciones as $inscripcion) {
             unset($inscripcion->created_at);

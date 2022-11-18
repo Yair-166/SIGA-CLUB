@@ -105,9 +105,9 @@
                                 </div>
                                 <div class="d-flex align-items-end justify-content-between mt-4">
                                     <div>
-                                        <a href="/pages-team"
+                                        <a href="/pages-team?club=all"
                                             class="link-secondary text-decoration-underline">
-                                                Editar participantes.
+                                                Ver participantes.
                                             </a>
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">

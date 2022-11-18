@@ -6,6 +6,7 @@ use App\Models\User;
 use App\Models\Clubes;
 use App\Models\Inscripciones;
 use App\Models\Eventos;
+use App\Models\Confi_eventos;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -260,6 +261,15 @@ class HomeController extends Controller
 
         //print_r($eventos->tipo);
         $eventos->save();
+
+        $confi_eventos = new Confi_eventos();
+        $confi_eventos->idEvento = $eventos->id;
+        $confi_eventos->id_coordinador = NULL;
+        $confi_eventos->secondId = NULL;
+        $confi_eventos->ultimoQR = NULL;
+        $confi_eventos->qrActual = NULL;
+        $confi_eventos->isPrivate = 0;
+        $confi_eventos->save();
 
         return redirect()->back()->with('success', 'Evento creado correctamente');
     }

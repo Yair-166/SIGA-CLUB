@@ -199,7 +199,7 @@
                                             </div>
                                         </div>
                                     </div><!--end col-->
-                                    <div class="col-12" id="event-time">
+                                    <div class="col-12" id="time">
                                         <div class="row">
                                             <div class="col-6">
                                                 <div class="mb-3">

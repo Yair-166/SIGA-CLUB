@@ -2,5 +2,16 @@
     "vscode-pets.position": "explorer",
     "vscode-pets.theme": "none",
     "vscode-pets.petSize": "large",
-    "vscode-pets.petColor": "black"
+    "vscode-pets.petColor": "black",
+    
+    "intelephense.telemetry.enabled": false,
+    "intelephense.completion.triggerParameterHints": true,
+    "intelephense.completion.insertUseDeclaration": true,
+    "intelephense.trace.server": "messages",
+    "intelephense.diagnostics.undefinedClassConstants": false,
+    "intelephense.diagnostics.undefinedFunctions": false,
+    "intelephense.diagnostics.undefinedConstants": false,
+    "intelephense.diagnostics.undefinedProperties": false,
+    "intelephense.diagnostics.undefinedTypes": false,
+    "intelephense.diagnostics.undefinedMethods": false,
 }
