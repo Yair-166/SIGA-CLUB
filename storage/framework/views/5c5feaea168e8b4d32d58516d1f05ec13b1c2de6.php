@@ -210,53 +210,36 @@
 
             <?php if(Auth::user()->rol == ('administrador')): ?>
 
+                <div class="row">
+                    <div class="col-xl-12">
+                        <div class="card">
+                            <div class="card-header border-0 align-items-center d-flex">
+                                <h4 class="card-title mb-0 flex-grow-1">Constancias expedidas</h4>
+                            </div><!-- end card header -->
 
-            <div class="row">
-                <div class="col-xl-12">
-                    <div class="card">
-                        <div class="card-header border-0 align-items-center d-flex">
-                            <h4 class="card-title mb-0 flex-grow-1">Constancias expedidas</h4>
-                        </div><!-- end card header -->
+                            <div class="card-header p-0 border-0 bg-soft-light">
+                                <div class="row g-0 text-center">
+                                    <?php $__currentLoopData = $clubs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $club): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                        <div class="col-3">
+                                            <div class="p-3">
+                                                <h5 class="font-size-16 mb-1">
+                                                    <?php echo e($club->nombre); ?>
 
-                        <div class="card-header p-0 border-0 bg-soft-light">
-                            <div class="row g-0 text-center">
-                                <?php $__currentLoopData = $clubs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $club): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                <div class="col-3">
-                                    <div class="p-3">
-                                        <h5 class="font-size-16 mb-1">
-                                            <a href="/apps-crm-contacts" class="text-dark">
-                                                <?php echo e($club->nombre); ?>
+                                                </h5>
+                                                <p class="text-muted mb-0">
+                                                    <?php echo e($club->constanciasExpedidas); ?>
 
-                                            </a>
-                                        </h5>
-                                        <p class="text-muted mb-0">
-                                            <?php echo e($club->constanciasExpedidas); ?>
-
-                                        </p>
-                                    </div>
+                                                </p>
+                                            </div>
+                                        </div>
+                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </div>
-                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                            </div>
-                        </div><!-- end card header -->
-
-                        <div class="card-body p-0 pb-2">
-                            <div class="w-100">
-                                <div id="customer_impression_charts"
-                                    data-colors='["--vz-light", "--vz-primary", "--vz-info"]'
-                                    class="apex-charts" dir="ltr">
-                                </div>
-                            </div>
-                        </div><!-- end card body -->
-
-                    </div><!-- end card -->
-                </div><!-- end col -->
-            </div>
+                            </div><!-- end card header -->
+                        </div><!-- end card -->
+                    </div><!-- end col -->
+                </div>
 
             <?php endif; ?>
-
-            
-
-            
 
         </div> <!-- end .h-100-->
 
@@ -269,7 +252,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
 <!-- apexcharts -->
-<script src="<?php echo e(URL::asset('/assets/libs/apexcharts/apexcharts.min.js')); ?>"></script>
+<script src="assets/libs/apexcharts/apexcharts.min.js"></script>
 <script src="<?php echo e(URL::asset('/assets/libs/jsvectormap/jsvectormap.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/libs/swiper/swiper.min.js')); ?>"></script>
 <!-- dashboard init -->

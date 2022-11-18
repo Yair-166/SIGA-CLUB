@@ -36,7 +36,6 @@
         $coordinador = DB::table('users')->where('id', $coordinador->id_coordinador)->first();
         array_push($coordinadoresNombres, $coordinador);
     }
-
     //Obtener todas las inscripciones del club
     $inscripciones = DB::table('inscripciones')->where('id_club', $club->id)->get();
     //Guardar en un array los usuarios que estan inscritos al club
@@ -47,6 +46,10 @@
         //Guardar el usuario en el array
         array_push($usuarios, $usuario);
     }
+    //Obtener todos los registros de la tabla archivos donde idEvento sea igual a getId
+    $archivos = DB::table('archivos')->where('idEvento', $getId)->get();
+    //Obtener todos los registros de la tabla evidencias donde idEvento sea igual a getId
+    $evidencias = DB::table('evidencias')->where('idEvento', $getId)->get();
 
 @endphp
     <div class="row">
@@ -192,36 +195,77 @@
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="avatar-sm">
-                                                                <div
-                                                                    class="avatar-title bg-light text-primary rounded fs-24">
-                                                                    <i class="ri-folder-zip-line"></i>
+                                                @foreach ($archivos as $archivo)
+                                                    @if($archivo->isPrivate == 0)
+                                                        @if (Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id)
+                                                            <tr>
+                                                                <td>
+                                                                    <div class="d-flex align-items-center">
+                                                                        <div class="avatar-sm">
+                                                                            <div
+                                                                                class="avatar-title bg-light text-primary rounded fs-24">
+                                                                                <i class="ri-file-fill"></i>
+                                                                            </div>
+                                                                        </div>
+                                                                        <div class="ms-3 flex-grow-1">
+                                                                            <h5 class="fs-14 mb-0"><a href="/files/{{$club->id}}/archivos/{{$archivo->archivo}}"
+                                                                                    class="text-dark">{{$archivo->archivo}}</a>
+                                                                            </h5>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                                <td>
+                                                                    {{-- Aqui va una condicion de si esta oculto que diga mostrar y si esta visible que diga ocultar --}}
+                                                                    @if ($archivo->isPrivate == 1)
+                                                                        <a href="{{ route('toogleArchivo', $archivo->id) }}" class="btn btn-soft-primary btn-sm">
+                                                                        <i class="ri-eye-off-fill me-1 align-bottom"></i>Ocultar</a>
+                                                                    @else
+                                                                        <a href="{{ route('toogleArchivo', $archivo->id) }}" class="btn btn-soft-primary btn-sm">
+                                                                        <i class="ri-eye-fill me-1 align-bottom"></i>Mostrar</a>
+                                                                    @endif
+                                                                </td>
+                                                                <td>
+                                                                    <a href="{{ route('eliminarArchivo', $archivo->id) }}" class="btn btn-sm btn-soft-danger"><i
+                                                                        class="ri-delete-bin-2-line"></i></a>
+                                                                </td>
+                                                            </tr>
+                                                        @endif
+                                                    @else
+                                                        <tr>
+                                                            <td>
+                                                                <div class="d-flex align-items-center">
+                                                                    <div class="avatar-sm">
+                                                                        <div
+                                                                            class="avatar-title bg-light text-primary rounded fs-24">
+                                                                            <i class="ri-file-fill"></i>
+                                                                        </div>
+                                                                    </div>
+                                                                    <div class="ms-3 flex-grow-1">
+                                                                        <h5 class="fs-14 mb-0"><a href="/files/{{$club->id}}/archivos/{{$archivo->archivo}}"
+                                                                                class="text-dark">{{$archivo->archivo}}</a>
+                                                                        </h5>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                            <div class="ms-3 flex-grow-1">
-                                                                <h5 class="fs-14 mb-0"><a href="javascript:void(0)"
-                                                                        class="text-dark">Artboard-documents.zip</a>
-                                                                </h5>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    @if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id)
-                                                        <td>
-                                                            {{-- Aqui va una condicion de si esta oculto que diga mostrar y si esta visible que diga ocultar --}}
-                                                            <button type="button" class="btn btn-soft-primary btn-sm"><i
-                                                                    class="ri-eye-off-fill me-1 align-bottom"></i> Ocultar</button>
-                                                            <button type="button" class="btn btn-soft-primary btn-sm"><i
-                                                                    class="ri-eye-fill me-1 align-bottom"></i> Mostrar</button>
-                                                        </td>
-                                                        <td>
-                                                            <button type="button" class="btn btn-sm btn-soft-danger"><i
-                                                                    class="ri-delete-bin-2-line"></i></button>
-                                                        </td>
+                                                            </td>
+                                                            @if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id)
+                                                                <td>
+                                                                    {{-- Aqui va una condicion de si esta oculto que diga mostrar y si esta visible que diga ocultar --}}
+                                                                    @if ($archivo->isPrivate == 1)
+                                                                        <a href="{{ route('toogleArchivo', $archivo->id) }}" class="btn btn-soft-primary btn-sm">
+                                                                        <i class="ri-eye-off-fill me-1 align-bottom"></i>Ocultar</a>
+                                                                    @else
+                                                                        <a href="{{ route('toogleArchivo', $archivo->id) }}" class="btn btn-soft-primary btn-sm">
+                                                                        <i class="ri-eye-fill me-1 align-bottom"></i>Mostrar</a>
+                                                                    @endif
+                                                                </td>
+                                                                <td>
+                                                                    <a href="{{ route('eliminarArchivo', $archivo->id) }}" class="btn btn-sm btn-soft-danger"><i
+                                                                        class="ri-delete-bin-2-line"></i></a>
+                                                                </td>
+                                                            @endif
+                                                        </tr>
                                                     @endif
-                                                </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -244,33 +288,35 @@
                                             <thead class="table-light">
                                                 <tr>
                                                     <th scope="col">Nombre del archivo</th>
-                                                    <th scope="col">Tipo</th>
+                                                    <th scope="col">Nota</th>
                                                     <th scope="col">Eliminar</th>
                                                 </tr>
                                             </thead>
                                             <tbody>
-                                                <tr>
-                                                    <td>
-                                                        <div class="d-flex align-items-center">
-                                                            <div class="avatar-sm">
-                                                                <div
-                                                                    class="avatar-title bg-light text-primary rounded fs-24">
-                                                                    <i class="ri-folder-zip-line"></i>
+                                                @foreach ($evidencias as $evidencia)
+                                                    <tr>
+                                                        <td>
+                                                            <div class="d-flex align-items-center">
+                                                                <div class="avatar-sm">
+                                                                    <div
+                                                                        class="avatar-title bg-light text-primary rounded fs-24">
+                                                                        <i class="ri-file-fill"></i>
+                                                                    </div>
+                                                                </div>
+                                                                <div class="ms-3 flex-grow-1">
+                                                                    <h5 class="fs-14 mb-0"><a href="/files/{{$club->id}}/evidencias/{{$evidencia->archivo}}"
+                                                                            class="text-dark">{{$evidencia->archivo}}</a>
+                                                                    </h5>
                                                                 </div>
                                                             </div>
-                                                            <div class="ms-3 flex-grow-1">
-                                                                <h5 class="fs-14 mb-0"><a href="javascript:void(0)"
-                                                                        class="text-dark">Artboard-documents.zip</a>
-                                                                </h5>
-                                                            </div>
-                                                        </div>
-                                                    </td>
-                                                    <td>Zip File</td>
-                                                    <td>
-                                                        <button type="button" class="btn btn-sm btn-soft-danger"><i
-                                                                class="ri-delete-bin-2-line"></i></button>
-                                                    </td>
-                                                </tr>
+                                                        </td>
+                                                        <td>{{$evidencia->nota}}</td>
+                                                        <td>
+                                                            <a href="{{ route('eliminarEvidencia', $evidencia->id) }}" class="btn btn-sm btn-soft-danger"><i
+                                                                    class="ri-delete-bin-2-line"></i></a>
+                                                        </td>
+                                                    </tr>
+                                                @endforeach
                                             </tbody>
                                         </table>
                                     </div>
@@ -316,35 +362,47 @@
                                         </div>
                                         
                                         <div class="pt-3 border-top border-top-dashed mt-4">
-                                            <h4 class="card-title mb-0 flex-grow-1">Recursos</h4>
-                                            <div class="row g-3">
-                                                <div class="flex-shrink-0">
-                                                    <label class="form-label">Agregar recurso para descargar</label>
-                                                    <input type="text" class="form-control col-sm-6" placeholder="Nombre del recurso">
-                                                    <hr>
-                                                    <input type="file" class="form-control col-sm-6" id="formFile">
-                                                    <hr>
-                                                    <button type="button" class="btn btn-soft-primary btn-sm"><i
-                                                            class="ri-upload-2-fill me-1 align-bottom"></i> Subir</button>
+                                            <form action="{{ route('subirArchivo') }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <h4 class="card-title mb-0 flex-grow-1">Recursos</h4>
+                                                <div class="row g-3">
+                                                    <div class="flex-shrink-0">
+                                                        <input type="hidden" name="idClub" value="{{ $evento->id_club }}">
+                                                        <input type="hidden" name="idEvento" value="{{ $evento->id }}">
+                                                        <input type="hidden" name="isPrivate" value="0">
+                                                        <label class="form-label">Agregar recurso para descargar</label>
+                                                        <input name="nombreArchivo" type="text" class="form-control col-sm-6" placeholder="Nombre del recurso">
+                                                        <hr>
+                                                        <input name="archivo" type="file" class="form-control col-sm-6" id="formFile">
+                                                        <hr>
+                                                        <button type="submit" class="btn btn-soft-primary btn-sm"><i
+                                                                class="ri-upload-2-fill me-1 align-bottom"></i> Subir</button>
+                                                    </div>
                                                 </div>
-                                            </div>
+                                            </form>
                                         </div>
                                         <!-- end card body -->
 
                                         <div class="pt-3 border-top border-top-dashed mt-4">
-                                            <h6 class="mb-3 fw-semibold text-uppercase">Subir evidencias</h6>
-                                            <div class="row g-3">
-                                                <div class="flex-shrink-0">
-                                                    <label class="form-label">Agregar evidencia</label>
-                                                    <input type="text" class="form-control col-sm-6" placeholder="Nombre del recurso">
-                                                    <hr>
-                                                    <input type="file" class="form-control col-sm-6" id="formFile">
-                                                    <hr>
-                                                    <button type="button" class="btn btn-soft-primary btn-sm"><i
-                                                            class="ri-upload-2-fill me-1 align-bottom"></i> Subir</button>
+                                            <form action="{{ route('subirEvidencia') }}" method="POST" enctype="multipart/form-data">
+                                                @csrf
+                                                <h6 class="mb-3 fw-semibold text-uppercase">Subir evidencias</h6>
+                                                <div class="row g-3">
+                                                    <div class="flex-shrink-0">
+                                                        <input type="hidden" name="idClub_ev" value="{{ $evento->id_club }}">
+                                                        <input type="hidden" name="idEvento_ev" value="{{ $evento->id }}">
+                                                        <label class="form-label">Agregar evidencia</label>
+                                                        <textarea name="nota_ev" class="form-control" id="exampleFormControlTextarea1" rows="3" 
+                                                        placeholder="Notas sobre la evidencia"></textarea>
+                                                        <hr>
+                                                        <input name="archivo_ev" type="file" class="form-control col-sm-6" id="formFile">
+                                                        <hr>
+                                                        <button type="submit" class="btn btn-soft-primary btn-sm"><i
+                                                                class="ri-upload-2-fill me-1 align-bottom"></i> Subir</button>
+                                                    </div>
                                                 </div>
-                                            </div>
-                                            <!-- end row -->
+                                                <!-- end row -->
+                                            </form>
                                         </div>
                                         <!-- end subir evidencia -->
 

@@ -43,3 +43,12 @@ Route::post('/asignarCoordinador', [App\Http\Controllers\HomeController::class, 
 //autoridades
 Route::post('/agregarAutoridad', [App\Http\Controllers\HomeController::class, 'agregarAutoridad'])->name('agregarAutoridad');
 Route::get('/eliminarAutoridad/{id}', [App\Http\Controllers\HomeController::class, 'eliminarAutoridad'])->name('eliminarAutoridad');
+
+//Archivos
+Route::post('/subirArchivo', [App\Http\Controllers\HomeController::class, 'subirArchivo'])->name('subirArchivo');
+Route::get('/eliminarArchivo/{id}', [App\Http\Controllers\HomeController::class, 'eliminarArchivo'])->name('eliminarArchivo');
+Route::get('/toogleArchivo/{id}', [App\Http\Controllers\HomeController::class, 'toogleArchivo'])->name('toogleArchivo');
+
+//Evidencias
+Route::post('/subirEvidencia', [App\Http\Controllers\HomeController::class, 'subirEvidencia'])->name('subirEvidencia');
+Route::get('/eliminarEvidencia/{id}', [App\Http\Controllers\HomeController::class, 'eliminarEvidencia'])->name('eliminarEvidencia');

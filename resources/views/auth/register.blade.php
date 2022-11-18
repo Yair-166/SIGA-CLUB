@@ -138,22 +138,14 @@
                                             </div>
                                         </div>
 
+                                        <!-- Base Switchs -->
+                                        <div class="form-check form-switch form-switch-md" dir="ltr">
+                                            <input name="rol" type="checkbox" class="form-check-input" id="customSwitchsizemd" value="administrador">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">Administrador</label>
+                                        </div>
+
                                         <div class="mb-3">
-                                            <label for="rol" class="form-label">Rol <span
-                                                    class="text-danger">*</span></label>
-                                            <select class="form-control @error('roles') is-invalid @enderror" name="rol"
-                                                id="rol" required>
-                                                <option value="colaborador">Colaborador</option>
-                                                <option value="administrador">Administrador</option>
-                                            </select>
-                                            @error('rol')
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong>{{ $message }}</strong>
-                                                </span>
-                                            @enderror
-                                            <div class="invalid-feedback">
-                                                Por favor selecciona un rol.
-                                            </div>
+                                            
                                         </div>
 
                                         <div class=" mb-4">
@@ -168,15 +160,6 @@
                                                 <i data-feather="file"></i>
                                             </div>
                                         </div>
-
-                                        {{-- 
-                                        El swtich de administrador
-                                        <div class=" mb-4">
-                                            <div class="form-check form-switch form-switch-md" dir="ltr">
-                                                <input type="checkbox" class="form-check-input" id="customSwitchsizemd">
-                                                <label class="form-check-label" for="customSwitchsizemd">Administrador</label>
-                                            </div>
-                                        </div> --}}
 
                                         <div class="mb-4">
                                             <p class="mb-0 fs-12 text-muted fst-italic">Al registrarte aceptas los <a href="#"
@@ -209,7 +192,6 @@
                                                         class="ri-twitter-fill fs-16"></i></button>
                                             </div>
                                         </div>
-                                        -->
                                     </form>
 
                                 </div>

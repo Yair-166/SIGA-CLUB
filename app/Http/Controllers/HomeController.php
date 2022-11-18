@@ -8,6 +8,8 @@ use App\Models\Inscripciones;
 use App\Models\Eventos;
 use App\Models\Confi_eventos;
 use App\Models\Autoridades;
+use App\Models\Archivos;
+use App\Models\Evidencias;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -67,7 +69,7 @@ class HomeController extends Controller
             'amaterno' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email'],
             'avatar' => ['nullable', 'image', 'mimes:jpg,jpeg,png', 'max:1024'],
-            'descripcion' => ['nullable', 'string', 'max:255'],
+            'descripcion' => ['nullable', 'string', 'max:1024'],
         ]);
 
         $user = User::find($id);
@@ -316,4 +318,79 @@ class HomeController extends Controller
         $autoridades->delete();
         return redirect()->back()->with('success', 'Autoridad eliminada correctamente');
     }
+
+    //Para archivos
+    public function subirArchivo(Request $request)
+    {
+        $archivos = new Archivos();
+
+        $club = $request->post('idClub');
+
+        $archivos->idEvento = $request->post('idEvento');
+        $archivos->nombreArchivo = $request->post('nombreArchivo');
+        $archivos->isPrivate = $request->post('isPrivate');
+
+        if ($request->file('archivo')) {
+            $archivo = $request->file('archivo');
+            $archivoName =  $archivos->nombreArchivo . '.' . $archivo->getClientOriginalExtension();
+            $archivoPath = public_path('/files/'.$club.'/archivos/');
+            $archivo->move($archivoPath, $archivoName);
+            $archivos->archivo =  $archivoName;
+        }
+
+        $archivos->save();
+
+        return redirect()->back()->with('success', 'Archivo subido correctamente');
+    }
+
+    public function eliminarArchivo($id)
+    {
+        $archivos = Archivos::find($id);
+        $archivos->delete();
+        return redirect()->back()->with('success', 'Archivo eliminado correctamente');
+    }
+
+    public function toogleArchivo($id)
+    {
+        $archivos = Archivos::find($id);
+        if ($archivos->isPrivate == 0) {
+            $archivos->isPrivate = 1;
+        } else {
+            $archivos->isPrivate = 0;
+        }
+        $archivos->save();
+        return redirect()->back()->with('success', 'Archivo actualizado correctamente');
+    }
+
+    //Para evidencias
+    public function subirEvidencia(Request $request)
+    {
+        $evidencias = new Evidencias();
+
+        $club = $request->post('idClub_ev');
+
+        $evidencias->idEvento = $request->post('idEvento_ev');
+        $evidencias->nota = $request->post('nota_ev');
+
+        if ($request->file('archivo_ev')) {
+            $evidencia = $request->file('archivo_ev');
+            $evidenciaName =  $evidencia->getClientOriginalName();
+            $evidenciaPath = public_path('/files/'.$club.'/evidencias/');
+            $evidencia->move($evidenciaPath, $evidenciaName);
+            $evidencias->archivo =  $evidenciaName;
+        }
+
+        $evidencias->save();
+
+        return redirect()->back()->with('success', 'Archivo subido correctamente');
+    }
+
+    public function eliminarEvidencia($id)
+    {
+        $evidencias = Evidencias::find($id);
+        $evidencias->delete();
+
+        return redirect()->back()->with('success', 'Autoridad eliminada correctamente');
+    }
+
 }

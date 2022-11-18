@@ -215,36 +215,14 @@ unset($__errorArgs, $__bag); ?>"
                                             </div>
                                         </div>
 
+                                        <!-- Base Switchs -->
+                                        <div class="form-check form-switch form-switch-md" dir="ltr">
+                                            <input name="rol" type="checkbox" class="form-check-input" id="customSwitchsizemd" value="administrador">
+                                            <label class="form-check-label" for="flexSwitchCheckDefault">Administrador</label>
+                                        </div>
+
                                         <div class="mb-3">
-                                            <label for="rol" class="form-label">Rol <span
-                                                    class="text-danger">*</span></label>
-                                            <select class="form-control <?php $__errorArgs = ['roles'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>" name="rol"
-                                                id="rol" required>
-                                                <option value="colaborador">Colaborador</option>
-                                                <option value="administrador">Administrador</option>
-                                            </select>
-                                            <?php $__errorArgs = ['rol'];
-$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
-if ($__bag->has($__errorArgs[0])) :
-if (isset($message)) { $__messageOriginal = $message; }
-$message = $__bag->first($__errorArgs[0]); ?>
-                                                <span class="invalid-feedback" role="alert">
-                                                    <strong><?php echo e($message); ?></strong>
-                                                </span>
-                                            <?php unset($message);
-if (isset($__messageOriginal)) { $message = $__messageOriginal; }
-endif;
-unset($__errorArgs, $__bag); ?>
-                                            <div class="invalid-feedback">
-                                                Por favor selecciona un rol.
-                                            </div>
+                                            
                                         </div>
 
                                         <div class=" mb-4">
@@ -273,8 +251,6 @@ unset($__errorArgs, $__bag); ?>
                                                 <i data-feather="file"></i>
                                             </div>
                                         </div>
-
-                                        
 
                                         <div class="mb-4">
                                             <p class="mb-0 fs-12 text-muted fst-italic">Al registrarte aceptas los <a href="#"
@@ -307,7 +283,6 @@ unset($__errorArgs, $__bag); ?>
                                                         class="ri-twitter-fill fs-16"></i></button>
                                             </div>
                                         </div>
-                                        -->
                                     </form>
 
                                 </div>
