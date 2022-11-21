@@ -24,11 +24,11 @@
                 </div>
 
                 <button type="button" class="btn btn-sm px-3 fs-16 header-item vertical-menu-btn topnav-hamburger" id="topnav-hamburger-icon">
-                    <span class="hamburger-icon">
-                        <span></span>
-                        <span></span>
-                        <span></span>
-                    </span>
+                    <a href="index">
+                        <span class="logo-sm">
+                            <img src="{{ URL::asset('assets/images/logo-sm.png') }}" alt="" height="22">
+                        </span>
+                    </a>
                 </button>
 
                 <!-- App Search-->

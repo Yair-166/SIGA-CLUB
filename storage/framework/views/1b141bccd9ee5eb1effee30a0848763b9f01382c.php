@@ -26,16 +26,32 @@
          //Si no, mostrar la fecha de inicio y la fecha de fin
          $hora = date("h:i a", strtotime($evento->horaInicio))." - ".date("h:i a", strtotime($evento->horaFin));
     }
+
+    //Obtener el numero de filas de la tabla confi_eventos donde idEvento sea igual al id del evento
+    $confi_eventos = DB::table('confi_eventos')->where('idEvento', $getId)->count();
     
-    //Obtener los coordinadores del evento en la tabla confi_eventos
-    $coordinadores = DB::table('confi_eventos')->where('idEvento', $getId)->get();
-    
-    //Obtener los nombres de los coordinadores del evento
+    //Array para guardar los coordinadores
     $coordinadoresNombres = array();
-    foreach($coordinadores as $coordinador){
-        $coordinador = DB::table('users')->where('id', $coordinador->id_coordinador)->first();
-        array_push($coordinadoresNombres, $coordinador);
+
+    //Guardar el admin del club
+    $coordinador = DB::table('users')->where('id', $club->idAdministrador)->first();
+    array_push($coordinadoresNombres, $coordinador);
+
+    //Si el numero de filas es igual a 1
+    if($confi_eventos > 1){
+        //Obtener los coordinadores del evento en la tabla confi_eventos
+        $coordinadores = DB::table('confi_eventos')->where('idEvento', $getId)->get();
+    
+        foreach($coordinadores as $coordinador){
+            if($coordinador->id_coordinador != "-1"){
+                $coordinador = DB::table('users')->where('id', $coordinador->id_coordinador)->first();
+                array_push($coordinadoresNombres, $coordinador);
+            }
+        }
     }
+    
+
+    
     //Obtener todas las inscripciones del club
     $inscripciones = DB::table('inscripciones')->where('id_club', $club->id)->get();
     //Guardar en un array los usuarios que estan inscritos al club
@@ -144,15 +160,12 @@
                                 <div class="card-header align-items-center d-flex border-bottom-dashed">
                                     <h4 class="card-title mb-0 flex-grow-1">Coordinador (es)</h4>
                                 </div>
-
-                                <div class="card-body">
-                                    <div data-simplebar style="height: 235px;" class="mx-n3 px-3">
-                                        <?php $__currentLoopData = $coordinadoresNombres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $coordinador): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <?php $__currentLoopData = $coordinadoresNombres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $coordinador): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                             <div class="vstack gap-3">
                                                 <div class="d-flex align-items-center">
                                                     <div class="avatar-xs flex-shrink-0 me-3">
                                                         <img src="<?php echo e(URL::asset('images/'.$coordinador->avatar)); ?>" alt=""
-                                                            class="img-fluid rounded-circle">
+                                                            class="img-fluid rounded-circle" style="aspect-ratio: 1/1;;">
                                                     </div>
                                                     <div class="flex-grow-1">
                                                         <h5 class="fs-13 mb-0"><a href="#" class="text-body d-block">
@@ -164,6 +177,9 @@
                                             </div>
                                             <br>
                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                <div class="card-body">
+                                    <div data-simplebar style="height: 235px;" class="mx-n3 px-3">
+                                        
                                     </div>
                                 </div>
                                 <!-- end card body -->
@@ -421,29 +437,51 @@
                                 <div class="card-header align-items-center d-flex border-bottom-dashed">
                                     <h4 class="card-title mb-0 flex-grow-1">Coordinador (es)</h4>
                                 </div>
-
-                                <div class="card-body">
-                                    <div data-simplebar style="height: 235px;" class="mx-n3 px-3">
-                                         <?php $__currentLoopData = $coordinadoresNombres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $coordinador): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                            <div class="vstack gap-3">
-                                                <div class="d-flex align-items-center">
-                                                    <div class="avatar-xs flex-shrink-0 me-3">
-                                                        <img src="<?php echo e(URL::asset('images/'.$coordinador->avatar)); ?>" alt=""
-                                                            class="img-fluid rounded-circle">
-                                                    </div>
-                                                    <div class="flex-grow-1">
-                                                        <h5 class="fs-13 mb-0"><a href="#" class="text-body d-block">
-                                                        <?php echo e($coordinador->name . ' ' . $coordinador->apaterno . ' ' . $coordinador->amaterno); ?></a></h5>
-                                                        </a></h5>
-                                                    </div>
-                                                </div>
-                                                <!-- end member item -->
+                                <?php $__currentLoopData = $coordinadoresNombres; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $coordinador): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <div class="vstack gap-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-xs flex-shrink-0 me-3">
+                                                <img src="<?php echo e(URL::asset('images/'.$coordinador->avatar)); ?>" alt=""
+                                                    class="img-fluid rounded-circle" style="aspect-ratio: 1/1;;">
                                             </div>
+                                            <div class="flex-grow-1">
+                                                <h5 class="fs-13 mb-0"><a href="#" class="text-body d-block">
+                                                <?php echo e($coordinador->name . ' ' . $coordinador->apaterno . ' ' . $coordinador->amaterno); ?></a></h5>
+                                                </a></h5>
+                                            </div>
+                                        </div>
+                                        <!-- end member item -->
+                                    </div>
+                                    <br>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            </div>
+                            <!-- end card -->
+                            <div class="card  align-items-center">
+                                <div class="card-header align-items-center d-flex border-bottom-dashed">
+                                    <h5 class="fs-13 mb-0">Activar asistencia</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="vstack gap-3">
+                                        <div class="d-flex align-items-center">
+                                            <a href="<?php echo e(URL::asset('/pages-qr?uid='.$evento->id)); ?>" class="btn btn-primary btn-sm">Activar</a>
                                             <br>
-                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                        </div>
                                     </div>
                                 </div>
-                                <!-- end card body -->
+                            </div>
+                            <!-- end card -->
+                            <div class="card  align-items-center">
+                                <div class="card-header align-items-center d-flex border-bottom-dashed">
+                                    <h5 class="fs-13 mb-0">QR Privado</h5>
+                                </div>
+                                <div class="card-body">
+                                    <div class="vstack gap-3">
+                                        <div class="d-flex align-items-center">
+                                            <a href="pages-qr" target="_blank" class="btn btn-primary btn-sm">Activar</a>
+                                            <br>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             <!-- end card -->
                         </div>

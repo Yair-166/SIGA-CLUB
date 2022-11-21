@@ -6,7 +6,7 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
 <?php $__env->startComponent('components.breadcrumb'); ?>
-<?php $__env->slot('li_1'); ?> Admin <?php $__env->endSlot(); ?>
+<?php $__env->slot('li_1'); ?> SIGA <?php $__env->endSlot(); ?>
 <?php $__env->slot('title'); ?> Inicio <?php $__env->endSlot(); ?>
 <?php echo $__env->renderComponent(); ?>
 <?php
@@ -163,7 +163,7 @@
                                     <div class="d-flex align-items-end justify-content-between mt-4">
                                         <div>
                                             <a href="/apps-calendario-participante" class="link-secondary text-decoration-underline">
-                                                Eventos organizados por tu club.
+                                                Eventos organizados por los clubes a los que perteneces.
                                             </a>
                                         </div>
                                         <div class="avatar-sm flex-shrink-0">
@@ -184,13 +184,13 @@
                                         <div class="flex-grow-1 overflow-hidden">
                                             <p
                                                 class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                                Mis constancias</p>
+                                                Mis asistencias</p>
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-end justify-content-between mt-4">
                                         <div>
-                                            <a href="/apps-crm-companies" class="link-secondary text-decoration-underline">
-                                                Solicita tus constancias.
+                                            <a href="/asistencias" class="link-secondary text-decoration-underline">
+                                                Ve tus asistencias y solicita constancias.
                                             </a>
                                         </div>
                                         <div class="avatar-sm flex-shrink-0">

@@ -519,7 +519,7 @@ function tConvert(time) {
 }
 
 var str_dt = function formatDate(date) {
-    var monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayoo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
+    var monthNames = ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "Junio", "Julio", "Agosto", "Septiembre", "Octubre", "Noviembre", "Diciembre"];
     var d = new Date(date),
         month = '' + monthNames[(d.getMonth())],
         day = '' + d.getDate(),

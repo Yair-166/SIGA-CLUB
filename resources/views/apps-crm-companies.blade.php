@@ -10,7 +10,7 @@
 @section('content')
     @component('components.breadcrumb')
         @slot('li_1')
-            CRM
+            SIGA
         @endslot
         @slot('title')
             Clubes

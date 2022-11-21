@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
+use SimpleSoftwareIO\QrCode\Facades\QrCode;
 
 class HomeController extends Controller
 {
@@ -267,7 +268,7 @@ class HomeController extends Controller
 
         $confi_eventos = new Confi_eventos();
         $confi_eventos->idEvento = $eventos->id;
-        $confi_eventos->id_coordinador = NULL;
+        $confi_eventos->id_coordinador = "-1";
         $confi_eventos->secondId = NULL;
         $confi_eventos->ultimoQR = NULL;
         $confi_eventos->qrActual = NULL;
@@ -285,8 +286,8 @@ class HomeController extends Controller
         $confi_eventos->idEvento = $request->post('idEvento');
         $confi_eventos->secondId = NULL;
         $confi_eventos->id_coordinador = $request->post('id_coordinador');
-        $confi_eventos->ultimoQR = NULL;
-        $confi_eventos->qrActual = NULL;
+        $confi_eventos->ultimoQR = "0";
+        $confi_eventos->qrActual = "0";
         $confi_eventos->isPrivate = 0;
 
         $confi_eventos->save();

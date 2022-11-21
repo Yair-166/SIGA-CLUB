@@ -48,7 +48,7 @@
 
     <div class="card">
         <div class="card-body">
-            <div class="row g-2"
+            <div class="row g-2">
                 <!--end col-->
                 <div class="col-sm-auto ms-auto">
                     <div class="list-grid-nav hstack gap-1">

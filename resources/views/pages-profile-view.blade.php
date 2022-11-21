@@ -11,8 +11,8 @@
     $uid = $_GET['uid'];
     //Obtener los datos de la tabla inscripciones con el uid
     $inscripcion = DB::table('inscripciones')->where('id', $uid)->first();
-    //Obtener todas las asistencias del usuario con el uid
-    $asistencias = DB::table('asistencias')->where('idUsuario', $uid)->get();
+    //Obtener todas las asistencias del usuario con el id del usuario
+    $asistencias = DB::table('asistencias')->where('idUsuario', $inscripcion->id_alumno)->get();
     //Obtener los datos del club con el id del club
     $club = DB::table('clubes')->where('id', $inscripcion->id_club)->first();
     //Obtener el usuario de la base de datos por el id
@@ -145,7 +145,6 @@
                                                     </thead>
                                                     <tbody>
                                                         @foreach ($asistencias as $asistencia)
-                                                            //Obtener el nombre del evento 
                                                             @php
                                                                 $evento = DB::table('eventos')->where('id', $asistencia->idEvento)->first();
                                                             @endphp
@@ -155,7 +154,11 @@
                                                                 <td>{{$evento->fechaFin}}</td>
                                                                 <td>{{$asistencia->asistenciaTotal}}</td>
                                                                 <td>
-                                                                    <a href="{{route('constancia', $asistencia->id)}}" class="btn btn-primary btn-sm">Generar</a>
+                                                                    @if($asistencia->constanciaGenerada == 0)
+                                                                        <a href="" class="btn btn-primary btn-sm">Generar</a>
+                                                                    @else
+                                                                        <a href="" class="btn btn-primary btn-sm">Descargar acuse</a>
+                                                                    @endif
                                                                 </td>
                                                             </tr>
                                                         @endforeach

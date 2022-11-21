@@ -64,14 +64,15 @@ document.addEventListener("DOMContentLoaded", function () {
         //Obtener id, nombre, fecha y hora de los eventos
         var defaultEvents = [];
         for (var i = 0; i < eventos_usr.length; i++) {
-            var evento = eventos_usr[i].split(",");
+            //Separar por ,\
+            var evento = eventos_usr[i].split(",\\");
             var id = evento[0];
             //Eliminar el substring {\\\"id\\\": de la cadena
             id = id.substring(8); 
             
             var title = evento[1];
             //Eliminar el substring \\\"nombre\\\":\\\ de la cadena
-            title = title.substring(13);
+            title = title.substring(12);
             //Eliminar el substring \\" de la cadena
             title = title.substring(0, title.length - 2);
             //Permitir los acentos 
@@ -90,21 +91,25 @@ document.addEventListener("DOMContentLoaded", function () {
             //Eliminar todos los \ de la cadena
             title = title.replace(/\\/g, "");
 
-            var start = evento[6];
+            var start = evento[7];
             //Eliminar el substring \\\"fechaInicio\\\":\\\ de la cadena
-            start = start.substring(18);
+            start = start.substring(17);
             //Eliminar el substring \\\" de la cadena
             start = start.substring(0, start.length - 2);
 
-            var end = evento[7];
+            var end = evento[8];
             //Eliminar el substring \\\"fechaFin\\\":\\\ de la cadena
-            end = end.substring(15);
+            end = end.substring(14);
             //Eliminar el substring \\\" de la cadena
             end = end.substring(0, end.length - 2);
+            //Sumar un dia a la fecha de fin
+            end = new Date(end);
+            end.setDate(end.getDate() + 1);
+            end = end.toISOString().split('T')[0];
 
-            var description = evento[3];
+            var description = evento[4];
             //Eliminar el substring \\\"descripcion\\\":\\\ de la cadena
-            description = description.substring(18);
+            description = description.substring(17);
             //Eliminar el substring \\\" de la cadena
             description = description.substring(0, description.length - 2);
 
@@ -118,6 +123,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 description: description
 
             };
+            
             defaultEvents.push(evento);
         }
     }
@@ -543,6 +549,17 @@ function upcomingEvent(a) {
         if (e_dt == "Invalid Date" || e_dt == undefined) {
             e_dt = null;
         } else {
+
+            ende = new Date(e_dt);
+            //Restar 1 dia a ende
+            //console.log(ende);
+            //Pasar a formato yyyy-mm-dd
+            var dd = String(ende.getDate()).padStart(2, '0');
+            var mm = String(ende.getMonth() + 1).padStart(2, '0'); //January is 0!
+            var yyyy = ende.getFullYear();
+            e_dt = yyyy + '-' + mm + '-' + dd;
+            
+            e_dt = e_dt.replace(/-/g, '/');
             e_dt = new Date(e_dt).toLocaleDateString('en', {
                 year: 'numeric',
                 month: 'numeric',
@@ -555,6 +572,7 @@ function upcomingEvent(a) {
             e_dt = null;
         }
         var startDate = element.start;
+        startDate = startDate.replace(/-/g, '/');
         if (startDate === "Invalid Date" || startDate === undefined) {
             startDate = null;
         } else {
@@ -564,17 +582,22 @@ function upcomingEvent(a) {
                 day: 'numeric'
             });
         }
-
-        var end_dt = (e_dt) ? " to " + e_dt : '';
+        var end_dt = (e_dt) ? " a " + e_dt : '';
         var category = (element.className).split("-");
         var description = (element.description) ? element.description : "";
         var e_time_s = tConvert(getTime(element.start));
         var e_time_e = tConvert(getTime(element.end));
+
         if (e_time_s == e_time_e) {
             var e_time_s = "Todo el día";
             var e_time_e = null;
         }
-        var e_time_e = (e_time_e) ? " to " + e_time_e : "";
+        var e_time_e = (e_time_e) ? " a " + e_time_e : "";
+
+        //Checar si startDate esta contenido en end_dt
+        if (end_dt.includes(startDate)) {
+            var end_dt = "";
+        }
 
         u_event = "<div class='card mb-3'>\
                         <div class='card-body'>\
