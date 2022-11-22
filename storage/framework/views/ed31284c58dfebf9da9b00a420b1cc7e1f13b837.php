@@ -160,7 +160,7 @@
                                                                     <?php if($asistencia->constanciaGenerada == 0): ?>
                                                                         <a href="" class="btn btn-primary btn-sm">Generar</a>
                                                                     <?php else: ?>
-                                                                        <a href="" class="btn btn-primary btn-sm">Descargar</a>
+                                                                        <a href="" class="btn btn-primary btn-sm">Descargar acuse</a>
                                                                     <?php endif; ?>
                                                                 </td>
                                                             </tr>
