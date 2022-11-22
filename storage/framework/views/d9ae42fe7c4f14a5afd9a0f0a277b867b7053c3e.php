@@ -2,8 +2,8 @@
 <?php $__env->startSection('title'); ?> <?php echo app('translator')->get('translation.faqs'); ?> <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
     <?php $__env->startComponent('components.breadcrumb'); ?>
-        <?php $__env->slot('li_1'); ?> Pages <?php $__env->endSlot(); ?>
-        <?php $__env->slot('title'); ?> FAQs <?php $__env->endSlot(); ?>
+        <?php $__env->slot('li_1'); ?> SIGA <?php $__env->endSlot(); ?>
+        <?php $__env->slot('title'); ?> Preguntas y respuestas <?php $__env->endSlot(); ?>
     <?php echo $__env->renderComponent(); ?>
 
     <div class="row">
@@ -13,11 +13,13 @@
                     <div class="row">
                         <div class="col-xxl-5 align-self-center">
                             <div class="py-4">
-                                <h4 class="display-6 coming-soon-text">Frequently asked questions</h4>
-                                <p class="text-muted fs-15 mt-3">If you can not find answer to your question in our FAQ, you can always contact us or email us. We will answer you shortly!</p>
+                                <h4 class="display-6 coming-soon-text">Preguntas frecuentes</h4>
+                                <p class="text-muted fs-15 mt-3">Si no puede encontrar la respuesta a su pregunta en nuestras preguntas frecuentes, 
+                                    siempre puede contactarnos o enviarnos un correo electrónico. ¡Te responderemos en breve!</p>
                                 <div class="hstack flex-wrap gap-2">
-                                    <button type="button" class="btn btn-primary btn-label rounded-pill"><i class="ri-mail-line label-icon align-middle rounded-pill fs-16 me-2"></i> Email Us</button>
-                                    <button type="button" class="btn btn-secondary btn-label rounded-pill"><i class="ri-twitter-line label-icon align-middle rounded-pill fs-16 me-2"></i> Send Us Tweet</button>
+                                    <a href="mailto: sigaclubtt@gmail.com?subject = Pregunta sobre SIGA-Club"  type="button" class="btn btn-primary btn-label rounded-pill">
+                                        <i class="ri-mail-line label-icon align-middle rounded-pill fs-16 me-2">
+                                        </i>Enviar correo</a>
                                 </div>
                             </div>
                         </div>
@@ -40,56 +42,58 @@
                                 <i class="ri-question-line fs-24 align-middle text-success me-1"></i>
                             </div>
                             <div class="flex-grow-1">
-                                <h5 class="fs-16 mb-0 fw-semibold">General Questions</h5>
+                                <h5 class="fs-16 mb-0 fw-semibold">Preguntas generales</h5>
                             </div>
                         </div>
 
                         <div class="accordion accordion-border-box" id="genques-accordion">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="genques-headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#genques-collapseOne" aria-expanded="true" aria-controls="genques-collapseOne">
-                                        What is Lorem Ipsum ?
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#genques-collapseOne" aria-expanded="false" aria-controls="genques-collapseOne">
+                                        ¿Quiénes somos?
                                     </button>
                                 </h2>
-                                <div id="genques-collapseOne" class="accordion-collapse collapse show" aria-labelledby="genques-headingOne" data-bs-parent="#genques-accordion">
+                                <div id="genques-collapseOne" class="accordion-collapse collapse collapsed" aria-labelledby="genques-headingOne" data-bs-parent="#genques-accordion">
                                     <div class="accordion-body">
-                                        If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more simple and regular than the existing European languages. It will be as simple their most common words.
+                                        Somos el TT 2021-B004 de la Escuela Superior de Cómputo del Instituto Politécnico Nacional.
+                                        El equipo esta conformado por 2 integrantes y 1 director.
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="genques-headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#genques-collapseTwo" aria-expanded="false" aria-controls="genques-collapseTwo">
-                                        Why do we use it ?
+                                        ¿Por qué nace SIGA-Club?
                                     </button>
                                 </h2>
                                 <div id="genques-collapseTwo" class="accordion-collapse collapse" aria-labelledby="genques-headingTwo" data-bs-parent="#genques-accordion">
                                     <div class="accordion-body">
-                                        The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is.
+                                        Por la necesidad de tener un sistema de gestión de asistencias y actividades y sea altamente dirigido a clubes escolares.
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="genques-headingThree">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#genques-collapseThree" aria-expanded="false" aria-controls="genques-collapseThree">
-                                        Where does it come from ?
+                                        ¿Que los hace diferentes a otros sistemas?
                                     </button>
                                 </h2>
                                 <div id="genques-collapseThree" class="accordion-collapse collapse" aria-labelledby="genques-headingThree" data-bs-parent="#genques-accordion">
                                     <div class="accordion-body">
-                                        he wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete.
+                                        Nuesto sistema es altamente dirigido a clubes escolares y es algo que no se había implementado anteriormente, pero, además, es un sistema que se adapta a las necesidades 
+                                        de cualquier evento donde se tiene que llevar una gestion tanto de actividades como de asistencias.
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="genques-headingFour">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#genques-collapseFour" aria-expanded="false" aria-controls="genques-collapseFour">
-                                        Where can I get some ?
+                                        ¿Hotel?
                                     </button>
                                 </h2>
                                 <div id="genques-collapseFour" class="accordion-collapse collapse" aria-labelledby="genques-headingFour" data-bs-parent="#genques-accordion">
                                     <div class="accordion-body">
-                                        Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis aliquam ultrices mauris.
+                                        Trivago.
                                     </div>
                                 </div>
                             </div>
@@ -104,7 +108,7 @@
                                 <i class="ri-user-settings-line fs-24 align-middle text-success me-1"></i>
                             </div>
                             <div class="flex-grow-1">
-                                <h5 class="fs-16 mb-0 fw-semibold">Manage Account</h5>
+                                <h5 class="fs-16 mb-0 fw-semibold">Manejo de cuenta</h5>
                             </div>
                         </div>
 
@@ -112,48 +116,48 @@
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="manageaccount-headingOne">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#manageaccount-collapseOne" aria-expanded="false" aria-controls="manageaccount-collapseOne">
-                                        Where can I get some ?
+                                        ¿Dónde puedo crear una cuenta?
                                     </button>
                                 </h2>
                                 <div id="manageaccount-collapseOne" class="accordion-collapse collapse" aria-labelledby="manageaccount-headingOne" data-bs-parent="#manageaccount-accordion">
                                     <div class="accordion-body">
-                                        If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more simple and regular than the existing European languages. It will be as simple their most common words.
+                                        En el siguiente enlace. <a href="https://panel.sigaclub.com/register"> Crear cuenta.</a>    
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="manageaccount-headingTwo">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#manageaccount-collapseTwo" aria-expanded="true" aria-controls="manageaccount-collapseTwo">
-                                        Where does it come from ?
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#manageaccount-collapseTwo" aria-expanded="false" aria-controls="manageaccount-collapseTwo">
+                                        ¿Qué es una cuenta de administrador?
                                     </button>
                                 </h2>
-                                <div id="manageaccount-collapseTwo" class="accordion-collapse collapse show" aria-labelledby="manageaccount-headingTwo" data-bs-parent="#manageaccount-accordion">
+                                <div id="manageaccount-collapseTwo" class="accordion-collapse collapse" aria-labelledby="manageaccount-headingTwo" data-bs-parent="#manageaccount-accordion">
                                     <div class="accordion-body">
-                                        The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is.
+                                        Es un tipo de cuenta donde el usuario puede crear clubes y gestionar tanto sus asistencias como sus actividades, además puede generar constancias por actividades a las que los participantes hayan asistido.
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="manageaccount-headingThree">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#manageaccount-collapseThree" aria-expanded="false" aria-controls="manageaccount-collapseThree">
-                                        Why do we use it ?
+                                        ¿Qué es una cuenta de colaborador?
                                     </button>
                                 </h2>
                                 <div id="manageaccount-collapseThree" class="accordion-collapse collapse" aria-labelledby="manageaccount-headingThree" data-bs-parent="#manageaccount-accordion">
                                     <div class="accordion-body">
-                                        he wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete.
+                                        Es un tipo de cuenta donde el usuario se puede inscribir a clubes, ver si existen actividades de dichos clubes y asistir a las mismas.
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="manageaccount-headingFour">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#manageaccount-collapseFour" aria-expanded="false" aria-controls="manageaccount-collapseFour">
-                                        What is Lorem Ipsum ?
+                                        ¿Qué es el rol de usuario?
                                     </button>
                                 </h2>
                                 <div id="manageaccount-collapseFour" class="accordion-collapse collapse" aria-labelledby="manageaccount-headingFour" data-bs-parent="#manageaccount-accordion">
                                     <div class="accordion-body">
-                                        Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis aliquam ultrices mauris.
+                                        Es el rol que toma un participante al asistir a una actividad, este rol lo asigna el administrador del club, y puede ser participante o coordinador de una actividad.    
                                     </div>
                                 </div>
                             </div>
@@ -168,56 +172,58 @@
                                 <i class="ri-shield-keyhole-line fs-24 align-middle text-success me-1"></i>
                             </div>
                             <div class="flex-grow-1">
-                                <h5 class="fs-16 mb-0 fw-semibold">Privacy &amp; Security</h5>
+                                <h5 class="fs-16 mb-0 fw-semibold">Privacidad y seguridad</h5>
                             </div>
                         </div>
 
                         <div class="accordion accordion-border-box" id="privacy-accordion">
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="privacy-headingOne">
-                                    <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#privacy-collapseOne" aria-expanded="true" aria-controls="privacy-collapseOne">
-                                        Why do we use it ?
+                                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#privacy-collapseOne" aria-expanded="false" aria-controls="privacy-collapseOne">
+                                        ¿Dónde se encuentran las politicas?
                                     </button>
                                 </h2>
-                                <div id="privacy-collapseOne" class="accordion-collapse collapse show" aria-labelledby="privacy-headingOne" data-bs-parent="#privacy-accordion">
+                                <div id="privacy-collapseOne" class="accordion-collapse collapse collapsed" aria-labelledby="privacy-headingOne" data-bs-parent="#privacy-accordion">
                                     <div class="accordion-body">
-                                        If several languages coalesce, the grammar of the resulting language is more simple and regular than that of the individual languages. The new common language will be more simple and regular than the existing European languages. It will be as simple their most common words.
+                                        Al estar dentro de una cuenta, dar click sobre el nombre y foto, luego en "Configuraciones" y por ultimo en "Politicas de privacidad".
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="privacy-headingTwo">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#privacy-collapseTwo" aria-expanded="false" aria-controls="privacy-collapseTwo">
-                                        Where can I get some ?
+                                        ¿Mi información esta segura?
                                     </button>
                                 </h2>
                                 <div id="privacy-collapseTwo" class="accordion-collapse collapse" aria-labelledby="privacy-headingTwo" data-bs-parent="#privacy-accordion">
                                     <div class="accordion-body">
-                                        The new common language will be more simple and regular than the existing European languages. It will be as simple as Occidental; in fact, it will be Occidental. To an English person, it will seem like simplified English, as a skeptical Cambridge friend of mine told me what Occidental is.
+                                        Sí, tu información es segura, ya que esta se encuentra encriptada en la base de datos, además se cuenta con un certificado SSL, que es un certificado digital que autentica 
+                                        la identidad de un sitio web y habilita una conexión cifrada.    
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="privacy-headingThree">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#privacy-collapseThree" aria-expanded="false" aria-controls="privacy-collapseThree">
-                                        What is Lorem Ipsum ?
+                                        ¿Usan cookies?
                                     </button>
                                 </h2>
                                 <div id="privacy-collapseThree" class="accordion-collapse collapse" aria-labelledby="privacy-headingThree" data-bs-parent="#privacy-accordion">
                                     <div class="accordion-body">
-                                        he wise man therefore always holds in these matters to this principle of selection: he rejects pleasures to secure other greater pleasures, or else he endures pains to avoid worse pains.But I must explain to you how all this mistaken idea of denouncing pleasure and praising pain was born and I will give you a complete.
+                                        Sí, usamos cookies para mejorar la experiencia de usuario.	
                                     </div>
                                 </div>
                             </div>
                             <div class="accordion-item">
                                 <h2 class="accordion-header" id="privacy-headingFour">
                                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#privacy-collapseFour" aria-expanded="false" aria-controls="privacy-collapseFour">
-                                        Where does it come from ?
+                                        ¿Puedo eliminar mi información de contacto de la base de datos?
                                     </button>
                                 </h2>
                                 <div id="privacy-collapseFour" class="accordion-collapse collapse" aria-labelledby="privacy-headingFour" data-bs-parent="#privacy-accordion">
                                     <div class="accordion-body">
-                                        Cras ultricies mi eu turpis hendrerit fringilla. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; In ac dui quis mi consectetuer lacinia. Nam pretium turpis et arcu arcu tortor, suscipit eget, imperdiet nec, imperdiet iaculis aliquam ultrices mauris.
+                                        Por supuesto que se puede eliminar la información de contacto de una base de datos, para ello se debe dar click en el nombre y foto, luego en "Configuraciones" y por ultimo se debe 
+                                        escribir la contraseña y dar click en "Eliminar cuenta".
                                     </div>
                                 </div>
                             </div>

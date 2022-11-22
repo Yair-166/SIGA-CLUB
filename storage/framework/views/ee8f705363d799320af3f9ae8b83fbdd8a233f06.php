@@ -229,23 +229,7 @@
                                     </li>
                                 </ul>
                             </div>
-                            <div>
-                                <h5 class="card-title text-decoration-underline mb-3">
-                                    Borrar cuenta:
-                                </h5>
-                                <p class="text-muted" style="font-size: 14px;">
-                                    Si deseas borrar tu cuenta, puedes hacerlo aqui.
-                                </p>
-                                <div>
-                                    <input type="password" class="form-control" id="passwordInput"
-                                        placeholder="Ingresa tu contraseña" style="max-width: 265px;">
-                                </div>
-                                <div class="hstack gap-2 mt-3">
-                                    <a href="javascript:void(0);" class="btn btn-soft-primary">
-                                        Cerrar y borrar cuenta
-                                    </a>
-                                </div>
-                            </div>
+                            
                         </div>
                         <!--end tab-pane-->
                     </div>
