@@ -23,6 +23,8 @@ Route::get('/', [App\Http\Controllers\HomeController::class, 'root'])->name('roo
 Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class, 'updateProfile'])->name('updateProfile');
 Route::post('/editarPassword', [App\Http\Controllers\HomeController::class, 'editarPassword'])->name('editarPassword');
 Route::post('/edituser', [App\Http\Controllers\HomeController::class, 'edituser'])->name('edituser');
+Route::post('/eliminarUser', [App\Http\Controllers\HomeController::class, 'eliminarUser'])->name('eliminarUser');
+
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
@@ -52,3 +54,6 @@ Route::get('/toogleArchivo/{id}', [App\Http\Controllers\HomeController::class, '
 //Evidencias
 Route::post('/subirEvidencia', [App\Http\Controllers\HomeController::class, 'subirEvidencia'])->name('subirEvidencia');
 Route::get('/eliminarEvidencia/{id}', [App\Http\Controllers\HomeController::class, 'eliminarEvidencia'])->name('eliminarEvidencia');
+
+//DoomPDF
+Route::get('/pdf/{id}', [App\Http\Controllers\HomeController::class, 'pdf'])->name('pdf');

@@ -16,6 +16,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
+use Barryvdh\DomPDF\Facade\Pdf;
 
 class HomeController extends Controller
 {
@@ -153,10 +154,25 @@ class HomeController extends Controller
         $user->amaterno = $request->post('amaterno');
         $user->email = $request->post('email');
         $user->descripcion = $request->post('descripcion');
+        $user->boleta = $request->post('boleta');
 
         $user->save();
 
         return redirect()->back();
+    }
+
+    public function eliminarUser(request $request)
+    {
+        $user = Auth::user();
+        print_r($request->post('password_delete'));
+        
+        //Verificar si la contraseña es correcta
+        if (!(Hash::check($request->post('password_delete'), Auth::user()->password))) {
+            return redirect()->back()->with("error","La contraseña actual no coincide.");
+        } else {
+            $user->delete();
+            return redirect()->route('logout');
+        }
     }
 
     //Para clubes
@@ -177,6 +193,10 @@ class HomeController extends Controller
             $fotoPath = public_path('/images/');
             $foto->move($fotoPath, $fotoName);
             $clubes->foto =  $fotoName;
+        }
+        else{
+            //Retornar mensaje de error
+            return redirect()->back()->with("error","No se ha seleccionado una imagen.");
         }
 
         $clubes->constanciasExpedidas = 0;
@@ -394,4 +414,10 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Autoridad eliminada correctamente');
     }
 
+    //Para constancias
+    public function pdf($id)
+    {
+        $pdf = Pdf::loadView('generar-constancia', compact('id'));
+        return $pdf->download('constancia_'.$id.'.pdf');
+    }
 }

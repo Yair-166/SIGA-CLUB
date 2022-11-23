@@ -175,6 +175,9 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        //Para doompdf
+        Barryvdh\DomPDF\ServiceProvider::class,
         
         //Para roles
         Spatie\Permission\PermissionServiceProvider::class,

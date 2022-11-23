@@ -50,27 +50,29 @@
                 <div class="row text text-white-50 text-center">
                     <div class="col-lg-6 col-4">
                         <div class="p-2">
-                            @if(Auth::user()->rol == 'administrador')
-                                @php
-                                    if($numero==1){
-                                        $texto = "Club administrado";
-                                    }else{
-                                        $texto = "Clubes administrados";
-                                    }
-                                    
-                                    //obtener el numero de clubes administrados por el usuario
-                                    $numero = DB::table('clubes')->where('idAdministrador', Auth::user()->id)->count();
-                                @endphp
-                            @elseif(Auth::user()->rol == 'colaborador')
-                                @php
-                                    if($numero==1){
-                                        $texto = "Club inscrito";
-                                    }else{
-                                        $texto = "Clubes inscritos";   
-                                    }
-                                    //obtener el numero de clubes en los que el usuario esta inscrito
-                                    $numero = DB::table('inscripciones')->where('id_alumno', Auth::user()->id)->count();
-                                @endphp
+                            @if($uid != Auth::user()->id)
+                                @if(Auth::user()->rol == 'administrador')
+                                    @php
+                                        if($numero==1){
+                                            $texto = "Club administrado";
+                                        }else{
+                                            $texto = "Clubes administrados";
+                                        }
+                                        
+                                        //obtener el numero de clubes administrados por el usuario
+                                        $numero = DB::table('clubes')->where('idAdministrador', Auth::user()->id)->count();
+                                    @endphp
+                                @elseif(Auth::user()->rol == 'colaborador')
+                                    @php
+                                        if($numero==1){
+                                            $texto = "Club inscrito";
+                                        }else{
+                                            $texto = "Clubes inscritos";   
+                                        }
+                                        //obtener el numero de clubes en los que el usuario esta inscrito
+                                        $numero = DB::table('inscripciones')->where('id_alumno', Auth::user()->id)->count();
+                                    @endphp
+                                @endif
                             @endif
                             <h4 class="text-white mb-1">{{$numero}}</h4>
                             <p class="fs-14 mb-0">{{$texto}}</p>
@@ -140,7 +142,7 @@
                                                             <th scope="col">Fecha inicio del evento</th>
                                                             <th scope="col">Fecha final del evento</th>
                                                             <th scope="col">Total de horas registradas</th>
-                                                            <th scope="col">Generar constancia</th>
+                                                            <th scope="col">Constancias</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -154,11 +156,9 @@
                                                                 <td>{{$evento->fechaFin}}</td>
                                                                 <td>{{$asistencia->asistenciaTotal}}</td>
                                                                 <td>
-                                                                    @if($asistencia->constanciaGenerada == 0)
-                                                                        <a href="" class="btn btn-primary btn-sm">Generar</a>
-                                                                    @else
-                                                                        <a href="" class="btn btn-primary btn-sm">Descargar acuse</a>
-                                                                    @endif
+                                                                    <a href="{{route('pdf', $asistencia->id)}}" class="btn btn-primary btn-sm">Generar</a>
+                                                                    <a href="" class="btn btn-primary btn-sm">Subir acuse</a>
+                                                                    <a href="" class="btn btn-primary btn-sm">Descargar acuse</a>
                                                                 </td>
                                                             </tr>
                                                         @endforeach

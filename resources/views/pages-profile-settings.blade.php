@@ -116,7 +116,7 @@
                                         </div>
                                     </div>
                                     <!--end col-->
-                                    <div class="col-lg-6" hidden>
+                                    <div class="col-lg-6">
                                         <div class="mb-3">
                                             <label for="email" class="form-label">
                                                 Correo electrónico
@@ -140,6 +140,21 @@
                                                 class="form-label">Descripción</label>
                                             <textarea name="descripcion" class="form-control" id="exampleFormControlTextarea" placeholder="Cuentanos sobre ti"
                                                 rows="3" value="{{$user->descripcion}}">{{$user->descripcion}}</textarea>
+                                        </div>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col-lg-6">
+                                        <div class="form-check form-switch form-switch-md" dir="ltr">
+                                            <input type="checkbox" class="form-check-input" id="customSwitchsizemd" onclick="habilitar()">
+                                            <label class="form-check-label" for="customSwitchsizemd">Soy Politécnivo</label>
+                                        </div>
+                                    </div>
+                                    <!--end col-->
+                                    <div class="col-lg-6" id="boletatinha" style="display: none;">
+                                        <div class="mb-3">
+                                            <label for="exampleFormControlTextarea"
+                                                class="form-label">Boleta</label>
+                                            <input name="boleta" type="text" class="form-control" id="boleta" placeholder="{{$user->boleta}}" value="{{$user->boleta}}" />
                                         </div>
                                     </div>
                                     <!--end col-->
@@ -231,18 +246,21 @@
                                 <h5 class="card-title text-decoration-underline mb-3">
                                     Borrar cuenta:
                                 </h5>
-                                <p class="text-muted" style="font-size: 14px;">
-                                    Si deseas borrar tu cuenta, puedes hacerlo aqui.
-                                </p>
-                                <div>
-                                    <input type="password" class="form-control" id="passwordInput"
-                                        placeholder="Ingresa tu contraseña" style="max-width: 265px;">
-                                </div>
-                                <div class="hstack gap-2 mt-3">
-                                    <a href="javascript:void(0);" class="btn btn-soft-primary">
-                                        Cerrar y borrar cuenta
-                                    </a>
-                                </div>
+                                <form action="{{route('eliminarUser')}}" method="POST">
+                                    @csrf
+                                    <p class="text-muted" style="font-size: 14px;">
+                                        Si deseas borrar tu cuenta, puedes hacerlo aqui.
+                                    </p>
+                                    <div>
+                                        <input name="password_delete" type="password" class="form-control" id="passwordInput"
+                                            placeholder="Ingresa tu contraseña" style="max-width: 265px;">
+                                    </div>
+                                    <div class="hstack gap-2 mt-3">
+                                        <button type="submit" class="btn btn-soft-primary">
+                                            Cerrar y borrar cuenta
+                                        </button>
+                                    </div>
+                                </form>
                             </div>
                         </div>
                         <!--end tab-pane-->
@@ -257,4 +275,16 @@
 @section('script')
     <script src="{{ URL::asset('assets/js/pages/profile-setting.init.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+    <script type="text/javascript">
+        function habilitar() {
+            element = document.getElementById("boletatinha");
+            check = document.getElementById("customSwitchsizemd");
+            if (check.checked) {
+                element.style.display='block';
+            }
+            else {
+                element.style.display='none';
+            }
+        }
+    </script>
 @endsection

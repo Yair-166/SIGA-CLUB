@@ -30,6 +30,7 @@ class User extends Authenticatable
         'rol',
         'avatar',
         'descripcion',
+        'boleta',
     ];
 
     /**

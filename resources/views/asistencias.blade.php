@@ -124,7 +124,7 @@
                                         <th data-sort="name" scope="col">Nombre del club</th>
                                         <th data-sort="owner" scope="col">Evento</th>
                                         <th data-sort="date" scope="col">Rol del usuario</th>
-                                        <th data-sort="location" scope="col">Constancia</th>
+                                        <th data-sort="location" scope="col">Constancias</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list form-check-all">
@@ -160,13 +160,11 @@
                                         </td>
                                         <td class="location">
                                             @if ($asistencia->constanciaGenerada == 0)
-                                                <a href="" class="btn btn-primary">
-                                                    Pedir constancia
-                                                </a>
+                                                <p class="fw-medium">Cuando tu constancia este lista aparecera aqui.</p>
                                             @else
                                                 <p class="fw-medium">Puedes pasar por tu constancia con el administrador del club o </p>
                                                 <a href="" class="btn btn-primary">
-                                                    Descargar acuse
+                                                    Descargar constancia
                                                 </a>
                                             @endif
                                         </td>

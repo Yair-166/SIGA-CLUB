@@ -44,6 +44,14 @@
         <div class="col-xxl-9">
             <div class="card" id="companyList">
                 <div class="card-body">
+                    @if (session('error'))
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <div class="alert-body">
+                                <strong>¡Error!</strong> {{ session('error') }}
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    @endif
                     <div>
                         <div class="table-responsive table-card mb-3">
                             <table class="table align-middle table-nowrap mb-0" id="customerTable">

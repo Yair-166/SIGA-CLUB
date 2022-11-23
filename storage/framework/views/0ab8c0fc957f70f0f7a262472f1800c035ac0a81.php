@@ -10,7 +10,7 @@
 <?php $__env->startSection('content'); ?>
     <?php $__env->startComponent('components.breadcrumb'); ?>
         <?php $__env->slot('li_1'); ?>
-            CRM
+            SIGA
         <?php $__env->endSlot(); ?>
         <?php $__env->slot('title'); ?>
             Clubes
@@ -44,6 +44,15 @@
         <div class="col-xxl-9">
             <div class="card" id="companyList">
                 <div class="card-body">
+                    <?php if(session('error')): ?>
+                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                            <div class="alert-body">
+                                <strong>¡Error!</strong> <?php echo e(session('error')); ?>
+
+                            </div>
+                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                        </div>
+                    <?php endif; ?>
                     <div>
                         <div class="table-responsive table-card mb-3">
                             <table class="table align-middle table-nowrap mb-0" id="customerTable">

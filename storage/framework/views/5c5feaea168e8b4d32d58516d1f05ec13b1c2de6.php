@@ -190,7 +190,7 @@
                                     <div class="d-flex align-items-end justify-content-between mt-4">
                                         <div>
                                             <a href="/asistencias" class="link-secondary text-decoration-underline">
-                                                Ve tus asistencias y solicita constancias.
+                                                Ve tus asistencias y constancias.
                                             </a>
                                         </div>
                                         <div class="avatar-sm flex-shrink-0">
