@@ -429,6 +429,15 @@ class HomeController extends Controller
         $asistencia->constanciaGenerada = 1;
         $asistencia->save();
 
+        //Obtener el evento con el id de la asistencia de la base de datos
+        $evento = Eventos::find($asistencia->idEvento);
+    
+        //Obtener el club con el id del evento de la base de datos
+        $clubes = Clubes::find($evento->id_club);
+        //Aumentar en 1 $clubes->constanciasExpedidas
+        $clubes->constanciasExpedidas = $clubes->constanciasExpedidas + 1;
+        $clubes->save();
+
         if($sel == 1){
             $pdf = Pdf::setPaper('A4')->loadView('generar-constancia-ipn', compact('id'));
         }else{
