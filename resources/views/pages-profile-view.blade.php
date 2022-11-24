@@ -143,6 +143,7 @@
                                                             <th scope="col">Fecha final del evento</th>
                                                             <th scope="col">Total de horas registradas</th>
                                                             <th scope="col">Constancias</th>
+                                                            <th scope="col">Acuses</th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -156,7 +157,14 @@
                                                                 <td>{{$evento->fechaFin}}</td>
                                                                 <td>{{$asistencia->asistenciaTotal}}</td>
                                                                 <td>
-                                                                    <a href="{{route('pdf', $asistencia->id)}}" class="btn btn-primary btn-sm">Generar</a>
+                                                                    @if($user->boleta != NULL)
+                                                                        <a href="{{route('pdf', [$asistencia->id, 1])}}" class="btn btn-primary btn-sm">Generar IPN</a>
+                                                                        <a href="{{route('pdf', [$asistencia->id, 0])}}" class="btn btn-primary btn-sm">Generar Externo</a>
+                                                                    @else
+                                                                        <a href="{{route('pdf', [$asistencia->id, 0])}}" class="btn btn-primary btn-sm">Generar</a>
+                                                                    @endif
+                                                                </td>
+                                                                <td>
                                                                     <a href="" class="btn btn-primary btn-sm">Subir acuse</a>
                                                                     <a href="" class="btn btn-primary btn-sm">Descargar acuse</a>
                                                                 </td>

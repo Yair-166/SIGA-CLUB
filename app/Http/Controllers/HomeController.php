@@ -415,9 +415,14 @@ class HomeController extends Controller
     }
 
     //Para constancias
-    public function pdf($id)
+    public function pdf($id, $sel)
     {
-        $pdf = Pdf::loadView('generar-constancia', compact('id'));
+
+        if($sel == 1){
+            $pdf = Pdf::setPaper('A4')->loadView('generar-constancia-ipn', compact('id'));
+        }else{
+            $pdf = Pdf::setPaper('A4', 'landscape')->loadView('generar-constancia-externa', compact('id'));
+        }
         return $pdf->download('constancia_'.$id.'.pdf');
     }
 }

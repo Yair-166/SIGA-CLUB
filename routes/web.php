@@ -56,4 +56,5 @@ Route::post('/subirEvidencia', [App\Http\Controllers\HomeController::class, 'sub
 Route::get('/eliminarEvidencia/{id}', [App\Http\Controllers\HomeController::class, 'eliminarEvidencia'])->name('eliminarEvidencia');
 
 //DoomPDF
-Route::get('/pdf/{id}', [App\Http\Controllers\HomeController::class, 'pdf'])->name('pdf');
+//Route get con 2 parametros
+Route::get('/pdf/{id}/{sel}', [App\Http\Controllers\HomeController::class, 'pdf'])->name('pdf');
