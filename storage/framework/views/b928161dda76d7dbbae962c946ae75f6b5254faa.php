@@ -171,19 +171,22 @@
 
         </br></br>
 
-        <table>
+        <table style="width: 100%;">
             <tr>
-                <td>
+                <td colspan="2">
                     Verifica la autenticidad de esta constancia en:
                 </td>
             </tr>
             <tr>
-                <td>
+                <td style="width: 50%;">
                     <?php
                         $qr = QrCode::size(300)->margin(0)->generate("http://panel.sigaclub.com/checkasistencia/".$asistencia->id);
                     ?>
                     
                     <img src="data:image/png;base64, <?php echo base64_encode($qr); ?> " width="150" height="150" />
+                </td>
+                <td align="right" style="width: 50%;">
+                    <img src="<?php echo e(URL::asset('images/' . $club->foto)); ?>" width="150" height="150" style="float:right" />
                 </td>
             </tr>
         </table>
