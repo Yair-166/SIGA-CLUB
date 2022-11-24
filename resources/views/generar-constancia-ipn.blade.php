@@ -107,7 +107,7 @@
                     @else
                         en el periodo del <b>{{$evento->fechaInicio}}</b> al <b>{{$evento->fechaFin}}</b>
                     @endif
-                    con un horario de <b>{{$evento->horaInicio}} a {{$evento->horaFin}}</b> horas. Sumando un total de horas de <b>{{$asistencia->asistenciaTotal}}</b> horas.
+                    con un horario de <b>{{$evento->horaInicio}} a {{$evento->horaFin}}</b> horas. Sumando un total de horas de <b>{{$asistencia->asistenciaTotal}} horas</b>.
                 </span>
         
             </p>

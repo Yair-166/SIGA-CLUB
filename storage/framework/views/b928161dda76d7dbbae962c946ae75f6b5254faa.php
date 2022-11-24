@@ -109,7 +109,7 @@
                     <?php else: ?>
                         en el periodo del <b><?php echo e($evento->fechaInicio); ?></b> al <b><?php echo e($evento->fechaFin); ?></b>
                     <?php endif; ?>
-                    con un horario de <b><?php echo e($evento->horaInicio); ?> a <?php echo e($evento->horaFin); ?></b> horas. Sumando un total de horas de <b><?php echo e($asistencia->asistenciaTotal); ?></b> horas.
+                    con un horario de <b><?php echo e($evento->horaInicio); ?> a <?php echo e($evento->horaFin); ?></b> horas. Sumando un total de horas de <b><?php echo e($asistencia->asistenciaTotal); ?> horas</b>.
                 </span>
         
             </p>
