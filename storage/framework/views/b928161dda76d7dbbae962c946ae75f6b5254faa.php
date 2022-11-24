@@ -141,7 +141,7 @@
 
         </div>
 
-        </br></br></br></br></br>
+        </br></br></br></br>
 
         <div id="pie" style='width: 100%;'>
             <table>
@@ -168,7 +168,27 @@
                 </tr>
             </table>
         </div>
-    
+
+        </br></br>
+
+        <table>
+            <tr>
+                <td>
+                    Verifica la autenticidad de esta constancia en:
+                </td>
+            </tr>
+            <tr>
+                <td>
+                    <?php
+                        $qr = QrCode::size(300)->margin(0)->generate("http://panel.sigaclub.com/checkasistencia/".$asistencia->id);
+                    ?>
+                    
+                    <img src="data:image/png;base64, <?php echo base64_encode($qr); ?> " width="150" height="150" />
+                </td>
+            </tr>
+        </table>
+        
+        
     </div>
 
 </body>

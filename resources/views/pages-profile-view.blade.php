@@ -157,7 +157,7 @@
                                                                 <td>{{$evento->fechaFin}}</td>
                                                                 <td>{{$asistencia->asistenciaTotal}}</td>
                                                                 <td>
-                                                                    @if($user->boleta != NULL)
+                                                                    @if($user->boleta != NULL && Auth::user()->boleta != NULL)
                                                                         <a href="{{route('pdf', [$asistencia->id, 1])}}" class="btn btn-primary btn-sm">Generar IPN</a>
                                                                         <a href="{{route('pdf', [$asistencia->id, 0])}}" class="btn btn-primary btn-sm">Generar Externo</a>
                                                                     @else

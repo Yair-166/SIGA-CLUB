@@ -155,7 +155,7 @@
                                     <div class="col-lg-6" id="boletatinha" style="display: none;">
                                         <div class="mb-3">
                                             <label for="exampleFormControlTextarea"
-                                                class="form-label">Boleta</label>
+                                                class="form-label">Boleta o número de empleado</label>
                                             <input name="boleta" type="text" class="form-control" id="boleta" placeholder="<?php echo e($user->boleta); ?>" value="<?php echo e($user->boleta); ?>" />
                                         </div>
                                     </div>
