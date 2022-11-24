@@ -10,6 +10,8 @@ use App\Models\Confi_eventos;
 use App\Models\Autoridades;
 use App\Models\Archivos;
 use App\Models\Evidencias;
+use App\Models\Constancias;
+use App\Models\Asistencias;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -417,12 +419,22 @@ class HomeController extends Controller
     //Para constancias
     public function pdf($id, $sel)
     {
+        $constancias = new Constancias();
+        $constancias->idAsistencia = $id;
+        $constancias->redaccion = "Constancia de asistencia";
+        $constancias->fechaExpedicion = date('Y-m-d');
+        $constancias->save();
+
+        $asistencia = Asistencias::find($id);
+        $asistencia->constanciaGenerada = 1;
+        $asistencia->save();
 
         if($sel == 1){
             $pdf = Pdf::setPaper('A4')->loadView('generar-constancia-ipn', compact('id'));
         }else{
             $pdf = Pdf::setPaper('A4', 'landscape')->loadView('generar-constancia-externa', compact('id'));
         }
+
         return $pdf->download('constancia_'.$id.'.pdf');
     }
 }
