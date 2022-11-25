@@ -101,7 +101,7 @@
 
             <p align="left">
                 <span class="ft11">
-                    Con el número de boleta <b>{{$usuario->boleta}}</b>, participo en el <b>"{{$club->nombre}}”</b> en la actividad <b>{{$evento->nombre}}</b>
+                    Con el número de boleta <b>{{$usuario->boleta}}</b>, participó en el <b>"{{$club->nombre}}”</b> en la actividad <b>{{$evento->nombre}}</b>
                     @if($evento->fechaInicio == $evento->fechaFin)
                         el día <b>{{$evento->fechaInicio}}</b>
                     @else

@@ -9,6 +9,22 @@
     $id = request()->route('id');
     //Obtener la asistencia por el id de la base de datos
     $asistencia = DB::table('asistencias')->where('id', $id)->first();
+
+    //Checar si la asistencia existe
+    if($asistencia == null){
+
+        echo "<center>";
+        echo "<FONT FACE='impact' SIZE=6 COLOR='red'>
+                Asistencia invalida
+            </FONT>";
+            //imprimir imagen que esta en /public/assets/images/tiste.png
+        echo "</br>";
+        echo "<img src='https://sigaclub.com/assets/images/tiste.png' height='600'>";
+        echo "</br>";
+        echo "</center>";
+        exit();
+    }
+
     //Obtener el evento de la tabla eventos con el id del evento de la tabla asistencias
     $evento = DB::table('eventos')->where('id', $asistencia->idEvento)->first();
     //Obtener el club con el id_club de la tabla eventos

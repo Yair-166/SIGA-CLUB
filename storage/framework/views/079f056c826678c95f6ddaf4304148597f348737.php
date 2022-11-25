@@ -72,7 +72,7 @@
 
 			<p align="left">
                 <span style="font-size:30px;font-family:Times;color:#000000;">
-                    Participo en el <b>"<?php echo e($club->nombre); ?>”</b> en la actividad <b><?php echo e($evento->nombre); ?></b>
+                    Participó en el <b>"<?php echo e($club->nombre); ?>”</b> en la actividad <b><?php echo e($evento->nombre); ?></b>
                 </span>
         
             </p>

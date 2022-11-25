@@ -165,8 +165,22 @@
                                                                     @endif
                                                                 </td>
                                                                 <td>
-                                                                    <a href="" class="btn btn-primary btn-sm">Subir acuse</a>
-                                                                    <a href="" class="btn btn-primary btn-sm">Descargar acuse</a>
+                                                                    @php
+                                                                        //Obtener la constancia con el idAsistencia
+                                                                        $constancia = DB::table('constancias')->where('idAsistencia', $asistencia->id)->first();
+                                                                    @endphp
+                                                                    @if($constancia != NULL)
+                                                                        <a href="{{ URL::asset('acuses/' . $constancia->redaccion) }}" target="_blank" class="btn btn-primary btn-sm">
+                                                                            Descargar acuse
+                                                                        </a>
+                                                                    @else
+                                                                        <form action="{{route('createAcuse')}}" method="POST" enctype="multipart/form-data">
+                                                                            @csrf
+                                                                            <input type="hidden" name="idAsistencia_acuse" value="{{$asistencia->id}}">
+                                                                            <input name="acuse_file" type="file" name="acuse" id="acuse">
+                                                                            <button type="submit" class="btn btn-primary btn-sm">Subir acuse</button>
+                                                                        </form>
+                                                                    @endif
                                                                 </td>
                                                             </tr>
                                                         @endforeach

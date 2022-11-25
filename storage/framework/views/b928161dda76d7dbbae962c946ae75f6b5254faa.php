@@ -103,7 +103,7 @@
 
             <p align="left">
                 <span class="ft11">
-                    Con el número de boleta <b><?php echo e($usuario->boleta); ?></b>, participo en el <b>"<?php echo e($club->nombre); ?>”</b> en la actividad <b><?php echo e($evento->nombre); ?></b>
+                    Con el número de boleta <b><?php echo e($usuario->boleta); ?></b>, participó en el <b>"<?php echo e($club->nombre); ?>”</b> en la actividad <b><?php echo e($evento->nombre); ?></b>
                     <?php if($evento->fechaInicio == $evento->fechaFin): ?>
                         el día <b><?php echo e($evento->fechaInicio); ?></b>
                     <?php else: ?>

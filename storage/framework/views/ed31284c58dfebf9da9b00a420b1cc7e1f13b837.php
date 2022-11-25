@@ -168,8 +168,22 @@
                                                                     <?php endif; ?>
                                                                 </td>
                                                                 <td>
-                                                                    <a href="" class="btn btn-primary btn-sm">Subir acuse</a>
-                                                                    <a href="" class="btn btn-primary btn-sm">Descargar acuse</a>
+                                                                    <?php
+                                                                        //Obtener la constancia con el idAsistencia
+                                                                        $constancia = DB::table('constancias')->where('idAsistencia', $asistencia->id)->first();
+                                                                    ?>
+                                                                    <?php if($constancia != NULL): ?>
+                                                                        <a href="<?php echo e(URL::asset('acuses/' . $constancia->redaccion)); ?>" target="_blank" class="btn btn-primary btn-sm">
+                                                                            Descargar acuse
+                                                                        </a>
+                                                                    <?php else: ?>
+                                                                        <form action="<?php echo e(route('createAcuse')); ?>" method="POST" enctype="multipart/form-data">
+                                                                            <?php echo csrf_field(); ?>
+                                                                            <input type="hidden" name="idAsistencia_acuse" value="<?php echo e($asistencia->id); ?>">
+                                                                            <input name="acuse_file" type="file" name="acuse" id="acuse">
+                                                                            <button type="submit" class="btn btn-primary btn-sm">Subir acuse</button>
+                                                                        </form>
+                                                                    <?php endif; ?>
                                                                 </td>
                                                             </tr>
                                                         <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>

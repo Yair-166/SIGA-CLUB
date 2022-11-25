@@ -61,3 +61,6 @@ Route::get('/eliminarEvidencia/{id}', [App\Http\Controllers\HomeController::clas
 
 //DoomPDF
 Route::get('/pdf/{id}/{sel}', [App\Http\Controllers\HomeController::class, 'pdf'])->name('pdf');
+
+//Acuses
+Route::post('/createAcuse', [App\Http\Controllers\HomeController::class, 'createAcuse'])->name('createAcuse');

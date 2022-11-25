@@ -165,10 +165,16 @@
                                             <?php if($asistencia->constanciaGenerada == 0): ?>
                                                 <p class="fw-medium">Cuando tu constancia este lista aparecera aqui.</p>
                                             <?php else: ?>
-                                                <p class="fw-medium">Puedes pasar por tu constancia con el administrador del club o </p>
-                                                <a href="" class="btn btn-primary">
-                                                    Descargar constancia
-                                                </a>
+                                                <?php
+                                                    //Obtener la constancia con el idAsistencia
+                                                    $constancia = DB::table('constancias')->where('idAsistencia', $asistencia->id)->first();
+                                                ?>
+                                                <p class="fw-medium">Puedes pasar por tu constancia con el administrador del club</p>
+                                                <?php if($constancia->redaccion != NULL): ?>
+                                                    <a href="<?php echo e(URL::asset('acuses/' . $constancia->redaccion)); ?>" class="btn btn-primary" target="_blank">
+                                                        Descargar constancia / acuse
+                                                    </a>
+                                                <?php endif; ?>
                                             <?php endif; ?>
                                         </td>
                                     </tr>

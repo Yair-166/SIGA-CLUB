@@ -162,10 +162,16 @@
                                             @if ($asistencia->constanciaGenerada == 0)
                                                 <p class="fw-medium">Cuando tu constancia este lista aparecera aqui.</p>
                                             @else
-                                                <p class="fw-medium">Puedes pasar por tu constancia con el administrador del club o </p>
-                                                <a href="" class="btn btn-primary">
-                                                    Descargar constancia
-                                                </a>
+                                                @php
+                                                    //Obtener la constancia con el idAsistencia
+                                                    $constancia = DB::table('constancias')->where('idAsistencia', $asistencia->id)->first();
+                                                @endphp
+                                                <p class="fw-medium">Puedes pasar por tu constancia con el administrador del club</p>
+                                                @if($constancia->redaccion != NULL)
+                                                    <a href="{{ URL::asset('acuses/' . $constancia->redaccion) }}" class="btn btn-primary" target="_blank">
+                                                        Descargar constancia / acuse
+                                                    </a>
+                                                @endif
                                             @endif
                                         </td>
                                     </tr>

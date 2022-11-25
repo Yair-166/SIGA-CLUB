@@ -419,25 +419,6 @@ class HomeController extends Controller
     //Para constancias
     public function pdf($id, $sel)
     {
-        $constancias = new Constancias();
-        $constancias->idAsistencia = $id;
-        $constancias->redaccion = "Constancia de asistencia";
-        $constancias->fechaExpedicion = date('Y-m-d');
-        $constancias->save();
-
-        $asistencia = Asistencias::find($id);
-        $asistencia->constanciaGenerada = 1;
-        $asistencia->save();
-
-        //Obtener el evento con el id de la asistencia de la base de datos
-        $evento = Eventos::find($asistencia->idEvento);
-    
-        //Obtener el club con el id del evento de la base de datos
-        $clubes = Clubes::find($evento->id_club);
-        //Aumentar en 1 $clubes->constanciasExpedidas
-        $clubes->constanciasExpedidas = $clubes->constanciasExpedidas + 1;
-        $clubes->save();
-
         if($sel == 1){
             $pdf = Pdf::setPaper('A4')->loadView('generar-constancia-ipn', compact('id'));
         }else{
@@ -445,5 +426,40 @@ class HomeController extends Controller
         }
 
         return $pdf->download('constancia_'.$id.'.pdf');
+    }
+
+    public function createAcuse(Request $request)
+    {
+        $id = request('idAsistencia_acuse');
+        $asistencia = Asistencias::find($id);
+
+        
+        $asistencia->constanciaGenerada = 1;
+        $asistencia->save();
+        //Obtener el evento con el id de la asistencia de la base de datos
+        $evento = Eventos::find($asistencia->idEvento);
+        
+        //Obtener el club con el id del evento de la base de datos
+        $clubes = Clubes::find($evento->id_club);
+        //Aumentar en 1 $clubes->constanciasExpedidas
+        $clubes->constanciasExpedidas = $clubes->constanciasExpedidas + 1;
+        $clubes->save();
+
+        $constancias = new Constancias();
+        $constancias->idAsistencia = $id;
+
+        if ($request->file('acuse_file')) {
+            $acuse = $request->file('acuse_file');
+            $acuseName =  $acuse->getClientOriginalName();
+            $acusePath = public_path('/acuses/');
+            $acuse->move($acusePath, $acuseName);
+            $constancias->redaccion =  $acuseName;
+        }
+
+        $constancias->fechaExpedicion = date('Y-m-d');
+        $constancias->save();
+        
+
+        return redirect()->back()->with('success', 'Acuse creado correctamente');
     }
 }
