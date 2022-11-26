@@ -53,7 +53,7 @@
                     <div>
                         <h5 class="mb-1">Proximos eventos</h5>
                         <p class="text-muted">No te pierdas los eventos programados</p>
-                        <div class="pe-2 me-n1 mb-3" data-simplebar style="height: 500px">
+                        <div class="pe-2 me-n1 mb-3" data-simplebar style="height: 800px">
                             <div id="upcoming-event-list"></div>
                         </div>
                     </div>

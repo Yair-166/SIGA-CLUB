@@ -157,7 +157,7 @@
                                         <div class="flex-grow-1 overflow-hidden">
                                             <p
                                                 class="text-uppercase fw-medium text-muted text-truncate mb-0">
-                                                Mis eventos</p>
+                                                Eventos de mis clubes</p>
                                         </div>
                                     </div>
                                     <div class="d-flex align-items-end justify-content-between mt-4">

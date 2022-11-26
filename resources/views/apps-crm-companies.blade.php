@@ -167,7 +167,7 @@
                                 </div>
                             </div>
                         </div>
-                        <div class="d-flex justify-content-end mt-3">
+                        {{-- <div class="d-flex justify-content-end mt-3">
                             <div class="pagination-wrap hstack gap-2">
                                 <a class="page-item pagination-prev disabled" href="#">
                                     Anterior
@@ -177,7 +177,7 @@
                                     Siguiente
                                 </a>
                             </div>
-                        </div>
+                        </div> --}}
                     </div>
 
                     <div class="modal fade" id="showModal" tabindex="-1" aria-labelledby="exampleModalLabel"
@@ -238,8 +238,8 @@
                                             </div>
                                             <div class="col-lg-6">
                                                 <div>
-                                                    <label for="nomenclatura-field" class="form-label">Nomenclatura</label>
-                                                    <input type="text" id="nomenclatura-field" class="form-control" name="nomenclatura" placeholder="Nomenclatura" required />
+                                                    <label for="nomenclatura-field" class="form-label">Prefijo para constancias</label>
+                                                    <input type="text" id="nomenclatura-field" class="form-control" name="nomenclatura" placeholder="Prefijo para constancias" required />
                                                 </div>
                                             </div>
                                             <div class="col-lg-6">
