@@ -361,11 +361,32 @@
                                                         <select name="id_coordinador" class="form-select" aria-label="Default select example">
                                                             <option selected>Selecciona un coordinador</option>
                                                             @foreach ($usuarios as $usuario)
-                                                                <option value="{{ $usuario->id }}">
-                                                                    {{ $usuario->name . ' ' . $usuario->apaterno . ' ' . $usuario->amaterno }}
-                                                                </option>
+                                                                @if($usuario->active == 1)
+                                                                    <option value="{{ $usuario->id }}">
+                                                                        {{ $usuario->name . ' ' . $usuario->apaterno . ' ' . $usuario->amaterno }}
+                                                                    </option>
+                                                                @endif
                                                             @endforeach
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <br>
+                                                        <button type="submit" class="btn btn-primary ">Asignar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="row">
+                                            <form action="{{ route('reglasEvento') }}" method="POST">
+                                                @csrf
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <input type="hidden" name="idEvento_reglas" value="{{ $evento->id }}">
+                                                        <label for="formrow-firstname-input" class="form-label">Reglas de asistencia al evento</label>
+                                                        <textarea name="reglas" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Añade los requisitos que debe cumplir el participante para formar parte de esta actividad.">{{$evento->reglas}}</textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">

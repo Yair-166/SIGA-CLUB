@@ -18,6 +18,7 @@ return new class extends Migration
             $table->string('idAsistencia');
             $table->text('redaccion');
             $table->date('fechaExpedicion');
+            $table->text('acuse');
             $table->timestamps();
         });
     }

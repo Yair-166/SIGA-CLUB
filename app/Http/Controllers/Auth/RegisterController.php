@@ -67,16 +67,6 @@ class RegisterController extends Controller
      */
     protected function create(array $data)
     {
-        //Comprobar si se envio $data[]
-
-        if(request()->has('rol'))
-        {
-            $data['rol'] = "administrador";
-        }
-        else
-        {
-            $data['rol'] = "colaborador";
-        }
         // return request()->file('avatar');
         if (request()->has('avatar')) {
             $avatar = request()->file('avatar');
@@ -93,6 +83,8 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'rol' => $data['rol'],
             'avatar' =>  $avatarName,
+            $data['rol'] = "administrador",
+            'active' => '1',
         ]);
     }
 }

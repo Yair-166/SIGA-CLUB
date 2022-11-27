@@ -362,12 +362,33 @@
                                                         <select name="id_coordinador" class="form-select" aria-label="Default select example">
                                                             <option selected>Selecciona un coordinador</option>
                                                             <?php $__currentLoopData = $usuarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $usuario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                                <option value="<?php echo e($usuario->id); ?>">
-                                                                    <?php echo e($usuario->name . ' ' . $usuario->apaterno . ' ' . $usuario->amaterno); ?>
+                                                                <?php if($usuario->active == 1): ?>
+                                                                    <option value="<?php echo e($usuario->id); ?>">
+                                                                        <?php echo e($usuario->name . ' ' . $usuario->apaterno . ' ' . $usuario->amaterno); ?>
 
-                                                                </option>
+                                                                    </option>
+                                                                <?php endif; ?>
                                                             <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                                         </select>
+                                                    </div>
+                                                </div>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <br>
+                                                        <button type="submit" class="btn btn-primary ">Asignar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+
+                                        <div class="row">
+                                            <form action="<?php echo e(route('reglasEvento')); ?>" method="POST">
+                                                <?php echo csrf_field(); ?>
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <input type="hidden" name="idEvento_reglas" value="<?php echo e($evento->id); ?>">
+                                                        <label for="formrow-firstname-input" class="form-label">Reglas de asistencia al evento</label>
+                                                        <textarea name="reglas" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Añade los requisitos que debe cumplir el participante para formar parte de esta actividad."><?php echo e($evento->reglas); ?></textarea>
                                                     </div>
                                                 </div>
                                                 <div class="col-lg-6">

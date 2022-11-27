@@ -28,6 +28,8 @@ Route::post('/update-profile/{id}', [App\Http\Controllers\HomeController::class,
 Route::post('/editarPassword', [App\Http\Controllers\HomeController::class, 'editarPassword'])->name('editarPassword');
 Route::post('/edituser', [App\Http\Controllers\HomeController::class, 'edituser'])->name('edituser');
 Route::post('/eliminarUser', [App\Http\Controllers\HomeController::class, 'eliminarUser'])->name('eliminarUser');
+Route::post('/deleteuser', [App\Http\Controllers\HomeController::class, 'deleteuser'])->name('deleteuser');
+Route::get('/darAdmin/{id}', [App\Http\Controllers\HomeController::class, 'darAdmin'])->name('darAdmin');
 
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
@@ -39,9 +41,11 @@ Route::post('/clubeliminar', [App\Http\Controllers\HomeController::class, 'delet
 
 //inscripciones
 Route::post('/inscribirse', [App\Http\Controllers\HomeController::class, 'inscribirse'])->name('inscribirse');
+Route::post('/desinscribirse', [App\Http\Controllers\HomeController::class, 'desinscribirse'])->name('desinscribirse');
 
 //eventos
 Route::post('/creaEvento', [App\Http\Controllers\HomeController::class, 'creaEvento'])->name('creaEvento');
+Route::post('/reglasEvento', [App\Http\Controllers\HomeController::class, 'reglasEvento'])->name('reglasEvento');
 
 //confi_eventos
 Route::post('/asignarCoordinador', [App\Http\Controllers\HomeController::class, 'asignarCoordinador'])->name('asignarCoordinador');

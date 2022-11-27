@@ -197,7 +197,8 @@ unset($__errorArgs, $__bag); ?>
                                             </div>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="input-password">Confirma la contraseña</label>
+                                            <label for="input-password">Confirma la contraseña <span
+                                                    class="text-danger">*</span></label>
                                             <input type="password"
                                                 class="form-control <?php $__errorArgs = ['password_confirmation'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
@@ -215,17 +216,13 @@ unset($__errorArgs, $__bag); ?>"
                                             </div>
                                         </div>
 
-                                        <!-- Base Switchs -->
-                                        <div class="form-check form-switch form-switch-md" dir="ltr">
-                                            <input name="rol" type="checkbox" class="form-check-input" id="customSwitchsizemd" value="administrador">
-                                            <label class="form-check-label" for="flexSwitchCheckDefault">Administrador</label>
-                                        </div>
-
                                         <div class="mb-3">
-                                            
+                                            <input hidden type="text" class="form-control" name="rol" value="colaborador">
                                         </div>
 
                                         <div class=" mb-4">
+                                            <label for="input-avatar">Foto de perfil <span
+                                                    class="text-danger">*</span></label>
                                             <input type="file" class="form-control <?php $__errorArgs = ['avatar'];
 $__bag = $errors->getBag($__errorArgs[1] ?? 'default');
 if ($__bag->has($__errorArgs[0])) :

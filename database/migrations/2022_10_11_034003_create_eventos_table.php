@@ -25,6 +25,7 @@ return new class extends Migration
             $table->date('fechaFin');
             $table->time('horaInicio');
             $table->time('horaFin');
+            $table->string('reglas')->nullable();
             $table->timestamps();
         });
     }

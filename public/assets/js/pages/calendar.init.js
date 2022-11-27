@@ -36,7 +36,7 @@ document.addEventListener("DOMContentLoaded", function () {
     console.log(eventos_usr)
     
 
-    if(eventos_usr.length == 4){
+    if(eventos_usr.length == 4 || eventos_usr.length ==5 || eventos_usr.length ==6 || eventos_usr.length ==8  || eventos_usr.length == 12){
         var defaultEvents = [
             {
     

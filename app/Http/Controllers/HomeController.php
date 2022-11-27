@@ -166,15 +166,63 @@ class HomeController extends Controller
     public function eliminarUser(request $request)
     {
         $user = Auth::user();
-        print_r($request->post('password_delete'));
         
         //Verificar si la contraseña es correcta
         if (!(Hash::check($request->post('password_delete'), Auth::user()->password))) {
             return redirect()->back()->with("error","La contraseña actual no coincide.");
         } else {
-            $user->delete();
-            return redirect()->route('logout');
+            //Obtener de la tabla inscripciones todos los registros donde el id_alumno sea igual al id del usuario logueado
+            $inscripciones = Inscripciones::where('id_alumno', $user->id)->get();
+            //Si es que hay registros en la tabla inscripciones
+            if (count($inscripciones) > 0) {
+                //Recorrer todos los registros de la tabla inscripciones
+                foreach ($inscripciones as $inscripcion) {
+                    //Cambiar $inscripcion->active a 0
+                    $inscripcion->active = '0';
+                    //Guardar los cambios
+                    $inscripcion->save();
+                }
+            }
+
+            $user->email = "";
+            $user->password = "";
+            $user->active = "0";
+            $user->save();
+            //Cerrar la sesión del usuario
+            Auth::logout();
+            return redirect()->back()->with("success","La cuenta ha sido eliminada.");
         }
+    }
+
+    public function deleteuser(request $request)
+    {
+        $user = new User();
+
+        $user->id = $request->post('id');
+
+        //obtener el usuario por el id
+        $user = User::find($user->id);
+
+        $user->email = "";
+        $user->password = "";
+        $user->active = "0";
+
+        $user->save();
+
+        return redirect()->back();
+    }
+
+    public function darAdmin($id)
+    {
+        $user = User::find($id);
+
+        if($user->rol == "administrador")
+            $user->rol = "colaborador";
+        else
+            $user->rol = "administrador";
+            
+        $user->save();
+        return redirect()->back();
     }
 
     //Para clubes
@@ -188,6 +236,9 @@ class HomeController extends Controller
         $clubes->nomenclatura = $request->post('nomenclatura');
         $clubes->localizacion = $request->post('localizacion');
         $clubes->descripcion = $request->post('descripcion');
+        $clubes->facebook = $request->post('facebook');
+        $clubes->bienvenida = $request->post('bienvenida');
+        $clubes->active = '1';
 
         if ($request->file('foto')) {
             $foto = $request->file('foto');
@@ -205,7 +256,7 @@ class HomeController extends Controller
 
         $clubes->save();
 
-        return redirect()->back()->with('success', 'Club creado correctamente');
+        return redirect()->back()->with('des', 'Club creado correctamente');
     }
 
     public function editarClub(Request $request)
@@ -218,6 +269,9 @@ class HomeController extends Controller
         $clubes->nomenclatura = $request->post('nomenclatura');
         $clubes->localizacion = $request->post('localizacion');
         $clubes->descripcion = $request->post('descripcion');
+        $clubes->facebook = $request->post('facebook');
+        $clubes->bienvenida = $request->post('bienvenida');
+        $clubes->active = '1';
         
         if ($request->file('foto')) {
             $foto = $request->file('foto');
@@ -241,19 +295,44 @@ class HomeController extends Controller
     public function deleteClub(Request $request)
     {
         $clubes = Clubes::find($request->post('id'));
-        $clubes->delete();
+        $clubes->active = '0';
+        $clubes->save();
         return redirect()->back()->with('success', 'Club eliminado correctamente');
     }
 
+    //Para inscripciones
+
     public function inscribirse(Request $request){
+
         $inscripciones = new Inscripciones();
 
-        $inscripciones->id_club = $request->post('id_club');
-        $inscripciones->id_alumno = $request->post('id_alumno');
-        
+        //Verificar si en la tabla inscripciones exite un registro con el id del usuario y el id del club
+        $checkinscripciones = Inscripciones::where('id_alumno', '=', $request->post('id_alumno')) ->where('id_club', '=', $request->post('id_club'))->first();
+        if($checkinscripciones){
+            $inscripciones = $checkinscripciones;
+        }
+        else{
+            $inscripciones->id_club = $request->post('id_club');
+            $inscripciones->id_alumno = $request->post('id_alumno');
+        }
+            $inscripciones->active = '1';
+                
+            $inscripciones->save();
+
+        //Obtener el club
+        $club = Clubes::find($request->post('id_club'));
+        $mensaje = $club->bienvenida;
+
+        return redirect()->back()->with('success', $mensaje);
+    }
+
+    public function desinscribirse(Request $request){
+
+        $inscripciones = Inscripciones::where('id_alumno', '=', $request->post('id_alumno')) ->where('id_club', '=', $request->post('id_club'))->first();
+        $inscripciones->active = '0';
         $inscripciones->save();
 
-        return redirect()->back()->with('success', 'Inscripción realizada correctamente');
+        return redirect()->back()->with('des', 'Te has desinscrito correctamente');
     }
 
     //Para eventos
@@ -298,6 +377,17 @@ class HomeController extends Controller
         $confi_eventos->save();
 
         return redirect()->back()->with('success', 'Evento creado correctamente');
+    }
+
+    public function reglasEvento(Request $request)
+    {
+        $eventos = new Eventos();
+        //Encontrar el evento con $request->post('idEvento_reglas')
+        $eventos = Eventos::find($request->post('idEvento_reglas'));
+        $eventos->reglas = $request->post('reglas');
+        $eventos->update();
+
+        return redirect()->back()->with('success', 'Reglas del evento actualizadas correctamente');
     }
 
     //Para Confi_eventos
@@ -453,7 +543,7 @@ class HomeController extends Controller
             $acuseName =  $acuse->getClientOriginalName();
             $acusePath = public_path('/acuses/');
             $acuse->move($acusePath, $acuseName);
-            $constancias->redaccion =  $acuseName;
+            $constancias->acuse =  $acuseName;
         }
 
         $constancias->fechaExpedicion = date('Y-m-d');

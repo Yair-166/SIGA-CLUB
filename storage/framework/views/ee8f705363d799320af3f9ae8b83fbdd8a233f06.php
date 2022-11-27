@@ -248,21 +248,55 @@
                                 <h5 class="card-title text-decoration-underline mb-3">
                                     Borrar cuenta:
                                 </h5>
-                                <form action="<?php echo e(route('eliminarUser')); ?>" method="POST">
-                                    <?php echo csrf_field(); ?>
-                                    <p class="text-muted" style="font-size: 14px;">
-                                        Si deseas borrar tu cuenta, puedes hacerlo aqui.
-                                    </p>
-                                    <div>
-                                        <input name="password_delete" type="password" class="form-control" id="passwordInput"
-                                            placeholder="Ingresa tu contraseña" style="max-width: 265px;">
-                                    </div>
-                                    <div class="hstack gap-2 mt-3">
+
+                                
+
+                                <p class="text-muted" style="font-size: 14px;">
+                                    Si deseas borrar tu cuenta, puedes hacerlo aqui.
+                                </p>
+                                <div>
+                                    <input type="password" class="form-control" id="passwordInput"
+                                        placeholder="Ingresa tu contraseña" style="max-width: 265px;">
+                                </div>
+                                <div class="hstack gap-2 mt-3">
+                                    <a id="adelete" class="delete-item-btn" href="#deleteRecordModal" data-bs-toggle="modal" data-bs-id="<?php echo e(Auth::user()->id); ?>">
                                         <button type="submit" class="btn btn-soft-primary">
                                             Cerrar y borrar cuenta
                                         </button>
+                                    </a>
+                                </div>
+
+                                <div class="modal fade zoomIn" id="deleteRecordModal" tabindex="-1" aria-labelledby="deleteRecordLabel"
+                                    aria-hidden="true"
+                                    data-bs-id="">
+                                    <div class="modal-dialog modal-dialog-centered">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" id="btn-close"></button>
+                                            </div>
+                                            <div class="modal-body p-5 text-center">
+                                                <lord-icon src="https://cdn.lordicon.com/gsqxdxog.json" trigger="loop" colors="primary:#00bd9d,secondary:#25a0e2" style="width:90px;height:90px"></lord-icon>
+                                                <div class="mt-4 text-center">
+                                                    <h4 class="fs-semibold">¿Quiéres eliminar el usuario?</h4>
+                                                    <p class="text-muted fs-14 mb-4 pt-1">Eliminar el usuario implica borrar tus datos de contacto pero no tus participaciones generadas.</p>
+                                                    <div class="hstack gap-2 justify-content-center remove">
+                                                        </br></br>
+                                                        <form action="<?php echo e(route('eliminarUser')); ?>" method="post">
+                                                            <?php echo csrf_field(); ?>
+                                                            <input name="password_delete" type="password" class="form-control mb-12" id="passwordInput"
+                                                                placeholder="Ingresa tu contraseña">
+                                                            </br>
+                                                            <a class="btn btn-link link-primary fw-medium text-decoration-none" data-bs-dismiss="modal"><i class="ri-close-line me-1 align-middle"></i> Cerrar</a>
+                                                            <button type="submit" class="btn btn-primary" id="delete-record">Si</button>
+                                                        </form>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
                                     </div>
-                                </form>
+                                </div> <!--end delete modal -->
+
                             </div>
                         </div>
                         <!--end tab-pane-->

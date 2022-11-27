@@ -23,14 +23,14 @@
             foreach ($clubes as $club) {
                 array_push($clubesId, $club->id);
             }
-            //Obtener todas las inscripciones cuyo idClub sea igual a alguno de los id de los clubes del usuario logueado
-            $inscripciones = DB::table('inscripciones')->whereIn('id_club', $clubesId)->get();
+            //Obtener todas las inscripciones cuyo idClub sea igual a alguno de los id de los clubes del usuario logueado y que active sea igual a 1
+            $inscripciones = DB::table('inscripciones')->whereIn('id_club', $clubesId)->where('active', 1)->get();
         }
         else{
             //Obtener el club cuyo id sea igual al id del club de la url
             $clubes = DB::table('clubes')->where('id', $getClub)->first();
-            //Obtener todas las inscripciones cuyo idClub sea igual al id del club de la url
-            $inscripciones = DB::table('inscripciones')->where('id_club', $getClub)->get();
+            //Obtener todas las inscripciones cuyo idClub sea igual al id del club de la url y que active sea igual a 1
+            $inscripciones = DB::table('inscripciones')->where('id_club', $getClub)->where('active', 1)->get();
         }
 
         //Eliminar createdAt y updatedAt de $inscripciones
@@ -137,12 +137,7 @@
                         <!--end col-->
                     @endforeach
 
-                    <div class="col-lg-12">
-                        <div class="text-center mb-3">
-                            <a href="javascript:void(0);" class="text-primary"><i
-                                    class="mdi mdi-loading mdi-spin fs-20 align-middle me-2"></i> Load More </a>
-                        </div>
-                    </div>
+                    
                 </div>
                 <!--end row-->
 

@@ -22,8 +22,8 @@
         @foreach ($clubes as $club)
 
             @php
-                //Contar el total de filas de la tabla inscripciones donde id_club sea igual al id del club
-                $totalInscritos = DB::table('inscripciones')->where('id_club', $club->id)->count();
+                //Contar el total de filas de la tabla inscripciones donde id_club sea igual al id del club y que active sea igual a 1
+                $totalInscritos = DB::table('inscripciones')->where('id_club', $club->id)->where('active', 1)->count();
             @endphp
 
             <div class="col-xl-3 col-lg-6">

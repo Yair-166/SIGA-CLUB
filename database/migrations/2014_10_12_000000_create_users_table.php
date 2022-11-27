@@ -27,6 +27,7 @@ class CreateUsersTable extends Migration
             $table->string('descripcion')->nullable();
             $table->string('boleta')->nullable();
             $table->text('avatar');
+            $table->string('active')->default('1');
             $table->rememberToken();
             $table->timestamps();
         });

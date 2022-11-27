@@ -90,8 +90,16 @@
                                             <input type="text" class="form-control" id="localizacion" name="localizacion" value="{{$club->localizacion}}">
                                         </div>
                                         <div class="mb-3">
+                                            <label for="facebook" class="form-label">Link de facebook</label>
+                                            <input type="text" class="form-control" id="facebook" name="localizacion" value="{{$club->facebook}}">
+                                        </div>
+                                        <div class="mb-3">
                                             <label for="descripcion" class="form-label">Descripción</label>
                                             <textarea class="form-control" id="descripcion" name="descripcion" rows="3">{{$club->descripcion}}</textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="bienvenida" class="form-label">Mensaje de bienvenida</label>
+                                            <textarea class="form-control" id="bienvenida" name="bienvenida" rows="3">{{$club->bienvenida}}</textarea>
                                         </div>
                                         <button type="submit" class="btn btn-primary">Guardar</button>
                                     </form>

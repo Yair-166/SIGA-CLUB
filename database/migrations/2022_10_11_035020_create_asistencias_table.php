@@ -18,7 +18,7 @@ return new class extends Migration
             $table->string('idEvento');
             $table->string('idUsuario');
             $table->string('rolUsuario');
-            $table->integer('tipoAsistencia');
+            $table->string('tipoAsistencia');
             $table->time('horaEntrada');
             $table->time('horaSalida');
             $table->float('asistenciaTotal');

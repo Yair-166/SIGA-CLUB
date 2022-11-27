@@ -22,8 +22,8 @@
         <?php $__currentLoopData = $clubes; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $club): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
 
             <?php
-                //Contar el total de filas de la tabla inscripciones donde id_club sea igual al id del club
-                $totalInscritos = DB::table('inscripciones')->where('id_club', $club->id)->count();
+                //Contar el total de filas de la tabla inscripciones donde id_club sea igual al id del club y que active sea igual a 1
+                $totalInscritos = DB::table('inscripciones')->where('id_club', $club->id)->where('active', 1)->count();
             ?>
 
             <div class="col-xl-3 col-lg-6">

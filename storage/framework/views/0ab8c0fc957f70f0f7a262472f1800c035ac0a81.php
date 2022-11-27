@@ -67,89 +67,119 @@
                                 <tbody class="list form-check-all">
                                 
                                 <?php $__currentLoopData = $clubs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $club): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <tbody class="list form-check-all">
-                                    <tr>
-                                        <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ001</a>
-                                        </td>
-                                        <td>
-                                            <div class="d-flex align-items-center">
-                                                <div class="flex-shrink-0">
-                                                    <img src="<?php echo e(URL::asset('images/' . $club->foto)); ?>" alt="" class="avatar-xxs rounded-circle image_src object-cover">
-                                                </div>
-                                                <div class="flex-grow-1 ms-2 name">
-                                                    <?php echo e($club->nombre); ?>
+                                    <?php if($club->active == '1'): ?>
+                                        <tbody class="list form-check-all">
+                                        <tr>
+                                            <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ001</a>
+                                            </td>
+                                            <td>
+                                                <?php if($club->idAdministrador == Auth::user()->id || Auth::user()->rol == 'super'): ?>
+                                                    <a href="<?php echo e(URL::asset('/apps-clubes-editar?club='.$club->id)); ?>">
+                                                        <div class="d-flex align-items-center">
+                                                            <div class="flex-shrink-0">
+                                                                <img src="<?php echo e(URL::asset('images/' . $club->foto)); ?>" alt="" class="avatar-xxs rounded-circle image_src object-cover">
+                                                            </div>
+                                                            <div class="flex-grow-1 ms-2 name">
+                                                                <?php echo e($club->nombre); ?>
 
-                                                </div>
-                                            </div>
-                                        </td>
-                                        <td class="owner">
-                                            <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                <?php if($user->id == $club->idAdministrador): ?>
-                                                    <?php
-                                                        $admin_name = $user->name . " " . $user->apaterno . " " . $user->amaterno;
-                                                    ?>
-                                                    <?php echo e($admin_name); ?>
-
-                                                <?php endif; ?>
-                                            <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                        </td>
-                                        <td class="location"><?php echo e($club->localizacion); ?></td>
-                                        <td>
-                                            <?php
-                                                //juntar toda la información del club en un solo string
-                                                $clubData = $club->foto . ';' . $club->nombre . ';' . $admin_name . ';' . $club->descripcion . ';' . $club->localizacion . ';' . $club->nomenclatura;
-                                                //Convertir a json el string
-                                                $clubData = json_encode($clubData);
-                                            ?>
-                                            <ul class="list-inline hstack gap-2 mb-0">
-                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                    data-bs-placement="top" title="Ver más">
-                                                    <a href="javascript:mostrar(<?php echo e($clubData); ?>);" class="view-item-btn">
-                                                        <i class="ri-eye-fill align-bottom text-muted"></i>
+                                                            </div>
+                                                        </div>
                                                     </a>
-                                                </li>
-                                                <?php if($club->idAdministrador == Auth::user()->id): ?>
-                                                    
+                                                <?php else: ?>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="flex-shrink-0">
+                                                            <img src="<?php echo e(URL::asset('images/' . $club->foto)); ?>" alt="" class="avatar-xxs rounded-circle image_src object-cover">
+                                                        </div>
+                                                        <div class="flex-grow-1 ms-2 name">
+                                                            <?php echo e($club->nombre); ?>
+
+                                                        </div>
+                                                    </div>
+                                                <?php endif; ?>
+                                            </td>
+                                            <td class="owner">
+                                                <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                    <?php if($user->id == $club->idAdministrador): ?>
+                                                        <?php
+                                                            $admin_name = $user->name . " " . $user->apaterno . " " . $user->amaterno;
+                                                        ?>
+                                                        <?php echo e($admin_name); ?>
+
+                                                    <?php endif; ?>
+                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                            </td>
+                                            <td class="location"><?php echo e($club->localizacion); ?></td>
+                                            <td>
+                                                <?php
+                                                    //juntar toda la información del club en un solo string
+                                                    $clubData = $club->foto . ';' . $club->nombre . ';' . $admin_name . ';' . $club->descripcion . ';' . $club->localizacion . ';' . $club->nomenclatura . ';' . $club->facebook;
+                                                    //Convertir a json el string
+                                                    $clubData = json_encode($clubData);
+                                                ?>
+                                                <ul class="list-inline hstack gap-2 mb-0">
                                                     <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                        data-bs-placement="top" title="Eliminar">
-                                                        <a id="adelete" class="delete-item-btn" href="#deleteRecordModal" data-bs-toggle="modal" data-bs-id="<?php echo e($club->id); ?>">
-                                                            <button onClick="eliminarid(<?php echo e($club->id); ?>)" style="border: none; background: none;">
-                                                                <i class="ri-delete-bin-fill align-bottom text-muted"></i>
-                                                            </button>
+                                                        data-bs-placement="top" title="Ver más">
+                                                        <a href="javascript:mostrar(<?php echo e($clubData); ?>);" class="view-item-btn">
+                                                            <i class="ri-eye-fill align-bottom text-muted"></i>
                                                         </a>
                                                     </li>
-                                                <?php endif; ?>
-
-                                                <?php if(Auth::user()->rol == 'colaborador'): ?>
-                                                    <?php $__currentLoopData = $inscripciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $inscripcion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                        <?php if($inscripcion->id_club == $club->id && $inscripcion->id_alumno == Auth::user()->id): ?>
-                                                            <?php
-                                                                $inscrito = 1;
-                                                            ?>
-                                                        <?php endif; ?>
-                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                                    <?php if($inscrito != 1): ?>
-                                                        <form action="<?php echo e(route('inscribirse')); ?>" method="POST">
-                                                            <?php echo csrf_field(); ?>
-                                                            <input type="hidden" name="id_club" value="<?php echo e($club->id); ?>">
-                                                            <input type="hidden" name="id_alumno" value="<?php echo e(Auth::user()->id); ?>">
-                                                            <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                                data-bs-placement="top" title="Inscribirse">
-                                                                <a href="javascript:void(0);" class="inscribirse-item-btn">
-                                                                    <button type="submit" style="border: none; background: none;">
-                                                                        <i class="ri-user-add-fill align-bottom text-muted"></i>
-                                                                    </button>
-                                                                </a>
-                                                            </li>
-                                                        </form>
+                                                    <?php if($club->idAdministrador == Auth::user()->id || Auth::user()->rol == 'super'): ?>
+                                                        
+                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                            data-bs-placement="top" title="Eliminar">
+                                                            <a id="adelete" class="delete-item-btn" href="#deleteRecordModal" data-bs-toggle="modal" data-bs-id="<?php echo e($club->id); ?>">
+                                                                <button onClick="eliminarid(<?php echo e($club->id); ?>)" style="border: none; background: none;">
+                                                                    <i class="ri-delete-bin-fill align-bottom text-muted"></i>
+                                                                </button>
+                                                            </a>
+                                                        </li>
                                                     <?php endif; ?>
-                                                    <?php
-                                                        $inscrito = 0;
-                                                    ?>
-                                                <?php endif; ?>
-                                            </ul>
-                                        </td>
-                                    </tr>
+
+                                                    <?php if(Auth::user()->rol == 'colaborador'): ?>
+                                                        <?php $__currentLoopData = $inscripciones; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $inscripcion): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php if($inscripcion->id_club == $club->id && $inscripcion->id_alumno == Auth::user()->id && $inscripcion->active == '1'): ?>
+                                                                <?php
+                                                                    $inscrito = 1;
+                                                                ?>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                        <?php if($inscrito != 1): ?>
+                                                            <form action="<?php echo e(route('inscribirse')); ?>" method="POST">
+                                                                <?php echo csrf_field(); ?>
+                                                                <input type="hidden" name="id_club" value="<?php echo e($club->id); ?>">
+                                                                <input type="hidden" name="id_alumno" value="<?php echo e(Auth::user()->id); ?>">
+                                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                                    data-bs-placement="top" title="Inscribirse">
+                                                                    <a href="javascript:void(0);" class="inscribirse-item-btn">
+                                                                        <button type="submit" style="border: none; background: none;">
+                                                                            <i class="ri-user-add-fill align-bottom text-muted"></i>
+                                                                        </button>
+                                                                    </a>
+                                                                </li>
+                                                            </form>
+                                                        <?php else: ?>
+                                                            <form action="<?php echo e(route('desinscribirse')); ?>" method="POST">
+                                                                <?php echo csrf_field(); ?>
+                                                                <input type="hidden" name="id_club" value="<?php echo e($club->id); ?>">
+                                                                <input type="hidden" name="id_alumno" value="<?php echo e(Auth::user()->id); ?>">
+                                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                                    data-bs-placement="top" title="desinscribirse">
+                                                                    <a href="javascript:void(0);" class="inscribirse-item-btn">
+                                                                        <button type="submit" style="border: none; background: none;">
+                                                                            <i class="ri-user-unfollow-fill align-bottom text-muted"></i>
+                                                                        </button>
+                                                                    </a>
+                                                                </li>
+                                                            </form>
+                                                        <?php endif; ?>
+                                                        <?php
+                                                            $inscrito = 0;
+                                                        ?>
+                                                    <?php endif; ?>
+                                                </ul>
+                                            </td>
+                                        </tr>
+                                    <?php endif; ?>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
@@ -234,10 +264,22 @@
                                                     <input type="text" id="location-field" class="form-control" name="localizacion"  placeholder="Localización" required />
                                                 </div>
                                             </div>
+                                            <div class="col-lg-6">
+                                                <div>
+                                                    <label for="facebook-field" class="form-label">Link de facebook</label>
+                                                    <input type="text" id="facebook-field" class="form-control" name="facebook"  placeholder="link de facebook" required />
+                                                </div>
+                                            </div>
                                             <div class="col-lg-12">
                                                 <div>
                                                     <label for="since-field" class="form-label">Descripción</label>
                                                     <textarea id="description-field" class="form-control" rows="3" name="descripcion" placeholder="Descripción del club"></textarea>
+                                                </div>
+                                            </div>
+                                            <div class="col-lg-12">
+                                                <div>
+                                                    <label for="since-field" class="form-label">Mensaje de bienvenida</label>
+                                                    <textarea id="bienvenida-field" class="form-control" rows="3" name="bienvenida" placeholder="Mensaje de bienvenida al club"></textarea>
                                                 </div>
                                             </div>
                                         </div>
@@ -401,12 +443,43 @@
                                     <td class="fw-medium" scope="row">Localización</td>
                                     <td id="info-location">ESCOM, México</td>
                                 </tr>
+                                <tr>
+                                    <td class="fw-medium" scope="row" colspan='2'> 
+                                        <a href="#" id="info-facebook">
+                                            <img src="<?php echo e(URL::asset('assets/images/fb.png')); ?>" alt="" class="avatar-sm rounded-circle object-cover">
+                                        </a>
+                                    </td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
                 </div>
             </div><!--end card-->
+
+            
         </div><!--end col-->
+
+        <div class="mb-4">
+                <?php if($message = Session::get('des')): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Listo</strong> <?php echo e($message); ?>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close">
+                        </button>
+                    </div>
+                <?php elseif($message = Session::get('success')): ?>
+                    <div class="alert alert-success alert-dismissible fade show" role="alert">
+                        <strong>Club inscrito!</strong> 
+                        </br>
+                        <?php echo e($message); ?>
+
+                        <button type="button" class="btn-close" data-bs-dismiss="alert"
+                            aria-label="Close">
+                        </button>
+                    </div>
+                <?php endif; ?>  
+            </div>
     </div><!--end row-->
 
 <?php $__env->stopSection(); ?>
@@ -431,6 +504,7 @@
             document.getElementById("info-admin").innerHTML = datos[2];
             document.getElementById("info-description").innerHTML = datos[3];
             document.getElementById("info-location").innerHTML = datos[4];
+            document.getElementById("info-facebook").href = datos[6];
             
         }
         function editarModal(data){

@@ -162,17 +162,7 @@
                                         </div>
                                     </div><!--end col-->
 
-                                    <div class="col-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Modalidad</label>
-                                            <select class="form-select" name="modalidad" id="event-modalidad" required>
-                                                <option value="Presencial">Presencial</option>
-                                                <option value="A distancia">A distancia</option>
-                                                <option value="Híbrida">Híbrida</option>
-                                            </select>
-                                            <div class="invalid-feedback">Por favor, seleccione una modalidad valida</div>
-                                        </div>
-                                    </div><!--end col-->
+                                    
                                     <div class="col-12">
                                         <div class="mb-3">
                                             <label class="form-label">Nombre del evento</label>
@@ -180,16 +170,33 @@
                                             <div class="invalid-feedback">Proporcione un nombre de evento válido</div>
                                         </div>
                                     </div><!--end col-->
+
                                     <div class="col-12">
-                                        <div class="mb-3">
-                                            <label class="form-label">Tipo de asitencia</label>
-                                            <select class="form-select" name="tipoAsistencia" id="event-astype" required>
-                                                <option value="Total">Total</option>
-                                                <option value="Parcial">Parcial</option>
-                                            </select>
-                                            <div class="invalid-feedback">Por favor, seleccione un tipo valido</div>
+                                        <div class="row">
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Tipo de asitencia</label>
+                                                    <select class="form-select" name="tipoAsistencia" id="event-astype" required>
+                                                        <option value="Total">Total</option>
+                                                        <option value="Parcial">Parcial</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">Por favor, seleccione un tipo valido</div>
+                                                </div>
+                                            </div><!--end col-->
+                                            <div class="col-6">
+                                                <div class="mb-3">
+                                                    <label class="form-label">Modalidad</label>
+                                                    <select class="form-select" name="modalidad" id="event-modalidad" required>
+                                                        <option value="Presencial">Presencial</option>
+                                                        <option value="A distancia">A distancia</option>
+                                                        <option value="Híbrida">Híbrida</option>
+                                                    </select>
+                                                    <div class="invalid-feedback">Por favor, seleccione una modalidad valida</div>
+                                                </div>
+                                            </div><!--end col-->
                                         </div>
                                     </div><!--end col-->
+
                                     <div class="col-12">
                                         <div class="mb-3">
                                             <label>Fecha del evento</label>
@@ -237,6 +244,7 @@
                                             <textarea name="descripcion" class="form-control d-none" id="event-description" placeholder="Descripción del evento" rows="3" spellcheck="false"></textarea>
                                         </div>
                                     </div><!--end col-->
+                                    <input type="hidden" id="reglas" name="reglas" value="Sin restricciones" />
                                 </div><!--end row-->
                                 <div class="hstack gap-2 justify-content-end">
                                     <button type="button" class="btn btn-soft-danger" id="btn-delete-event"><i class="ri-close-line align-bottom"></i> Borrar</button>

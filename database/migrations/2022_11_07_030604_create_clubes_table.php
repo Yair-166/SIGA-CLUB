@@ -22,6 +22,9 @@ return new class extends Migration
             $table->string('nomenclatura');
             $table->string('constanciasExpedidas');
             $table->string('localizacion');
+            $table->string('facebook')->nullable();
+            $table->string('active')->default('1');
+            $table->text('bienvenida');
             $table->timestamps();
         });
     }

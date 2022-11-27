@@ -48,16 +48,17 @@
                             </div>
                         </div>
 
-                        <div class="py-3">
+                        <a href="<?php echo e(URL::asset('/apps-eventos-overview?evento='.$evento->id)); ?>" class="text-dark">
+                            <div class="py-3">
                                 <div class="flex-grow-1">
-                                    <h5 class="mb-1 fs-15"><a href="<?php echo e(URL::asset('/apps-eventos-overview?evento='.$evento->id)); ?>"
-                                            class="text-dark"><?php echo e($evento->nombre); ?></a></h5>
+                                    <h5 class="mb-1 fs-15"><?php echo e($evento->nombre); ?></h5>
                                     <p class="text-muted text-truncate-two-lines mb-3">
                                         <?php echo e($evento->descripcion); ?>
 
                                     </p>
                                 </div>
                             </div>
+                        </a>
                     </div>
                     <!-- end card body -->
                     <div class="card-footer bg-transparent border-top-dashed py-2">
