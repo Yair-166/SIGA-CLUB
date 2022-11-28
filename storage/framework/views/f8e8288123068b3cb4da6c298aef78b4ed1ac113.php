@@ -55,6 +55,14 @@
                                     <p class="text-muted text-truncate-two-lines mb-3">
                                         <?php echo e($evento->descripcion); ?>
 
+                                        </br>
+                                        Interesados en asistir: 
+                                        <?php
+                                            //Contar cuantos usuarios estan interesados en asistir al evento
+                                            $interesados = DB::table('asistencias_previstas')->where('id_evento', $evento->id)->count();
+                                        ?>
+                                        <?php echo e($interesados); ?>
+
                                     </p>
                                 </div>
                             </div>

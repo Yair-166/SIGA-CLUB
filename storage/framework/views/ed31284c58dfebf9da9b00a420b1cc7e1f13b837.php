@@ -160,12 +160,7 @@
                                                                 <td><?php echo e($evento->fechaFin); ?></td>
                                                                 <td><?php echo e($asistencia->asistenciaTotal); ?></td>
                                                                 <td>
-                                                                    <?php if($user->boleta != NULL && Auth::user()->boleta != NULL): ?>
-                                                                        <a href="<?php echo e(route('pdf', [$asistencia->id, 1])); ?>" class="btn btn-primary btn-sm">Generar IPN</a>
-                                                                        <a href="<?php echo e(route('pdf', [$asistencia->id, 0])); ?>" class="btn btn-primary btn-sm">Generar Externo</a>
-                                                                    <?php else: ?>
-                                                                        <a href="<?php echo e(route('pdf', [$asistencia->id, 0])); ?>" class="btn btn-primary btn-sm">Generar</a>
-                                                                    <?php endif; ?>
+                                                                    <a href="pages-constancias-form?uid=<?php echo e($asistencia->id); ?>"  class="btn btn-primary btn-sm">Generar constancia</a>
                                                                 </td>
                                                                 <td>
                                                                     <?php

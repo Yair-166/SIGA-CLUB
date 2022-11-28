@@ -157,12 +157,7 @@
                                                                 <td>{{$evento->fechaFin}}</td>
                                                                 <td>{{$asistencia->asistenciaTotal}}</td>
                                                                 <td>
-                                                                    @if($user->boleta != NULL && Auth::user()->boleta != NULL)
-                                                                        <a href="{{route('pdf', [$asistencia->id, 1])}}" class="btn btn-primary btn-sm">Generar IPN</a>
-                                                                        <a href="{{route('pdf', [$asistencia->id, 0])}}" class="btn btn-primary btn-sm">Generar Externo</a>
-                                                                    @else
-                                                                        <a href="{{route('pdf', [$asistencia->id, 0])}}" class="btn btn-primary btn-sm">Generar</a>
-                                                                    @endif
+                                                                    <a href="pages-constancias-form?uid={{$asistencia->id}}"  class="btn btn-primary btn-sm">Generar constancia</a>
                                                                 </td>
                                                                 <td>
                                                                     @php

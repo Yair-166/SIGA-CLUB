@@ -12,6 +12,7 @@ use App\Models\Archivos;
 use App\Models\Evidencias;
 use App\Models\Constancias;
 use App\Models\Asistencias;
+use App\Models\AsistenciasPrevistas;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -300,6 +301,25 @@ class HomeController extends Controller
         return redirect()->back()->with('success', 'Club eliminado correctamente');
     }
 
+    public function asistire($id)
+    {
+        $id_evento = $id;
+        $id_alumno = Auth::user()->id;
+
+        //Ver si el usuario ya está inscrito en el evento en la tabla asistenciasprevistas de la base de datos
+        $asistencia = AsistenciasPrevistas::where('id_evento', $id_evento)->where('id_alumno', $id_alumno)->first();
+        if($asistencia == null){
+            $asistencia = new AsistenciasPrevistas();
+            $asistencia->id_evento = $id_evento;
+            $asistencia->id_alumno = $id_alumno;
+            $asistencia->save();
+            return redirect()->back()->with('success', 'Asistencia registrada correctamente');
+        }
+        else{
+            return redirect()->back()->with('error', 'Ya estás pre-inscrito en este evento');
+        }
+    }
+
     //Para inscripciones
 
     public function inscribirse(Request $request){
@@ -513,6 +533,17 @@ class HomeController extends Controller
             $pdf = Pdf::setPaper('A4')->loadView('generar-constancia-ipn', compact('id'));
         }else{
             $pdf = Pdf::setPaper('A4', 'landscape')->loadView('generar-constancia-externa', compact('id'));
+        }
+
+        return $pdf->download('constancia_'.$id.'.pdf');
+    }
+
+    public function pdf2($id, $sel, Request $request)
+    {
+        if($sel == 1){
+            $pdf = Pdf::setPaper('A4')->loadView('generar-constancia-ipn', compact('id', 'request'));
+        }else{
+            $pdf = Pdf::setPaper('A4', 'landscape')->loadView('generar-constancia-externa', compact('id', 'request'));
         }
 
         return $pdf->download('constancia_'.$id.'.pdf');

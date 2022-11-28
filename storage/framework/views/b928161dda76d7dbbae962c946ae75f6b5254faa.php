@@ -19,6 +19,10 @@
     //Obteneer las autoridades del club
     $autoridades = DB::table('autoridades')->where('idClub', $club->id)->get();
     
+    $nuevasAutoridades = $request->input('autoridades_externo');
+    //Convertir el string de autoridades en un json
+    $autoridades_externo = json_decode($nuevasAutoridades);
+
 ?>
 
 <!DOCTYPE html>
@@ -60,11 +64,12 @@
                         </br>
                                 
                         <span class="ft12">
-                            ESCUELA SUPERIOR DE CÓMPUTO
+                            <?php echo e($request->input('escuela')); ?>
+
                         </span>
                     </td>
                     <td style='width: 18%; float: left'>
-                        <img src="https://pbs.twimg.com/profile_images/1423089146/escom_400x400.png" height="150" />
+                        <img src="<?php echo e(URL::asset('assets/images/escuelas/'.$request->input('escuela').'.png')); ?>" height="150"/>
                     </td>
                 </tr>
                 <tr>
@@ -77,7 +82,7 @@
                         </br>
 
                         <span class="ft15" style='margin-left: auto; margin-right: auto; text-align: center;'>
-                            <?php echo e($club->nomenclatura); ?><?php echo e($club->nombre); ?>/<?php echo e($id); ?>/<?php echo e($anio); ?>
+                            <?php echo e($club->nomenclatura); ?>/<?php echo e($id); ?>/<?php echo e($anio); ?>
 
                         </span>
                     </td>
@@ -116,7 +121,8 @@
 
             <p align="left">
                 <span class="ft11">
-                    Las actividades del <?php echo e($club->nombre); ?> son extracurriculares y giran en torno a desarrollar un alumno integral y complementar su formación académica.
+                    <?php echo e($request->input('redaccion_ipn')); ?>
+
                 </span>
             </p>
 
@@ -146,24 +152,26 @@
         <div id="pie" style='width: 100%;'>
             <table>
                 <tr>
-                <?php $__currentLoopData = $autoridades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $autoridad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <td style='margin-left: auto; margin-right: auto; text-align: center;'>
-                        <span class="ft15">
-                            <b>
-                                ________________________________
-                            </b>
-                        </span>
-                        </br>
-                        <span class="ft13">
-                            <?php echo e($autoridad->nombre); ?> <?php echo e($autoridad->aPaterno); ?> <?php echo e($autoridad->aMaterno); ?>
+                <?php $__currentLoopData = $autoridades_externo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $autoridad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if($request->input('autoridad_'.$autoridad->id) == $autoridad->id): ?>
+                        <td style='margin-left: auto; margin-right: auto; text-align: center;'>
+                            <span class="ft15">
+                                <b>
+                                    ________________________________
+                                </b>
+                            </span>
+                            </br>
+                            <span class="ft13">
+                                <?php echo e($autoridad->nombre); ?> <?php echo e($autoridad->aPaterno); ?> <?php echo e($autoridad->aMaterno); ?>
 
-                        </span>
-                        </br>
-                        <span class="ft13">
-                            <?php echo e($autoridad->cargo); ?>
+                            </span>
+                            </br>
+                            <span class="ft13">
+                                <?php echo e($autoridad->cargo); ?>
 
-                        </span>
-                    </td>
+                            </span>
+                        </td>
+                    <?php endif; ?>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tr>
             </table>
@@ -183,10 +191,10 @@
                         $qr = QrCode::size(300)->margin(0)->generate("http://panel.sigaclub.com/checkasistencia/".$asistencia->id);
                     ?>
                     
-                    <img src="data:image/png;base64, <?php echo base64_encode($qr); ?> " width="150" height="150" />
+                    <img src="data:image/png;base64, <?php echo base64_encode($qr); ?> " width="120" height="120" />
                 </td>
                 <td align="right" style="width: 50%;">
-                    <img src="<?php echo e(URL::asset('images/' . $club->foto)); ?>" width="150" height="150" style="float:right" />
+                    <img src="<?php echo e(URL::asset('images/' . $club->foto)); ?>" width="120" height="120" style="float:right" />
                 </td>
             </tr>
         </table>

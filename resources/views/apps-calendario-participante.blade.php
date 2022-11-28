@@ -32,6 +32,21 @@
 
         
     @endphp
+    @if (session('error'))
+        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+            <div class="alert-body">
+                <strong>¡Error!</strong> {{ session('error') }}
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @elseif (session('success'))
+        <div class="alert alert-success alert-dismissible fade show" role="alert">
+            <div class="alert-body">
+                <strong>¡Éxito!</strong> {{ session('success') }}
+            </div>
+            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+        </div>
+    @endif
     <input type="hidden" id="eventos_usr" value="{{$eventosj}}"/>
     <input type="hidden" id="rol_usr" value="{{Auth::user()->rol}}"/>
     <div class="row">
@@ -80,6 +95,36 @@
                         <div class="modal-body p-4">
                             <h4 class="modal-title mt-0" id="modal-title">Evento</h4>
                         </div>
+
+                        <label>Descripción</label>
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 me-3">
+                                <i class="ri-discuss-line text-muted fs-16"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="d-block text-muted mb-0" id="event-description-tag"></p>
+                            </div>
+                        </div>
+
+                        <label>Reglas de participación</label>
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 me-3">
+                                <i class="ri-file-info-line text-muted fs-16"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <p class="d-block text-muted mb-0" id="event-rules-tag"></p>
+                            </div>
+                        </div>
+
+                        <label>Asistire</label>
+                        <div class="d-flex mb-3">
+                            <div class="flex-shrink-0 me-3">
+                                <i class="ri-checkbox-circle-line text-muted fs-16"></i>
+                            </div>
+                            <div class="flex-grow-1">
+                                <a href="#" class="btn btn-primary" id="btn-asistire">Asistire</a>
+                            </div>
+                        </div>
                         
                         <div class="modal-footer">
                             <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
@@ -92,6 +137,7 @@
                                 <h5 class="modal-title" id="modal-title">Evento</h5>
                                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
                             </div>
+                            
                             <div class="modal-body p-4">
 
                                 <form action="{{ route('creaEvento') }}" method="POST" class="needs-validation" name="event-form" id="form-event" >
@@ -132,6 +178,22 @@
                                             </div>
                                             <div class="flex-grow-1">
                                                 <p class="d-block text-muted mb-0" id="event-description-tag"></p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mb-3">
+                                            <div class="flex-shrink-0 me-3">
+                                                <i class="ri-discuss-line text-muted fs-16"></i>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <p class="d-block text-muted mb-0" id="event-rules-tag"></p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mb-3">
+                                            <div class="flex-shrink-0 me-3">
+                                                <i class="ri-checkbox-circle-line text-muted fs-16"></i>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <a href="#" class="btn btn-primary" id="btn-asistire">Asistire</a>
                                             </div>
                                         </div>
                                     </div>

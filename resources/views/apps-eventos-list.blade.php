@@ -76,6 +76,13 @@
                                     <h5 class="mb-1 fs-15">{{$evento->nombre}}</h5>
                                     <p class="text-muted text-truncate-two-lines mb-3">
                                         {{$evento->descripcion}}
+                                        </br>
+                                        Interesados en asistir: 
+                                        @php
+                                            //Contar cuantos usuarios estan interesados en asistir al evento
+                                            $interesados = DB::table('asistencias_previstas')->where('id_evento', $evento->id)->count();
+                                        @endphp
+                                        {{$interesados}}
                                     </p>
                                 </div>
                             </div>

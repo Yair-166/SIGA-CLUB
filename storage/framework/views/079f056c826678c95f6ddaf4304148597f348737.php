@@ -15,7 +15,11 @@
     $usuario = DB::table('users')->where('id', $asistencia->idUsuario)->first();
     //Obteneer las autoridades del club
     $autoridades = DB::table('autoridades')->where('idClub', $club->id)->get();
-    
+
+    $nuevasAutoridades = $request->input('autoridades_externo');
+    //Convertir el string de autoridades en un json
+    $autoridades_externo = json_decode($nuevasAutoridades);
+
 ?>
 
 <!DOCTYPE html>
@@ -32,7 +36,7 @@
 		.ft11{font-size:14px;font-family:Times;color:#000000;}
 		.ft12{font-size:14px;font-family:Times;color:#365e91;}
 		.ft13{font-size:15px;font-family:Times;color:#000000;}
-		.ft14{font-size:18px;font-family:Times;font-weight:bold;color:#000000;}
+		.ft14{font-size:17px;font-family:Times;font-weight:bold;color:#000000;}
 		.ft15{font-size:14px;font-family:Times;font-weight:bold;color:#000000;}
         .ft16{font-size:30px;font-family:Times;color:#000000;}
         .ft17{font-size:14px;font-family:Times;color:#000000;}
@@ -45,19 +49,18 @@
     <div class="contenido">
 
         <div id="cabecera" style='margin-left: auto; margin-right: auto; text-align: center;'>
-
             <table style="border: 0px solid black; border-collapse: collapse; width: 100%;">
                 <tr>
                     <td style='width: 18%; float: left'>
-                        <img align="right" src="<?php echo e(URL::asset('images/' . $club->foto)); ?>" height="150" />
-                        </br></br></br></br></br></br></br></br></br>
-                        <span class="ft14" style='margin-left: auto; margin-right: auto; text-align: center;'>
-                            CONSTANCIA
+                        <img align="left" src="<?php echo e(URL::asset('images/' . $club->foto)); ?>" height="120" />
+                        </br></br></br></br></br></br></br>
+                        <span class="ft14" style='margin-left: auto; margin-right: auto; text-align: right;' align="right">
+                        CONSTANCIA
                         </span>
                     </td>
                     <td style='margin-left: auto; margin-right: auto; text-align: right; width: 64%;'>
                         	<span class="ft15" style='margin-left: auto; margin-right: auto; text-align: right;'>
-                            <?php echo e($club->nomenclatura); ?><?php echo e($club->nombre); ?>/<?php echo e($id); ?>/<?php echo e($anio); ?>
+                            <?php echo e($club->nomenclatura); ?>/<?php echo e($id); ?>/<?php echo e($anio); ?>
 
                         </span>
                     </td>
@@ -65,79 +68,85 @@
                 </tr>
             </table>
         </div>
-
-        </br>
         
-        <div id="cuerpo" style='height:400px; width: 100%;'>
+        <div id="cuerpo" style='width: 100%;'>
 
 			<p align="left">
-                <span style="font-size:30px;font-family:Times;color:#000000;">
+                <span style="font-size:23px;font-family:Times;color:#000000;">
                     Participó en el <b>"<?php echo e($club->nombre); ?>”</b> en la actividad <b><?php echo e($evento->nombre); ?></b>
                 </span>
-        
-            </p>
+                <br><br>
+                <?php echo e($request->input('redaccion')); ?>
 
+            </p>
             <p align="left">
-                <span class="ft17">
+                <span style="font-size:28px;font-family:Times;color:#000000;">
                     <?php echo e($usuario->name); ?> <?php echo e($usuario->apaterno); ?> <?php echo e($usuario->amaterno); ?>
 
-				</br></br>
-					<?php if($evento->fechaInicio == $evento->fechaFin): ?>
-                        El día <b><?php echo e($evento->fechaInicio); ?></b>
-                    <?php else: ?>
-                        En el periodo del <b><?php echo e($evento->fechaInicio); ?></b> al <b><?php echo e($evento->fechaFin); ?></b>
-                    <?php endif; ?>
-                    con un horario de <b><?php echo e($evento->horaInicio); ?> a <?php echo e($evento->horaFin); ?></b> horas. Sumando un total de horas de <b><?php echo e($asistencia->asistenciaTotal); ?> horas</b>.
                 </span>
             </p>
+            <p align="left">
+				<span class="ft17">
+                    Fecha: 
+					<?php if($evento->fechaInicio == $evento->fechaFin): ?>
+                        <b><?php echo e($evento->fechaInicio); ?></b>
+                    <?php else: ?>
+                        <b><?php echo e($evento->fechaInicio); ?></b> al <b><?php echo e($evento->fechaFin); ?></b>
+                    <?php endif; ?>
+                    </br>
+                    Duración: <b><?php echo e($asistencia->asistenciaTotal); ?> horas</b>.
+                </span>
+            </p>
+        
+        </div>
 
-            
-
-
-
-        </br></br></br></br></br></br>
+        </br></br></br></br></br>
 
         <div id="pie" style='width: 100%;'>
             <table>
                 <tr>
-                <?php $__currentLoopData = $autoridades; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $autoridad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                    <td style='margin-left: auto; margin-right: auto; text-align: center;'>
-                        <span class="ft15">
-                            <b>
-                                ________________________________
-                            </b>
-                        </span>
-                        </br>
-                        <span class="ft13">
-                            <?php echo e($autoridad->nombre); ?> <?php echo e($autoridad->aPaterno); ?> <?php echo e($autoridad->aMaterno); ?>
+                <?php $__currentLoopData = $autoridades_externo; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $autoridad): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                    <?php if($request->input('autoridad'.$autoridad->id) == $autoridad->id): ?>
+                        <td style='margin-left: auto; margin-right: auto; text-align: center;'>
+                            <span class="ft15">
+                                <b>
+                                    ________________________________
+                                </b>
+                            </span>
+                            </br>
+                            <span class="ft13">
+                                <?php echo e($autoridad->nombre); ?> <?php echo e($autoridad->aPaterno); ?> <?php echo e($autoridad->aMaterno); ?>
 
-                        </span>
-                        </br>
-                        <span class="ft13">
-                            <?php echo e($autoridad->cargo); ?>
+                            </span>
+                            </br>
+                            <span class="ft13">
+                                <?php echo e($autoridad->cargo); ?>
 
-                        </span>
-                    </td>
+                            </span>
+                        </td>
+                    <?php endif; ?>
                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                 </tr>
             </table>
-        </div>
+        
 
-        </br>
+            </br>
 
-        <table style="width: 100%;">
-            <tr>
-                <td style='margin-left: auto; margin-right: auto; text-align: right;'>
-                    Verifica la autenticidad de esta constancia en:
-                    <?php
-                        $qr = QrCode::size(300)->margin(0)->generate("http://panel.sigaclub.com/checkasistencia/".$asistencia->id);
-                    ?>
+            <table style="width: 100%;">
+                <tr>
+                    <td style='margin-left: auto; margin-right: auto; text-align: right;'>
+                        Verifica la autenticidad de esta constancia en:
+                        <?php
+                            $qr = QrCode::size(300)->margin(0)->generate("http://panel.sigaclub.com/checkasistencia/".$asistencia->id);
+                        ?>
+                        
+                        <img src="data:image/png;base64, <?php echo base64_encode($qr); ?> " width="120" height="120" />
+                    </td>
                     
-                    <img src="data:image/png;base64, <?php echo base64_encode($qr); ?> " width="150" height="150" />
-                </td>
-                
-            </tr>
-        </table>
+                </tr>
+            </table>
+        
+        </div>
         
         
     </div>

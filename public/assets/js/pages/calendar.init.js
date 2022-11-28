@@ -113,6 +113,12 @@ document.addEventListener("DOMContentLoaded", function () {
             //Eliminar el substring \\\" de la cadena
             description = description.substring(0, description.length - 2);
 
+            var reglas = evento[11];
+            //Eliminar el substring \\\"reglas\\\":\\\ de la cadena
+            reglas = reglas.substring(12);
+            //Eliminar el substring \\\" de la cadena
+            reglas = reglas.substring(0, reglas.length - 2);
+
             var evento = {
                 id: id,
                 title: title,
@@ -120,7 +126,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 end: end,
                 className: "bg-soft-info",
                 allDay: true,
-                description: description
+                description: description,
+                reglas: reglas
 
             };
             
@@ -207,6 +214,8 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("modal-title").innerHTML = "";
             document.getElementById("event-location-tag").innerHTML = selectedEvent.extendedProps.location === undefined ? "No Location" : selectedEvent.extendedProps.location;
             document.getElementById("event-description-tag").innerHTML = selectedEvent.extendedProps.description === undefined ? "No Description" : selectedEvent.extendedProps.description;
+            document.getElementById("event-rules-tag").innerHTML = selectedEvent.extendedProps.reglas === undefined ? "No Rules" : selectedEvent.extendedProps.reglas;
+            document.getElementById("btn-asistire").setAttribute("href", "/asistire/" + selectedEvent.id);
 
             // Edit Modal
             document.getElementById("event-title").value = selectedEvent.title;
@@ -534,6 +543,7 @@ function eventTyped() {
     document.getElementById("event-timepicker2-tag").classList.replace("d-block", "d-none");
     document.getElementById("event-location-tag").classList.replace("d-block", "d-none");
     document.getElementById("event-description-tag").classList.replace("d-block", "d-none");
+    document.getElementById("event-rules-tag").classList.replace("d-block", "d-none");
     document.getElementById('btn-save-event').removeAttribute("hidden");
 }
 
@@ -545,6 +555,7 @@ function upcomingEvent(a) {
     document.getElementById("upcoming-event-list").innerHTML = null;
     a.forEach(function (element) {
         var title = element.title;
+        var id = element.id;
         var e_dt = element.end ? element.end : null;
         if (e_dt == "Invalid Date" || e_dt == undefined) {
             e_dt = null;
@@ -600,14 +611,16 @@ function upcomingEvent(a) {
         }
 
         u_event = "<div class='card mb-3'>\
-                        <div class='card-body'>\
-                            <div class='d-flex mb-3'>\
-                                <div class='flex-grow-1'><i class='mdi mdi-checkbox-blank-circle me-2 text-" + category[2] + "'></i><span class='fw-medium'>" + startDate + end_dt + " </span></div>\
-                                <div class='flex-shrink-0'><small class='badge badge-soft-primary ms-auto'>" + e_time_s + e_time_e + "</small></div>\
+                        <a href='apps-eventos-overview?evento="+id+"'>\
+                            <div class='card-body'>\
+                                <div class='d-flex mb-3'>\
+                                    <div class='flex-grow-1'><i class='mdi mdi-checkbox-blank-circle me-2 text-" + category[2] + "'></i><span class='fw-medium'>" + startDate + end_dt + " </span></div>\
+                                    <div class='flex-shrink-0'><small class='badge badge-soft-primary ms-auto'>" + e_time_s + e_time_e + "</small></div>\
+                                </div>\
+                                <h6 class='card-title fs-16'> " + title + "</h6>\
+                                <p class='text-muted text-truncate-two-lines mb-0'> " + description + "</p>\
                             </div>\
-                            <h6 class='card-title fs-16'> " + title + "</h6>\
-                            <p class='text-muted text-truncate-two-lines mb-0'> " + description + "</p>\
-                        </div>\
+                        </a>\
                     </div>";
         document.getElementById("upcoming-event-list").innerHTML += u_event;
     });

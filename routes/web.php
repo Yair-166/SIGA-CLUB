@@ -46,6 +46,7 @@ Route::post('/desinscribirse', [App\Http\Controllers\HomeController::class, 'des
 //eventos
 Route::post('/creaEvento', [App\Http\Controllers\HomeController::class, 'creaEvento'])->name('creaEvento');
 Route::post('/reglasEvento', [App\Http\Controllers\HomeController::class, 'reglasEvento'])->name('reglasEvento');
+Route::get('/asistire/{id}', [App\Http\Controllers\HomeController::class, 'asistire'])->name('asistire');
 
 //confi_eventos
 Route::post('/asignarCoordinador', [App\Http\Controllers\HomeController::class, 'asignarCoordinador'])->name('asignarCoordinador');
@@ -65,6 +66,7 @@ Route::get('/eliminarEvidencia/{id}', [App\Http\Controllers\HomeController::clas
 
 //DoomPDF
 Route::get('/pdf/{id}/{sel}', [App\Http\Controllers\HomeController::class, 'pdf'])->name('pdf');
+Route::post('/pdf2/{id}/{sel}', [App\Http\Controllers\HomeController::class, 'pdf2'])->name('pdf2');
 
 //Acuses
 Route::post('/createAcuse', [App\Http\Controllers\HomeController::class, 'createAcuse'])->name('createAcuse');

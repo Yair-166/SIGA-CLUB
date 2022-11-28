@@ -19,6 +19,10 @@
     //Obteneer las autoridades del club
     $autoridades = DB::table('autoridades')->where('idClub', $club->id)->get();
     
+    $nuevasAutoridades = $request->input('autoridades_externo');
+    //Convertir el string de autoridades en un json
+    $autoridades_externo = json_decode($nuevasAutoridades);
+
 @endphp
 
 <!DOCTYPE html>
@@ -60,11 +64,11 @@
                         </br>
                                 
                         <span class="ft12">
-                            ESCUELA SUPERIOR DE CÓMPUTO
+                            {{$request->input('escuela')}}
                         </span>
                     </td>
                     <td style='width: 18%; float: left'>
-                        <img src="https://pbs.twimg.com/profile_images/1423089146/escom_400x400.png" height="150" />
+                        <img src="{{ URL::asset('assets/images/escuelas/'.$request->input('escuela').'.png') }}" height="150"/>
                     </td>
                 </tr>
                 <tr>
@@ -77,7 +81,7 @@
                         </br>
 
                         <span class="ft15" style='margin-left: auto; margin-right: auto; text-align: center;'>
-                            {{$club->nomenclatura}}{{$club->nombre}}/{{$id}}/{{ $anio }}
+                            {{$club->nomenclatura}}/{{$id}}/{{ $anio }}
                         </span>
                     </td>
                 </tr>
@@ -114,7 +118,7 @@
 
             <p align="left">
                 <span class="ft11">
-                    Las actividades del {{$club->nombre}} son extracurriculares y giran en torno a desarrollar un alumno integral y complementar su formación académica.
+                    {{$request->input('redaccion_ipn')}}
                 </span>
             </p>
 
@@ -144,22 +148,24 @@
         <div id="pie" style='width: 100%;'>
             <table>
                 <tr>
-                @foreach($autoridades as $autoridad)
-                    <td style='margin-left: auto; margin-right: auto; text-align: center;'>
-                        <span class="ft15">
-                            <b>
-                                ________________________________
-                            </b>
-                        </span>
-                        </br>
-                        <span class="ft13">
-                            {{$autoridad->nombre}} {{$autoridad->aPaterno}} {{$autoridad->aMaterno}}
-                        </span>
-                        </br>
-                        <span class="ft13">
-                            {{$autoridad->cargo}}
-                        </span>
-                    </td>
+                @foreach ($autoridades_externo as $autoridad)
+                    @if($request->input('autoridad_'.$autoridad->id) == $autoridad->id)
+                        <td style='margin-left: auto; margin-right: auto; text-align: center;'>
+                            <span class="ft15">
+                                <b>
+                                    ________________________________
+                                </b>
+                            </span>
+                            </br>
+                            <span class="ft13">
+                                {{$autoridad->nombre}} {{$autoridad->aPaterno}} {{$autoridad->aMaterno}}
+                            </span>
+                            </br>
+                            <span class="ft13">
+                                {{$autoridad->cargo}}
+                            </span>
+                        </td>
+                    @endif
                 @endforeach
                 </tr>
             </table>
@@ -179,10 +185,10 @@
                         $qr = QrCode::size(300)->margin(0)->generate("http://panel.sigaclub.com/checkasistencia/".$asistencia->id);
                     @endphp
                     
-                    <img src="data:image/png;base64, {!! base64_encode($qr) !!} " width="150" height="150" />
+                    <img src="data:image/png;base64, {!! base64_encode($qr) !!} " width="120" height="120" />
                 </td>
                 <td align="right" style="width: 50%;">
-                    <img src="{{ URL::asset('images/' . $club->foto) }}" width="150" height="150" style="float:right" />
+                    <img src="{{ URL::asset('images/' . $club->foto) }}" width="120" height="120" style="float:right" />
                 </td>
             </tr>
         </table>
