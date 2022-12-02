@@ -17,7 +17,12 @@
         $getClub = $_GET['club'];
         //Si $getClub es igual a "all" entonces mostrar todos los eventos de los clubes del usuario
         if($getClub == "all"){
-            $clubes = DB::table('clubes')->where('idAdministrador', Auth::user()->id)->get();
+
+            if(Auth::user()->rol == "super"){
+                $clubes = DB::table('clubes')->get();
+            }else{
+                $clubes = DB::table('clubes')->where('idAdministrador', Auth::user()->id)->get();
+            }
             //Guardar en un array los ids de los clubes
             $clubesIds = array();
             foreach ($clubes as $club) {
@@ -52,7 +57,7 @@
                             <div class="py-3">
                                 <div class="flex-grow-1">
                                     <h5 class="mb-1 fs-15"><?php echo e($evento->nombre); ?></h5>
-                                    <p class="text-muted text-truncate-two-lines mb-3">
+                                    <p class="text-muted text-truncate-five-lines mb-3">
                                         <?php echo e($evento->descripcion); ?>
 
                                         </br>

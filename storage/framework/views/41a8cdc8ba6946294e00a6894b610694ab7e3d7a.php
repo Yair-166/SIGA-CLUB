@@ -30,6 +30,9 @@
         //Sustituir }{ por }],[{ para separar cada evento
         $eventosj = str_replace("},{", "}],[{", $eventosj);
 
+        //Sustituir ][ por ],[ para separar cada evento
+        $eventosj = str_replace("][", "],[", $eventosj);
+        $eventosj = str_replace(",[]", "", $eventosj);
         
     ?>
     <?php if(session('error')): ?>

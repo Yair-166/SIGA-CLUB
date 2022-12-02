@@ -63,6 +63,8 @@ document.addEventListener("DOMContentLoaded", function () {
         console.log(eventos_usr.length);
         //Obtener id, nombre, fecha y hora de los eventos
         var defaultEvents = [];
+
+        
         for (var i = 0; i < eventos_usr.length; i++) {
             //Separar por ,\
             var evento = eventos_usr[i].split(",\\");

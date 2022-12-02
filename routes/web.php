@@ -38,6 +38,7 @@ Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name
 Route::post('/club', [App\Http\Controllers\HomeController::class, 'updateClub'])->name('updateClub');
 Route::post('/clubeditar', [App\Http\Controllers\HomeController::class, 'editarClub'])->name('editarClub');
 Route::post('/clubeliminar', [App\Http\Controllers\HomeController::class, 'deleteClub'])->name('deleteClub');
+Route::get('/activarClub/{id}', [App\Http\Controllers\HomeController::class, 'activarClub'])->name('activarClub');
 
 //inscripciones
 Route::post('/inscribirse', [App\Http\Controllers\HomeController::class, 'inscribirse'])->name('inscribirse');

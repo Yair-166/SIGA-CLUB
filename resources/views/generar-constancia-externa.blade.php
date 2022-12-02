@@ -20,6 +20,21 @@
     //Convertir el string de autoridades en un json
     $autoridades_externo = json_decode($nuevasAutoridades);
 
+    //Obtener todos los registros de la tabla confi_eventos con el id del evento
+    $configuracion = DB::table('confi_eventos')->where('idEvento', $evento->id)->get();
+    //Verificar si en algún registro de $configuracion el campo 'id_coordinador' es igual al id del usuario
+    $coordinador = false;
+    foreach($configuracion as $confi){
+        if($confi->id_coordinador == $usuario->id){
+            $coordinador = true;
+        }
+    }
+    if($coordinador){
+        $rolactividad = 'Coordinador';
+    }else{
+        $rolactividad = 'Participante';
+    }
+
 @endphp
 
 <!DOCTYPE html>
@@ -35,7 +50,7 @@
 		.ft10{font-size:16px;font-family:Times;color:#bf504d;}
 		.ft11{font-size:14px;font-family:Times;color:#000000;}
 		.ft12{font-size:14px;font-family:Times;color:#365e91;}
-		.ft13{font-size:15px;font-family:Times;color:#000000;}
+		.ft13{font-size:13px;font-family:Times;color:#000000;}
 		.ft14{font-size:17px;font-family:Times;font-weight:bold;color:#000000;}
 		.ft15{font-size:14px;font-family:Times;font-weight:bold;color:#000000;}
         .ft16{font-size:30px;font-family:Times;color:#000000;}
@@ -71,10 +86,17 @@
         <div id="cuerpo" style='width: 100%;'>
 
 			<p align="left">
-                <span style="font-size:23px;font-family:Times;color:#000000;">
+                <span style="font-size:22px;font-family:Times;color:#000000;">
                     Participó en el <b>"{{$club->nombre}}”</b> en la actividad <b>{{$evento->nombre}}</b>
                 </span>
-                <br><br>
+                <br>
+                <p align="left">
+                @if($rolactividad == 'Coordinador')
+                    {{$evento->redaccionCoordinador}}
+                @else
+                    {{$evento->redaccionParticipante}}
+                @endif
+                <br>
                 {{$request->input('redaccion')}}
             </p>
             <p align="left">
@@ -92,6 +114,8 @@
                     @endif
                     </br>
                     Duración: <b>{{$asistencia->asistenciaTotal}} horas</b>.
+                    </br>
+                    Rol: <b>{{$rolactividad}}</b>.
                 </span>
             </p>
         
@@ -125,7 +149,6 @@
             </table>
         
 
-            </br>
 
             <table style="width: 100%;">
                 <tr>

@@ -9,8 +9,15 @@
         <?php $__env->slot('title'); ?> Calendario <?php $__env->endSlot(); ?>
     <?php echo $__env->renderComponent(); ?>
     <?php
-        //Obtener los clubes donde idAdmin = id del usuario logueado
-        $clubes = DB::table('clubes')->where('idAdministrador', Auth::user()->id)->get();
+        //Si el usuario es un administrador
+        if(Auth::user()->rol == "administrador"){
+            //Obtener los clubes donde idAdmin = id del usuario logueado
+            $clubes = DB::table('clubes')->where('idAdministrador', Auth::user()->id)->get();
+        }
+        else{
+            //Obtener todos los clubes
+            $clubes = DB::table('clubes')->get();
+        }
         //Obtener los eventos de cada club y guardarlos en un solo string
         $eventos = "";
         foreach ($clubes as $club) {
@@ -25,6 +32,9 @@
 
         //Sustituir }{ por }],[{ para separar cada evento
         $eventosj = str_replace("},{", "}],[{", $eventosj);
+        $eventosj = str_replace("][", "],[", $eventosj);
+        $eventosj = str_replace(",[]", "", $eventosj);
+
         
     ?>
     <input type="hidden" id="eventos_usr" value="<?php echo e($eventosj); ?>"/>

@@ -11,10 +11,22 @@
     $uid = $_GET['uid'];
     //Obtener los datos de la tabla inscripciones con el uid
     $inscripcion = DB::table('inscripciones')->where('id', $uid)->first();
-    //Obtener todas las asistencias del usuario con el id del usuario
-    $asistencias = DB::table('asistencias')->where('idUsuario', $inscripcion->id_alumno)->get();
     //Obtener los datos del club con el id del club
     $club = DB::table('clubes')->where('id', $inscripcion->id_club)->first();
+    //Obtener todos los eventos del club
+    $eventos = DB::table('eventos')->where('id_club', $inscripcion->id_club)->get();
+
+    //Obtener todas las asistencias a los eventos que se tienen
+    $asistencias = array();
+    foreach ($eventos as $evento) {
+        $asistencia = DB::table('asistencias')->where('idEvento', $evento->id)->where('idUsuario', $inscripcion->id_alumno)->first();
+        if($asistencia){
+            array_push($asistencias, $asistencia);
+        }
+    }
+
+    //Obtener todas las asistencias del usuario con el id del usuario en el club $inscripcion->id_club
+    //$asistencias = DB::table('asistencias')->where('idUsuario', $inscripcion->id_alumno)->get();
     //Obtener el usuario de la base de datos por el id
     $user = DB::table('users')->where('id', $inscripcion->id_alumno)->first();
     $texto = $numero = "";

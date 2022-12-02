@@ -26,6 +26,8 @@ return new class extends Migration
             $table->time('horaInicio');
             $table->time('horaFin');
             $table->string('reglas')->nullable();
+            $table->text('redaccionCoordinador')->nullable();
+            $table->text('redaccionParticipante')->nullable();
             $table->timestamps();
         });
     }

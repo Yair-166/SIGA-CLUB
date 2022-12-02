@@ -23,6 +23,22 @@
     //Convertir el string de autoridades en un json
     $autoridades_externo = json_decode($nuevasAutoridades);
 
+    //Obtener todos los registros de la tabla confi_eventos con el id del evento
+    $configuracion = DB::table('confi_eventos')->where('idEvento', $evento->id)->get();
+    //Verificar si en algún registro de $configuracion el campo 'id_coordinador' es igual al id del usuario
+    $coordinador = false;
+    foreach($configuracion as $confi){
+        if($confi->id_coordinador == $usuario->id){
+            $coordinador = true;
+        }
+    }
+    if($coordinador){
+        $rolactividad = 'Coordinador';
+    }else{
+        $rolactividad = 'Participante';
+    }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -69,7 +85,13 @@
                         </span>
                     </td>
                     <td style='width: 18%; float: left'>
-                        <img src="<?php echo e(URL::asset('assets/images/escuelas/'.$request->input('escuela').'.png')); ?>" height="150"/>
+                        <?php
+                            $escuela = str_replace(' ', '', $request->input('escuela'));
+                            //unir https://sigaclub.com/assets/images/escuelas/ con el nombre de la escuela
+                            $url = 'https://sigaclub.com/assets/images/escuelas/'.$escuela.'.png';
+                        ?>
+
+                        <img src="<?php echo e($url); ?>" height="150"/>
                     </td>
                 </tr>
                 <tr>
@@ -106,7 +128,7 @@
                 </span>
             </p>
 
-            <p align="left">
+            <p align="left" style='text-align: justify;'>
                 <span class="ft11">
                     Con el número de boleta <b><?php echo e($usuario->boleta); ?></b>, participó en el <b>"<?php echo e($club->nombre); ?>”</b> en la actividad <b><?php echo e($evento->nombre); ?></b>
                     <?php if($evento->fechaInicio == $evento->fechaFin): ?>
@@ -114,15 +136,20 @@
                     <?php else: ?>
                         en el periodo del <b><?php echo e($evento->fechaInicio); ?></b> al <b><?php echo e($evento->fechaFin); ?></b>
                     <?php endif; ?>
-                    con un horario de <b><?php echo e($evento->horaInicio); ?> a <?php echo e($evento->horaFin); ?></b> horas. Sumando un total de horas de <b><?php echo e($asistencia->asistenciaTotal); ?> horas</b>.
+                    con el rol de <b><?php echo e($rolactividad); ?></b> y con un horario de <b><?php echo e($evento->horaInicio); ?> a <?php echo e($evento->horaFin); ?></b> horas. Sumando un total de horas de <b><?php echo e($asistencia->asistenciaTotal); ?> horas</b>.
                 </span>
         
             </p>
 
             <p align="left">
                 <span class="ft11">
-                    <?php echo e($request->input('redaccion_ipn')); ?>
+                    <?php if($rolactividad == 'Coordinador'): ?>
+                        <?php echo e($evento->redaccionCoordinador); ?>
 
+                    <?php else: ?>
+                        <?php echo e($evento->redaccionParticipante); ?>
+
+                    <?php endif; ?>
                 </span>
             </p>
 
@@ -130,6 +157,13 @@
                 <span class="ft11">
                     No existiendo inconveniente alguno, se emite la presente a los <b><?php echo e($dia); ?> días del mes de <?php echo e($mes); ?> del 
                     <?php echo e($anio); ?></b> a solicitud expresa y para los fines que el (la) interesado (a) convengan.
+                </span>
+            </p>
+
+            <p align="left">
+                <span class="ft11">
+                    <?php echo e($request->input('redaccion_ipn')); ?>
+
                 </span>
             </p>
 

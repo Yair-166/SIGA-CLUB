@@ -42,6 +42,7 @@
                                     <tr>
                                         <th class="sort" data-sort="name" scope="col">Nombre del usuario</th>
                                         <th class="sort" data-sort="owner" scope="col">Correo electronico</th>
+                                        <th class="sort" data-sort="rol" scope="col">Tipo de usuario</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
@@ -65,6 +66,9 @@
                                             </td>
                                             <td class="owner">
                                                 {{ $user->email }}
+                                            </td>
+                                            <td class="rol">
+                                                {{ $user->rol }}
                                             </td>
                                             <td>
                                                 @php

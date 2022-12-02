@@ -157,6 +157,34 @@
                                     <div class="flex-grow-1 overflow-hidden">
                                         <p
                                             class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                            Crear evento</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                    <div>
+                                        <a href="/apps-calendar"
+                                            class="link-secondary text-decoration-underline">
+                                                Crea un nuevo evento.
+                                            </a>
+                                    </div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-soft-primary rounded fs-3">
+                                            <i class="bx bx-calendar text-primary"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div><!-- end card body -->
+                        </div><!-- end card -->
+                    </div><!-- end col -->
+
+                    <div class="col-xl-3 col-md-6">
+                        <!-- card -->
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1 overflow-hidden">
+                                        <p
+                                            class="text-uppercase fw-medium text-muted text-truncate mb-0">
                                             Usuarios</p>
                                     </div>
                                 </div>
@@ -169,6 +197,34 @@
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-soft-primary rounded fs-3">
                                             <i class="bx bx-user-circle text-primary"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div><!-- end card body -->
+                        </div><!-- end card -->
+                    </div><!-- end col -->
+
+                    <div class="col-xl-3 col-md-6">
+                        <!-- card -->
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1 overflow-hidden">
+                                        <p
+                                            class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                            Todos mis eventos</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                    <div>
+                                        <a href="/apps-eventos-list?club=all"
+                                            class="link-secondary text-decoration-underline">
+                                                Lista de todos tus eventos
+                                            </a>
+                                    </div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-soft-primary rounded fs-3">
+                                            <i class="bx bx-calendar-event text-primary"></i>
                                         </span>
                                     </div>
                                 </div>
@@ -240,7 +296,36 @@
             @if (Auth::user()->rol == ('administrador'))
 
                 <div class="row">
-                    <div class="col-xl-12">
+
+                    <div class="col-xl-3 col-md-6">
+                        <!-- card -->
+                        <div class="card card-animate">
+                            <div class="card-body">
+                                <div class="d-flex align-items-center">
+                                    <div class="flex-grow-1 overflow-hidden">
+                                        <p
+                                            class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                            Todos mis eventos</p>
+                                    </div>
+                                </div>
+                                <div class="d-flex align-items-end justify-content-between mt-4">
+                                    <div>
+                                        <a href="/apps-eventos-list?club=all"
+                                            class="link-secondary text-decoration-underline">
+                                                Lista de todos tus eventos
+                                            </a>
+                                    </div>
+                                    <div class="avatar-sm flex-shrink-0">
+                                        <span class="avatar-title bg-soft-primary rounded fs-3">
+                                            <i class="bx bx-calendar-event text-primary"></i>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div><!-- end card body -->
+                        </div><!-- end card -->
+                    </div><!-- end col -->
+
+                    <div class="col-xl-9">
                         <div class="card">
                             <div class="card-header border-0 align-items-center d-flex">
                                 <h4 class="card-title mb-0 flex-grow-1">Constancias expedidas</h4>

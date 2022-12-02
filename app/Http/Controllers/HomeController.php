@@ -241,6 +241,14 @@ class HomeController extends Controller
         $clubes->bienvenida = $request->post('bienvenida');
         $clubes->active = '1';
 
+        //Checar si existe algún club en la tabla clubes con el mismo nombre
+        $club = Clubes::where('nombre', $clubes->nombre)->first();
+        //Si existe un club con el mismo nombre
+        if($club)
+        {
+            return redirect()->back()->with("error","Ya existe un club con el mismo nombre.");
+        }
+
         if ($request->file('foto')) {
             $foto = $request->file('foto');
             $fotoName = time() . '.' . $foto->getClientOriginalExtension();
@@ -296,9 +304,26 @@ class HomeController extends Controller
     public function deleteClub(Request $request)
     {
         $clubes = Clubes::find($request->post('id'));
-        $clubes->active = '0';
+        //Obtener de la tabla eventos todos los registros donde el id_club sea igual al id del club
+        $eventos = Eventos::where('id_club', $clubes->id)->count();
+        if($eventos > 0){
+            $clubes->active = '0';
+            $clubes->save();
+            return redirect()->back()->with('success', 'Club deshabilitado, porque tiene registros, correctamente');
+        }
+        else{
+            $clubes->delete();
+            return redirect()->back()->with('success', 'Club eliminado correctamente');
+        }
+        
+    }
+
+    public function activarClub($id)
+    {
+        $clubes = Clubes::find($id);
+        $clubes->active = '1';
         $clubes->save();
-        return redirect()->back()->with('success', 'Club eliminado correctamente');
+        return redirect()->back()->with('success', 'Club activado correctamente');
     }
 
     public function asistire($id)
@@ -404,7 +429,17 @@ class HomeController extends Controller
         $eventos = new Eventos();
         //Encontrar el evento con $request->post('idEvento_reglas')
         $eventos = Eventos::find($request->post('idEvento_reglas'));
+        
+        $eventos->nombre = $request->post('title');
+        $eventos->tipoAsistencia = $request->post('tipoAsistencia');
+        $eventos->tipo = $request->post('category');
+        $eventos->modalidad = $request->post('modalidad');
+        $eventos->horaInicio = $request->post('horaInicio');
+        $eventos->horaFin = $request->post('horaFin');
+        $eventos->descripcion = $request->post('descripcion');
         $eventos->reglas = $request->post('reglas');
+        $eventos->redaccionCoordinador = $request->post('redaccionCoordinador');
+        $eventos->redaccionParticipante = $request->post('redaccionParticipante');
         $eventos->update();
 
         return redirect()->back()->with('success', 'Reglas del evento actualizadas correctamente');

@@ -23,6 +23,22 @@
     //Convertir el string de autoridades en un json
     $autoridades_externo = json_decode($nuevasAutoridades);
 
+    //Obtener todos los registros de la tabla confi_eventos con el id del evento
+    $configuracion = DB::table('confi_eventos')->where('idEvento', $evento->id)->get();
+    //Verificar si en algún registro de $configuracion el campo 'id_coordinador' es igual al id del usuario
+    $coordinador = false;
+    foreach($configuracion as $confi){
+        if($confi->id_coordinador == $usuario->id){
+            $coordinador = true;
+        }
+    }
+    if($coordinador){
+        $rolactividad = 'Coordinador';
+    }else{
+        $rolactividad = 'Participante';
+    }
+
+
 @endphp
 
 <!DOCTYPE html>
@@ -68,7 +84,13 @@
                         </span>
                     </td>
                     <td style='width: 18%; float: left'>
-                        <img src="{{ URL::asset('assets/images/escuelas/'.$request->input('escuela').'.png') }}" height="150"/>
+                        @php
+                            $escuela = str_replace(' ', '', $request->input('escuela'));
+                            //unir https://sigaclub.com/assets/images/escuelas/ con el nombre de la escuela
+                            $url = 'https://sigaclub.com/assets/images/escuelas/'.$escuela.'.png';
+                        @endphp
+
+                        <img src="{{$url}}" height="150"/>
                     </td>
                 </tr>
                 <tr>
@@ -103,7 +125,7 @@
                 </span>
             </p>
 
-            <p align="left">
+            <p align="left" style='text-align: justify;'>
                 <span class="ft11">
                     Con el número de boleta <b>{{$usuario->boleta}}</b>, participó en el <b>"{{$club->nombre}}”</b> en la actividad <b>{{$evento->nombre}}</b>
                     @if($evento->fechaInicio == $evento->fechaFin)
@@ -111,14 +133,18 @@
                     @else
                         en el periodo del <b>{{$evento->fechaInicio}}</b> al <b>{{$evento->fechaFin}}</b>
                     @endif
-                    con un horario de <b>{{$evento->horaInicio}} a {{$evento->horaFin}}</b> horas. Sumando un total de horas de <b>{{$asistencia->asistenciaTotal}} horas</b>.
+                    con el rol de <b>{{$rolactividad}}</b> y con un horario de <b>{{$evento->horaInicio}} a {{$evento->horaFin}}</b> horas. Sumando un total de horas de <b>{{$asistencia->asistenciaTotal}} horas</b>.
                 </span>
         
             </p>
 
             <p align="left">
                 <span class="ft11">
-                    {{$request->input('redaccion_ipn')}}
+                    @if($rolactividad == 'Coordinador')
+                        {{$evento->redaccionCoordinador}}
+                    @else
+                        {{$evento->redaccionParticipante}}
+                    @endif
                 </span>
             </p>
 
@@ -126,6 +152,12 @@
                 <span class="ft11">
                     No existiendo inconveniente alguno, se emite la presente a los <b>{{$dia}} días del mes de {{$mes}} del 
                     {{$anio}}</b> a solicitud expresa y para los fines que el (la) interesado (a) convengan.
+                </span>
+            </p>
+
+            <p align="left">
+                <span class="ft11">
+                    {{$request->input('redaccion_ipn')}}
                 </span>
             </p>
 

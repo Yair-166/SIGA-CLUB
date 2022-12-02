@@ -2,6 +2,9 @@
 @section('title')
     @lang('translation.overview')
 @endsection
+@section('css')
+    <link href="{{ URL::asset('/assets/libs/fullcalendar/fullcalendar.min.css') }}" rel="stylesheet">
+@endsection
 @section('content')
 @php
     //Obtener el valor de la variable evento desde la url
@@ -50,8 +53,6 @@
         }
     }
     
-
-    
     //Obtener todas las inscripciones del club
     $inscripciones = DB::table('inscripciones')->where('id_club', $club->id)->get();
     //Guardar en un array los usuarios que estan inscritos al club
@@ -66,6 +67,11 @@
     $archivos = DB::table('archivos')->where('idEvento', $getId)->get();
     //Obtener todos los registros de la tabla evidencias donde idEvento sea igual a getId
     $evidencias = DB::table('evidencias')->where('idEvento', $getId)->get();
+
+    //Obtener las filas de la tabla asistencias_previstas donde id_evento sea igual a getId
+    $asistencias_previstas = DB::table('asistencias_previstas')->where('id_evento', $getId)->get();
+
+    $correos = "";
 
 @endphp
     <div class="row">
@@ -110,7 +116,7 @@
                                     Archivos
                                 </a>
                             </li>
-                            @if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id)
+                            @if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super")
                                 <li class="nav-item">
                                     <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#project-activities" role="tab">
                                         Evidencias
@@ -119,6 +125,16 @@
                                 <li class="nav-item">
                                     <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#project-team" role="tab">
                                         Configuración
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#edit-event" role="tab">
+                                        Editar evento
+                                    </a>
+                                </li>
+                                <li class="nav-item">
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#participantes" role="tab">
+                                        Participantes confirmados
                                     </a>
                                 </li>
                             @endif
@@ -379,7 +395,8 @@
                                             </form>
                                         </div>
 
-                                        <div class="row">
+                                        <div class="pt-3 border-top border-top-dashed mt-4">
+                                            <h6 class="mb-3 fw-semibold text-uppercase">Editar evento</h6>
                                             <form action="{{ route('reglasEvento') }}" method="POST">
                                                 @csrf
                                                 <div class="col-lg-6">
@@ -511,6 +528,252 @@
 
                 </div>
                 <!-- end tab pane -->
+
+                <div class="tab-pane fade" id="edit-event" role="tabpanel">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="text-muted">
+                                        <h6 class="mb-3 fw-semibold text-uppercase">Editar evento</h6>
+                                        <div class="row">
+                                            <form action="{{ route('reglasEvento') }}" method="POST">
+                                                @csrf
+
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Nombre del evento</label>
+                                                        <input class="form-control" placeholder="Nombre del evento" type="text" name="title" value="{{ $evento->nombre }}" required/>
+                                                        <div class="invalid-feedback">Proporcione un nombre de evento válido</div>
+                                                    </div>
+                                                </div><!--end col-->
+                                                
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Tipo</label>
+                                                        <select class="form-select" name="category" id="event-category" required>
+                                                            <option value="Clase">Clase</option>
+                                                            <option value="Campamento">Campamento</option>
+                                                            <option value="Curso">Curso</option>
+                                                            <option value="Seminario">Seminario</option>
+                                                            <option value="Entrenamiento">Entrenamiento</option>
+                                                            <option value="Evaluación">Evaluación</option>
+                                                            <option value="Concurso">Concurso</option>
+                                                            <option value="Torneo">Torneo</option>
+                                                            <option value="Conferencia">Conferencia</option>
+                                                            <option value="Exposición">Exposición</option>
+                                                            <option value="Exhibición">Exhibición</option>
+                                                        </select>
+                                                        <div class="invalid-feedback">Por favor, seleccione una categoria valida</div>
+                                                    </div>
+                                                </div><!--end col-->
+
+                                                <div class="col-12">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Tipo de asitencia</label>
+                                                                <select class="form-select" name="tipoAsistencia" id="event-astype" required>
+                                                                    <option value="Total">Total</option>
+                                                                    <option value="Parcial">Parcial</option>
+                                                                </select>
+                                                                <div class="invalid-feedback">Por favor, seleccione un tipo valido</div>
+                                                            </div>
+                                                        </div><!--end col-->
+                                                        <div class="col-6">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Modalidad</label>
+                                                                <select class="form-select" name="modalidad" id="event-modalidad" required>
+                                                                    <option value="Presencial">Presencial</option>
+                                                                    <option value="A distancia">A distancia</option>
+                                                                    <option value="Híbrida">Híbrida</option>
+                                                                </select>
+                                                                <div class="invalid-feedback">Por favor, seleccione una modalidad valida</div>
+                                                            </div>
+                                                        </div><!--end col-->
+                                                    </div>
+                                                </div><!--end col-->
+
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <label>Fecha del evento</label>
+                                                        <div class="input-group">
+                                                            <input name="fecha" type="text" id="event-start-date" class="form-control flatpickr flatpickr-input" placeholder="Seleccione una fecha" readonly required>
+                                                            <span class="input-group-text"><i class="ri-calendar-event-line"></i></span>
+                                                        </div>
+                                                    </div>
+                                                </div><!--end col-->
+                                                <div class="col-12" id="time">
+                                                    <div class="row">
+                                                        <div class="col-6">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Hora de inicio</label>
+                                                                <div class="input-group">
+                                                                    <input name="horaInicio" id="timepicker1" type="text"
+                                                                        class="form-control flatpickr flatpickr-input" placeholder="Seleccione la hora de inicio" value="{{ $evento->horaInicio }}" readonly>
+                                                                    <span class="input-group-text"><i class="ri-time-line"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                        <div class="col-6">
+                                                            <div class="mb-3">
+                                                                <label class="form-label">Hora de fin</label>
+                                                                <div class="input-group">
+                                                                    <input name="horaFin" id="timepicker2" type="text" class="form-control flatpickr flatpickr-input" placeholder="Seleccione la hora de fin" value="{{ $evento->horaFin }}" readonly>
+                                                                    <span class="input-group-text"><i class="ri-time-line"></i></span>
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div><!--end col-->
+                                                <div class="col-12" hidden>
+                                                    <div class="mb-3">
+                                                        <label for="event-location">Lugar del evento</label>
+                                                        <div>
+                                                            <input type="text" class="form-control" name="event-location" id="event-location" placeholder="Lugar del evento">
+                                                        </div>
+                                                    </div>
+                                                </div><!--end col-->
+                                                <input type="hidden" id="eventid" name="eventid" value="" />
+                                                <div class="col-12">
+                                                    <div class="mb-3">
+                                                        <label class="form-label">Descripción</label>
+                                                        <textarea name="descripcion" class="form-control" id="event-description" placeholder="Descripción del evento" rows="3" spellcheck="false" >{{ $evento->descripcion }}</textarea>
+                                                    </div>
+                                                </div><!--end col-->
+
+                                                <div class="col-lg-12">
+                                                    <div class="mb-3">
+                                                        <input type="hidden" name="idEvento_reglas" value="{{ $evento->id }}">
+                                                        <label for="formrow-firstname-input" class="form-label">Reglas de asistencia al evento</label>
+                                                        <textarea name="reglas" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Añade los requisitos que debe cumplir el participante para formar parte de esta actividad.">{{$evento->reglas}}</textarea>
+                                                    </div>
+                                                </div>
+
+                                                 <div class="col-lg-12">
+                                                    <div class="mb-3">
+                                                        <label for="formrow-firstname-input" class="form-label">Redaccion para constancias de coordinadores</label>
+                                                        <textarea name="redaccionCoordinador" class="form-control" id="exampleFormControlTextarea1" rows="3" 
+                                                        placeholder="Añade una redacción que se verá cuando se generen las constancias de los coordinadores.">{{$evento->redaccionCoordinador}}</textarea>
+                                                    </div>
+                                                </div>
+
+                                                 <div class="col-lg-12">
+                                                    <div class="mb-3">
+                                                        <label for="formrow-firstname-input" class="form-label">Redaccion para constancias de participantes</label>
+                                                        <textarea name="redaccionParticipante" class="form-control" id="exampleFormControlTextarea1" rows="3" 
+                                                        placeholder="Añade una redacción que se verá cuando se generen las constancias de los participantes.">{{$evento->redaccionParticipante}}</textarea>
+                                                    </div>
+                                                </div>
+
+                                                <div class="col-lg-6">
+                                                    <div class="mb-3">
+                                                        <br>
+                                                        <button type="submit" class="btn btn-primary ">Guardar</button>
+                                                    </div>
+                                                </div>
+                                            </form>
+                                        </div>
+                                        
+
+
+                                    </div>
+                                </div>
+                                <!-- end card body -->
+                            </div>
+                            <!-- end card -->
+                        </div>
+                        <!-- ene col -->
+                        <div class="col-xl-3 col-lg-4">
+                            
+                            <div class="card">
+                                <div class="card-header align-items-center d-flex border-bottom-dashed">
+                                    <h4 class="card-title mb-0 flex-grow-1">Coordinador (es)</h4>
+                                </div>
+                                @foreach($coordinadoresNombres as $coordinador)
+                                    <div class="vstack gap-3">
+                                        <div class="d-flex align-items-center">
+                                            <div class="avatar-xs flex-shrink-0 me-3">
+                                                <img src="{{ URL::asset('images/'.$coordinador->avatar) }}" alt=""
+                                                    class="img-fluid rounded-circle" style="aspect-ratio: 1/1;;">
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <h5 class="fs-13 mb-0"><a href="#" class="text-body d-block">
+                                                {{$coordinador->name . ' ' . $coordinador->apaterno . ' ' . $coordinador->amaterno}}</a></h5>
+                                                </a></h5>
+                                            </div>
+                                        </div>
+                                        <!-- end member item -->
+                                    </div>
+                                    <br>
+                                @endforeach
+                            </div>
+                            <!-- end card -->
+                        </div>
+                        <!-- end col -->
+                    </div>
+                    <!-- end row -->
+                    <!-- end team list -->
+                </div>
+                <!-- end tab pane -->
+
+                <div class="tab-pane fade" id="participantes" role="tabpanel">
+                    <div class="row">
+                        <div class="col-xl-12 col-lg-8">
+                            <div class="d-flex align-items-center mb-4">
+                                <h5 class="card-title flex-grow-1">Participantes confirmados</h5>
+                                <button type="button" class="btn btn-primary" onclick="copiarAlPortapapeles('correos')">
+                                    Copiar correos
+                                </button>
+                            </div>
+                            <div class="table-responsive table-card">
+                                <table class="table table-borderless align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Nombre</th>
+                                            <th scope="col">Correo electrónico</th>
+                                            <th scope="col">Copiar correo electrónico</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($asistencias_previstas as $aspre)
+                                            @php
+                                                //Obtener los datos del usuario que asistirá al evento
+                                                $userpre = DB::table('users')->where('id', $aspre->id_alumno)->first();
+                                                $correos = $correos . "," . $userpre->email;
+                                            @endphp
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="flex-shrink-0">
+                                                            <img src="{{ URL::asset('images/' . $userpre->avatar) }}" alt="" class="avatar-xxs rounded-circle image_src object-cover">
+                                                        </div>
+                                                        <div class="flex-grow-1 ms-2 name">
+                                                            {{$userpre->name . ' ' . $userpre->apaterno . ' ' . $userpre->amaterno}}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td id="{{$loop->iteration}}" value="{{$userpre->email}}"><a href="mailto:{{$userpre->email}}">{{$userpre->email}}</a></td>
+                                                <td>
+                                                    <button type="button" class="btn btn-soft-primary btn-sm" onclick="copiarAlPortapapeles({{$loop->iteration}})"><i
+                                                            class="ri-copy-2-fill me-1 align-bottom"></i> Copiar</button>
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                            <input type="hidden" id="correos" value="{{$correos}}">
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                        <!-- ene col -->
+                    </div>
+                    <!-- end row -->
+                    <!-- end team list -->
+                </div>
+                <!-- end tab pane -->
+
+
+
             </div>
         </div>
         <!-- end col -->
@@ -520,4 +783,15 @@
 @section('script')
     <script src="{{ URL::asset('assets/js/pages/project-overview.init.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/pages/calendar.init.js') }}"></script>
+    <script>
+        function copiarAlPortapapeles(id) {
+            var aux = document.createElement("input");
+            aux.setAttribute("value", document.getElementById(id).getAttribute("value"));
+            document.body.appendChild(aux);
+            aux.select();
+            document.execCommand("copy");
+            document.body.removeChild(aux);
+        }
+    </script>
 @endsection
