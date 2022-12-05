@@ -13,6 +13,8 @@ use App\Models\Evidencias;
 use App\Models\Constancias;
 use App\Models\Asistencias;
 use App\Models\AsistenciasPrevistas;
+use App\Mail\Bienvenida;
+use App\Mail\AltaUsuario;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Hash;
@@ -20,6 +22,7 @@ use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Session;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller
 {
@@ -62,6 +65,48 @@ class HomeController extends Controller
         } else {
             return redirect()->back();
         }
+    }
+
+    //Para correos
+    public function emailBienvenida($idalumno, $idclub)
+    {
+        $alumno = User::find($idalumno);
+        $club = Clubes::find($idclub);
+
+        $asunto = 'Bienvenido al ' . $club->nombre;
+        $email = $alumno->email;
+        $nombre = $alumno->name . " " . $alumno->apaterno . " " . $alumno->amaterno;
+        $mensaje = $club->bienvenida;
+        $clubname = $club->nombre;
+
+        //Enviar correo de bienvenida
+        $data = array(
+            'asunto' => $asunto,
+            'email' => $email,
+            'nombre' => $nombre,
+            'mensaje' => $mensaje,
+            'clubname' => $clubname,
+        );
+
+        //Mail::to($email)->send(new Bienvenida($data));
+        Mail::to($email)->send(new Bienvenida($data));
+    }
+
+    public function emailAltaUsuario($email, $nombre)
+    {
+        $asunto = 'Bienvenido a SIGA-Club';
+        $mensaje = 'https://panel.sigaclub.com';
+
+        //Enviar correo de bienvenida
+        $data = array(
+            'asunto' => $asunto,
+            'email' => $email,
+            'nombre' => $nombre,
+            'mensaje' => $mensaje,
+        );
+
+        //Mail::to($email)->send(new Bienvenida($data));
+        Mail::to($email)->send(new AltaUsuario($data));
     }
 
     //Para usuarios
@@ -368,6 +413,10 @@ class HomeController extends Controller
         $club = Clubes::find($request->post('id_club'));
         $mensaje = $club->bienvenida;
 
+        //Llamar a la funcion emailBienvenida y enviarle el id_alumno y id_club
+        $this->emailBienvenida($request->post('id_alumno'), $request->post('id_club'));
+
+
         return redirect()->back()->with('success', $mensaje);
     }
 
@@ -618,4 +667,6 @@ class HomeController extends Controller
 
         return redirect()->back()->with('success', 'Acuse creado correctamente');
     }
+
+    
 }

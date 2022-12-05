@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Auth;
+use App\Mail\Bienvenida;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -71,3 +72,7 @@ Route::post('/pdf2/{id}/{sel}', [App\Http\Controllers\HomeController::class, 'pd
 
 //Acuses
 Route::post('/createAcuse', [App\Http\Controllers\HomeController::class, 'createAcuse'])->name('createAcuse');
+
+//Correos
+//get emailBienvenida con 2 parametros idalumno y idclub
+Route::get('/emailBienvenida/{id}/{idclub}', [App\Http\Controllers\HomeController::class, 'emailBienvenida'])->name('emailBienvenida');

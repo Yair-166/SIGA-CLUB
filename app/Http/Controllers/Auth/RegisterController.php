@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Auth;
 
 use App\Http\Controllers\Controller;
+use App\Http\Controllers\HomeController;
 use App\Providers\RouteServiceProvider;
 use App\Models\User;
 use Illuminate\Foundation\Auth\RegistersUsers;
@@ -75,6 +76,10 @@ class RegisterController extends Controller
             $avatar->move($avatarPath, $avatarName);
         }
 
+        //Llamar a la función emailAltaUsuario del HomeController
+        $homeController = new HomeController();
+        $homeController->emailAltaUsuario($data['email'], $data['name']);
+
         return User::create([
             'name' => $data['name'],
             'apaterno' => $data['apaterno'],
@@ -83,7 +88,6 @@ class RegisterController extends Controller
             'password' => Hash::make($data['password']),
             'rol' => $data['rol'],
             'avatar' =>  $avatarName,
-            $data['rol'] = "administrador",
             'active' => '1',
         ]);
     }

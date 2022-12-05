@@ -33,6 +33,12 @@
         //Sustituir ][ por ],[ para separar cada evento
         $eventosj = str_replace("][", "],[", $eventosj);
         $eventosj = str_replace(",[]", "", $eventosj);
+
+        //Obtener las filas de la tabla asistencias_previstas donde id_alumno sea igual al id del usuario logueado
+        //$asistencias_previstas = DB::table('asistencias_previstas')->where('id_alumno', Auth::user()->id)->get();
+        //$asistencias_previstasj = json_encode($asistencias_previstas);
+        
+
         
     @endphp
     @if (session('error'))
