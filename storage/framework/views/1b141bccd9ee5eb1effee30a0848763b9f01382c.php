@@ -40,6 +40,9 @@
     $coordinador = DB::table('users')->where('id', $club->idAdministrador)->first();
     array_push($coordinadoresNombres, $coordinador);
 
+    //Obtener la fila con id_coordinador = -1
+    $confipriv = DB::table('confi_eventos')->where('idEvento', $getId)->where('id_coordinador', "-1")->first();
+
     //Si el numero de filas es igual a 1
     if($confi_eventos > 1){
         //Obtener los coordinadores del evento en la tabla confi_eventos
@@ -72,6 +75,11 @@
     $asistencias_previstas = DB::table('asistencias_previstas')->where('id_evento', $getId)->get();
 
     $correos = "";
+
+    //Obtener la fecha actual en formato 2022-12-05
+    $fechaActual = date("Y-m-d");
+    //Obtener la hora actual en formato 24 horas de México
+    $horaActual = date("H:i:s", strtotime("-6 hours"));
 
 ?>
     <div class="row">
@@ -345,7 +353,7 @@
                                                         </td>
                                                         <td><?php echo e($evidencia->nota); ?></td>
                                                         <td>
-                                                            <a href="<?php echo e(route('eliminarEvidencia', $evidencia->id)); ?>" class="btn btn-sm btn-soft-danger"><i
+                                                            <a href="<?php echo e(route('tooglePrivate', $archivo->id)); ?>" class="btn btn-sm btn-soft-danger"><i
                                                                     class="ri-delete-bin-2-line"></i></a>
                                                         </td>
                                                     </tr>
@@ -494,28 +502,35 @@
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                             </div>
                             <!-- end card -->
-                            <div class="card  align-items-center">
-                                <div class="card-header align-items-center d-flex border-bottom-dashed">
-                                    <h5 class="fs-13 mb-0">Activar asistencia</h5>
-                                </div>
-                                <div class="card-body">
-                                    <div class="vstack gap-3">
-                                        <div class="d-flex align-items-center">
-                                            <a href="<?php echo e(URL::asset('/pages-qr?uid='.$evento->id)); ?>" class="btn btn-primary btn-sm">Activar</a>
-                                            <br>
+                            <?php if($evento->fechaInicio <= $fechaActual && $evento->fechaFin >= $fechaActual && $evento->horaInicio <= $horaActual && $evento->horaFin >= $horaActual): ?>
+                                <div class="card  align-items-center">
+                                    <div class="card-header align-items-center d-flex border-bottom-dashed">
+                                        <h5 class="fs-13 mb-0">Activar asistencia</h5>
+                                    </div>
+                                    <div class="card-body">
+                                        <div class="vstack gap-3">
+                                            <div class="d-flex align-items-center">
+                                                <a href="<?php echo e(URL::asset('/pages-qr?uid='.$evento->id)); ?>" class="btn btn-primary btn-sm">Activar</a>
+                                                <br>
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
-                            </div>
-                            <!-- end card -->
+                                <!-- end card -->
+                            <?php endif; ?>
+                                        
                             <div class="card  align-items-center">
                                 <div class="card-header align-items-center d-flex border-bottom-dashed">
-                                    <h5 class="fs-13 mb-0">QR Privado</h5>
+                                    <?php if($confipriv->isPrivate == "1"): ?>
+                                        <h5 class="fs-13 mb-0">QR Público</h5>
+                                    <?php else: ?>
+                                        <h5 class="fs-13 mb-0">QR Privado</h5>
+                                    <?php endif; ?>
                                 </div>
                                 <div class="card-body">
                                     <div class="vstack gap-3">
                                         <div class="d-flex align-items-center">
-                                            <a href="pages-qr" target="_blank" class="btn btn-primary btn-sm">Activar</a>
+                                            <a href="<?php echo e(route('tooglePrivate', [$confipriv->id, $confipriv->isPrivate])); ?>" class="btn btn-primary btn-sm">Cambiar</a>
                                             <br>
                                         </div>
                                     </div>

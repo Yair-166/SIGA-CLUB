@@ -35,8 +35,8 @@
         $eventosj = str_replace(",[]", "", $eventosj);
 
         //Obtener las filas de la tabla asistencias_previstas donde id_alumno sea igual al id del usuario logueado
-        //$asistencias_previstas = DB::table('asistencias_previstas')->where('id_alumno', Auth::user()->id)->get();
-        //$asistencias_previstasj = json_encode($asistencias_previstas);
+        $asistencias_previstas = DB::table('asistencias_previstas')->where('id_alumno', Auth::user()->id)->get();
+        $asistencias_previstasj = json_encode($asistencias_previstas);
         
 
         
@@ -57,6 +57,7 @@
         </div>
     @endif
     <input type="hidden" id="eventos_usr" value="{{$eventosj}}"/>
+    <input type="hidden" id="asistencias_previstas" value="{{$asistencias_previstasj}}"/>
     <input type="hidden" id="rol_usr" value="{{Auth::user()->rol}}"/>
     <div class="row">
         <div class="col-12">

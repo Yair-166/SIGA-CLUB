@@ -467,7 +467,7 @@ class HomeController extends Controller
         $confi_eventos->secondId = NULL;
         $confi_eventos->ultimoQR = NULL;
         $confi_eventos->qrActual = NULL;
-        $confi_eventos->isPrivate = 0;
+        $confi_eventos->isPrivate = 1;
         $confi_eventos->save();
 
         return redirect()->back()->with('success', 'Evento creado correctamente');
@@ -504,11 +504,25 @@ class HomeController extends Controller
         $confi_eventos->id_coordinador = $request->post('id_coordinador');
         $confi_eventos->ultimoQR = "0";
         $confi_eventos->qrActual = "0";
-        $confi_eventos->isPrivate = 0;
+        $confi_eventos->isPrivate = 1;
 
         $confi_eventos->save();
         
         return redirect()->back()->with('success', 'Coordinador asignado correctamente');
+    }
+
+    public function tooglePrivate($id, $state)
+    {
+        $confi_eventos = new Confi_eventos();
+        $confi_eventos = Confi_eventos::find($id);
+        if($state == "1")
+            $confi_eventos->isPrivate = 0;
+        else
+            $confi_eventos->isPrivate = 1;
+        
+        $confi_eventos->update();
+
+        return redirect()->back()->with('success', 'Evento actualizado correctamente');
     }
 
     //Para autoridades

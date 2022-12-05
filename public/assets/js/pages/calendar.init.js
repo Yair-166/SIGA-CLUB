@@ -49,6 +49,22 @@ document.addEventListener("DOMContentLoaded", function () {
         ];
     }
     else{
+        var existen_previstas = false;
+        //Si existe el elemento asistencias_previstas en el html
+        if(document.getElementById('asistencias_previstas')){
+            var asistencias_previstas = document.getElementById('asistencias_previstas').value;
+            var asistencias_previstas = JSON.parse(asistencias_previstas);
+            console.log(asistencias_previstas);
+            if(asistencias_previstas.length > 0){
+                existen_previstas = true;
+            }
+            var ides = [];
+            for(var i=0; i<asistencias_previstas.length; i++){
+                ides.push(asistencias_previstas[i].id_evento);
+            }
+            console.log(ides);
+        }
+
         //Partir el string en un array de objetos
         var eventos_usr = eventos_usr.split("],[");
         //Quitar las primeras y ultimas comillas
@@ -121,12 +137,21 @@ document.addEventListener("DOMContentLoaded", function () {
             //Eliminar el substring \\\" de la cadena
             reglas = reglas.substring(0, reglas.length - 2);
 
+            var className = "bg-soft-info";
+            
+            //Verificar si el id del evento esta en el array de ides
+            if(existen_previstas){
+                if(ides.includes(id)){
+                    className = "bg-soft-warning";
+                }
+            }
+
             var evento = {
                 id: id,
                 title: title,
                 start: start,
                 end: end,
-                className: "bg-soft-info",
+                className: className,
                 allDay: true,
                 description: description,
                 reglas: reglas
