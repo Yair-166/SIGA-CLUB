@@ -76,8 +76,10 @@
 
     $correos = "";
 
-    //Obtener la fecha actual en formato 2022-12-05
-    $fechaActual = date("Y-m-d");
+    //Obtener la fecha actual con todo y hora
+    $fechaActualConHora = date("Y-m-d H:i:s", strtotime("-6 hours"));
+    //Truncar la fecha actual a solo el año, mes y dia
+    $fechaActual = date("Y-m-d", strtotime($fechaActualConHora));
     //Obtener la hora actual en formato 24 horas de México
     $horaActual = date("H:i:s", strtotime("-6 hours"));
 
