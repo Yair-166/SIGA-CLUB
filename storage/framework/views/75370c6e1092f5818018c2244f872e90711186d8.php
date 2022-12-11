@@ -34,6 +34,7 @@
         $eventosj = str_replace("},{", "}],[{", $eventosj);
         $eventosj = str_replace("][", "],[", $eventosj);
         $eventosj = str_replace(",[]", "", $eventosj);
+        $eventosj = str_replace("[],", "", $eventosj);
 
         
     ?>

@@ -88,17 +88,6 @@
                                     <div class="row align-items-center team-row">
                                         <div class="col team-settings">
                                             <div class="row">
-                                                <div class="col">
-                                                    <div class="bookmark-icon flex-shrink-0 me-2">
-                                                        <input type="checkbox" id="favourite1"
-                                                            class="bookmark-input bookmark-hide">
-                                                        <label for="favourite1" class="btn-star">
-                                                            <svg width="20" height="20">
-                                                                <use xlink:href="#icon-star" />
-                                                            </svg>
-                                                        </label>
-                                                    </div>
-                                                </div>
                                                 <div class="col text-end dropdown">
                                                     <ul class="dropdown-menu dropdown-menu-end"
                                                         aria-labelledby="dropdownMenuLink2">

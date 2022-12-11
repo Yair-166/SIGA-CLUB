@@ -6,6 +6,14 @@
     <link href="<?php echo e(URL::asset('/assets/libs/fullcalendar/fullcalendar.min.css')); ?>" rel="stylesheet">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
+    <?php $__env->startComponent('components.breadcrumb'); ?>
+        <?php $__env->slot('li_1'); ?>
+            Clubes
+        <?php $__env->endSlot(); ?>
+        <?php $__env->slot('title'); ?>
+            Eventos
+        <?php $__env->endSlot(); ?>
+    <?php echo $__env->renderComponent(); ?>
 <?php
     //Obtener el valor de la variable evento desde la url
     $getId = $_GET['evento'];
@@ -123,13 +131,13 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#project-documents" role="tab">
-                                    Archivos
+                                    Material de apoyo
                                 </a>
                             </li>
                             <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
                                 <li class="nav-item">
                                     <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#project-activities" role="tab">
-                                        Evidencias
+                                        Evidencias de participación
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -222,7 +230,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-4">
-                                <h5 class="card-title flex-grow-1">Archivos</h5>
+                                <h5 class="card-title flex-grow-1">Material de apoyo</h5>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -231,7 +239,7 @@
                                             <thead class="table-light">
                                                 <tr>
                                                     <th scope="col">Nombre del archivo</th>
-                                                    <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id): ?>
+                                                    <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
                                                         <th scope="col">Ocultar</th>
                                                         <th scope="col">Eliminar</th>
                                                     <?php endif; ?>
@@ -240,7 +248,7 @@
                                             <tbody>
                                                 <?php $__currentLoopData = $archivos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $archivo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                     <?php if($archivo->isPrivate == 0): ?>
-                                                        <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id): ?>
+                                                        <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
                                                             <tr>
                                                                 <td>
                                                                     <div class="d-flex align-items-center">
@@ -290,7 +298,7 @@
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id): ?>
+                                                            <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
                                                                 <td>
                                                                     
                                                                     <?php if($archivo->isPrivate == 1): ?>
@@ -322,7 +330,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-4">
-                                <h5 class="card-title flex-grow-1">Evidencias</h5>
+                                <h5 class="card-title flex-grow-1">Evidencias de participación</h5>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -430,13 +438,13 @@
                                         <div class="pt-3 border-top border-top-dashed mt-4">
                                             <form action="<?php echo e(route('subirArchivo')); ?>" method="POST" enctype="multipart/form-data">
                                                 <?php echo csrf_field(); ?>
-                                                <h4 class="card-title mb-0 flex-grow-1">Recursos</h4>
+                                                <h6 class="mb-3 fw-semibold text-uppercase">Material de apoyo</h6>
                                                 <div class="row g-3">
                                                     <div class="flex-shrink-0">
                                                         <input type="hidden" name="idClub" value="<?php echo e($evento->id_club); ?>">
                                                         <input type="hidden" name="idEvento" value="<?php echo e($evento->id); ?>">
                                                         <input type="hidden" name="isPrivate" value="0">
-                                                        <label class="form-label">Agregar recurso para descargar</label>
+                                                        <label class="form-label">Agregar material de apoyo para descargar</label>
                                                         <input name="nombreArchivo" type="text" class="form-control col-sm-6" placeholder="Nombre del recurso">
                                                         <hr>
                                                         <input name="archivo" type="file" class="form-control col-sm-6" id="formFile">
@@ -452,7 +460,7 @@
                                         <div class="pt-3 border-top border-top-dashed mt-4">
                                             <form action="<?php echo e(route('subirEvidencia')); ?>" method="POST" enctype="multipart/form-data">
                                                 <?php echo csrf_field(); ?>
-                                                <h6 class="mb-3 fw-semibold text-uppercase">Subir evidencias</h6>
+                                                <h6 class="mb-3 fw-semibold text-uppercase">Subir evidencias de participación</h6>
                                                 <div class="row g-3">
                                                     <div class="flex-shrink-0">
                                                         <input type="hidden" name="idClub_ev" value="<?php echo e($evento->id_club); ?>">

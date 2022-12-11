@@ -158,7 +158,7 @@
                                             <a href="apps-crm-contacts" class="nav-link" ><?php echo app('translator')->get('translation.contacts'); ?></a>
                                         </li>
                                         <li class="nav-item">
-                                            <a href="apps-crm-companies" class="nav-link" ><?php echo app('translator')->get('translation.companies'); ?></a>
+                                            <a href="clubes-catalogo" class="nav-link" ><?php echo app('translator')->get('translation.companies'); ?></a>
                                         </li>
                                         <li class="nav-item">
                                             <a href="apps-crm-deals" class="nav-link" ><?php echo app('translator')->get('translation.deals'); ?></a>

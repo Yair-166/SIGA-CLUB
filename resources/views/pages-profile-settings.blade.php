@@ -146,7 +146,7 @@
                                     <div class="col-lg-6">
                                         <div class="form-check form-switch form-switch-md" dir="ltr">
                                             <input type="checkbox" class="form-check-input" id="customSwitchsizemd" onclick="habilitar()">
-                                            <label class="form-check-label" for="customSwitchsizemd">Soy Politécnivo</label>
+                                            <label class="form-check-label" for="customSwitchsizemd">Soy Politécnico</label>
                                         </div>
                                     </div>
                                     <!--end col-->

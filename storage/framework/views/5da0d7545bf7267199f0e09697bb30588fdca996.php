@@ -15,6 +15,11 @@
     <?php
         //Obtener todos los clubes de la base de datos donde el usuario sea el administrador
         $clubes = DB::table('clubes')->where('idAdministrador', Auth::user()->id)->get();
+        //si el usuario tiene rol super
+        if(Auth::user()->rol == 'super'){
+            //Obtener todos los clubes de la base de datos
+            $clubes = DB::table('clubes')->get();
+        }
     ?>
 
     <div class="row mt-4">
@@ -30,10 +35,10 @@
                 <div class="card">
                     <div class="card-body text-center p-4">
                         <img class="rounded-circle header-profile-user" src="<?php echo e(URL::asset('images/' . $club->foto)); ?>" alt="" height="45">
-                        <h5 class="mb-1 mt-4"><a href="<?php echo e(URL::asset('/apps-clubes-admin-details')); ?>" class="link-secondary">
+                        <h5 class="mb-1 mt-4">
                             <?php echo e($club->nombre); ?>
 
-                        </a></h5>
+                        </h5>
                         <p class="text-muted mb-4"><?php echo e($club->descripcion); ?></p>
                         <div class="row mt-4">
                             <div class="col-lg-6 border-end-dashed border-end">

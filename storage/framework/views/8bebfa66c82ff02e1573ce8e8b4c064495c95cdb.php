@@ -3,6 +3,14 @@
     <?php echo app('translator')->get('translation.overview'); ?>
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
+    <?php $__env->startComponent('components.breadcrumb'); ?>
+        <?php $__env->slot('li_1'); ?>
+            SIGA
+        <?php $__env->endSlot(); ?>
+        <?php $__env->slot('title'); ?>
+            Clubes
+        <?php $__env->endSlot(); ?>
+    <?php echo $__env->renderComponent(); ?>
 <?php
     //Obtener el valor de la variable evento desde la url
     $getId = $_GET['club'];
@@ -79,19 +87,19 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="nombre" class="form-label">Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo e($club->nombre); ?>">
+                                            <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo e($club->nombre); ?>" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="nomenclatura" class="form-label">Nomenclatura</label>
-                                            <input type="text" class="form-control" id="nomenclatura" name="nomenclatura" value="<?php echo e($club->nomenclatura); ?>">
+                                            <label for="nomenclatura" class="form-label">Prefijo para constancias (Texto que llevarán las constancias expedidas por el club)</label>
+                                            <input type="text" class="form-control" id="nomenclatura" name="nomenclatura" value="<?php echo e($club->nomenclatura); ?>" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="localizacion" class="form-label">Localización</label>
-                                            <input type="text" class="form-control" id="localizacion" name="localizacion" value="<?php echo e($club->localizacion); ?>">
+                                            <input type="text" class="form-control" id="localizacion" name="localizacion" value="<?php echo e($club->localizacion); ?>" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="facebook" class="form-label">Link de facebook</label>
-                                            <input type="text" class="form-control" id="facebook" name="localizacion" value="<?php echo e($club->facebook); ?>">
+                                            <input type="text" class="form-control" id="facebook" name="facebook" value="<?php echo e($club->facebook); ?>">
                                         </div>
                                         <div class="mb-3">
                                             <label for="descripcion" class="form-label">Descripción</label>

@@ -6,6 +6,14 @@
     <link href="{{ URL::asset('/assets/libs/fullcalendar/fullcalendar.min.css') }}" rel="stylesheet">
 @endsection
 @section('content')
+    @component('components.breadcrumb')
+        @slot('li_1')
+            Clubes
+        @endslot
+        @slot('title')
+            Eventos
+        @endslot
+    @endcomponent
 @php
     //Obtener el valor de la variable evento desde la url
     $getId = $_GET['evento'];
@@ -123,13 +131,13 @@
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#project-documents" role="tab">
-                                    Archivos
+                                    Material de apoyo
                                 </a>
                             </li>
                             @if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super")
                                 <li class="nav-item">
                                     <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#project-activities" role="tab">
-                                        Evidencias
+                                        Evidencias de participación
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -221,7 +229,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-4">
-                                <h5 class="card-title flex-grow-1">Archivos</h5>
+                                <h5 class="card-title flex-grow-1">Material de apoyo</h5>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -230,7 +238,7 @@
                                             <thead class="table-light">
                                                 <tr>
                                                     <th scope="col">Nombre del archivo</th>
-                                                    @if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id)
+                                                    @if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super")
                                                         <th scope="col">Ocultar</th>
                                                         <th scope="col">Eliminar</th>
                                                     @endif
@@ -239,7 +247,7 @@
                                             <tbody>
                                                 @foreach ($archivos as $archivo)
                                                     @if($archivo->isPrivate == 0)
-                                                        @if (Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id)
+                                                        @if (Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super")
                                                             <tr>
                                                                 <td>
                                                                     <div class="d-flex align-items-center">
@@ -289,7 +297,7 @@
                                                                     </div>
                                                                 </div>
                                                             </td>
-                                                            @if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id)
+                                                            @if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super")
                                                                 <td>
                                                                     {{-- Aqui va una condicion de si esta oculto que diga mostrar y si esta visible que diga ocultar --}}
                                                                     @if ($archivo->isPrivate == 1)
@@ -321,7 +329,7 @@
                     <div class="card">
                         <div class="card-body">
                             <div class="d-flex align-items-center mb-4">
-                                <h5 class="card-title flex-grow-1">Evidencias</h5>
+                                <h5 class="card-title flex-grow-1">Evidencias de participación</h5>
                             </div>
                             <div class="row">
                                 <div class="col-lg-12">
@@ -428,13 +436,13 @@
                                         <div class="pt-3 border-top border-top-dashed mt-4">
                                             <form action="{{ route('subirArchivo') }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
-                                                <h4 class="card-title mb-0 flex-grow-1">Recursos</h4>
+                                                <h6 class="mb-3 fw-semibold text-uppercase">Material de apoyo</h6>
                                                 <div class="row g-3">
                                                     <div class="flex-shrink-0">
                                                         <input type="hidden" name="idClub" value="{{ $evento->id_club }}">
                                                         <input type="hidden" name="idEvento" value="{{ $evento->id }}">
                                                         <input type="hidden" name="isPrivate" value="0">
-                                                        <label class="form-label">Agregar recurso para descargar</label>
+                                                        <label class="form-label">Agregar material de apoyo para descargar</label>
                                                         <input name="nombreArchivo" type="text" class="form-control col-sm-6" placeholder="Nombre del recurso">
                                                         <hr>
                                                         <input name="archivo" type="file" class="form-control col-sm-6" id="formFile">
@@ -450,7 +458,7 @@
                                         <div class="pt-3 border-top border-top-dashed mt-4">
                                             <form action="{{ route('subirEvidencia') }}" method="POST" enctype="multipart/form-data">
                                                 @csrf
-                                                <h6 class="mb-3 fw-semibold text-uppercase">Subir evidencias</h6>
+                                                <h6 class="mb-3 fw-semibold text-uppercase">Subir evidencias de participación</h6>
                                                 <div class="row g-3">
                                                     <div class="flex-shrink-0">
                                                         <input type="hidden" name="idClub_ev" value="{{ $evento->id_club }}">

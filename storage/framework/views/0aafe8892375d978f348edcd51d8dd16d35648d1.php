@@ -5,6 +5,17 @@
 <script src="<?php echo e(URL::asset('assets/js/pages/plugins/lord-icon-2.1.0.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/js/plugins.min.js')); ?>"></script>
 <script src="<?php echo e(URL::asset('assets/js/tema.js')); ?>"></script>
+<script>
+    function atras() {
+        //Obtener la ruta actual
+        var url = window.location.pathname;
+        console.log(url);
+        if(url != '/' && url != '/index'){
+            //Enviar a la ruta anterior
+            window.history.back();
+        }
+    }
+</script>
 <?php echo $__env->yieldContent('script'); ?>
 <?php echo $__env->yieldContent('script-bottom'); ?>
 <?php /**PATH C:\laragon\www\SIGA-CLUB\resources\views/layouts/vendor-scripts.blade.php ENDPATH**/ ?>

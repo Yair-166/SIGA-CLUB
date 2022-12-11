@@ -3,6 +3,14 @@
     @lang('translation.overview')
 @endsection
 @section('content')
+    @component('components.breadcrumb')
+        @slot('li_1')
+            SIGA
+        @endslot
+        @slot('title')
+            Clubes
+        @endslot
+    @endcomponent
 @php
     //Obtener el valor de la variable evento desde la url
     $getId = $_GET['club'];
@@ -79,19 +87,19 @@
                                         </div>
                                         <div class="mb-3">
                                             <label for="nombre" class="form-label">Nombre</label>
-                                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{$club->nombre}}">
+                                            <input type="text" class="form-control" id="nombre" name="nombre" value="{{$club->nombre}}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="nomenclatura" class="form-label">Nomenclatura</label>
-                                            <input type="text" class="form-control" id="nomenclatura" name="nomenclatura" value="{{$club->nomenclatura}}">
+                                            <label for="nomenclatura" class="form-label">Prefijo para constancias (Texto que llevarán las constancias expedidas por el club)</label>
+                                            <input type="text" class="form-control" id="nomenclatura" name="nomenclatura" value="{{$club->nomenclatura}}" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="localizacion" class="form-label">Localización</label>
-                                            <input type="text" class="form-control" id="localizacion" name="localizacion" value="{{$club->localizacion}}">
+                                            <label for="localizacion" class="form-label">Por favor ingrese la ubicación de la escuela y el salón, por ejemplo: Escuela XYZ, Salón ABC</label>
+                                            <input type="text" class="form-control" id="localizacion" name="localizacion" value="{{$club->localizacion}}" required>
                                         </div>
                                         <div class="mb-3">
                                             <label for="facebook" class="form-label">Link de facebook</label>
-                                            <input type="text" class="form-control" id="facebook" name="localizacion" value="{{$club->facebook}}">
+                                            <input type="text" class="form-control" id="facebook" name="facebook" value="{{$club->facebook}}">
                                         </div>
                                         <div class="mb-3">
                                             <label for="descripcion" class="form-label">Descripción</label>

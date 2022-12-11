@@ -17,7 +17,7 @@
                                 <p class="text-muted fs-15 mt-3">Si no puede encontrar la respuesta a su pregunta en nuestras preguntas frecuentes, 
                                     siempre puede contactarnos o enviarnos un correo electrónico. ¡Te responderemos en breve!</p>
                                 <div class="hstack flex-wrap gap-2">
-                                    <a href="mailto: sigaclubtt@gmail.com?subject = Pregunta sobre SIGA-Club"  type="button" class="btn btn-primary btn-label rounded-pill">
+                                    <a href="mailto: admin@sigaclub.com?subject = Pregunta sobre SIGA-Club"  type="button" class="btn btn-primary btn-label rounded-pill">
                                         <i class="ri-mail-line label-icon align-middle rounded-pill fs-16 me-2">
                                         </i>Enviar correo</a>
                                 </div>

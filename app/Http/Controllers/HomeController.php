@@ -319,7 +319,6 @@ class HomeController extends Controller
         $clubes = Clubes::find($request->post('id'));
         
         $clubes->nombre = $request->post('nombre');
-        $clubes->idAdministrador = $request->post('idAdministrador');
         $clubes->nomenclatura = $request->post('nomenclatura');
         $clubes->localizacion = $request->post('localizacion');
         $clubes->descripcion = $request->post('descripcion');
@@ -343,7 +342,7 @@ class HomeController extends Controller
     public function showClubes()
     {
         $clubes = Clubes::all();
-        return view('/apps-crm-companies', compact('clubes'));
+        return view('/clubes-catalogo', compact('clubes'));
     }
 
     public function deleteClub(Request $request)
