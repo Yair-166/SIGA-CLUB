@@ -141,8 +141,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#project-team" role="tab">
-                                        Configuración
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#participantes" role="tab">
+                                        Participantes confirmados
                                     </a>
                                 </li>
                                 <li class="nav-item">
@@ -151,8 +151,8 @@
                                     </a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#participantes" role="tab">
-                                        Participantes confirmados
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#project-team" role="tab">
+                                        Configuración
                                     </a>
                                 </li>
                             <?php endif; ?>
@@ -170,11 +170,31 @@
     <div class="row">
         <div class="col-lg-12">
             <div class="tab-content text-muted">
+            
                 <div class="tab-pane fade show active" id="project-overview" role="tabpanel">
                     <div class="row">
                         <div class="col-xl-9 col-lg-8">
                             <div class="card">
                                 <div class="card-body">
+                                    <?php if(session('success')): ?>
+                                        <div class="alert alert-success alert-dismissible fade show" role="alert">
+                                            <strong>¡Éxito!</strong> <?php echo e(session('success')); ?>
+
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    <?php elseif(session('error')): ?>
+                                        <div class="alert alert-danger alert-dismissible fade show" role="alert">
+                                            <strong>¡Error!</strong> <?php echo e(session('error')); ?>
+
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    <?php elseif(session('warning')): ?>
+                                        <div class="alert alert-warning alert-dismissible fade show" role="alert">
+                                            <strong>¡Advertencia!</strong> <?php echo e(session('warning')); ?>
+
+                                            <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                                        </div>
+                                    <?php endif; ?>
                                     <div class="text-muted">
                                         <h6 class="mb-3 fw-semibold text-uppercase">Descripción</h6>
                                         <p>
@@ -202,9 +222,10 @@
                                                             class="img-fluid rounded-circle" style="aspect-ratio: 1/1;;">
                                                     </div>
                                                     <div class="flex-grow-1">
-                                                        <h5 class="fs-13 mb-0"><a href="#" class="text-body d-block">
-                                                        <?php echo e($coordinador->name . ' ' . $coordinador->apaterno . ' ' . $coordinador->amaterno); ?></a></h5>
-                                                        </a></h5>
+                                                        <h5 class="fs-13 mb-0">
+                                                        <?php echo e($coordinador->name . ' ' . $coordinador->apaterno . ' ' . $coordinador->amaterno); ?>
+
+                                                        </h5>
                                                     </div>
                                                 </div>
                                                 <!-- end member item -->
@@ -227,28 +248,165 @@
                 <!-- end tab pane -->
 
                 <div class="tab-pane fade" id="project-documents" role="tabpanel">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-4">
-                                <h5 class="card-title flex-grow-1">Material de apoyo</h5>
+                    <div class="row">
+                        <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
+                            <div class="col-xl-9 col-lg-8">
+                        <?php else: ?>
+                            <div class="col-xl-12 col-lg-12">
+                        <?php endif; ?>
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-4">
+                                        <h5 class="card-title flex-grow-1">Material de apoyo</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="table-responsive table-card">
+                                                <table class="table table-borderless align-middle mb-0">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th scope="col">Nombre del archivo</th>
+                                                            <th scope="col">Descripción</th>
+                                                            <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
+                                                                <th scope="col">Ocultar</th>
+                                                                <th scope="col">Eliminar</th>
+                                                            <?php endif; ?>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php $__currentLoopData = $archivos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $archivo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                            <?php if($archivo->isPrivate == 0): ?>
+                                                                <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
+                                                                    <tr>
+                                                                        <td>
+                                                                            <div class="d-flex align-items-center">
+                                                                                <div class="avatar-sm">
+                                                                                    <div
+                                                                                        class="avatar-title bg-light text-primary rounded fs-24">
+                                                                                        <i class="ri-file-fill"></i>
+                                                                                    </div>
+                                                                                </div>
+                                                                                <div class="ms-3 flex-grow-1">
+                                                                                    <h5 class="fs-14 mb-0"><a href="/files/<?php echo e($club->id); ?>/archivos/<?php echo e($archivo->archivo); ?>"
+                                                                                            class="text-dark"><?php echo e($archivo->archivo); ?></a>
+                                                                                    </h5>
+                                                                                </div>
+                                                                            </div>
+                                                                        </td>
+                                                                        <td>
+                                                                            <p class="mb-0"><?php echo e($archivo->nombreArchivo); ?></p>
+                                                                        </td>
+                                                                        <td>
+                                                                            
+                                                                            <?php if($archivo->isPrivate == 1): ?>
+                                                                                <a href="<?php echo e(route('toogleArchivo', $archivo->id)); ?>" class="btn btn-soft-primary btn-sm">
+                                                                                <i class="ri-eye-off-fill me-1 align-bottom"></i>Ocultar</a>
+                                                                            <?php else: ?>
+                                                                                <a href="<?php echo e(route('toogleArchivo', $archivo->id)); ?>" class="btn btn-soft-primary btn-sm">
+                                                                                <i class="ri-eye-fill me-1 align-bottom"></i>Mostrar</a>
+                                                                            <?php endif; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="<?php echo e(route('eliminarArchivo', $archivo->id)); ?>" class="btn btn-sm btn-soft-danger"><i
+                                                                                class="ri-delete-bin-2-line"></i></a>
+                                                                        </td>
+                                                                    </tr>
+                                                                <?php endif; ?>
+                                                            <?php else: ?>
+                                                                <tr>
+                                                                    <td>
+                                                                        <div class="d-flex align-items-center">
+                                                                            <div class="avatar-sm">
+                                                                                <div
+                                                                                    class="avatar-title bg-light text-primary rounded fs-24">
+                                                                                    <i class="ri-file-fill"></i>
+                                                                                </div>
+                                                                            </div>
+                                                                            <div class="ms-3 flex-grow-1">
+                                                                                <h5 class="fs-14 mb-0"><a href="/files/<?php echo e($club->id); ?>/archivos/<?php echo e($archivo->archivo); ?>"
+                                                                                        class="text-dark"><?php echo e($archivo->archivo); ?></a>
+                                                                                </h5>
+                                                                            </div>
+                                                                        </div>
+                                                                    </td>
+                                                                    <td>
+                                                                        <p class="mb-0"><?php echo e($archivo->nombreArchivo); ?></p>
+                                                                    </td>
+                                                                    <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
+                                                                        <td>
+                                                                            
+                                                                            <?php if($archivo->isPrivate == 1): ?>
+                                                                                <a href="<?php echo e(route('toogleArchivo', $archivo->id)); ?>" class="btn btn-soft-primary btn-sm">
+                                                                                <i class="ri-eye-off-fill me-1 align-bottom"></i>Ocultar</a>
+                                                                            <?php else: ?>
+                                                                                <a href="<?php echo e(route('toogleArchivo', $archivo->id)); ?>" class="btn btn-soft-primary btn-sm">
+                                                                                <i class="ri-eye-fill me-1 align-bottom"></i>Mostrar</a>
+                                                                            <?php endif; ?>
+                                                                        </td>
+                                                                        <td>
+                                                                            <a href="<?php echo e(route('eliminarArchivo', $archivo->id)); ?>" class="btn btn-sm btn-soft-danger"><i
+                                                                                class="ri-delete-bin-2-line"></i></a>
+                                                                        </td>
+                                                                    <?php endif; ?>
+                                                                </tr>
+                                                            <?php endif; ?>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="table-responsive table-card">
-                                        <table class="table table-borderless align-middle mb-0">
-                                            <thead class="table-light">
-                                                <tr>
-                                                    <th scope="col">Nombre del archivo</th>
-                                                    <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
-                                                        <th scope="col">Ocultar</th>
-                                                        <th scope="col">Eliminar</th>
-                                                    <?php endif; ?>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $__currentLoopData = $archivos; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $archivo): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <?php if($archivo->isPrivate == 0): ?>
-                                                        <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
+                        </div>
+                        <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
+                            <div class="col-xl-3 col-lg-4">
+                                <div class="card">
+                                    <form action="<?php echo e(route('subirArchivo')); ?>" method="POST" enctype="multipart/form-data">
+                                        <?php echo csrf_field(); ?>
+                                        <h6 class="mb-3 fw-semibold text-uppercase">  Material de apoyo</h6>
+                                        <div class="row g-3">
+                                            <div class="flex-shrink-0">
+                                                <input type="hidden" name="idClub" value="<?php echo e($evento->id_club); ?>">
+                                                <input type="hidden" name="idEvento" value="<?php echo e($evento->id); ?>">
+                                                <input type="hidden" name="isPrivate" value="0">
+                                                <label class="form-label">Descripción del material de apoyo</label>
+                                                <input name="nombreArchivo" type="text" class="form-control col-sm-6" placeholder="Agrega una descripción al material">
+                                                <hr>
+                                                <input name="archivo[]" type="file" class="form-control col-sm-6" id="formFile" multiple="">
+                                                <hr>
+                                                <button type="submit" class="btn btn-soft-primary btn-sm"><i
+                                                    class="ri-upload-2-fill me-1 align-bottom"></i> Subir</button>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        <?php endif; ?>
+                    </div>
+                </div>
+                <!-- end tab pane -->
+                <div class="tab-pane fade" id="project-activities" role="tabpanel">
+                    <div class="row">
+                        <div class="col-xl-9 col-lg-8">
+                            <div class="card">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center mb-4">
+                                        <h5 class="card-title flex-grow-1">Evidencias de participación</h5>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-lg-12">
+                                            <div class="table-responsive table-card">
+                                                <table class="table table-borderless align-middle mb-0">
+                                                    <thead class="table-light">
+                                                        <tr>
+                                                            <th scope="col">Nombre del archivo</th>
+                                                            <th scope="col">Nota</th>
+                                                            <th scope="col">Eliminar</th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        <?php $__currentLoopData = $evidencias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $evidencia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <tr>
                                                                 <td>
                                                                     <div class="d-flex align-items-center">
@@ -259,123 +417,53 @@
                                                                             </div>
                                                                         </div>
                                                                         <div class="ms-3 flex-grow-1">
-                                                                            <h5 class="fs-14 mb-0"><a href="/files/<?php echo e($club->id); ?>/archivos/<?php echo e($archivo->archivo); ?>"
-                                                                                    class="text-dark"><?php echo e($archivo->archivo); ?></a>
+                                                                            <h5 class="fs-14 mb-0"><a href="/files/<?php echo e($club->id); ?>/evidencias/<?php echo e($evidencia->archivo); ?>"
+                                                                                    class="text-dark"><?php echo e($evidencia->archivo); ?></a>
                                                                             </h5>
                                                                         </div>
                                                                     </div>
                                                                 </td>
+                                                                <td><?php echo e($evidencia->nota); ?></td>
                                                                 <td>
-                                                                    
-                                                                    <?php if($archivo->isPrivate == 1): ?>
-                                                                        <a href="<?php echo e(route('toogleArchivo', $archivo->id)); ?>" class="btn btn-soft-primary btn-sm">
-                                                                        <i class="ri-eye-off-fill me-1 align-bottom"></i>Ocultar</a>
-                                                                    <?php else: ?>
-                                                                        <a href="<?php echo e(route('toogleArchivo', $archivo->id)); ?>" class="btn btn-soft-primary btn-sm">
-                                                                        <i class="ri-eye-fill me-1 align-bottom"></i>Mostrar</a>
-                                                                    <?php endif; ?>
-                                                                </td>
-                                                                <td>
-                                                                    <a href="<?php echo e(route('eliminarArchivo', $archivo->id)); ?>" class="btn btn-sm btn-soft-danger"><i
-                                                                        class="ri-delete-bin-2-line"></i></a>
+                                                                    <a href="<?php echo e(route('eliminarEvidencia', $evidencia->id)); ?>" class="btn btn-sm btn-soft-danger"><i
+                                                                            class="ri-delete-bin-2-line"></i></a>
                                                                 </td>
                                                             </tr>
-                                                        <?php endif; ?>
-                                                    <?php else: ?>
-                                                        <tr>
-                                                            <td>
-                                                                <div class="d-flex align-items-center">
-                                                                    <div class="avatar-sm">
-                                                                        <div
-                                                                            class="avatar-title bg-light text-primary rounded fs-24">
-                                                                            <i class="ri-file-fill"></i>
-                                                                        </div>
-                                                                    </div>
-                                                                    <div class="ms-3 flex-grow-1">
-                                                                        <h5 class="fs-14 mb-0"><a href="/files/<?php echo e($club->id); ?>/archivos/<?php echo e($archivo->archivo); ?>"
-                                                                                class="text-dark"><?php echo e($archivo->archivo); ?></a>
-                                                                        </h5>
-                                                                    </div>
-                                                                </div>
-                                                            </td>
-                                                            <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
-                                                                <td>
-                                                                    
-                                                                    <?php if($archivo->isPrivate == 1): ?>
-                                                                        <a href="<?php echo e(route('toogleArchivo', $archivo->id)); ?>" class="btn btn-soft-primary btn-sm">
-                                                                        <i class="ri-eye-off-fill me-1 align-bottom"></i>Ocultar</a>
-                                                                    <?php else: ?>
-                                                                        <a href="<?php echo e(route('toogleArchivo', $archivo->id)); ?>" class="btn btn-soft-primary btn-sm">
-                                                                        <i class="ri-eye-fill me-1 align-bottom"></i>Mostrar</a>
-                                                                    <?php endif; ?>
-                                                                </td>
-                                                                <td>
-                                                                    <a href="<?php echo e(route('eliminarArchivo', $archivo->id)); ?>" class="btn btn-sm btn-soft-danger"><i
-                                                                        class="ri-delete-bin-2-line"></i></a>
-                                                                </td>
-                                                            <?php endif; ?>
-                                                        </tr>
-                                                    <?php endif; ?>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            </tbody>
-                                        </table>
+                                                        <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
+                            <!--end card-->
                         </div>
-                    </div>
-                </div>
-                <!-- end tab pane -->
-                <div class="tab-pane fade" id="project-activities" role="tabpanel">
-                    <div class="card">
-                        <div class="card-body">
-                            <div class="d-flex align-items-center mb-4">
-                                <h5 class="card-title flex-grow-1">Evidencias de participación</h5>
-                            </div>
-                            <div class="row">
-                                <div class="col-lg-12">
-                                    <div class="table-responsive table-card">
-                                        <table class="table table-borderless align-middle mb-0">
-                                            <thead class="table-light">
-                                                <tr>
-                                                    <th scope="col">Nombre del archivo</th>
-                                                    <th scope="col">Nota</th>
-                                                    <th scope="col">Eliminar</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                                <?php $__currentLoopData = $evidencias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $evidencia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                                    <tr>
-                                                        <td>
-                                                            <div class="d-flex align-items-center">
-                                                                <div class="avatar-sm">
-                                                                    <div
-                                                                        class="avatar-title bg-light text-primary rounded fs-24">
-                                                                        <i class="ri-file-fill"></i>
-                                                                    </div>
-                                                                </div>
-                                                                <div class="ms-3 flex-grow-1">
-                                                                    <h5 class="fs-14 mb-0"><a href="/files/<?php echo e($club->id); ?>/evidencias/<?php echo e($evidencia->archivo); ?>"
-                                                                            class="text-dark"><?php echo e($evidencia->archivo); ?></a>
-                                                                    </h5>
-                                                                </div>
-                                                            </div>
-                                                        </td>
-                                                        <td><?php echo e($evidencia->nota); ?></td>
-                                                        <td>
-                                                            <a href="<?php echo e(route('tooglePrivate', $archivo->id)); ?>" class="btn btn-sm btn-soft-danger"><i
-                                                                    class="ri-delete-bin-2-line"></i></a>
-                                                        </td>
-                                                    </tr>
-                                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                            </tbody>
-                                        </table>
+                        <div class="col-xl-3 col-lg-4">
+                            <div class="card">
+                                <form action="<?php echo e(route('subirEvidencia')); ?>" method="POST" enctype="multipart/form-data">
+                                    <?php echo csrf_field(); ?>
+                                    <h6 class="mb-3 fw-semibold text-uppercase">Subir evidencias de participación</h6>
+                                    <div class="row g-3">
+                                        <div class="flex-shrink-0">
+                                            <input type="hidden" name="idClub_ev" value="<?php echo e($evento->id_club); ?>">
+                                            <input type="hidden" name="idEvento_ev" value="<?php echo e($evento->id); ?>">
+                                            <label class="form-label">Agregar evidencia</label>
+                                            <textarea name="nota_ev" class="form-control" id="exampleFormControlTextarea1" rows="3" 
+                                            placeholder="Notas sobre la evidencia"></textarea>
+                                            <hr>
+                                            <input name="archivo_ev[]" type="file" class="form-control col-sm-6" id="formFile" multiple="">
+                                            <hr>
+                                            <button type="submit" class="btn btn-soft-primary btn-sm"><i
+                                                    class="ri-upload-2-fill me-1 align-bottom"></i> Subir</button>
+                                        </div>
                                     </div>
-                                </div>
+                                    <!-- end row -->
+                                </form>
                             </div>
+                             <!-- end subir evidencia -->
                         </div>
                     </div>
-                    <!--end card-->
                 </div>
                 <!-- end tab pane -->
                 <div class="tab-pane fade" id="project-team" role="tabpanel">
@@ -392,9 +480,8 @@
                                                 <div class="col-lg-6">
                                                     <div class="mb-3">
                                                         <input type="hidden" name="idEvento" value="<?php echo e($evento->id); ?>">
-                                                        <label for="formrow-firstname-input" class="form-label">Coordinador</label>
-                                                        <select name="id_coordinador" class="form-select" aria-label="Default select example">
-                                                            <option selected>Selecciona un coordinador</option>
+                                                        <label for="formrow-firstname-input" class="form-label">Agrega coordinadores</label>
+                                                        <select id="idcords" name="id_coordinador" class="form-select" aria-label="Default select example">
                                                             <?php $__currentLoopData = $usuarios; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $usuario): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                                 <?php if($usuario->active == 1): ?>
                                                                     <option value="<?php echo e($usuario->id); ?>">
@@ -409,76 +496,15 @@
                                                 <div class="col-lg-6">
                                                     <div class="mb-3">
                                                         <br>
-                                                        <button type="submit" class="btn btn-primary ">Asignar</button>
+                                                        <button onclick="agregarcoord()" class="btn btn-primary ">Agregar</button>
+                                                        <button type="submit" class="btn btn-primary" style="display: none;" id="btnGuardar">Guardar</button>
                                                     </div>
                                                 </div>
+                                                <div id="labels"></div>
                                             </form>
                                         </div>
-
-                                        <div class="pt-3 border-top border-top-dashed mt-4">
-                                            <h6 class="mb-3 fw-semibold text-uppercase">Editar evento</h6>
-                                            <form action="<?php echo e(route('reglasEvento')); ?>" method="POST">
-                                                <?php echo csrf_field(); ?>
-                                                <div class="col-lg-6">
-                                                    <div class="mb-3">
-                                                        <input type="hidden" name="idEvento_reglas" value="<?php echo e($evento->id); ?>">
-                                                        <label for="formrow-firstname-input" class="form-label">Reglas de asistencia al evento</label>
-                                                        <textarea name="reglas" class="form-control" id="exampleFormControlTextarea1" rows="3" placeholder="Añade los requisitos que debe cumplir el participante para formar parte de esta actividad."><?php echo e($evento->reglas); ?></textarea>
-                                                    </div>
-                                                </div>
-                                                <div class="col-lg-6">
-                                                    <div class="mb-3">
-                                                        <br>
-                                                        <button type="submit" class="btn btn-primary ">Asignar</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
-                                        
-                                        <div class="pt-3 border-top border-top-dashed mt-4">
-                                            <form action="<?php echo e(route('subirArchivo')); ?>" method="POST" enctype="multipart/form-data">
-                                                <?php echo csrf_field(); ?>
-                                                <h6 class="mb-3 fw-semibold text-uppercase">Material de apoyo</h6>
-                                                <div class="row g-3">
-                                                    <div class="flex-shrink-0">
-                                                        <input type="hidden" name="idClub" value="<?php echo e($evento->id_club); ?>">
-                                                        <input type="hidden" name="idEvento" value="<?php echo e($evento->id); ?>">
-                                                        <input type="hidden" name="isPrivate" value="0">
-                                                        <label class="form-label">Agregar material de apoyo para descargar</label>
-                                                        <input name="nombreArchivo" type="text" class="form-control col-sm-6" placeholder="Nombre del recurso">
-                                                        <hr>
-                                                        <input name="archivo" type="file" class="form-control col-sm-6" id="formFile">
-                                                        <hr>
-                                                        <button type="submit" class="btn btn-soft-primary btn-sm"><i
-                                                                class="ri-upload-2-fill me-1 align-bottom"></i> Subir</button>
-                                                    </div>
-                                                </div>
-                                            </form>
-                                        </div>
+                                       
                                         <!-- end card body -->
-
-                                        <div class="pt-3 border-top border-top-dashed mt-4">
-                                            <form action="<?php echo e(route('subirEvidencia')); ?>" method="POST" enctype="multipart/form-data">
-                                                <?php echo csrf_field(); ?>
-                                                <h6 class="mb-3 fw-semibold text-uppercase">Subir evidencias de participación</h6>
-                                                <div class="row g-3">
-                                                    <div class="flex-shrink-0">
-                                                        <input type="hidden" name="idClub_ev" value="<?php echo e($evento->id_club); ?>">
-                                                        <input type="hidden" name="idEvento_ev" value="<?php echo e($evento->id); ?>">
-                                                        <label class="form-label">Agregar evidencia</label>
-                                                        <textarea name="nota_ev" class="form-control" id="exampleFormControlTextarea1" rows="3" 
-                                                        placeholder="Notas sobre la evidencia"></textarea>
-                                                        <hr>
-                                                        <input name="archivo_ev" type="file" class="form-control col-sm-6" id="formFile">
-                                                        <hr>
-                                                        <button type="submit" class="btn btn-soft-primary btn-sm"><i
-                                                                class="ri-upload-2-fill me-1 align-bottom"></i> Subir</button>
-                                                    </div>
-                                                </div>
-                                                <!-- end row -->
-                                            </form>
-                                        </div>
-                                        <!-- end subir evidencia -->
 
                                     </div>
                                 </div>
@@ -501,9 +527,17 @@
                                                     class="img-fluid rounded-circle" style="aspect-ratio: 1/1;;">
                                             </div>
                                             <div class="flex-grow-1">
-                                                <h5 class="fs-13 mb-0"><a href="#" class="text-body d-block">
-                                                <?php echo e($coordinador->name . ' ' . $coordinador->apaterno . ' ' . $coordinador->amaterno); ?></a></h5>
-                                                </a></h5>
+                                                <h5 class="fs-13 mb-0">
+                                                    <?php echo e($coordinador->name . ' ' . $coordinador->apaterno . ' ' . $coordinador->amaterno); ?>
+
+                                                    
+                                                </h5>
+                                            </div>
+                                            <div class="flex-shrink-0">
+                                                <a href="<?php echo e(route('eliminarCoordinador', ['id' => $coordinador->id, 'idevento' => $evento->id])); ?>" class="btn btn-sm btn-soft-danger">
+                                                    <i class="ri-delete-bin-2-line"></i>
+                                                </a>
+                                                
                                             </div>
                                         </div>
                                         <!-- end member item -->
@@ -725,9 +759,10 @@
                                                     class="img-fluid rounded-circle" style="aspect-ratio: 1/1;;">
                                             </div>
                                             <div class="flex-grow-1">
-                                                <h5 class="fs-13 mb-0"><a href="#" class="text-body d-block">
-                                                <?php echo e($coordinador->name . ' ' . $coordinador->apaterno . ' ' . $coordinador->amaterno); ?></a></h5>
-                                                </a></h5>
+                                                <h5 class="fs-13 mb-0">
+                                                <?php echo e($coordinador->name . ' ' . $coordinador->apaterno . ' ' . $coordinador->amaterno); ?>
+
+                                                </h5>
                                             </div>
                                         </div>
                                         <!-- end member item -->
@@ -813,6 +848,9 @@
     <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('assets/js/pages/calendar.init.js')); ?>"></script>
     <script>
+
+        let conteo = 0;
+
         function copiarAlPortapapeles(id) {
             var aux = document.createElement("input");
             aux.setAttribute("value", document.getElementById(id).getAttribute("value"));
@@ -821,6 +859,101 @@
             document.execCommand("copy");
             document.body.removeChild(aux);
         }
+        function agregarcoord(){
+            //Cancel submit
+            event.preventDefault();
+
+            //Obtener el valor del select 
+            var idcords = document.getElementById("idcords").value;
+            //Obtener el texto del select
+            var namecords = document.getElementById("idcords").options[document.getElementById("idcords").selectedIndex].text;
+
+            //Checar si existe un label con id = namecords
+            if(document.getElementById(namecords)){
+                //Si existe, no hacer nada
+                return;
+            }
+            else{
+                conteo++;
+                //Agregar un input hidden con name=idcords y value=idcords
+                var newInput = document.createElement('input');
+                //Poner type hidden
+                newInput.setAttribute("type", "hidden");
+                //agrego la clase deseada
+                newInput.className += "form-control";
+                //Poner name al input igual al id del select
+                newInput.setAttribute("name", namecords);
+                //Poner id al input igual al id del select
+                newInput.setAttribute("id", namecords);
+                //Poner value al input igual al id del select
+                newInput.setAttribute("value", idcords);
+                //agregando el input
+                var contenedor = document.getElementById('labels');
+                contenedor.appendChild(newInput);
+
+                //Agregar un label con el nombre del coordinador
+                var newLabel = document.createElement('label');
+                //agrego la clase deseada
+                newLabel.className += "col-md-3 control-label";
+                //Poner id al label igual al id del select
+                newLabel.setAttribute("id", namecords);
+                //Obtener de la base de datos el nombre del user con el idcords
+                newLabel.innerHTML = namecords;
+                //agregando el label
+                var contenedor = document.getElementById('labels');
+                contenedor.appendChild(newLabel);
+
+                //Agregar boton para eliminar el coordinador
+                var newButton = document.createElement('button');
+                //agrego la clase deseada
+                newButton.className += "btn btn-danger";
+                //Poner id al label igual al id del select
+                newButton.setAttribute("id", namecords);
+                //Poner value al label igual al id del select
+                newButton.setAttribute("value", idcords);
+                //Poner onclick al boton
+                newButton.setAttribute("onclick", "eliminarcoord(this.id, this.value)");
+                //Poner el texto del boton
+                newButton.innerHTML = "🗑️";
+                //agregando el label
+                var contenedor = document.getElementById('labels');
+                contenedor.appendChild(newButton);
+
+                //Poner un br
+                var newBr = document.createElement('br');
+                newBr.setAttribute("id", namecords + "br");
+                contenedor.appendChild(newBr);
+            }
+            if(conteo > 0){
+                //Mostrar el boton de guardar
+                document.getElementById("btnGuardar").style.display = "inline-block";
+            }
+        }
+
+        function eliminarcoord(namecords, idcords){
+                //Eliminar el input hidden con name=namecords y value=idcords
+                var input = document.getElementById(namecords);
+                input.parentNode.removeChild(input);
+
+                //Eliminar el label con id=namecords
+                var label = document.getElementById(namecords);
+                label.parentNode.removeChild(label);
+
+                //Eliminar el boton con id=namecords
+                var button = document.getElementById(namecords);
+                button.parentNode.removeChild(button);
+
+                //Eliminar el br
+                var br = document.getElementById(namecords + "br");
+                br.parentNode.removeChild(br);
+
+                conteo--;
+
+                if(conteo == 0){
+                    //Ocultar el boton de guardar
+                    document.getElementById("btnGuardar").style.display = "none";
+                }
+            }
     </script>
 <?php $__env->stopSection(); ?>
 

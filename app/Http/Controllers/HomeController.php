@@ -23,6 +23,7 @@ use Illuminate\Support\Facades\Session;
 use SimpleSoftwareIO\QrCode\Facades\QrCode;
 use Barryvdh\DomPDF\Facade\Pdf;
 use Illuminate\Support\Facades\Mail;
+use PhpParser\Node\Expr\Print_;
 
 class HomeController extends Controller
 {
@@ -496,18 +497,55 @@ class HomeController extends Controller
     //Para Confi_eventos
     public function asignarCoordinador(Request $request)
     {
+
+        //Obtener el tamaño de $request
+        $size = count($request->all());
+        print_r($size);
+
+        echo "<br>";
+
+        //Obtener el nombre de los post que se mandaron
+        $keys = array_keys($request->all());
+        print_r($keys);
+
+        echo "<br>";
+
+        $iteraciones = $size - 3;
+
+        for ($i = 0; $i < $iteraciones; $i++) {
+
+            //Ver si en la tabla confi_eventos existe un registro con el idEvento y el id_coordinador
+            $confi_eventos = Confi_eventos::where('idEvento', '=', $request->post('idEvento'))->where('id_coordinador', '=', $request->post($keys[$i+3]))->first();
+            if($confi_eventos != null){
+                $titulo = "warning";
+                $mensaje = "Un coordinador fue asignado previamente";
+                continue;
+            }
+
+            $confi_eventos = new Confi_eventos();
+
+            $confi_eventos->idEvento = $request->post('idEvento');
+            $confi_eventos->secondId = NULL;
+            $confi_eventos->id_coordinador = $request->post($keys[$i+3]);
+            $confi_eventos->ultimoQR = "0";
+            $confi_eventos->qrActual = "0";
+            $confi_eventos->isPrivate = 1;
+
+            $confi_eventos->save();
+            $titulo = "success";
+            $mensaje = "Coordinador(es) asignado correctamente";
+        }
+
+        return redirect()->back()->with($titulo, $mensaje);
+    }
+
+    public function eliminarCoordinador($id, $idEvento)
+    {
         $confi_eventos = new Confi_eventos();
+        $confi_eventos = Confi_eventos::where('idEvento', '=', $idEvento)->where('id_coordinador', '=', $id)->first();
+        $confi_eventos->delete();
 
-        $confi_eventos->idEvento = $request->post('idEvento');
-        $confi_eventos->secondId = NULL;
-        $confi_eventos->id_coordinador = $request->post('id_coordinador');
-        $confi_eventos->ultimoQR = "0";
-        $confi_eventos->qrActual = "0";
-        $confi_eventos->isPrivate = 1;
-
-        $confi_eventos->save();
-        
-        return redirect()->back()->with('success', 'Coordinador asignado correctamente');
+        return redirect()->back()->with('success', 'Coordinador eliminado correctamente');
     }
 
     public function tooglePrivate($id, $state)
@@ -552,25 +590,36 @@ class HomeController extends Controller
     //Para archivos
     public function subirArchivo(Request $request)
     {
-        $archivos = new Archivos();
+        //Recibe un array de archivos y cuenta cuantos hay
+        $files = $request->file('archivo');
+        $count = count($files);
 
-        $club = $request->post('idClub');
+        for ($i = 0; $i < $count; $i++) {
 
-        $archivos->idEvento = $request->post('idEvento');
-        $archivos->nombreArchivo = $request->post('nombreArchivo');
-        $archivos->isPrivate = $request->post('isPrivate');
+            $archivos = new Archivos();
 
-        if ($request->file('archivo')) {
-            $archivo = $request->file('archivo');
-            $archivoName =  $archivos->nombreArchivo . '.' . $archivo->getClientOriginalExtension();
+            $club = $request->post('idClub');
+
+            $archivos->idEvento = $request->post('idEvento');
+            $archivos->nombreArchivo = $request->post('nombreArchivo');
+            $archivos->isPrivate = $request->post('isPrivate');
+
+
+            
+
+            $archivo = $files[$i];
+            $archivoName =  $archivo->getClientOriginalName();
             $archivoPath = public_path('/files/'.$club.'/archivos/');
             $archivo->move($archivoPath, $archivoName);
             $archivos->archivo =  $archivoName;
+
+            $archivos->save();
         }
 
-        $archivos->save();
-
-        return redirect()->back()->with('success', 'Archivo subido correctamente');
+        if($count == 1)
+            return redirect()->back()->with('success', 'Archivo subido correctamente');
+        else
+            return redirect()->back()->with('success', 'Archivos subidos correctamente');
     }
 
     public function eliminarArchivo($id)
@@ -595,24 +644,30 @@ class HomeController extends Controller
     //Para evidencias
     public function subirEvidencia(Request $request)
     {
-        $evidencias = new Evidencias();
+        //Recibe un array de archivos y cuenta cuantos hay
+        $files = $request->file('archivo_ev');
+        $count = count($files);
 
-        $club = $request->post('idClub_ev');
+        //Recorre el array de archivos y los guarda en la carpeta
+        for ($i = 0; $i < $count; $i++) {
+            $evidencias = new Evidencias();
 
-        $evidencias->idEvento = $request->post('idEvento_ev');
-        $evidencias->nota = $request->post('nota_ev');
+            $club = $request->post('idClub_ev');
 
-        if ($request->file('archivo_ev')) {
-            $evidencia = $request->file('archivo_ev');
+            $evidencias->idEvento = $request->post('idEvento_ev');
+            $evidencias->nota = $request->post('nota_ev');
+
+            $evidencia = $files[$i];
             $evidenciaName =  $evidencia->getClientOriginalName();
             $evidenciaPath = public_path('/files/'.$club.'/evidencias/');
             $evidencia->move($evidenciaPath, $evidenciaName);
             $evidencias->archivo =  $evidenciaName;
+
+            $evidencias->save();
         }
 
-        $evidencias->save();
-
         return redirect()->back()->with('success', 'Archivo subido correctamente');
+        
     }
 
     public function eliminarEvidencia($id)

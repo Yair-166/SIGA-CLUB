@@ -70,7 +70,7 @@ unset($__errorArgs, $__bag); ?>
 
                                     <div class="mb-3">
                                         <div class="float-end">
-                                            <a href="auth-pass-reset-basic" class="text-muted">Olvide mi contraseña</a>
+                                            <a href="auth-passwords-reset" class="text-muted">Olvide mi contraseña</a>
                                         </div>
                                         <label class="form-label" for="password-input">Contraseña</label>
                                         <div class="position-relative auth-pass-inputgroup mb-3">

@@ -53,6 +53,7 @@ Route::get('/asistire/{id}', [App\Http\Controllers\HomeController::class, 'asist
 //confi_eventos
 Route::post('/asignarCoordinador', [App\Http\Controllers\HomeController::class, 'asignarCoordinador'])->name('asignarCoordinador');
 Route::get('/tooglePrivate/{id}/{state}', [App\Http\Controllers\HomeController::class, 'tooglePrivate'])->name('tooglePrivate');
+Route::get('/eliminarCoordinador/{id}/{idevento}', [App\Http\Controllers\HomeController::class, 'eliminarCoordinador'])->name('eliminarCoordinador');
 
 //autoridades
 Route::post('/agregarAutoridad', [App\Http\Controllers\HomeController::class, 'agregarAutoridad'])->name('agregarAutoridad');
