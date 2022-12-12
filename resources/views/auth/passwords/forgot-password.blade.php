@@ -1,6 +1,6 @@
 @extends('layouts.master-without-nav')
 @section('title')
-@lang('translation.password-reset')
+    @lang('translation.password-reset')
 @endsection
 @section('content')
     <div class="auth-page-wrapper pt-5">
@@ -40,7 +40,6 @@
                             <div class="card-body p-4">
                                 <div class="text-center mt-2">
                                     <h5 class="text-primary">¿Olvidaste tu contraseña?</h5>
-                                    <p class="text-muted">Aqui la puedes recuperar</p>
 
                                     <lord-icon src="https://cdn.lordicon.com/rhvddzym.json" trigger="loop"
                                         colors="primary:#0ab39c" class="avatar-xl">
@@ -49,31 +48,24 @@
                                 </div>
 
                                 <div class="alert alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
-                                    Ingresa tu correo electrónico y sigue las instrucciones.
+                                    Ingresa tu correo y tu apellido paterno para poder resetear tu contraseña.
                                 </div>
                                 <div class="p-2">
-                                    <form class="form-horizontal" method="POST"
-                                                                    action="{{ route('password.email') }}">
-                                                                    @csrf
-                                                                    <div class="mb-3">
-                                                                        <label for="useremail" class="form-label">Correo electrónico</label>
-                                                                        <input type="email"
-                                                                            class="form-control @error('email') is-invalid @enderror"
-                                                                            id="useremail" name="email" placeholder="Correo electrónico"
-                                                                            value="{{ old('email') }}" id="email">
-                                                                        @error('email')
-                                                                            <span class="invalid-feedback" role="alert">
-                                                                                <strong>{{ $message }}</strong>
-                                                                            </span>
-                                                                        @enderror
-                                                                    </div>
+                                    <form action="{{ route('respass') }}" method="POST">
+                                        @csrf
+                                        <div class="mb-4">
+                                            <label class="form-label">Correo electronico</label>
+                                            <input name="email" type="email" class="form-control" id="email" placeholder="Email" required>
+                                        </div>
+                                        <div class="mb-4">
+                                            <label class="form-label">Apellido paterno</label>
+                                            <input name="apaterno" class="form-control" id="apaterno" placeholder="Apellido paterno" required>
+                                        </div>
 
-                                                                    <div class="text-end">
-                                                                        <button class="btn btn-primary w-md waves-effect waves-light"
-                                                                            type="submit">Restaurar</button>
-                                                                    </div>
-
-                                                                </form>
+                                        <div class="text-center mt-4">
+                                            <button class="btn btn-success w-100" type="submit">Resetear contraseña.</button>
+                                        </div>
+                                    </form><!-- end form -->
                                 </div>
                             </div>
                             <!-- end card body -->
@@ -99,8 +91,8 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center">
-                            <p class="mb-0 text-muted">&copy; <script>document.write(new Date().getFullYear())</script> SIGA-CLUB. <i class="mdi mdi-heart text-danger"></i> </p>
-                        </div>
+                        <p class="mb-0 text-muted">&copy; <script>document.write(new Date().getFullYear())</script> SIGA-CLUB. <i class="mdi mdi-heart text-danger"></i> </p>
+                    </div>
                     </div>
                 </div>
             </div>
@@ -110,5 +102,6 @@
     <!-- end auth-page-wrapper -->
 @endsection
 @section('script')
-    <script src="{{ URL::asset('assets/js/pages/eva-icon.init.js') }}"></script>
+    <script src="{{ URL::asset('assets/libs/particles.js/particles.js.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/pages/particles.app.js') }}"></script>
 @endsection

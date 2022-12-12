@@ -14,6 +14,10 @@ use App\Mail\Bienvenida;
 |
 */
 //Ruta publica  sin autenticacion
+Route::get('/forgot-password', function () {
+    return view('auth.passwords.email');
+});
+
 Route::get('/checkasistencia/{id}', function () {
     return view('checkasistencia');
 });

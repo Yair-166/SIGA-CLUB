@@ -27,7 +27,7 @@
                                     <img src="{{ URL::asset('assets/images/logo-light.png') }}" alt="" height="20">
                                 </a>
                             </div>
-                            <p class="mt-3 fs-15 fw-medium">La mejor opción para la gestión.</p>
+                            <p class="mt-3 fs-15 fw-medium">Premium Admin & Dashboard Template</p>
                         </div>
                     </div>
                 </div>
@@ -39,8 +39,8 @@
 
                             <div class="card-body p-4">
                                 <div class="text-center mt-2">
-                                    <h5 class="text-primary">¿Olvidaste tu contraseña?</h5>
-                                    <p class="text-muted">Aqui la puedes recuperar</p>
+                                    <h5 class="text-primary">Forgot Password?</h5>
+                                    <p class="text-muted">Reset password with velzon</p>
 
                                     <lord-icon src="https://cdn.lordicon.com/rhvddzym.json" trigger="loop"
                                         colors="primary:#0ab39c" class="avatar-xl">
@@ -49,15 +49,15 @@
                                 </div>
 
                                 <div class="alert alert-borderless alert-warning text-center mb-2 mx-2" role="alert">
-                                    Rellena los campos de abajo
+                                    Enter your email and instructions will be sent to you!
                                 </div>
                                 <div class="p-2">
                                     <form class="form-horizontal" method="POST" action="{{ route('password.update') }}">
                                         @csrf
                                         <input type="hidden" name="token" value="{{ $token }}">
                                         <div class="mb-3">
-                                            <label for="useremail" class="form-label">Correo electrónico</label>
-                                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="useremail" name="email" placeholder="Correo electrónico" value="{{ $email ?? old('email') }}" id="email">
+                                            <label for="useremail" class="form-label">Email</label>
+                                            <input type="email" class="form-control @error('email') is-invalid @enderror" id="useremail" name="email" placeholder="Enter email" value="{{ $email ?? old('email') }}" id="email">
                                             @error('email')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -66,8 +66,8 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="userpassword">Nueva contraseña</label>
-                                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="userpassword" placeholder="Nueva contraseña">
+                                            <label for="userpassword">Password</label>
+                                            <input type="password" class="form-control @error('password') is-invalid @enderror" name="password" id="userpassword" placeholder="Enter password">
                                             @error('password')
                                             <span class="invalid-feedback" role="alert">
                                                 <strong>{{ $message }}</strong>
@@ -76,12 +76,12 @@
                                         </div>
 
                                         <div class="mb-3">
-                                            <label for="userpassword">Confirma la nueva contraseña</label>
-                                            <input id="password-confirm" type="password" name="password_confirmation" class="form-control" placeholder="Confirma la nueva contraseña">
+                                            <label for="userpassword">Confirm Password</label>
+                                            <input id="password-confirm" type="password" name="password_confirmation" class="form-control" placeholder="Enter confirm password">
                                         </div>
 
                                         <div class="text-end">
-                                            <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Restaurar</button>
+                                            <button class="btn btn-primary w-md waves-effect waves-light" type="submit">Reset</button>
                                         </div>
 
                                     </form><!-- end form -->
@@ -92,8 +92,8 @@
                         <!-- end card -->
 
                         <div class="mt-4 text-center">
-                            <p class="mb-0">Espera, Creo que la recorde... <a href="auth-signin-basic"
-                                    class="fw-semibold text-primary text-decoration-underline"> Click aqui </a> </p>
+                            <p class="mb-0">Wait, I remember my password... <a href="auth-signin-basic"
+                                    class="fw-semibold text-primary text-decoration-underline"> Click here </a> </p>
                         </div>
 
                     </div>
@@ -110,7 +110,10 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="text-center">
-                            <p class="mb-0 text-muted">&copy; <script>document.write(new Date().getFullYear())</script> SIGA-CLUB. <i class="mdi mdi-heart text-danger"></i> </p>
+                            <script>
+                                document.write(new Date().getFullYear())
+                            </script> Velzon. Crafted with <i
+                                    class="mdi mdi-heart text-danger"></i> by Themesbrand</p>
                         </div>
                     </div>
                 </div>
