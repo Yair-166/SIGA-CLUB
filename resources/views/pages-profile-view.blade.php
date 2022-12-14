@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/libs/swiper/swiper.min.css') }}">
 @endsection
 @section('content')
+@component('components.breadcrumb')
+    @slot('li_1')
+            Perfil
+        @endslot
+        @slot('title')
+            Perfil
+        @endslot
+    @endcomponent
 @php
     //Recibir datos via get
     $uid = $_GET['uid'];
@@ -162,6 +170,8 @@
                                                         @foreach ($asistencias as $asistencia)
                                                             @php
                                                                 $evento = DB::table('eventos')->where('id', $asistencia->idEvento)->first();
+                                                                //Obtener la constancia con el idAsistencia
+                                                                $constancia = DB::table('constancias')->where('idAsistencia', $asistencia->id)->first();
                                                             @endphp
                                                             <tr>
                                                                 <td>{{$evento->nombre}}</td>
@@ -169,15 +179,23 @@
                                                                 <td>{{$evento->fechaFin}}</td>
                                                                 <td>{{$asistencia->asistenciaTotal}}</td>
                                                                 <td>
-                                                                    <a href="pages-constancias-form?uid={{$asistencia->id}}"  class="btn btn-primary btn-sm">Generar constancia</a>
+                                                                    @if($constancia == NULL)
+                                                                        <a href="pages-constancias-form?uid={{$asistencia->id}}"  class="btn btn-primary btn-sm">Generar constancia</a>
+                                                                    @else
+                                                                        @if($constancia->redaccion == "False")
+                                                                            <a href="{{ URL::asset('toogleAcuse/' . $constancia->id . '/False' ) }}" class="btn btn-primary btn-sm">
+                                                                                <i class="ri-eye-fill"> Permitir descarga</i>
+                                                                            </a>
+                                                                        @else
+                                                                            <a href="{{ URL::asset('toogleAcuse/' . $constancia->id . '/True' ) }}" class="btn btn-primary btn-sm">
+                                                                                <i class="ri-eye-off-fill"> No permitir descarga</i>
+                                                                            </a>
+                                                                        @endif
+                                                                    @endif
                                                                 </td>
                                                                 <td>
-                                                                    @php
-                                                                        //Obtener la constancia con el idAsistencia
-                                                                        $constancia = DB::table('constancias')->where('idAsistencia', $asistencia->id)->first();
-                                                                    @endphp
                                                                     @if($constancia != NULL)
-                                                                        <a href="{{ URL::asset('acuses/' . $constancia->redaccion) }}" target="_blank" class="btn btn-primary btn-sm">
+                                                                        <a href="{{ URL::asset('acuses/' . $constancia->acuse) }}" target="_blank" class="btn btn-primary btn-sm">
                                                                             Descargar acuse
                                                                         </a>
                                                                     @else

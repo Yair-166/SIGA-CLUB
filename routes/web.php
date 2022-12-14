@@ -78,6 +78,8 @@ Route::post('/pdf2/{id}/{sel}', [App\Http\Controllers\HomeController::class, 'pd
 
 //Acuses
 Route::post('/createAcuse', [App\Http\Controllers\HomeController::class, 'createAcuse'])->name('createAcuse');
+//Get toogleAcuse con el id y el estado
+Route::get('/toogleAcuse/{id}/{state}', [App\Http\Controllers\HomeController::class, 'toogleAcuse'])->name('toogleAcuse');
 
 //Correos
 //get emailBienvenida con 2 parametros idalumno y idclub

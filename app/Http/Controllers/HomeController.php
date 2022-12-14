@@ -553,9 +553,16 @@ class HomeController extends Controller
         $confi_eventos = new Confi_eventos();
         $confi_eventos = Confi_eventos::find($id);
         if($state == "1")
+        {
             $confi_eventos->isPrivate = 0;
+            $confi_eventos->ultimoQR = "0";
+            $num = rand(100000, 999999);
+            $confi_eventos->qrActual = $num;
+        }
         else
+        {
             $confi_eventos->isPrivate = 1;
+        }
         
         $confi_eventos->update();
 
@@ -727,6 +734,10 @@ class HomeController extends Controller
             $acusePath = public_path('/acuses/');
             $acuse->move($acusePath, $acuseName);
             $constancias->acuse =  $acuseName;
+            $constancias->redaccion = "False";
+        }
+        else{
+            return redirect()->back()->with('error', 'No se ha seleccionado un archivo');
         }
 
         $constancias->fechaExpedicion = date('Y-m-d');
@@ -734,6 +745,18 @@ class HomeController extends Controller
         
 
         return redirect()->back()->with('success', 'Acuse creado correctamente');
+    }
+
+    public function toogleAcuse($id, $state)
+    {
+        $constancias = Constancias::find($id);
+        if ($state == "False") {
+            $constancias->redaccion = "True";
+        } else {
+            $constancias->redaccion = "False";
+        }
+        $constancias->save();
+        return redirect()->back()->with('success', 'Acuse actualizado correctamente');
     }
 
     

@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="{{ URL::asset('assets/libs/swiper/swiper.min.css') }}">
 @endsection
 @section('content')
+@component('components.breadcrumb')
+        @slot('li_1')
+            Perfil
+        @endslot
+        @slot('title')
+            Perfil
+        @endslot
+    @endcomponent
 @php
     //Recibir datos via get
     $uid = $_GET['uid'];

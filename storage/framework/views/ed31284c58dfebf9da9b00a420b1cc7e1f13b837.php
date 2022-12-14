@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="<?php echo e(URL::asset('assets/libs/swiper/swiper.min.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
+<?php $__env->startComponent('components.breadcrumb'); ?>
+    <?php $__env->slot('li_1'); ?>
+            Perfil
+        <?php $__env->endSlot(); ?>
+        <?php $__env->slot('title'); ?>
+            Perfil
+        <?php $__env->endSlot(); ?>
+    <?php echo $__env->renderComponent(); ?>
 <?php
     //Recibir datos via get
     $uid = $_GET['uid'];
@@ -165,6 +173,8 @@
                                                         <?php $__currentLoopData = $asistencias; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $asistencia): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
                                                             <?php
                                                                 $evento = DB::table('eventos')->where('id', $asistencia->idEvento)->first();
+                                                                //Obtener la constancia con el idAsistencia
+                                                                $constancia = DB::table('constancias')->where('idAsistencia', $asistencia->id)->first();
                                                             ?>
                                                             <tr>
                                                                 <td><?php echo e($evento->nombre); ?></td>
@@ -172,15 +182,23 @@
                                                                 <td><?php echo e($evento->fechaFin); ?></td>
                                                                 <td><?php echo e($asistencia->asistenciaTotal); ?></td>
                                                                 <td>
-                                                                    <a href="pages-constancias-form?uid=<?php echo e($asistencia->id); ?>"  class="btn btn-primary btn-sm">Generar constancia</a>
+                                                                    <?php if($constancia == NULL): ?>
+                                                                        <a href="pages-constancias-form?uid=<?php echo e($asistencia->id); ?>"  class="btn btn-primary btn-sm">Generar constancia</a>
+                                                                    <?php else: ?>
+                                                                        <?php if($constancia->redaccion == "False"): ?>
+                                                                            <a href="<?php echo e(URL::asset('toogleAcuse/' . $constancia->id . '/False' )); ?>" class="btn btn-primary btn-sm">
+                                                                                <i class="ri-eye-fill"> Permitir descarga</i>
+                                                                            </a>
+                                                                        <?php else: ?>
+                                                                            <a href="<?php echo e(URL::asset('toogleAcuse/' . $constancia->id . '/True' )); ?>" class="btn btn-primary btn-sm">
+                                                                                <i class="ri-eye-off-fill"> No permitir descarga</i>
+                                                                            </a>
+                                                                        <?php endif; ?>
+                                                                    <?php endif; ?>
                                                                 </td>
                                                                 <td>
-                                                                    <?php
-                                                                        //Obtener la constancia con el idAsistencia
-                                                                        $constancia = DB::table('constancias')->where('idAsistencia', $asistencia->id)->first();
-                                                                    ?>
                                                                     <?php if($constancia != NULL): ?>
-                                                                        <a href="<?php echo e(URL::asset('acuses/' . $constancia->redaccion)); ?>" target="_blank" class="btn btn-primary btn-sm">
+                                                                        <a href="<?php echo e(URL::asset('acuses/' . $constancia->acuse)); ?>" target="_blank" class="btn btn-primary btn-sm">
                                                                             Descargar acuse
                                                                         </a>
                                                                     <?php else: ?>

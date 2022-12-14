@@ -162,7 +162,7 @@
                     <td style='margin-left: auto; margin-right: auto; text-align: right;'>
                         Verifica la autenticidad de esta constancia en:
                         <?php
-                            $qr = QrCode::size(300)->margin(0)->generate("http://panel.sigaclub.com/checkasistencia/".$asistencia->id);
+                            $qr = QrCode::size(300)->margin(0)->generate("https://panel.sigaclub.com/checkasistencia/".$asistencia->id);
                         ?>
                         
                         <img src="data:image/png;base64, <?php echo base64_encode($qr); ?> " width="120" height="120" />

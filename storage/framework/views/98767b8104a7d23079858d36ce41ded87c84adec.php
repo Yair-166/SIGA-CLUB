@@ -163,17 +163,20 @@
                                         </td>
                                         <td class="location">
                                             <?php if($asistencia->constanciaGenerada == 0): ?>
-                                                <p class="fw-medium">Cuando tu constancia este lista aparecera aqui.</p>
+                                                La constancia está en proceso.
                                             <?php else: ?>
                                                 <?php
                                                     //Obtener la constancia con el idAsistencia
                                                     $constancia = DB::table('constancias')->where('idAsistencia', $asistencia->id)->first();
                                                 ?>
-                                                <p class="fw-medium">Puedes pasar por tu constancia con el administrador del club</p>
-                                                <?php if($constancia->redaccion != NULL): ?>
-                                                    <a href="<?php echo e(URL::asset('acuses/' . $constancia->redaccion)); ?>" class="btn btn-primary" target="_blank">
+                                                <?php if($constancia->redaccion == "True"): ?>
+                                                    <a href="<?php echo e(URL::asset('acuses/' . $constancia->acuse)); ?>" class="btn btn-primary" target="_blank">
                                                         Descargar constancia / acuse
                                                     </a>
+                                                <?php else: ?>
+                                                    <h6>
+                                                        Obtén tu constancia con el administrador del club.<i class="ri-check-line"></i>
+                                                    </h6>
                                                 <?php endif; ?>
                                             <?php endif; ?>
                                         </td>

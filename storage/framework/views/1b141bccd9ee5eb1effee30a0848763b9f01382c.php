@@ -134,6 +134,13 @@
                                     Material de apoyo
                                 </a>
                             </li>
+                            <?php if(Auth::user()->rol == "colaborador" && $confipriv->isPrivate == 0): ?>
+                                <li class="nav-item">
+                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#asistencia" role="tab">
+                                        Tomar asistencia
+                                    </a>
+                                </li>
+                            <?php endif; ?>
                             <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
                                 <li class="nav-item">
                                     <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#project-activities" role="tab">
@@ -156,6 +163,7 @@
                                     </a>
                                 </li>
                             <?php endif; ?>
+                            
                             
                         </ul>
                     </div>
@@ -566,9 +574,9 @@
                             <div class="card  align-items-center">
                                 <div class="card-header align-items-center d-flex border-bottom-dashed">
                                     <?php if($confipriv->isPrivate == "1"): ?>
-                                        <h5 class="fs-13 mb-0">QR Público</h5>
+                                        <h5 class="fs-13 mb-0">Cambiar a QR Público</h5>
                                     <?php else: ?>
-                                        <h5 class="fs-13 mb-0">QR Privado</h5>
+                                        <h5 class="fs-13 mb-0">Cambiar a QR Privado</h5>
                                     <?php endif; ?>
                                 </div>
                                 <div class="card-body">
@@ -828,6 +836,35 @@
                                 </table>
                             </div>
                         </div>
+                        <!-- ene col -->
+                    </div>
+                    <!-- end row -->
+                    <!-- end team list -->
+                </div>
+                <!-- end tab pane -->
+
+                <div class="tab-pane fade" id="asistencia" role="tabpanel">
+                    <div class="row">
+                        <div class="card-header ">
+                            <h4 class="card-title mb-0">Escanea el QR para pasar tu asistencia</h4>
+                        </div>
+                        <div class="card-body">
+                            <div class="sitemap-content">
+                                <div class="visible-print text-center">
+                                    <?php
+                                        //Obtener la primer fila de la tabla confi_eventos donde el idEvento sea ia igual a $idEvento
+                                        $eventoqr = DB::table('confi_eventos')->where('idEvento', $getId)->first();
+
+                                        $qr = QrCode::size(400)->margin(0)->generate("http://panel.sigaclub.com/asistencias?evento=".$getId."&token=".$eventoqr->qrActual);
+                                        echo $qr;
+
+                                    ?>
+                                        <meta http-equiv="refresh" content="20">
+                                </div>
+                            </div>
+                            <!--end sitemap-content-->
+                        </div>
+                <!--end card-body-->
                         <!-- ene col -->
                     </div>
                     <!-- end row -->
