@@ -135,11 +135,13 @@
                                 </a>
                             </li>
                             <?php if(Auth::user()->rol == "colaborador" && $confipriv->isPrivate == 0): ?>
-                                <li class="nav-item">
-                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#asistencia" role="tab">
-                                        Tomar asistencia
-                                    </a>
-                                </li>
+                                <?php if($evento->fechaInicio <= $fechaActual && $evento->fechaFin >= $fechaActual && $evento->horaInicio <= $horaActual && $evento->horaFin >= $horaActual): ?>
+                                    <li class="nav-item">
+                                        <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#asistencia" role="tab">
+                                            Tomar asistencia
+                                        </a>
+                                    </li>
+                                <?php endif; ?>
                             <?php endif; ?>
                             <?php if(Auth::user()->rol == "administrador" || Auth::user()->id == $coordinador->id || Auth::user()->rol == "super"): ?>
                                 <li class="nav-item">
@@ -859,7 +861,6 @@
                                         echo $qr;
 
                                     ?>
-                                        <meta http-equiv="refresh" content="20">
                                 </div>
                             </div>
                             <!--end sitemap-content-->
