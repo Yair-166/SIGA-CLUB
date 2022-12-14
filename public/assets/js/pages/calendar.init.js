@@ -130,6 +130,21 @@ document.addEventListener("DOMContentLoaded", function () {
             description = description.substring(17);
             //Eliminar el substring \\\" de la cadena
             description = description.substring(0, description.length - 2);
+            //Permitir los acentos
+            description = description.replace(/\\u00e1/g, "á");
+            description = description.replace(/\\u00e9/g, "é");
+            description = description.replace(/\\u00ed/g, "í");
+            description = description.replace(/\\u00f3/g, "ó");
+            description = description.replace(/\\u00fa/g, "ú");
+            description = description.replace(/\\u00f1/g, "ñ");
+            description = description.replace(/\\u00c1/g, "Á");
+            description = description.replace(/\\u00c9/g, "É");
+            description = description.replace(/\\u00cd/g, "Í");
+            description = description.replace(/\\u00d3/g, "Ó");
+            description = description.replace(/\\u00da/g, "Ú");
+            description = description.replace(/\\u00d1/g, "Ñ");
+            //Eliminar todos los \ de la cadena
+            description = description.replace(/\\/g, "");
 
             var reglas = evento[11];
             //Eliminar el substring \\\"reglas\\\":\\\ de la cadena
