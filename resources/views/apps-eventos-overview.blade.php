@@ -82,6 +82,9 @@
     //Obtener las filas de la tabla asistencias_previstas donde id_evento sea igual a getId
     $asistencias_previstas = DB::table('asistencias_previstas')->where('id_evento', $getId)->get();
 
+    //Obtener las asistencias del evento
+    $asistencias = DB::table('asistencias')->where('idEvento', $getId)->get();
+
     $correos = "";
 
     //Obtener la fecha actual con todo y hora
@@ -115,6 +118,10 @@
                                                 <div>Fecha : <span class="fw-medium">{{$fecha}}</span></div>
                                                 <div class="vr"></div>
                                                 <div>Horario : <span class="fw-medium">{{$hora}}</span></div>
+                                                @if($fechaActual > $evento->fechaFin && $horaActual > $evento->horaFin)
+                                                    <div class="vr"></div>
+                                                    <div class="text-danger">Evento terminado</div>
+                                                @endif
                                             </div>
                                         </div>
                                     </div>
@@ -149,11 +156,13 @@
                                         Evidencias de participación
                                     </a>
                                 </li>
-                                <li class="nav-item">
-                                    <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#participantes" role="tab">
-                                        Participantes confirmados
-                                    </a>
-                                </li>
+                                @if($fechaActual <= $evento->fechaFin && $horaActual <= $evento->horaFin)
+                                    <li class="nav-item">
+                                        <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#participantes" role="tab">
+                                            Participantes confirmados
+                                        </a>
+                                    </li>
+                                @endif
                                 <li class="nav-item">
                                     <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#edit-event" role="tab">
                                         Editar evento
@@ -164,6 +173,13 @@
                                         Configuración
                                     </a>
                                 </li>
+                                @if($fechaActual > $evento->fechaFin && $horaActual > $evento->horaFin)
+                                    <li class="nav-item">
+                                        <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#asistentes" role="tab">
+                                            Participantes del evento
+                                        </a>
+                                    </li>
+                                @endif
                             @endif
                             
                             
@@ -856,7 +872,6 @@
                             </div>
                             <!--end sitemap-content-->
                         </div>
-                <!--end card-body-->
                         <!-- ene col -->
                     </div>
                     <!-- end row -->
@@ -864,6 +879,77 @@
                 </div>
                 <!-- end tab pane -->
 
+                <div class="tab-pane fade" id="asistentes" role="tabpanel">
+                    
+                    <div class="row">
+                        <div class="col-lg-12">
+                            <div class="table-responsive">
+                                <table class="table table-borderless align-middle mb-0">
+                                    <thead class="table-light">
+                                        <tr>
+                                            <th scope="col">Nombre del participante</th>
+                                            <th scope="col">Total de horas registradas</th>
+                                            <th scope="col">Constancias</th>
+                                            <th scope="col">Acuses</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($asistencias as $asistencia)
+                                            @php
+                                                $constancia = DB::table('constancias')->where('idAsistencia', $asistencia->id)->first();
+                                                //Obtener el usuario que asistió al evento
+                                                $user = DB::table('users')->where('id', $asistencia->idUsuario)->first();
+                                            @endphp
+                                            <tr>
+                                                <td>
+                                                    <div class="d-flex align-items-center">
+                                                        <div class="flex-shrink-0">
+                                                            <img src="{{ URL::asset('images/' . $user->avatar) }}" alt="" class="avatar-xxs rounded-circle image_src object-cover">
+                                                        </div>
+                                                        <div class="flex-grow-1 ms-2 name">
+                                                            {{$user->name . ' ' . $user->apaterno . ' ' . $user->amaterno}}
+                                                        </div>
+                                                    </div>
+                                                </td>
+                                                <td>{{$asistencia->asistenciaTotal}}</td>
+                                                <td>
+                                                    @if($constancia == NULL)
+                                                        <a href="pages-constancias-form?uid={{$asistencia->id}}"  class="btn btn-primary btn-sm">Generar constancia</a>
+                                                    @else
+                                                        @if($constancia->redaccion == "False")
+                                                            <a href="{{ URL::asset('toogleAcuse/' . $constancia->id . '/False' ) }}" class="btn btn-primary btn-sm">
+                                                                <i class="ri-eye-fill"> Permitir descarga</i>
+                                                            </a>
+                                                        @else
+                                                            <a href="{{ URL::asset('toogleAcuse/' . $constancia->id . '/True' ) }}" class="btn btn-primary btn-sm">
+                                                                <i class="ri-eye-off-fill"> No permitir descarga</i>
+                                                            </a>
+                                                        @endif
+                                                    @endif
+                                                </td>
+                                                <td>
+                                                    @if($constancia != NULL)
+                                                        <a href="{{ URL::asset('acuses/' . $constancia->acuse) }}" target="_blank" class="btn btn-primary btn-sm">
+                                                            Descargar acuse
+                                                        </a>
+                                                    @else
+                                                        <form action="{{route('createAcuse')}}" method="POST" enctype="multipart/form-data">
+                                                            @csrf
+                                                            <input type="hidden" name="idAsistencia_acuse" value="{{$asistencia->id}}">
+                                                            <input name="acuse_file" type="file" name="acuse" id="acuse">
+                                                            <button type="submit" class="btn btn-primary btn-sm">Subir acuse</button>
+                                                        </form>
+                                                    @endif
+                                                </td>
+                                            </tr>
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- end tab pane -->
 
 
             </div>

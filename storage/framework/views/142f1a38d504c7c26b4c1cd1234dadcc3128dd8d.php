@@ -29,8 +29,17 @@
     $evento = DB::table('eventos')->where('id', $asistencia->idEvento)->first();
     //Obtener el club con el id_club de la tabla eventos
     $club = DB::table('clubes')->where('id', $evento->id_club)->first();
+    //Obtener el usuario con el idAdministrador de la tabla clubes
+    $admin = DB::table('users')->where('id', $club->idAdministrador)->first();
+    $ipn = false;
+    //Verificar $admin->boleta es un campo vacio
+    if($admin->boleta != null){
+        //Si es vacio, se le asigna un valor por default
+        $ipn = true;
+    }
     //Obtener los datos del usuario con el idUsuario de la tabla asistencias
     $usuario = DB::table('users')->where('id', $asistencia->idUsuario)->first();
+    
     
 ?>
 
@@ -59,7 +68,12 @@
                         <div class="col-lg-12">
                             <div class="text-center pt-4">
                                 <div class="">
-                                    <img src="<?php echo e(URL::asset('assets/images/astrocheck.png')); ?>" alt="" class="error-basic-img move-animation">
+                                    <?php if($ipn): ?>
+                                        <img src="https://upload.wikimedia.org/wikipedia/commons/7/72/Logo_IPN.png" alt="" width="40%">
+                                        <img src="<?php echo e(URL::asset('images/' . $club->foto)); ?>" alt="" class="move-animation" width="40%"" style="inline-block">
+                                    <?php else: ?>
+                                        <img src="<?php echo e(URL::asset('images/' . $club->foto)); ?>" alt="" class="error-basic-img move-animation">
+                                    <?php endif; ?>
                                 </div>
                                 <div class="mt-n4">
                                     <h1 class="display-1 fw-medium">Constancia válida</h1>
