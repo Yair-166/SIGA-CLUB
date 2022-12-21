@@ -118,7 +118,7 @@
                                                 <div>Fecha : <span class="fw-medium">{{$fecha}}</span></div>
                                                 <div class="vr"></div>
                                                 <div>Horario : <span class="fw-medium">{{$hora}}</span></div>
-                                                @if($fechaActual > $evento->fechaFin && $horaActual > $evento->horaFin)
+                                                @if($fechaActualConHora > $evento->fechaFin." ".$evento->horaFin)
                                                     <div class="vr"></div>
                                                     <div class="text-danger">Evento terminado</div>
                                                 @endif
@@ -156,7 +156,7 @@
                                         Evidencias de participación
                                     </a>
                                 </li>
-                                @if($fechaActual <= $evento->fechaFin && $horaActual <= $evento->horaFin)
+                                @if($fechaActual <= $evento->fechaFin." ".$evento->horaFin)
                                     <li class="nav-item">
                                         <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#participantes" role="tab">
                                             Participantes confirmados
@@ -173,7 +173,7 @@
                                         Configuración
                                     </a>
                                 </li>
-                                @if($fechaActual > $evento->fechaFin && $horaActual > $evento->horaFin)
+                                @if($fechaActualConHora > $evento->fechaFin." ".$evento->horaFin)
                                     <li class="nav-item">
                                         <a class="nav-link fw-semibold" data-bs-toggle="tab" href="#asistentes" role="tab">
                                             Participantes del evento
