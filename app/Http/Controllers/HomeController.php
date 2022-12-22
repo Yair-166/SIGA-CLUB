@@ -325,6 +325,7 @@ class HomeController extends Controller
         $clubes->descripcion = $request->post('descripcion');
         $clubes->facebook = $request->post('facebook');
         $clubes->bienvenida = $request->post('bienvenida');
+        $clubes->idAdministrador = $request->post('idAdministrador');
         $clubes->active = '1';
         
         if ($request->file('foto')) {

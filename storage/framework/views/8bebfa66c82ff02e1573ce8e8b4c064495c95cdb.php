@@ -18,6 +18,9 @@
     $club = DB::table('clubes')->where('id', $getId)->first();
     //Obtener la tabla autoridades
     $autoridades = DB::table('autoridades')->where('idClub', $getId)->get();
+    //Obtener de la tabla users todos los que tengan el rol de administrador
+    $administradores = DB::table('users')->where('rol', 'administrador')->get();
+    $admin = DB::table('users')->where('id', $club->idAdministrador)->first();
 ?>
     <div class="row">
         <div class="col-lg-12">
@@ -79,12 +82,37 @@
                                 <div class="card-body">
                                     <form action="<?php echo e(route('editarClub')); ?>" method="POST" enctype="multipart/form-data">
                                         <?php echo csrf_field(); ?>
-                                        <input type="hidden" name="idAdministrador" value="<?php echo e(Auth::user()->id); ?>">
                                         <input type="hidden" name="id" value="<?php echo e($club->id); ?>">
                                         <div class="mb-3">
                                             <label for="formFile" class="form-label">Foto</label>
                                             <input name="foto" class="form-control" type="file" id="formFile">
                                         </div>
+                                        <?php if(Auth::user()->rol == "administrador"): ?>
+                                            <input type="hidden" name="idAdministrador" value="<?php echo e(Auth::user()->id); ?>">
+                                        <?php else: ?>
+                                            <div class="form-check form-switch form-switch-md" dir="ltr">
+                                                <input type="checkbox" class="form-check-input" id="customSwitchsizemd" onclick="habilitar()">
+                                                <label class="form-check-label" for="customSwitchsizemd">Cambiar administrador</label>
+                                            </div>
+                                            <br>
+                                            <div class="mb-3" id="admins" style="display: none;">
+                                                <label for="idAdministrador" class="form-label">Administrador</label>
+                                                <select class="form-select" name="idAdministrador" id="idAdministrador" required>
+                                                    <option value=<?php echo e($club->idAdministrador); ?> selected>
+                                                        <?php echo e($admin->name." ".$admin->apaterno." ".$admin->amaterno); ?>
+
+                                                    </option>
+                                                    <?php $__currentLoopData = $administradores; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $administrador): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <?php if($administrador->active == 1 && ($administrador->id != $club->idAdministrador)): ?>
+                                                            <option value="<?php echo e($administrador->id); ?>" id="valoradmin">
+                                                                <?php echo e($administrador->name." ".$administrador->apaterno." ".$administrador->amaterno); ?>
+
+                                                            </option>
+                                                        <?php endif; ?>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
+                                            </div>
+                                        <?php endif; ?>
                                         <div class="mb-3">
                                             <label for="nombre" class="form-label">Nombre</label>
                                             <input type="text" class="form-control" id="nombre" name="nombre" value="<?php echo e($club->nombre); ?>" required>
@@ -94,7 +122,7 @@
                                             <input type="text" class="form-control" id="nomenclatura" name="nomenclatura" value="<?php echo e($club->nomenclatura); ?>" required>
                                         </div>
                                         <div class="mb-3">
-                                            <label for="localizacion" class="form-label">Localización</label>
+                                            <label for="localizacion" class="form-label">Por favor ingrese la ubicación de la escuela y el salón, por ejemplo: Escuela XYZ, Salón ABC</label>
                                             <input type="text" class="form-control" id="localizacion" name="localizacion" value="<?php echo e($club->localizacion); ?>" required>
                                         </div>
                                         <div class="mb-3">
@@ -198,6 +226,18 @@
 <?php $__env->startSection('script'); ?>
     <script src="<?php echo e(URL::asset('assets/js/pages/project-overview.init.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+    <script type="text/javascript">
+        function habilitar() {
+            element = document.getElementById("admins");
+            check = document.getElementById("customSwitchsizemd");
+            if (check.checked) {
+                element.style.display='block'
+            }
+            else {
+                element.style.display='none';
+            }
+        }
+    </script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\SIGA-CLUB\resources\views/apps-clubes-editar.blade.php ENDPATH**/ ?>

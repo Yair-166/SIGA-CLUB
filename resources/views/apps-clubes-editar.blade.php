@@ -18,6 +18,9 @@
     $club = DB::table('clubes')->where('id', $getId)->first();
     //Obtener la tabla autoridades
     $autoridades = DB::table('autoridades')->where('idClub', $getId)->get();
+    //Obtener de la tabla users todos los que tengan el rol de administrador
+    $administradores = DB::table('users')->where('rol', 'administrador')->get();
+    $admin = DB::table('users')->where('id', $club->idAdministrador)->first();
 @endphp
     <div class="row">
         <div class="col-lg-12">
@@ -79,12 +82,35 @@
                                 <div class="card-body">
                                     <form action="{{ route('editarClub') }}" method="POST" enctype="multipart/form-data">
                                         @csrf
-                                        <input type="hidden" name="idAdministrador" value="{{Auth::user()->id}}">
                                         <input type="hidden" name="id" value="{{$club->id}}">
                                         <div class="mb-3">
                                             <label for="formFile" class="form-label">Foto</label>
                                             <input name="foto" class="form-control" type="file" id="formFile">
                                         </div>
+                                        @if(Auth::user()->rol == "administrador")
+                                            <input type="hidden" name="idAdministrador" value="{{Auth::user()->id}}">
+                                        @else
+                                            <div class="form-check form-switch form-switch-md" dir="ltr">
+                                                <input type="checkbox" class="form-check-input" id="customSwitchsizemd" onclick="habilitar()">
+                                                <label class="form-check-label" for="customSwitchsizemd">Cambiar administrador</label>
+                                            </div>
+                                            <br>
+                                            <div class="mb-3" id="admins" style="display: none;">
+                                                <label for="idAdministrador" class="form-label">Administrador</label>
+                                                <select class="form-select" name="idAdministrador" id="idAdministrador" required>
+                                                    <option value={{$club->idAdministrador}} selected>
+                                                        {{$admin->name." ".$admin->apaterno." ".$admin->amaterno}}
+                                                    </option>
+                                                    @foreach ($administradores as $administrador)
+                                                        @if($administrador->active == 1 && ($administrador->id != $club->idAdministrador))
+                                                            <option value="{{$administrador->id}}" id="valoradmin">
+                                                                {{$administrador->name." ".$administrador->apaterno." ".$administrador->amaterno}}
+                                                            </option>
+                                                        @endif
+                                                    @endforeach
+                                                </select>
+                                            </div>
+                                        @endif
                                         <div class="mb-3">
                                             <label for="nombre" class="form-label">Nombre</label>
                                             <input type="text" class="form-control" id="nombre" name="nombre" value="{{$club->nombre}}" required>
@@ -198,4 +224,16 @@
 @section('script')
     <script src="{{ URL::asset('assets/js/pages/project-overview.init.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+    <script type="text/javascript">
+        function habilitar() {
+            element = document.getElementById("admins");
+            check = document.getElementById("customSwitchsizemd");
+            if (check.checked) {
+                element.style.display='block'
+            }
+            else {
+                element.style.display='none';
+            }
+        }
+    </script>
 @endsection
