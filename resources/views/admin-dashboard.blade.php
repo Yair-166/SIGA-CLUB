@@ -23,18 +23,20 @@
         $totalClubes = count($clubes);
     @endphp
 
-    <div class="row mt-4">
-        <div class="card">
-            <div class="card-body text-center p-1">
-                <h5 class="mb-1 mt-1">
-                    Clubes administrados:
-                </h5>
-                <p class="text-muted mb-1">
-                    {{$totalClubes}}
-                </p>
+    @if(Auth::user()->rol == 'administrador')
+        <div class="row mt-4">
+            <div class="card">
+                <div class="card-body text-center p-1">
+                    <h5 class="mb-1 mt-1">
+                        Clubes administrados:
+                    </h5>
+                    <p class="text-muted mb-1">
+                        {{$totalClubes}}
+                    </p>
+                </div>
             </div>
         </div>
-    </div>
+    @endif
 
     <div class="row mt-4">
         
