@@ -112,6 +112,25 @@
                                         </div>
 
                                         <div class="mb-2">
+                                            <label for="genero" class="form-label">Genero <span
+                                                    class="text-danger">*</span></label>
+                                            <select class="form-select @error('genero') is-invalid @enderror" name="genero"
+                                                id="genero" required>
+                                                <option value="Masculino">Masculino</option>
+                                                <option value="Femenino">Femenino</option>
+                                                <option value="Otro">No especificar</option>
+                                            </select>
+                                            @error('genero')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <div class="invalid-feedback">
+                                                Por favor introduce el genero.
+                                            </div>
+                                        </div>
+
+                                        <div class="mb-2">
                                             <label for="userpassword" class="form-label">Contraseña <span
                                                     class="text-danger">*</span></label>
                                             <input type="password"

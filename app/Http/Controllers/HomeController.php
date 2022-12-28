@@ -268,6 +268,15 @@ class HomeController extends Controller
         else
             $user->rol = "administrador";
             
+        $user->clubes = "0";
+        $user->save();
+        return redirect()->back();
+    }
+
+    public function clubesPermitidos(Request $request)
+    {
+        $user = User::find($request->post('id'));
+        $user->clubes = $request->post('nums');
         $user->save();
         return redirect()->back();
     }
@@ -295,6 +304,18 @@ class HomeController extends Controller
             return redirect()->back()->with("error","Ya existe un club con el mismo nombre.");
         }
 
+        $user = User::find($clubes->idAdministrador);
+
+        if($user->rol == 'administrador')
+        {
+            $aux = $user->clubes;
+            $aux = (int)$aux;
+            $aux = $aux - 1;
+            $aux = (string)$aux;
+            $user->clubes = $aux;
+            $user->save();
+        }
+
         if ($request->file('foto')) {
             $foto = $request->file('foto');
             $fotoName = time() . '.' . $foto->getClientOriginalExtension();
@@ -316,9 +337,27 @@ class HomeController extends Controller
 
     public function editarClub(Request $request)
     {
+
+        //Obtener el tamaño de $request
+        $size = count($request->all());
+ 
+        //Obtener el nombre de los post que se mandaron
+        $keys = array_keys($request->all());
+ 
+        $iteraciones = $size - 10;
+
+        $tags = "";
+
+        for($i = 9; $i < $iteraciones+9; $i++)
+        {
+            //Agregar a $tags el valor del post y una coma
+            $tags = $tags . $request->post($keys[$i]) . ',';
+        }
+        //print_r($tags);
+
         //Recibir los datos del formulario y actualizarlos en la base de datos
         $clubes = Clubes::find($request->post('id'));
-        
+
         $clubes->nombre = $request->post('nombre');
         $clubes->nomenclatura = $request->post('nomenclatura');
         $clubes->localizacion = $request->post('localizacion');
@@ -327,6 +366,7 @@ class HomeController extends Controller
         $clubes->bienvenida = $request->post('bienvenida');
         $clubes->idAdministrador = $request->post('idAdministrador');
         $clubes->active = '1';
+        $clubes->tags = $clubes->tags . $tags;
         
         if ($request->file('foto')) {
             $foto = $request->file('foto');
@@ -377,18 +417,102 @@ class HomeController extends Controller
         $id_evento = $id;
         $id_alumno = Auth::user()->id;
 
+        //Obtener el club del evento
+        $evento = Eventos::find($id_evento);
+        $club = Clubes::find($evento->id_club);
+
+        //Obtener de la tabla inscripciones el registro deonde id_club sea igual al id del club y id_alumno sea igual al id del alumno
+        $inscripcion = Inscripciones::where('id_club', $club->id)->where('id_alumno', $id_alumno)->first();
+
+        //Verificar si el club tiene tags
+        if($club->tags != null){
+            //Obtener los tags del evento y de la inscripción
+            $tags_evento = explode(',', $evento->tags);
+            $tags_inscripcion = explode(',', $inscripcion->tags);
+
+            //Verificar si por lo menos un tag del evento está en los tags de la inscripción
+            $flag = false;
+            foreach($tags_evento as $tag_evento){
+                foreach($tags_inscripcion as $tag_inscripcion){
+                    if($tag_evento == $tag_inscripcion){
+                        $flag = true;
+                    }
+                }
+            }
+
+            if($flag == true){
+                //Ver si el usuario ya está inscrito en el evento en la tabla asistenciasprevistas de la base de datos
+                $asistencia = AsistenciasPrevistas::where('id_evento', $id_evento)->where('id_alumno', $id_alumno)->first();
+                if($asistencia == null){
+                    $asistencia = new AsistenciasPrevistas;
+                    $asistencia->id_evento = $id_evento;
+                    $asistencia->id_alumno = $id_alumno;
+                    $asistencia->save();
+                    return redirect()->back()->with('success', 'Asistencia registrada correctamente');
+                }
+                else{
+                    return redirect()->back()->with('error', 'Ya estás inscrito en este evento');
+                }
+            }
+            else{
+                return redirect()->back()->with('error', 'No puedes asistir a este evento porque no tienes los tags necesarios');
+            }
+        }
+        else{
+            //Ver si el usuario ya está inscrito en el evento en la tabla asistenciasprevistas de la base de datos
+            $asistencia = AsistenciasPrevistas::where('id_evento', $id_evento)->where('id_alumno', $id_alumno)->first();
+            if($asistencia == null){
+                $asistencia = new AsistenciasPrevistas;
+                $asistencia->id_evento = $id_evento;
+                $asistencia->id_alumno = $id_alumno;
+                $asistencia->save();
+                return redirect()->back()->with('success', 'Asistencia registrada correctamente');
+            }
+            else{
+                return redirect()->back()->with('error', 'Ya estás inscrito en este evento');
+            }
+        }
+        /*
+        //Obtener los tags del evento y de la inscripción
+        $tags_evento = explode(',', $evento->tags);
+        $tags_inscripcion = explode(',', $inscripcion->tags);
+
+        //Verificar si por lo menos un tag del evento está en los tags de la inscripción
+        $flag = false;
+        foreach($tags_evento as $tag_evento){
+            foreach($tags_inscripcion as $tag_inscripcion){
+                if($tag_evento == $tag_inscripcion){
+                    $flag = true;
+                }
+            }
+        }
+
         //Ver si el usuario ya está inscrito en el evento en la tabla asistenciasprevistas de la base de datos
         $asistencia = AsistenciasPrevistas::where('id_evento', $id_evento)->where('id_alumno', $id_alumno)->first();
         if($asistencia == null){
             $asistencia = new AsistenciasPrevistas();
             $asistencia->id_evento = $id_evento;
             $asistencia->id_alumno = $id_alumno;
-            $asistencia->save();
+            //$asistencia->save();
             return redirect()->back()->with('success', 'Asistencia registrada correctamente');
         }
         else{
             return redirect()->back()->with('error', 'Ya estás pre-inscrito en este evento');
         }
+        */
+    }
+
+    public function eliminarTagClub($id, $tag)
+    {
+        $clubes = Clubes::find($id);
+        $tags = $clubes->tags;
+        //Agregar una coma al final de la cadena de tag
+        $tag = $tag . ',';
+        $tags = str_replace($tag, "", $tags);
+        $tags = str_replace(",,", ",", $tags);
+        $clubes->tags = $tags;
+        $clubes->save();
+        return redirect()->back()->with('success', 'Tag eliminado correctamente');
     }
 
     //Para inscripciones
@@ -428,6 +552,37 @@ class HomeController extends Controller
         $inscripciones->save();
 
         return redirect()->back()->with('des', 'Te has desinscrito correctamente');
+    }
+
+    public function agregarTagInscripcion(Request $request, $id)
+    {
+        //Obtener el registro de la tabla inscripciones
+        $inscripciones = Inscripciones::find($id);
+        $tags = $inscripciones->tags;
+        //Verificar si el tag ya existe
+        if (strpos($tags, $request->post('tag')) !== false) {
+            return redirect()->back()->with('error', 'El tag ya existe');
+        }
+        //Agregar una coma al final de la cadena de tag
+        $tag = $request->post('tag') . ',';
+        $tags = $tags . $tag;
+        $inscripciones->tags = $tags;
+        $inscripciones->save();
+        return redirect()->back()->with('success', 'Tag agregado correctamente');
+    }
+
+    public function eliminarTagInscripcion($id, $tag)
+    {
+        //Obtener el registro de la tabla inscripciones
+        $inscripciones = Inscripciones::find($id);
+        $tags = $inscripciones->tags;
+        //Agregar una coma al final de la cadena de tag
+        $tag = $tag . ',';
+        $tags = str_replace($tag, "", $tags);
+        $tags = str_replace(",,", ",", $tags);
+        $inscripciones->tags = $tags;
+        $inscripciones->save();
+        return redirect()->back()->with('success', 'Tag eliminado correctamente');
     }
 
     //Para eventos
@@ -479,6 +634,23 @@ class HomeController extends Controller
         $eventos = new Eventos();
         //Encontrar el evento con $request->post('idEvento_reglas')
         $eventos = Eventos::find($request->post('idEvento_reglas'));
+
+        if($request->post('fecha') != NULL){
+            $fecha = $request->post('fecha');
+            //Si la longitud de la fecha es 10, es decir, no tiene hora, se le agrega la hora 00:00:00
+            if (strlen($fecha) == 10) {
+                $eventos->fechaInicio = $fecha;
+                $eventos->fechaFin = $fecha;
+                $eventos->horaInicio = $request->post('horaInicio');
+                $eventos->horaFin = $request->post('horaFin');
+            } else {
+                //Quitar de la cadena  to 
+                $eventos->fechaInicio = substr($fecha, 0, 10);
+                $eventos->fechaFin = substr($fecha, 14, 23);
+                $eventos->horaInicio = $request->post('horaInicio') . "00:00";
+                $eventos->horaFin = $request->post('horaFin') . "23:59";
+            }
+        }
         
         $eventos->nombre = $request->post('title');
         $eventos->tipoAsistencia = $request->post('tipoAsistencia');
@@ -490,9 +662,41 @@ class HomeController extends Controller
         $eventos->reglas = $request->post('reglas');
         $eventos->redaccionCoordinador = $request->post('redaccionCoordinador');
         $eventos->redaccionParticipante = $request->post('redaccionParticipante');
+
+        //Obtener el tamaño de $request
+        $size = count($request->all());
+
+        //Obtener el nombre de los post que se mandaron
+        $keys = array_keys($request->all());
+ 
+        $iteraciones = $size - 15;
+
+        $tags = "";
+
+        for($i = 11; $i < $iteraciones+11; $i++)
+        {
+            //Agregar a $tags el valor del post y una coma
+            $tags = $tags . $request->post($keys[$i]) . ',';
+        }
+        
+        $eventos->tags = $eventos->tags . $tags;
+
         $eventos->update();
 
         return redirect()->back()->with('success', 'Reglas del evento actualizadas correctamente');
+    }
+
+    public function eliminarTagEvento($id, $tag)
+    {
+        $eventos = Eventos::find($id);
+        $tags = $eventos->tags;
+        //Agregar una coma al final de la cadena de tag
+        $tag = $tag . ',';
+        $tags = str_replace($tag, "", $tags);
+        $tags = str_replace(",,", ",", $tags);
+        $eventos->tags = $tags;
+        $eventos->save();
+        return redirect()->back()->with('success', 'Tag eliminado correctamente');
     }
 
     //Para Confi_eventos
@@ -611,9 +815,6 @@ class HomeController extends Controller
             $archivos->idEvento = $request->post('idEvento');
             $archivos->nombreArchivo = $request->post('nombreArchivo');
             $archivos->isPrivate = $request->post('isPrivate');
-
-
-            
 
             $archivo = $files[$i];
             $archivoName =  $archivo->getClientOriginalName();

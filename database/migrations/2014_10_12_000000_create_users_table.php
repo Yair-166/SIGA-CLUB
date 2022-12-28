@@ -20,6 +20,7 @@ class CreateUsersTable extends Migration
             $table->string('name');
             $table->string('apaterno')->nullable();
             $table->string('amaterno')->nullable();
+            $table->string('genero')->nullable();
             $table->string('email')->unique();
             $table->timestamp('email_verified_at')->nullable();
             $table->string('password');
@@ -28,6 +29,7 @@ class CreateUsersTable extends Migration
             $table->string('boleta')->nullable();
             $table->text('avatar');
             $table->string('active')->default('1');
+            $table->string('clubes')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

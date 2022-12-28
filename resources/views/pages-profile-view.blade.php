@@ -113,10 +113,21 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-pills animation-nav profile-nav gap-2 gap-lg-3 flex-grow-1" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link fs-14 active border" data-bs-toggle="tab" href="#overview-tab" role="tab">
-                                <i class="ri-airplay-fill d-inline-block d-md-none"></i> <span
-                                    class="d-none d-md-inline-block">Sobre {{$user->name}}</span>
-                            </a>
+                            @if($inscripcion->tags != '')
+                                <h3>Tags del usuario</h3>
+                                @php
+                                    $tags = explode(",", $inscripcion->tags);
+                                    //Eliminar el ultimo elemento del array
+                                    array_pop($tags);
+                                @endphp
+                                @foreach ($tags as $tag)
+                                    <span class="badge bg-primary">{{$tag}}
+                                        <a type="button" class="badge btn-danger" href={{ route('eliminarTagInscripcion', ['id' => $uid, 'tag' => $tag])}}>
+                                            <i class="mdi mdi-close"></i>
+                                        </a>
+                                    </span>
+                                @endforeach
+                            @endif
                         </li>
                     </ul>
                 </div>
@@ -127,9 +138,27 @@
                             <div class="col-xxl-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title mb-5">
+                                        <h4 class="card-title mb-5">
                                             {{$club->nombre}}
-                                        </h5>
+                                        </h4>
+                                        @if($club->tags != '')
+                                            @php
+                                                $tagsDisponibles = explode(",", $club->tags);
+                                                //Eliminar el ultimo elemento del array
+                                                array_pop($tagsDisponibles);
+                                            @endphp
+                                            <form action="{{ route('agregarTagInscripcion', ['id' => $uid]) }}" method="POST">
+                                                @csrf
+                                                <h4 class="card-title mb-4">Agregar TAG</h4>
+                                                <select class="form-select" name="tag">
+                                                    @foreach ($tagsDisponibles as $tag)
+                                                        <option value="{{$tag}}">{{$tag}}</option>
+                                                    @endforeach
+                                                </select>
+                                                <br>
+                                                <button type="submit" class="btn btn-primary">Agregar</button>
+                                            </form>
+                                        @endif
                                     </div>
                                 </div>
                             </div>

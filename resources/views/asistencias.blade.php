@@ -97,6 +97,17 @@
 
         //Obtener las asistencias del usuario logueado
         $asistencias = DB::table('asistencias')->where('idUsuario', $idUsuario)->get();
+        //Contar todas aquellas asistencias que tengan el valor de constanciaGenerada en 1
+        $constanciasgeneradas = DB::table('asistencias')->where('idUsuario', $idUsuario)->where('constanciaGenerada', 1)->count();
+        
+        $horasTotales = 0;
+        foreach($asistencias as $asistencia){
+            $horasTotales = $horasTotales + $asistencia->asistenciaTotal;
+        }
+
+        //Contar $inscripciones
+        $inscripcionesCount = DB::table('inscripciones')->where('id_alumno', $idUsuario)->count();
+
     @endphp
     <div class="row">
     @if (Auth::user()->rol == 'administrador')
@@ -114,6 +125,44 @@
     @endif  
 
         <div class="col-xxl-12">
+
+            <div class="row col-xxl-12">
+                <div class="card col-xl-4">
+                    <div class="card-body text-center p-1">
+                        <h5 class="mb-1 mt-1">
+                        Clubes a los que pertenece:
+                        </h5>
+                        <p class="text-muted mb-1">
+                            {{$inscripcionesCount}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card col-xl-4">
+                    <div class="card-body text-center p-1">
+                        <h5 class="mb-1 mt-1">
+                        Horas totales de asistencia:
+                        </h5>
+                        <p class="text-muted mb-1">
+                            {{$horasTotales}}
+                        </p>
+                    </div>
+                </div>
+
+                <div class="card col-xl-4">
+                    <div class="card-body text-center p-1">
+                        <h5 class="mb-1 mt-1">
+                        Constancias generadas:
+                        </h5>
+                        <p class="text-muted mb-1">
+                            {{$constanciasgeneradas}}
+                        </p>
+                    </div>
+                </div>
+            </div>
+
+            <div><p> </p></div>
+
             <div class="card" id="companyList">
                 <div class="card-body">
                     <div>

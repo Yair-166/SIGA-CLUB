@@ -114,10 +114,22 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-pills animation-nav profile-nav gap-2 gap-lg-3 flex-grow-1" role="tablist">
                         <li class="nav-item">
-                            <a class="nav-link fs-14 active border" data-bs-toggle="tab" href="#overview-tab" role="tab">
-                                <i class="ri-airplay-fill d-inline-block d-md-none"></i> <span
-                                    class="d-none d-md-inline-block">Sobre <?php echo e($user->name); ?></span>
-                            </a>
+                            <?php if($inscripcion->tags != ''): ?>
+                                <h3>Tags del usuario</h3>
+                                <?php
+                                    $tags = explode(",", $inscripcion->tags);
+                                    //Eliminar el ultimo elemento del array
+                                    array_pop($tags);
+                                ?>
+                                <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                    <span class="badge bg-primary"><?php echo e($tag); ?>
+
+                                        <a type="button" class="badge btn-danger" href=<?php echo e(route('eliminarTagInscripcion', ['id' => $uid, 'tag' => $tag])); ?>>
+                                            <i class="mdi mdi-close"></i>
+                                        </a>
+                                    </span>
+                                <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                            <?php endif; ?>
                         </li>
                     </ul>
                 </div>
@@ -128,10 +140,28 @@
                             <div class="col-xxl-3">
                                 <div class="card">
                                     <div class="card-body">
-                                        <h5 class="card-title mb-5">
+                                        <h4 class="card-title mb-5">
                                             <?php echo e($club->nombre); ?>
 
-                                        </h5>
+                                        </h4>
+                                        <?php if($club->tags != ''): ?>
+                                            <?php
+                                                $tagsDisponibles = explode(",", $club->tags);
+                                                //Eliminar el ultimo elemento del array
+                                                array_pop($tagsDisponibles);
+                                            ?>
+                                            <form action="<?php echo e(route('agregarTagInscripcion', ['id' => $uid])); ?>" method="POST">
+                                                <?php echo csrf_field(); ?>
+                                                <h4 class="card-title mb-4">Agregar TAG</h4>
+                                                <select class="form-select" name="tag">
+                                                    <?php $__currentLoopData = $tagsDisponibles; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <option value="<?php echo e($tag); ?>"><?php echo e($tag); ?></option>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </select>
+                                                <br>
+                                                <button type="submit" class="btn btn-primary">Agregar</button>
+                                            </form>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>

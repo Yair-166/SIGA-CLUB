@@ -53,7 +53,11 @@
                                     </div>
                                     <div class="avatar-sm flex-shrink-0">
                                         <span class="avatar-title bg-soft-primary rounded fs-3">
-                                            <i class="bx bx-user-plus text-primary"></i>
+                                            @if(Auth::user()->rol == ('colaborador'))
+                                                <i class="bx bx-group text-primary"></i>
+                                            @else
+                                                <i class="bx bx-user-plus text-primary"></i>
+                                            @endif
                                         </span>
                                     </div>
                                 </div>

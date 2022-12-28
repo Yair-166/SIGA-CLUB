@@ -9,8 +9,8 @@
         @slot('title') Calendario @endslot
     @endcomponent
     @php
-        //Obtener de la tabla inscripciones todas las filas que tengan el id del usuario logueado
-        $inscripciones = DB::table('inscripciones')->where('id_alumno', Auth::user()->id)->get();
+        //Obtener de la tabla inscripciones todas las filas que tengan el id del usuario logueado y active = 1
+        $inscripciones = DB::table('inscripciones')->where('id_alumno', Auth::user()->id )->where('active', 1)->get();
 
         //Obtener todos los clubes de la tabla clubes cuyo id sea igual al id_club de la tabla inscripciones
         $clubes = DB::table('clubes')->whereIn('id', $inscripciones->pluck('id_club'))->get();
@@ -101,43 +101,55 @@
             <div class="modal fade" id="event-modal">
                 <div class="modal-dialog modal-dialog-centered">
                     
-                    <div class="modal-content">
+                    <div class="modal-content border-0">
+                        <div class="modal-header p-3 bg-soft-info">
+                            <h5 class="modal-title" id="modal-title">Evento</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-hidden="true"></button>
+                        </div>
                         <div class="modal-body p-4">
-                            <h4 class="modal-title mt-0" id="modal-title">Evento</h4>
-                        </div>
+                            <label>Descripción</label>
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0 me-3">
+                                    <i class="ri-discuss-line text-muted fs-16"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="d-block text-muted mb-0" id="event-description-tag"></p>
+                                </div>
+                            </div>
 
-                        <label>Descripción</label>
-                        <div class="d-flex mb-3">
-                            <div class="flex-shrink-0 me-3">
-                                <i class="ri-discuss-line text-muted fs-16"></i>
+                            <label>Reglas de participación</label>
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0 me-3">
+                                    <i class="ri-file-info-line text-muted fs-16"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="d-block text-muted mb-0" id="event-rules-tag"></p>
+                                </div>
                             </div>
-                            <div class="flex-grow-1">
-                                <p class="d-block text-muted mb-0" id="event-description-tag"></p>
-                            </div>
-                        </div>
 
-                        <label>Reglas de participación</label>
-                        <div class="d-flex mb-3">
-                            <div class="flex-shrink-0 me-3">
-                                <i class="ri-file-info-line text-muted fs-16"></i>
+                            <label>Tags de participación</label>
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0 me-3">
+                                    <i class="ri-hashtag text-muted fs-16"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <p class="d-block text-muted mb-0" id="event-tags-tag"></p>
+                                </div>
                             </div>
-                            <div class="flex-grow-1">
-                                <p class="d-block text-muted mb-0" id="event-rules-tag"></p>
-                            </div>
-                        </div>
 
-                        <label>Asistire</label>
-                        <div class="d-flex mb-3">
-                            <div class="flex-shrink-0 me-3">
-                                <i class="ri-checkbox-circle-line text-muted fs-16"></i>
+                            <label>Asistire</label>
+                            <div class="d-flex mb-3">
+                                <div class="flex-shrink-0 me-3">
+                                    <i class="ri-checkbox-circle-line text-muted fs-16"></i>
+                                </div>
+                                <div class="flex-grow-1">
+                                    <a href="#" class="btn btn-primary" id="btn-asistire">Asistire</a>
+                                </div>
                             </div>
-                            <div class="flex-grow-1">
-                                <a href="#" class="btn btn-primary" id="btn-asistire">Asistire</a>
+                            
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
                             </div>
-                        </div>
-                        
-                        <div class="modal-footer">
-                            <button type="button" class="btn btn-light" data-bs-dismiss="modal">Cerrar</button>
                         </div>
                     </div>
                     
@@ -196,6 +208,14 @@
                                             </div>
                                             <div class="flex-grow-1">
                                                 <p class="d-block text-muted mb-0" id="event-rules-tag"></p>
+                                            </div>
+                                        </div>
+                                        <div class="d-flex mb-3">
+                                            <div class="flex-shrink-0 me-3">
+                                                <i class="ri-hashtag text-muted fs-16"></i>
+                                            </div>
+                                            <div class="flex-grow-1">
+                                                <p class="d-block text-muted mb-0" id="event-tags-tag"></p>
                                             </div>
                                         </div>
                                         <div class="d-flex mb-3">

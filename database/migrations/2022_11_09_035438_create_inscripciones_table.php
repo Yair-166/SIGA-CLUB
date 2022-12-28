@@ -17,6 +17,7 @@ return new class extends Migration
             $table->id();
             $table->string('id_club');
             $table->string('id_alumno');
+            $table->text('tags')->nullable();
             $table->string('active')->default('1');
             $table->timestamps();
         });

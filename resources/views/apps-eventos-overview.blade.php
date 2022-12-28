@@ -123,6 +123,23 @@
                                                     <div class="text-danger">Evento terminado</div>
                                                 @endif
                                             </div>
+                                            <br>
+                                            <div class="hstack gap-3 flex-wrap">
+                                                @if($evento->tags != '')
+                                                    @php
+                                                        $tags = explode(",", $evento->tags);
+                                                        //Eliminar el ultimo elemento del array
+                                                        array_pop($tags);
+                                                    @endphp
+                                                    @foreach ($tags as $tag)
+                                                        <span class="badge bg-primary">{{$tag}}
+                                                            <a type="button" class="badge btn-danger" href={{ route('eliminarTagEvento', ['id' => $getId, 'tag' => $tag])}}>
+                                                                <i class="mdi mdi-close"></i>
+                                                            </a>
+                                                        </span>
+                                                    @endforeach
+                                                @endif
+                                            </div>
                                         </div>
                                     </div>
                                 </div>
@@ -552,12 +569,14 @@
                                                     
                                                 </h5>
                                             </div>
-                                            <div class="flex-shrink-0">
-                                                <a href="{{ route('eliminarCoordinador', ['id' => $coordinador->id, 'idevento' => $evento->id]) }}" class="btn btn-sm btn-soft-danger">
-                                                    <i class="ri-delete-bin-2-line"></i>
-                                                </a>
-                                                {{-- <a  class="btn btn-danger btn-sm" ><i class="ri-delete-bin-2-fill me-1 align-bottom"></i></a> --}}
-                                            </div>
+                                            @if($coordinador->id != $club->idAdministrador)
+                                                <div class="flex-shrink-0">
+                                                    <a href="{{ route('eliminarCoordinador', ['id' => $coordinador->id, 'idevento' => $evento->id]) }}" class="btn btn-sm btn-soft-danger">
+                                                        <i class="ri-delete-bin-2-line"></i>
+                                                    </a>
+                                                    {{-- <a  class="btn btn-danger btn-sm" ><i class="ri-delete-bin-2-fill me-1 align-bottom"></i></a> --}}
+                                                </div>
+                                            @endif
                                         </div>
                                         <!-- end member item -->
                                     </div>
@@ -721,6 +740,27 @@
                                                         <textarea name="descripcion" class="form-control" id="event-description" placeholder="Descripción del evento" rows="3" spellcheck="false" >{{ $evento->descripcion }}</textarea>
                                                     </div>
                                                 </div><!--end col-->
+
+                                                @if($club->tags != '')
+                                                    <div class="col-12">
+                                                        <div class="mb-3">
+                                                            <label class="form-label">Tags</label>
+                                                            @php
+                                                                $tagsDisponibles = explode(",", $club->tags);
+                                                                //Eliminar el ultimo elemento del array
+                                                                array_pop($tagsDisponibles);
+                                                            @endphp
+                                                            <select class="form-select" id="tagelegido">
+                                                            @foreach ($tagsDisponibles as $tag)
+                                                                <option value="{{$tag}}">{{$tag}}</option>
+                                                            @endforeach
+                                                            </select>
+                                                            <br>
+                                                            <button onclick="agregarTag()" class="btn btn-primary">Agregar</button>
+                                                            <div id="tags"></div>
+                                                        </div>
+                                                    </div><!--end col-->
+                                                @endif
 
                                                 <div class="col-lg-12">
                                                     <div class="mb-3">
@@ -974,6 +1014,7 @@
             document.execCommand("copy");
             document.body.removeChild(aux);
         }
+
         function agregarcoord(){
             //Cancel submit
             event.preventDefault();
@@ -1046,28 +1087,92 @@
         }
 
         function eliminarcoord(namecords, idcords){
-                //Eliminar el input hidden con name=namecords y value=idcords
-                var input = document.getElementById(namecords);
-                input.parentNode.removeChild(input);
+            //Eliminar el input hidden con name=namecords y value=idcords
+            var input = document.getElementById(namecords);
+            input.parentNode.removeChild(input);
 
-                //Eliminar el label con id=namecords
-                var label = document.getElementById(namecords);
-                label.parentNode.removeChild(label);
+            //Eliminar el label con id=namecords
+            var label = document.getElementById(namecords);
+            label.parentNode.removeChild(label);
 
-                //Eliminar el boton con id=namecords
-                var button = document.getElementById(namecords);
-                button.parentNode.removeChild(button);
+            //Eliminar el boton con id=namecords
+            var button = document.getElementById(namecords);
+            button.parentNode.removeChild(button);
 
-                //Eliminar el br
-                var br = document.getElementById(namecords + "br");
-                br.parentNode.removeChild(br);
+            //Eliminar el br
+            var br = document.getElementById(namecords + "br");
+            br.parentNode.removeChild(br);
 
-                conteo--;
+            conteo--;
 
-                if(conteo == 0){
-                    //Ocultar el boton de guardar
-                    document.getElementById("btnGuardar").style.display = "none";
-                }
+            if(conteo == 0){
+                //Ocultar el boton de guardar
+                document.getElementById("btnGuardar").style.display = "none";
             }
+        }
+
+        function agregarTag(){
+            //Cancel submit
+            event.preventDefault();
+
+            //Obtener lo escrito en el input tags
+            var tag = document.getElementById("tagelegido").value;
+
+            //Checar si existe un label con id = namecords
+            if(document.getElementById(tag)){
+                //Si existe, no hacer nada
+                return;
+            }
+            else{
+                //Agregar un input hidden con name=idcords y value=idcords
+                var newInput = document.createElement('input');
+                //Poner type hidden
+                newInput.setAttribute("type", "hidden");
+                //agrego la clase deseada
+                newInput.className += "form-control";
+                //Poner name al input igual al id del select
+                newInput.setAttribute("name", tag);
+                //Poner id al input igual al id del select
+                newInput.setAttribute("id", tag);
+                //Poner value al input igual al id del select
+                newInput.setAttribute("value", tag);
+                //agregando el input
+                var contenedor = document.getElementById('tags');
+                contenedor.appendChild(newInput);
+
+                //Agregar un label con el nombre del coordinador
+                var newLabel = document.createElement('label');
+                //agrego la clase deseada
+                newLabel.className += "badge badge-soft-success text-uppercase";
+                //Poner id al label igual al id del select
+                newLabel.setAttribute("id", tag);
+                //Obtener de la base de datos el nombre del user con el idcords
+                newLabel.innerHTML = tag;
+                //agregando el label
+                var contenedor = document.getElementById('tags');
+                contenedor.appendChild(newLabel);
+
+                //Agregar boton para eliminar el coordinador
+                var newButton = document.createElement('button');
+                //agrego la clase deseada
+                newButton.className += "badge btn-soft-danger text-uppercase";
+                //Poner id al label igual al id del select
+                newButton.setAttribute("id", tag);
+                //Poner value al label igual al id del select
+                newButton.setAttribute("value", tag);
+                //Poner onclick al boton
+                newButton.setAttribute("onclick", "eliminarcoord(this.id, this.value)");
+                //Poner el texto del boton
+                newButton.innerHTML = "🗑️";
+                //agregando el label
+                var contenedor = document.getElementById('tags');
+                contenedor.appendChild(newButton);
+
+                //Poner un br
+                var newBr = document.createElement('br');
+                newBr.setAttribute("id", tag + "br");
+                contenedor.appendChild(newBr);
+            }
+        }
     </script>
 @endsection

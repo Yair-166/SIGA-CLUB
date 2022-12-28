@@ -44,6 +44,24 @@
                                                 <div>Descripción : </div>
                                                 <span class="fw-medium"><?php echo e($club->descripcion); ?></span>
                                             </div>
+                                            <?php if($club->tags != ""): ?>
+                                                <div class="hstack gap-3 flex-wrap">
+                                                    <div>Tags : </div>
+                                                    <?php
+                                                        $tags = explode(",", $club->tags);
+                                                        //Eliminar el ultimo elemento del array
+                                                        array_pop($tags);
+                                                    ?>
+                                                    <?php $__currentLoopData = $tags; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $tag): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
+                                                        <span class="badge bg-success"><?php echo e($tag); ?>
+
+                                                            <a type="button" class="badge btn-danger" href=<?php echo e(route('eliminarTagClub', ['idClub' => $club->id, 'tag' => $tag])); ?>>
+                                                                <i class="mdi mdi-close"></i>
+                                                            </a>
+                                                        </span>
+                                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
+                                                </div>
+                                            <?php endif; ?>
                                         </div>
                                     </div>
                                 </div>
@@ -132,6 +150,12 @@
                                         <div class="mb-3">
                                             <label for="descripcion" class="form-label">Descripción</label>
                                             <textarea class="form-control" id="descripcion" name="descripcion" rows="3"><?php echo e($club->descripcion); ?></textarea>
+                                        </div>
+                                        <div class="mb-3">
+                                            <label for="Tags" class="form-label">Tags <b>*Permiten separar los tipos de participantes del club</b></label>
+                                            <input type="text" class="form-control" id="tags" name="tags" placeholder="Básicos, Intermedios, Avanzados...">
+                                            <button type="button" class="btn btn-primary" onclick="agregarTag()">Agregar</button>
+                                            <div id="labels"></div>
                                         </div>
                                         <div class="mb-3">
                                             <label for="bienvenida" class="form-label">Mensaje de bienvenida</label>
@@ -237,6 +261,90 @@
                 element.style.display='none';
             }
         }
+    </script>
+    <script>
+
+        function agregarTag(){
+            //Cancel submit
+            event.preventDefault();
+
+            //Obtener lo escrito en el input tags
+            var tag = document.getElementById("tags").value;
+
+            //Checar si existe un label con id = namecords
+            if(document.getElementById(tag)){
+                //Si existe, no hacer nada
+                return;
+            }
+            else{
+                //Agregar un input hidden con name=idcords y value=idcords
+                var newInput = document.createElement('input');
+                //Poner type hidden
+                newInput.setAttribute("type", "hidden");
+                //agrego la clase deseada
+                newInput.className += "form-control";
+                //Poner name al input igual al id del select
+                newInput.setAttribute("name", tag);
+                //Poner id al input igual al id del select
+                newInput.setAttribute("id", tag);
+                //Poner value al input igual al id del select
+                newInput.setAttribute("value", tag);
+                //agregando el input
+                var contenedor = document.getElementById('labels');
+                contenedor.appendChild(newInput);
+
+                //Agregar un label con el nombre del coordinador
+                var newLabel = document.createElement('label');
+                //agrego la clase deseada
+                newLabel.className += "badge badge-soft-success text-uppercase";
+                //Poner id al label igual al id del select
+                newLabel.setAttribute("id", tag);
+                //Obtener de la base de datos el nombre del user con el idcords
+                newLabel.innerHTML = tag;
+                //agregando el label
+                var contenedor = document.getElementById('labels');
+                contenedor.appendChild(newLabel);
+
+                //Agregar boton para eliminar el coordinador
+                var newButton = document.createElement('button');
+                //agrego la clase deseada
+                newButton.className += "badge btn-soft-danger text-uppercase";
+                //Poner id al label igual al id del select
+                newButton.setAttribute("id", tag);
+                //Poner value al label igual al id del select
+                newButton.setAttribute("value", tag);
+                //Poner onclick al boton
+                newButton.setAttribute("onclick", "eliminarcoord(this.id, this.value)");
+                //Poner el texto del boton
+                newButton.innerHTML = "🗑️";
+                //agregando el label
+                var contenedor = document.getElementById('labels');
+                contenedor.appendChild(newButton);
+
+                //Poner un br
+                var newBr = document.createElement('br');
+                newBr.setAttribute("id", tag + "br");
+                contenedor.appendChild(newBr);
+            }
+        }
+
+        function eliminarcoord(namecords, idcords){
+                //Eliminar el input hidden con name=namecords y value=idcords
+                var input = document.getElementById(namecords);
+                input.parentNode.removeChild(input);
+
+                //Eliminar el label con id=namecords
+                var label = document.getElementById(namecords);
+                label.parentNode.removeChild(label);
+
+                //Eliminar el boton con id=namecords
+                var button = document.getElementById(namecords);
+                button.parentNode.removeChild(button);
+
+                //Eliminar el br
+                var br = document.getElementById(namecords + "br");
+                br.parentNode.removeChild(br);
+            }
     </script>
 <?php $__env->stopSection(); ?>
 

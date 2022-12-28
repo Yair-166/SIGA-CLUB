@@ -56,6 +56,8 @@
                             <a href="<?php echo e(URL::asset('/apps-eventos-list?club='.$club->id)); ?>" class="btn btn-light w-100">Ver eventos</a>
                             <hr>
                             <a href="<?php echo e(URL::asset('/apps-clubes-editar?club='.$club->id)); ?>" class="btn btn-light w-100">Ver detalles</a>
+                            <hr>
+                            <a href="<?php echo e(URL::asset('/dashboard?club='.$club->id)); ?>" class="btn btn-light w-100">Ver estadísticas</a>
                         </div>
                     </div>
                 </div>

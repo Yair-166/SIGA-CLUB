@@ -6,6 +6,14 @@
     <link rel="stylesheet" href="<?php echo e(URL::asset('assets/libs/swiper/swiper.min.css')); ?>">
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
+<?php $__env->startComponent('components.breadcrumb'); ?>
+        <?php $__env->slot('li_1'); ?>
+            Perfil
+        <?php $__env->endSlot(); ?>
+        <?php $__env->slot('title'); ?>
+            Perfil
+        <?php $__env->endSlot(); ?>
+    <?php echo $__env->renderComponent(); ?>
 <?php
     //Recibir datos via get
     $uid = $_GET['uid'];

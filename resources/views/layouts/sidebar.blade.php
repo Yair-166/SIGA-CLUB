@@ -85,6 +85,17 @@
                             </a>
                         @endif
                     </li> <!-- end Usuarios -->
+                    <li class="nav-item">
+                        @if(Auth::user()->rol == "super")
+                            <a class="nav-link menu-link" href="super-dashboard">
+                                <i data-feather="bar-chart" ></i> <span>Estadisticas</span>
+                            </a>
+                        @else
+                            <a class="nav-link menu-link" href="admin-dashboard">
+                                <i data-feather="bar-chart" ></i> <span>Estadísticas</span>
+                            </a>
+                        @endif
+                    </li> <!-- end Estadisticas -->
                 @endif
 
             </ul>

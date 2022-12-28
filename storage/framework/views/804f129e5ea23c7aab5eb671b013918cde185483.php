@@ -27,7 +27,7 @@
         $inscrito = 0;
     ?>
     <div class="row">
-    <?php if(Auth::user()->rol == 'administrador' || Auth::user()->rol == 'super'): ?>
+    <?php if( (Auth::user()->rol == 'administrador' && Auth::user()->clubes > 0) || Auth::user()->rol == 'super'): ?>
        <div class="col-lg-12">
             <div class="card">
                 <div class="card-header">
@@ -125,6 +125,12 @@
                                                     </li>
                                                     <?php if($club->idAdministrador == Auth::user()->id || Auth::user()->rol == 'super'): ?>
                                                         
+                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                            data-bs-placement="top" title="Estadisticas">
+                                                            <a class="edit-item-btn" href="<?php echo e(URL::asset('/dashboard?club='.$club->id)); ?>">
+                                                                <i class="ri-bar-chart-fill align-bottom text-muted"></i>
+                                                            </a>
+                                                        </li>
                                                         <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
                                                             data-bs-placement="top" title="Eliminar">
                                                             <a id="adelete" class="delete-item-btn" href="#deleteRecordModal" data-bs-toggle="modal" data-bs-id="<?php echo e($club->id); ?>">

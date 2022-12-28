@@ -25,6 +25,7 @@ return new class extends Migration
             $table->string('facebook')->nullable();
             $table->string('active')->default('1');
             $table->text('bienvenida');
+            $table->text('tags')->nullable();
             $table->timestamps();
         });
     }

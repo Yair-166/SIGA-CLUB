@@ -56,6 +56,7 @@ class RegisterController extends Controller
             'amaterno' => ['required', 'string', 'max:255'],
             'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
             'password' => ['required', 'string', 'min:8', 'confirmed'],
+            'genero' => ['required', 'string', 'max:255'],
             'avatar' => ['required', 'image' ,'mimes:jpg,jpeg,png','max:1024'],
         ]);
     }
@@ -87,6 +88,7 @@ class RegisterController extends Controller
             'email' => $data['email'],
             'password' => Hash::make($data['password']),
             'rol' => $data['rol'],
+            'genero' => $data['genero'],
             'avatar' =>  $avatarName,
             'active' => '1',
         ]);

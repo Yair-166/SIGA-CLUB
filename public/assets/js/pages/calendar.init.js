@@ -151,6 +151,36 @@ document.addEventListener("DOMContentLoaded", function () {
             reglas = reglas.substring(12);
             //Eliminar el substring \\\" de la cadena
             reglas = reglas.substring(0, reglas.length - 2);
+            //Si reglas es vacio
+            if (reglas == "") {
+                reglas = "No hay reglas establecidas.";
+            }
+
+            var tags = evento[12];
+            //Si la cadena no contiene la palabra null
+            if (tags.indexOf("null") == -1) {
+                //Eliminar el substring \\\"tags\\\":\\\ de la cadena
+                tags = tags.substring(10);
+                //Permitir los acentos
+                tags = tags.replace(/\\u00e1/g, "á");
+                tags = tags.replace(/\\u00e9/g, "é");
+                tags = tags.replace(/\\u00ed/g, "í");
+                tags = tags.replace(/\\u00f3/g, "ó");
+                tags = tags.replace(/\\u00fa/g, "ú");
+                tags = tags.replace(/\\u00f1/g, "ñ");
+                tags = tags.replace(/\\u00c1/g, "Á");
+                tags = tags.replace(/\\u00c9/g, "É");
+                tags = tags.replace(/\\u00cd/g, "Í");
+                tags = tags.replace(/\\u00d3/g, "Ó");
+                tags = tags.replace(/\\u00da/g, "Ú");
+                tags = tags.replace(/\\u00d1/g, "Ñ");
+                //Eliminar todos los \ de la cadena
+                tags = tags.replace(/\\/g, "");
+            }
+            else {
+                tags = "Sin tags establecidos.";
+            }
+
 
             var className = "bg-soft-info";
             
@@ -169,8 +199,8 @@ document.addEventListener("DOMContentLoaded", function () {
                 className: className,
                 allDay: true,
                 description: description,
-                reglas: reglas
-
+                reglas: reglas,
+                tags: tags
             };
             
             defaultEvents.push(evento);
@@ -257,6 +287,7 @@ document.addEventListener("DOMContentLoaded", function () {
             document.getElementById("event-location-tag").innerHTML = selectedEvent.extendedProps.location === undefined ? "No Location" : selectedEvent.extendedProps.location;
             document.getElementById("event-description-tag").innerHTML = selectedEvent.extendedProps.description === undefined ? "No Description" : selectedEvent.extendedProps.description;
             document.getElementById("event-rules-tag").innerHTML = selectedEvent.extendedProps.reglas === undefined ? "No Rules" : selectedEvent.extendedProps.reglas;
+            document.getElementById("event-tags-tag").innerHTML = selectedEvent.extendedProps.reglas === undefined ? "No Tags" : selectedEvent.extendedProps.tags;
             document.getElementById("btn-asistire").setAttribute("href", "/asistire/" + selectedEvent.id);
 
             // Edit Modal

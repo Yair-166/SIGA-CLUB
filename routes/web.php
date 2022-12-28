@@ -35,24 +35,29 @@ Route::post('/edituser', [App\Http\Controllers\HomeController::class, 'edituser'
 Route::post('/eliminarUser', [App\Http\Controllers\HomeController::class, 'eliminarUser'])->name('eliminarUser');
 Route::post('/deleteuser', [App\Http\Controllers\HomeController::class, 'deleteuser'])->name('deleteuser');
 Route::get('/darAdmin/{id}', [App\Http\Controllers\HomeController::class, 'darAdmin'])->name('darAdmin');
+Route::post('/clubesPermitidos', [App\Http\Controllers\HomeController::class, 'clubesPermitidos'])->name('clubesPermitidos');
 
 
 Route::get('{any}', [App\Http\Controllers\HomeController::class, 'index'])->name('index');
 
-//clubes details
+//clubes
 Route::post('/club', [App\Http\Controllers\HomeController::class, 'updateClub'])->name('updateClub');
 Route::post('/clubeditar', [App\Http\Controllers\HomeController::class, 'editarClub'])->name('editarClub');
 Route::post('/clubeliminar', [App\Http\Controllers\HomeController::class, 'deleteClub'])->name('deleteClub');
 Route::get('/activarClub/{id}', [App\Http\Controllers\HomeController::class, 'activarClub'])->name('activarClub');
+Route::get('/eliminarTagClub/{idClub}/{tag}', [App\Http\Controllers\HomeController::class, 'eliminarTagClub'])->name('eliminarTagClub');
 
 //inscripciones
 Route::post('/inscribirse', [App\Http\Controllers\HomeController::class, 'inscribirse'])->name('inscribirse');
 Route::post('/desinscribirse', [App\Http\Controllers\HomeController::class, 'desinscribirse'])->name('desinscribirse');
+Route::get('/eliminarTagInscripcion/{id}/{tag}', [App\Http\Controllers\HomeController::class, 'eliminarTagInscripcion'])->name('eliminarTagInscripcion');
+Route::post('/agregarTagInscripcion/{id}', [App\Http\Controllers\HomeController::class, 'agregarTagInscripcion'])->name('agregarTagInscripcion');
 
 //eventos
 Route::post('/creaEvento', [App\Http\Controllers\HomeController::class, 'creaEvento'])->name('creaEvento');
 Route::post('/reglasEvento', [App\Http\Controllers\HomeController::class, 'reglasEvento'])->name('reglasEvento');
 Route::get('/asistire/{id}', [App\Http\Controllers\HomeController::class, 'asistire'])->name('asistire');
+Route::get('/eliminarTagEvento/{id}/{tag}', [App\Http\Controllers\HomeController::class, 'eliminarTagEvento'])->name('eliminarTagEvento');
 
 //confi_eventos
 Route::post('/asignarCoordinador', [App\Http\Controllers\HomeController::class, 'asignarCoordinador'])->name('asignarCoordinador');

@@ -108,6 +108,17 @@
                                                                 <i class="ri-user-unfollow-fill align-bottom text-muted"></i>
                                                             </a>
                                                         </li>
+                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                            data-bs-placement="top" title="Clubes permitidos">
+                                                            <form action="{{ route('clubesPermitidos')}}" method="POST">
+                                                                @csrf
+                                                                <input type="hidden" name="id" value="{{$user->id}}">
+                                                                <input type="text" name="nums" value="{{$user->clubes}}" required>
+                                                                <button type="submit" class="view-item-btn">
+                                                                    <i class="ri-checkbox-circle-fill align-bottom text-muted"></i>
+                                                                </button>
+                                                            </form>
+                                                        </li>
                                                     @endif
 
                                                 </ul>

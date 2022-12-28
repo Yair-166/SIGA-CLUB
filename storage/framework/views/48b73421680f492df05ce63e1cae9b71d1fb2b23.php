@@ -112,6 +112,17 @@
                                                                 <i class="ri-user-unfollow-fill align-bottom text-muted"></i>
                                                             </a>
                                                         </li>
+                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                            data-bs-placement="top" title="Clubes permitidos">
+                                                            <form action="<?php echo e(route('clubesPermitidos')); ?>" method="POST">
+                                                                <?php echo csrf_field(); ?>
+                                                                <input type="hidden" name="id" value="<?php echo e($user->id); ?>">
+                                                                <input type="text" name="nums" value="<?php echo e($user->clubes); ?>" required>
+                                                                <button type="submit" class="view-item-btn">
+                                                                    <i class="ri-checkbox-circle-fill align-bottom text-muted"></i>
+                                                                </button>
+                                                            </form>
+                                                        </li>
                                                     <?php endif; ?>
 
                                                 </ul>

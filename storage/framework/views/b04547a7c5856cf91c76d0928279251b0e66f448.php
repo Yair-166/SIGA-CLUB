@@ -85,6 +85,17 @@
                             </a>
                         <?php endif; ?>
                     </li> <!-- end Usuarios -->
+                    <li class="nav-item">
+                        <?php if(Auth::user()->rol == "super"): ?>
+                            <a class="nav-link menu-link" href="super-dashboard">
+                                <i data-feather="bar-chart" ></i> <span>Estadisticas</span>
+                            </a>
+                        <?php else: ?>
+                            <a class="nav-link menu-link" href="admin-dashboard">
+                                <i data-feather="bar-chart" ></i> <span>Estadísticas</span>
+                            </a>
+                        <?php endif; ?>
+                    </li> <!-- end Estadisticas -->
                 <?php endif; ?>
 
             </ul>
