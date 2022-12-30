@@ -17,10 +17,26 @@
         @endslot
     @endcomponent
     @php
-        //Obtener los usuarios de la base de datos 
-        $users = DB::table('users')->get();
+        //$users = DB::table('users')->get();
         $eliminar = 0;
         $inscrito = 0;
+        $type = 'todos';
+        $string = '';
+        //Checar si se envio algun parametro por la url
+        if(isset($_GET['type'])){
+            //Obtener el valor del parametro
+            $type = $_GET['type'];
+        }
+        if($type == 'todos')
+            $users = DB::table('users')->where('rol', '!=', 'super')->where('active', 1)->get();
+        else if($type == 'admins')
+            $users = DB::table('users')->where('rol', 'administrador')->where('active', 1)->get();
+        else
+            $users = DB::table('users')->where('rol', 'colaborador')->where('active', 1)->get();
+        
+        echo $string;
+        echo $type;
+
     @endphp
     <div class="row">
 
@@ -40,91 +56,87 @@
                             <table class="table align-middle table-nowrap mb-0" id="customerTable">
                                 <thead class="table-light">
                                     <tr>
-                                        <th class="sort" data-sort="name" scope="col">Nombre del usuario</th>
-                                        <th class="sort" data-sort="owner" scope="col">Correo electronico</th>
-                                        <th class="sort" data-sort="rol" scope="col">Tipo de usuario</th>
+                                        <th  scope="col">Nombre del usuario</th>
+                                        <th  scope="col">Correo electronico</th>
+                                        <th  scope="col">Tipo de usuario</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list form-check-all">
                                 
                                 @foreach ($users as $user)
-                                    @if($user->active == 1 && $user->rol != "super")
-                                        <tbody class="list form-check-all">
-                                        <tr>
-                                            <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ001</a>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="{{ URL::asset('images/' . $user->avatar) }}" alt="" class="avatar-xxs rounded-circle image_src object-cover">
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-2 name">
-                                                        {{ $user->name }} {{ $user->apaterno }} {{ $user->amaterno }}
-                                                    </div>
+                                    <tbody class="list form-check-all">
+                                    <tr>
+                                        <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ001</a>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <img src="{{ URL::asset('images/' . $user->avatar) }}" alt="" class="avatar-xxs rounded-circle image_src object-cover">
                                                 </div>
-                                            </td>
-                                            <td class="owner">
-                                                {{ $user->email }}
-                                            </td>
-                                            <td class="rol">
-                                                {{ $user->rol }}
-                                            </td>
-                                            <td>
-                                                @php
-                                                    //juntar toda la información del user en un solo string
-                                                    $userData = $user->avatar . ';' . $user->name . ';' . $user->descripcion;
-                                                    //Convertir a json el string
-                                                    $userData = json_encode($userData);
-                                                @endphp
-                                                <ul class="list-inline hstack gap-2 mb-0">
+                                                <div class="flex-grow-1 ms-2 name">
+                                                    {{ $user->name }} {{ $user->apaterno }} {{ $user->amaterno }}
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="owner">
+                                            {{ $user->email }}
+                                        </td>
+                                        <td class="rol">
+                                            {{ $user->rol }}
+                                        </td>
+                                        <td>
+                                            @php
+                                                //juntar toda la información del user en un solo string
+                                                $userData = $user->avatar . ';' . $user->name . ';' . $user->descripcion;
+                                                //Convertir a json el string
+                                                $userData = json_encode($userData);
+                                            @endphp
+                                            <ul class="list-inline hstack gap-2 mb-0">
+                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                    data-bs-placement="top" title="Ver más">
+                                                    <a href="javascript:mostrar({{$userData}});" class="view-item-btn">
+                                                        <i class="ri-eye-fill align-bottom text-muted"></i>
+                                                    </a>
+                                                </li>
+
+                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                    data-bs-placement="top" title="Eliminar">
+                                                    <a id="adelete" class="delete-item-btn" href="#deleteRecordModal" data-bs-toggle="modal" data-bs-id="{{$user->id}}">
+                                                        <button onClick="eliminarid({{$user->id}})" style="border: none; background: none;">
+                                                            <i class="ri-delete-bin-fill align-bottom text-muted"></i>
+                                                        </button>
+                                                    </a>
+                                                </li>
+                                                @if($user->rol != "administrador")
                                                     <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                        data-bs-placement="top" title="Ver más">
-                                                        <a href="javascript:mostrar({{$userData}});" class="view-item-btn">
-                                                            <i class="ri-eye-fill align-bottom text-muted"></i>
+                                                        data-bs-placement="top" title="Dar admin">
+                                                        <a href="{{ route('darAdmin', $user->id)}}" class="view-item-btn">
+                                                            <i class="ri-user-star-fill align-bottom text-muted"></i>
                                                         </a>
                                                     </li>
-
+                                                @else
                                                     <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                        data-bs-placement="top" title="Eliminar">
-                                                        <a id="adelete" class="delete-item-btn" href="#deleteRecordModal" data-bs-toggle="modal" data-bs-id="{{$user->id}}">
-                                                            <button onClick="eliminarid({{$user->id}})" style="border: none; background: none;">
-                                                                <i class="ri-delete-bin-fill align-bottom text-muted"></i>
+                                                        data-bs-placement="top" title="Quitar admin">
+                                                        <a href="{{ route('darAdmin', $user->id)}}" class="view-item-btn">
+                                                            <i class="ri-user-unfollow-fill align-bottom text-muted"></i>
+                                                        </a>                                                        </li>
+                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                        data-bs-placement="top" title="Clubes permitidos">
+                                                        <form action="{{ route('clubesPermitidos')}}" method="POST">
+                                                            @csrf
+                                                            <input type="hidden" name="id" value="{{$user->id}}">
+                                                            <input type="text" name="nums" value="{{$user->clubes}}" required>
+                                                            <button type="submit" class="view-item-btn">
+                                                                <i class="ri-checkbox-circle-fill align-bottom text-muted"></i>
                                                             </button>
-                                                        </a>
+                                                        </form>
                                                     </li>
+                                                @endif
 
-                                                    @if($user->rol != "administrador")
-                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                            data-bs-placement="top" title="Dar admin">
-                                                            <a href="{{ route('darAdmin', $user->id)}}" class="view-item-btn">
-                                                                <i class="ri-user-star-fill align-bottom text-muted"></i>
-                                                            </a>
-                                                        </li>
-                                                    @else
-                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                            data-bs-placement="top" title="Quitar admin">
-                                                            <a href="{{ route('darAdmin', $user->id)}}" class="view-item-btn">
-                                                                <i class="ri-user-unfollow-fill align-bottom text-muted"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                            data-bs-placement="top" title="Clubes permitidos">
-                                                            <form action="{{ route('clubesPermitidos')}}" method="POST">
-                                                                @csrf
-                                                                <input type="hidden" name="id" value="{{$user->id}}">
-                                                                <input type="text" name="nums" value="{{$user->clubes}}" required>
-                                                                <button type="submit" class="view-item-btn">
-                                                                    <i class="ri-checkbox-circle-fill align-bottom text-muted"></i>
-                                                                </button>
-                                                            </form>
-                                                        </li>
-                                                    @endif
-
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    @endif
+                                            </ul>
+                                        </td>
+                                    </tr>
                                 @endforeach
                                 </tbody>
                             </table>

@@ -177,8 +177,8 @@ var pieChart = new Chart(ispiechart, {
     type: 'pie',
     data: {
         labels: [
-            "Desktops",
-            "Tablets"
+            "Hola",
+            "Adios"
         ],
         datasets: [
             {
@@ -202,6 +202,40 @@ var pieChart = new Chart(ispiechart, {
 });
 }
 
+//Superdashboards
+var isdoughnutchart = document.getElementById('doughnut');
+doughnutChartColors =  getChartColorsArray('doughnut');
+if(doughnutChartColors){
+var lineChart = new Chart(isdoughnutchart, {
+    type: 'doughnut',
+    data: {
+        labels: [
+            "Perros",
+            "Gatos"
+        ],
+        datasets: [
+            {
+                data: [300, 210],
+                backgroundColor: doughnutChartColors,
+                hoverBackgroundColor: doughnutChartColors,
+                hoverBorderColor: "#fff"
+            }]
+    },
+    options: {
+        plugins: {
+            legend: {
+                labels: {
+                    font: {
+                        family: 'Poppins',
+                    }
+                }
+            },
+        }
+    }
+});
+}
+
+/*
 var isdoughnutchart = document.getElementById('doughnut');
 doughnutChartColors =  getChartColorsArray('doughnut');
 if(doughnutChartColors){
@@ -233,7 +267,7 @@ var lineChart = new Chart(isdoughnutchart, {
     }
 });
 }
-
+*/
 // polarArea chart
 var ispolarAreachart = document.getElementById('polarArea');
 polarAreaChartColors =  getChartColorsArray('polarArea');
@@ -293,6 +327,16 @@ var lineChart = new Chart(isradarchart, {
                 data: [65, 59, 90, 81, 56, 55, 40]
             },
             {
+                label: "Perros",
+                backgroundColor: radarChartColors[0], //"rgba(42, 181, 125, 0.2)",
+                borderColor: radarChartColors[1], //"#2ab57d",
+                pointBackgroundColor: radarChartColors[1], //"#2ab57d",
+                pointBorderColor: "#fff",
+                pointHoverBackgroundColor: "#fff",
+                pointHoverBorderColor: radarChartColors[1], //"#2ab57d",
+                data: [65, 59, 90, 81, 56, 55, 40]
+            },
+            {
                 label: "Tablets",
                 backgroundColor: radarChartColors[2], //"rgba(81, 86, 190, 0.2)",
                 borderColor: radarChartColors[3], //"#5156be",
@@ -317,3 +361,4 @@ var lineChart = new Chart(isradarchart, {
     }
 });
 }
+

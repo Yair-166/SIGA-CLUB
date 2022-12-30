@@ -38,6 +38,38 @@
     //Obtener el usuario de la base de datos por el id
     $user = DB::table('users')->where('id', $inscripcion->id_alumno)->first();
     $texto = $numero = "";
+
+    //Crear arreglo con tipos de eventos campamento, clase, Concurso, Conferencia, Curso, Entrenamiento, Evaluación, Exhibición, Exposición, Seminario, Torneo
+    $tipos = "Campamento,Clase,Concurso,Conferencia,Curso,Entrenamiento,Evaluación,Exhibición,Exposición,Seminario,Torneo,";
+    //Convertir el string en un arreglo
+    $tipos = explode(",", $tipos);
+    //Eliminar el ultimo elemento del array
+    array_pop($tipos);
+    $tiposCount = count($tipos);
+    //De cada asistencia obtener el evento y asistenciaTotal
+    $asistenciasTotales = array();
+    foreach($tipos as $tipo){
+        $asistenciaTotal = 0;
+        foreach($asistencias as $asistencia){
+            //Obtener el evento con el id del evento de la asistencia
+            $evento = DB::table('eventos')->where('id', $asistencia->idEvento)->first();
+            //Si el tipo del evento es igual al tipo del arreglo $tipos
+            if($evento->tipo == $tipo){
+                //Sumar la asistencia total de cada evento
+                $asistenciaTotal = $asistenciaTotal + $asistencia->asistenciaTotal;
+            }
+        }
+        //Agregar la asistencia total al arreglo $asistenciasTotales
+        array_push($asistenciasTotales, $asistenciaTotal);
+    }
+    $asistenciasTotalesString =  implode(",", $asistenciasTotales);
+    $tiposAlumnoString = implode(",", $tipos);
+    //Obtener el total de horas de asistencia del usuario
+    $totalHoras = 0;
+    foreach($asistencias as $asistencia){
+        $totalHoras = $totalHoras + $asistencia->asistenciaTotal;
+    }
+
 ?>
     <div class="profile-foreground position-relative mx-n4 mt-n4">
         <div class="profile-wid-bg">
@@ -144,6 +176,7 @@
                                             <?php echo e($club->nombre); ?>
 
                                         </h4>
+                                        
                                         <?php if($club->tags != ''): ?>
                                             <?php
                                                 $tagsDisponibles = explode(",", $club->tags);
@@ -168,15 +201,31 @@
                             <!--end col-->
                             <div class="col-xxl-9">
                                 <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-3">Descripción</h5>
-                                        <p>
-                                            <?php echo e($user->descripcion); ?>
-
-                                        </p>
-                                        <!--end row-->
+                                    <div class="accordion-item">
+                                        <h2 class="accordion-header" id="genques-headingOne">
+                                            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#genques-collapseOne" aria-expanded="false" aria-controls="genques-collapseOne">
+                                                Desgloce de horas por tipo de evento en el club (Hotas totales: <?php echo e($totalHoras); ?>)
+                                            </button>
+                                        </h2>
+                                        <input type="hidden" id="tiposAlumnoString" value="<?php echo e($tiposAlumnoString); ?>">
+                                        <input type="hidden" id="asistenciasTotalesString" value="<?php echo e($asistenciasTotalesString); ?>">
+                                        <div id="genques-collapseOne" class="accordion-collapse collapse collapsed" aria-labelledby="genques-headingOne" data-bs-parent="#genques-accordion">
+                                            <div class="accordion-body row">
+                                                <center>
+                                                    <div class="col-sm-7">
+                                                        <div class="card">
+                                                            <div class="card-header">
+                                                                <h4 class="card-title mb-0">Horas por tipo de evento</h4>
+                                                            </div>
+                                                            <div class="card-body">
+                                                                <canvas id="HorasxEvento" class="chartjs-chart" data-colors='["#344D67", "#6ECCAF"]'></canvas>
+                                                            </div>
+                                                        </div> 
+                                                    </div> <!-- end col -->
+                                                </center>
+                                            </div>
+                                        </div>
                                     </div>
-                                    <!--end card-body-->
                                 </div><!-- end card -->
 
                                 
@@ -272,6 +321,8 @@
 
     <script src="<?php echo e(URL::asset('assets/js/pages/profile.init.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/libs/chart.js/chart.js.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/js/pages/chartjs.init.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\SIGA-CLUB\resources\views/pages-profile-view.blade.php ENDPATH**/ ?>

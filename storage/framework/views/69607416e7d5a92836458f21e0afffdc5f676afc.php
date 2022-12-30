@@ -25,12 +25,32 @@
         //Obtener todos los colaboradores de la base de datos
         $colaboradores = DB::table('users')->where('rol', 'colaborador')->get();
         $totalColaboradores = count($colaboradores);
-        //Obtener todos los usuarios de la base de datos
-        $usuarios = DB::table('users')->where('rol', 'usuario')->get();
+        //Obtener todos los usuarios de la base de datos cuyo rol sea diferente a super
+        $usuarios = DB::table('users')->where('rol', '!=', 'super')->get();
         $totalUsuarios = count($usuarios);
         //Obtener todos los eventos de la base de datos
         $eventos = DB::table('eventos')->get();
         $totalEventos = count($eventos);
+        //Crear arreglo con tipos de eventos campamento, clase, Concurso, Conferencia, Curso, Entrenamiento, Evaluación, Exhibición, Exposición, Seminario, Torneo
+        $tipos = "Campamento,Clase,Concurso,Conferencia,Curso,Entrenamiento,Evaluación,Exhibición,Exposición,Seminario,Torneo,";
+        //Convertir el string en un arreglo
+        $tipos = explode(",", $tipos);
+        //Eliminar el ultimo elemento del array
+        array_pop($tipos);
+        //Crear un arreglo vacio
+        $cantdidadEventos = array();
+        //Recorrer el arreglo de tipos de eventos
+        foreach($tipos as $tipo){
+            //Obtener la cantidad de eventos por tipo
+            $cantidad = DB::table('eventos')->where('tipo', $tipo)->count();
+            //Agregar la cantidad de eventos al arreglo
+            array_push($cantdidadEventos, $cantidad);
+        }
+        //Convertir $tipos a string
+        $tipos = implode(",", $tipos);
+        //Convertir $cantdidadEventos a string
+        $cantdidadEventos = implode(",", $cantdidadEventos);
+
     ?>
     <div class="row">
         <div class="col-xl-3 col-md-6">
@@ -61,7 +81,7 @@
         <div class="col-xl-3 col-md-6">
             <!-- card -->
             <div class="card card-animate">
-                <a href='apps-crm-users'>
+                <a href='apps-crm-users?type=admins'>
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1">
@@ -86,7 +106,7 @@
         <div class="col-xl-3 col-md-6">
             <!-- card -->
             <div class="card card-animate">
-                <a href='apps-crm-users'>
+                <a href='apps-crm-users?type=colabs'>
                     <div class="card-body">
                         <div class="d-flex align-items-center">
                             <div class="flex-grow-1">
@@ -134,6 +154,38 @@
         </div><!-- end col -->
     </div> <!-- end row-->
 
+    <input type="hidden" id="totalAdministradores" value="<?php echo e($totalAdministradores); ?>">
+    <input type="hidden" id="totalColaboradores" value="<?php echo e($totalColaboradores); ?>">
+    <input type="hidden" id="tipos" value="<?php echo e($tipos); ?>">
+    <input type="hidden" id="cantdidadEventos" value="<?php echo e($cantdidadEventos); ?>">
+
+
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Cuentas activas</h4>
+                </div>
+                <div class="card-body">
+                    <canvas id="grafica" class="chartjs-chart" data-colors='["#344D67", "#6ECCAF"]'></canvas>
+                </div>
+            </div> 
+        </div> <!-- end col -->
+
+        <div class="col-sm-6">
+            <div class="card">
+                <div class="card-header">
+                    <h4 class="card-title mb-0">Total de tipos de eventos</h4>
+                </div>
+                <div class="card-body">
+                    <!--<canvas id="graficaTiposEventos" class="chartjs-chart" data-colors='["#344D67", "#6ECCAF", "#ADE792", "#F3ECB0"]'></canvas>-->
+                    <canvas id="graficaTiposEventos" class="chartjs-chart" data-colors='["#344D67", "#6ECCAF"]'></canvas>
+                </div>
+            </div> 
+        </div> <!-- end col -->
+    </div> <!-- end row -->
+
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('script'); ?>
     <script src="<?php echo e(URL::asset('assets/libs/list.js/list.js.min.js')); ?>"></script>
@@ -141,6 +193,8 @@
     <script src="<?php echo e(URL::asset('assets/js/pages/invoiceslist.init.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('assets/libs/sweetalert2/sweetalert2.min.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/libs/chart.js/chart.js.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/js/pages/chartjs.init.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\SIGA-CLUB\resources\views/super-dashboard.blade.php ENDPATH**/ ?>

@@ -4,14 +4,15 @@
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('css'); ?>
     <link rel="stylesheet" href="<?php echo e(URL::asset('assets/libs/swiper/swiper.min.css')); ?>">
+    <link href="<?php echo e(URL::asset('assets/libs/sweetalert2/sweetalert2.min.css')); ?>" rel="stylesheet" type="text/css" />
 <?php $__env->stopSection(); ?>
 <?php $__env->startSection('content'); ?>
-<?php $__env->startComponent('components.breadcrumb'); ?>
-    <?php $__env->slot('li_1'); ?>
-            Perfil
+    <?php $__env->startComponent('components.breadcrumb'); ?>
+        <?php $__env->slot('li_1'); ?>
+            Super
         <?php $__env->endSlot(); ?>
         <?php $__env->slot('title'); ?>
-            Perfil
+            Dashboard
         <?php $__env->endSlot(); ?>
     <?php echo $__env->renderComponent(); ?>
 <?php
@@ -82,9 +83,67 @@
     $tipos = explode(",", $tipos);
     //Eliminar el ultimo elemento del array
     array_pop($tipos);
+    
+    $tiposString = implode(",", $tipos);
+    $cantdidadEventos = array();
+    foreach($tipos as $tipo){
+        //Obtener la cantidad de eventos por tipo
+        $cantidad = DB::table('eventos')->where('tipo', $tipo)->where('id_club', $clubid)->count();
+        //Agregar la cantidad de eventos al arreglo
+        array_push($cantdidadEventos, $cantidad);
+    }
+    //Convertir $cantdidadEventos a string
+    $cantdidadEventos = implode(",", $cantdidadEventos);
+
+    $numTags = array();
+    foreach($tags as $tag)
+    {
+        $totalTagInscripciones = 0;
+        foreach($inscripciones as $inscripcion)
+        {
+            if(strpos($inscripcion->tags, $tag) !== false)
+            {
+                $totalTagInscripciones++;
+            }
+        }
+        //Agregar el numero de inscripciones al arreglo
+        array_push($numTags, $totalTagInscripciones);
+    }
+
+    $tagsclub = implode(",", $tags);
+    $numTags = implode(",", $numTags);
+
+    $asistenciasxusuario = array();
+    foreach($usuarios as $usuario)
+    {
+        //Obtener el numero de asistencias del usuario
+        $totalAsistencias = 0;
+        foreach($asistencias as $asistencia)
+        {
+            if($asistencia->idUsuario == $usuario->id)
+            {
+                $totalAsistencias++;
+            }
+        }
+        //Agregar el numero de asistencias al arreglo
+        array_push($asistenciasxusuario, $totalAsistencias);
+    }
+
+    //Crear un mapa con los usuarios y sus asistencias
+    $mapa = array();
+    for($i = 0; $i < count($usuarios); $i++)
+    {
+        $mapa[$usuarios[$i]->name." ".$usuarios[$i]->apaterno." ".$usuarios[$i]->amaterno] = $asistenciasxusuario[$i];
+    }
+    //Ordenar el mapa de mayor a menor
+    arsort($mapa);
+
 
 ?>
-    
+
+    <input type="hidden" id="tiposString" name="tiposString" value="<?php echo e($tiposString); ?>">
+    <input type="hidden" id="cantdidadEventosString" name="cantdidadEventos" value="<?php echo e($cantdidadEventos); ?>">
+
     <div class="profile-foreground position-relative mx-n4 mt-n4">
         <div class="profile-wid-bg">
             <img src="<?php echo e(URL::asset('assets/images/profile-bg.jpg')); ?>" alt="" class="profile-wid-img" />
@@ -164,17 +223,19 @@
                             </div>
                             <!--end col-->
                             <div class="col-xxl-3">
-                                <div class="card">
-                                    <div class="card-body">
-                                        <h5 class="card-title mb-3">Total de participantes inscritos</h5>
-                                        <h5>
-                                            <?php echo e($totalInscripciones); ?>
+                                <a href="pages-team?club=<?php echo e($club->id); ?>">
+                                    <div class="card">
+                                        <div class="card-body">
+                                            <h5 class="card-title mb-3">Total de participantes inscritos</h5>
+                                            <h5>
+                                                <?php echo e($totalInscripciones); ?>
 
-                                        </h5>
-                                        <!--end row-->
-                                    </div>
-                                    <!--end card-body-->
-                                </div><!-- end card -->
+                                            </h5>
+                                            <!--end row-->
+                                        </div>
+                                        <!--end card-body-->
+                                    </div><!-- end card -->
+                                </a>
                             </div>
                             <!--end col-->
                             <div class="col-xxl-3">
@@ -211,7 +272,7 @@
                                                             <th scope="col">Cantidad de eventos</th>
                                                             <th scope="col">Participaciones confirmadas promedio</th>
                                                             <th scope="col">Participaciones promedio</th>
-                                                            <th scope="col">Participantes promedio por género <b style="color:red;">*</b></th>
+                                                            <th scope="col">Participantes promedio por género <b style="color:red;" title="Ver al pie de página">*</b></th>
                                                         </tr>
                                                     </thead>
                                                     <tbody>
@@ -320,9 +381,17 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
-                                            <img src="https://i.postimg.cc/BbzZRP0n/Whats-App-Image-2022-12-26-at-20-01-28.jpg" style="width: 100%; object-fit: cover;">
-                                        </div>
+                                        
+                                        <div class="col-sm-4">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title mb-0">Total de tipos de eventos</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <canvas id="Eventosclub" class="chartjs-chart" data-colors='["#344D67", "#6ECCAF"]'></canvas>
+                                                </div>
+                                            </div> 
+                                        </div> <!-- end col -->
                                     </div>
                                 </div>
                             </div>
@@ -404,7 +473,7 @@
                                                             }
                                                         ?>
                                                         <tr>
-                                                            <td>Total</td>
+                                                            <td>Totales</td>
                                                             <td><?php echo e(count($masculinos)); ?></td>
                                                             <td><?php echo e(count($femeninos)); ?></td>
                                                             <td><?php echo e(count($nes)); ?></td>
@@ -414,9 +483,52 @@
                                                 </table>
                                             </div>
                                         </div>
-                                        <div class="col-lg-4">
-                                            <img src="https://i.postimg.cc/BbzZRP0n/Whats-App-Image-2022-12-26-at-20-01-28.jpg" style="width: 100%; object-fit: cover;">
+                                        <div class="col-sm-4">
+                                            <h5 class="card-title mb-4">Participantes más activos</h5>
+                                            <?php
+                                                //Si el mapa es mayor a 0, entonces hay participantes
+                                                if(count($mapa) > 0){
+                                                    //Ordenar el mapa de mayor a menor
+                                                    arsort($mapa);
+                                                    //Obtener los 5 primeros
+                                                    $mapa = array_slice($mapa, 0, 3);
+                                                    //Imprimir los 5 primeros
+                                                    foreach($mapa as $key => $value){
+                                                        echo "<p class='text-muted mb-4'><span class='text-primary'>". $key . "</span> - " . $value . " participaciones</p>";
+                                                    }
+                                                }
+                                                else{
+                                                    echo "<p class='text-muted mb-4'>No hay participantes</p>";
+                                                }
+                                            ?>
                                         </div>
+                                        <input type="hidden" id="masculinos" value="<?php echo e(count($masculinos)); ?>">
+                                        <input type="hidden" id="femeninos" value="<?php echo e(count($femeninos)); ?>">
+                                        <input type="hidden" id="nes" value="<?php echo e(count($nes)); ?>">
+                                        <div class="col-sm-6">
+                                            <div class="card">
+                                                <div class="card-header">
+                                                    <h4 class="card-title mb-0">Participantes por género</h4>
+                                                </div>
+                                                <div class="card-body">
+                                                    <canvas id="genero" class="chartjs-chart" data-colors='["#344D67", "#6ECCAF", "#ADE792"]'></canvas>
+                                                </div>
+                                            </div> 
+                                        </div> <!-- end col -->
+                                        <?php if($totalTags > 0): ?>
+                                            <input type="hidden" id="tagsclub" value="<?php echo e($tagsclub); ?>">
+                                            <input type="hidden" id="numTags" value="<?php echo e($numTags); ?>">
+                                            <div class="col-sm-6">
+                                                <div class="card">
+                                                    <div class="card-header">
+                                                        <h4 class="card-title mb-0">Participantes por Tag</h4>
+                                                    </div>
+                                                    <div class="card-body">
+                                                        <canvas id="tags" class="chartjs-chart" data-colors='["#344D67", "#6ECCAF", "#ADE792"]'></canvas>
+                                                    </div>
+                                                </div> 
+                                            </div> <!-- end col -->
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </div>
@@ -442,6 +554,13 @@
     <script src="<?php echo e(URL::asset('assets/libs/swiper/swiper.min.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('assets/js/pages/profile.init.js')); ?>"></script>
     <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/libs/list.js/list.js.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/libs/list.pagination.js/list.pagination.js.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/js/pages/invoiceslist.init.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/libs/sweetalert2/sweetalert2.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('/assets/js/app.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/libs/chart.js/chart.js.min.js')); ?>"></script>
+    <script src="<?php echo e(URL::asset('assets/js/pages/chartjs.init.js')); ?>"></script>
 <?php $__env->stopSection(); ?>
 
 <?php echo $__env->make('layouts.master', \Illuminate\Support\Arr::except(get_defined_vars(), ['__data', '__path']))->render(); ?><?php /**PATH C:\laragon\www\SIGA-CLUB\resources\views/dashboard.blade.php ENDPATH**/ ?>

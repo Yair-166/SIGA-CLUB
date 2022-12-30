@@ -54,9 +54,9 @@
                             <hr>
                             <a href="{{URL::asset('/apps-eventos-list?club='.$club->id)}}" class="btn btn-light w-100">Ver eventos</a>
                             <hr>
-                            <a href="{{URL::asset('/apps-clubes-editar?club='.$club->id)}}" class="btn btn-light w-100">Ver detalles</a>
+                            <a href="{{URL::asset('/apps-clubes-editar?club='.$club->id)}}" class="btn btn-light w-100">Configuraciones avanzadas</a>
                             <hr>
-                            <a href="{{URL::asset('/dashboard?club='.$club->id)}}" class="btn btn-light w-100">Ver estadísticas</a>
+                            <a href="{{URL::asset('/dashboard?club='.$club->id)}}" class="btn btn-light w-100">Estadísticas</a>
                         </div>
                     </div>
                 </div>

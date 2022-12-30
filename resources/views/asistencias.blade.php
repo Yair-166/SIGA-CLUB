@@ -97,6 +97,8 @@
 
         //Obtener las asistencias del usuario logueado
         $asistencias = DB::table('asistencias')->where('idUsuario', $idUsuario)->get();
+        //Contar $asistencias
+        $asistenciasCount = DB::table('asistencias')->where('idUsuario', $idUsuario)->count();
         //Contar todas aquellas asistencias que tengan el valor de constanciaGenerada en 1
         $constanciasgeneradas = DB::table('asistencias')->where('idUsuario', $idUsuario)->where('constanciaGenerada', 1)->count();
         
@@ -107,6 +109,31 @@
 
         //Contar $inscripciones
         $inscripcionesCount = DB::table('inscripciones')->where('id_alumno', $idUsuario)->count();
+        //Crear arreglo con tipos de eventos campamento, clase, Concurso, Conferencia, Curso, Entrenamiento, Evaluación, Exhibición, Exposición, Seminario, Torneo
+        $tipos = "Campamento,Clase,Concurso,Conferencia,Curso,Entrenamiento,Evaluación,Exhibición,Exposición,Seminario,Torneo,";
+        //Convertir el string en un arreglo
+        $tipos = explode(",", $tipos);
+        //Eliminar el ultimo elemento del array
+        array_pop($tipos);
+        $tiposCount = count($tipos);
+        //De cada asistencia obtener el evento y asistenciaTotal
+        $asistenciasTotales = array();
+        foreach($tipos as $tipo){
+            $asistenciaTotal = 0;
+            foreach($asistencias as $asistencia){
+                //Obtener el evento con el id del evento de la asistencia
+                $evento = DB::table('eventos')->where('id', $asistencia->idEvento)->first();
+                //Si el tipo del evento es igual al tipo del arreglo $tipos
+                if($evento->tipo == $tipo){
+                    //Sumar la asistencia total de cada evento
+                    $asistenciaTotal = $asistenciaTotal + $asistencia->asistenciaTotal;
+                }
+            }
+            //Agregar la asistencia total al arreglo $asistenciasTotales
+            array_push($asistenciasTotales, $asistenciaTotal);
+        }
+        $asistenciasTotalesString =  implode(",", $asistenciasTotales);
+        $tiposAlumnoString = implode(",", $tipos);
 
     @endphp
     <div class="row">
@@ -130,7 +157,7 @@
                 <div class="card col-xl-4">
                     <div class="card-body text-center p-1">
                         <h5 class="mb-1 mt-1">
-                        Clubes a los que pertenece:
+                        Clubes a los que perteneces:
                         </h5>
                         <p class="text-muted mb-1">
                             {{$inscripcionesCount}}
@@ -141,10 +168,10 @@
                 <div class="card col-xl-4">
                     <div class="card-body text-center p-1">
                         <h5 class="mb-1 mt-1">
-                        Horas totales de asistencia:
+                        Eventos en los que has participado:
                         </h5>
                         <p class="text-muted mb-1">
-                            {{$horasTotales}}
+                            {{$asistenciasCount}}
                         </p>
                     </div>
                 </div>
@@ -161,8 +188,6 @@
                 </div>
             </div>
 
-            <div><p> </p></div>
-
             <div class="card" id="companyList">
                 <div class="card-body">
                     <div>
@@ -172,7 +197,9 @@
                                     <tr>
                                         <th data-sort="name" scope="col">Nombre del club</th>
                                         <th data-sort="owner" scope="col">Evento</th>
+                                        <th data-sort="date" scope="col">Horas asistidas</th>
                                         <th data-sort="date" scope="col">Rol del usuario</th>
+                                        <th data-sort="date" scope="col">Tipo de evento</th>
                                         <th data-sort="location" scope="col">Constancias</th>
                                     </tr>
                                 </thead>
@@ -205,7 +232,13 @@
                                             </a>
                                         </td>
                                         <td>
+                                            {{ $asistencia->asistenciaTotal }}
+                                        </td>
+                                        <td>
                                             {{ $asistencia->rolUsuario }}
+                                        </td>
+                                        <td>
+                                            {{ $evento->tipo }}
                                         </td>
                                         <td class="location">
                                             @if ($asistencia->constanciaGenerada == 0)
@@ -234,8 +267,35 @@
                     </div>
                 </div>
             </div><!--end card-->
-        </div><!--end col-->
+            <div class="accordion-item">
+                <h2 class="accordion-header" id="genques-headingOne">
+                    <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#genques-collapseOne" aria-expanded="false" aria-controls="genques-collapseOne">
+                        Desgloce de horas por tipo de evento (Horas totales: {{$horasTotales}})
+                    </button>
+                </h2>
+                <div id="genques-collapseOne" class="accordion-collapse collapse collapsed" aria-labelledby="genques-headingOne" data-bs-parent="#genques-accordion">
+                    <div class="accordion-body row">
+                        <input type="hidden" id="tiposAlumnoString" value="{{$tiposAlumnoString}}">
+                        <input type="hidden" id="asistenciasTotalesString" value="{{$asistenciasTotalesString}}">
+                        <center>
+                            <div class="col-sm-7">
+                                <div class="card">
+                                    <div class="card-header">
+                                        <h4 class="card-title mb-0">Horas por tipo de evento</h4>
+                                    </div>
+                                    <div class="card-body">
+                                        <canvas id="HorasxEvento" class="chartjs-chart" data-colors='["#344D67", "#6ECCAF", "#ADE792"]'></canvas>
+                                    </div>
+                                </div> 
+                            </div> <!-- end col -->
+                        </center>
+                    </div>
+                </div>
+            </div>
 
+            <div><p> </p></div>
+
+        </div><!--end col-->
     </div><!--end row-->
 
 @endsection
@@ -245,6 +305,8 @@
     <script src="{{ URL::asset('/assets/js/pages/crm-companies.init.js') }}"></script>
     <script src="{{ URL::asset('assets/libs/sweetalert2/sweetalert2.min.js') }}"></script>
     <script src="{{ URL::asset('/assets/js/app.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/libs/chart.js/chart.js.min.js') }}"></script>
+    <script src="{{ URL::asset('assets/js/pages/chartjs.init.js') }}"></script>
     <script>
         function eliminarid(id){
             let clubid = id;

@@ -166,7 +166,8 @@ if (barChartColor) {
       }
     }
   });
-} // pie chart
+}
+// pie chart
 
 
 var ispiechart = document.getElementById('pieChart');
@@ -205,7 +206,7 @@ if (doughnutChartColors) {
   var lineChart = new Chart(isdoughnutchart, {
     type: 'doughnut',
     data: {
-      labels: ["Desktops", "Tablets"],
+      labels: ["perritus", "gatitus"],
       datasets: [{
         data: [300, 210],
         backgroundColor: doughnutChartColors,
@@ -225,7 +226,292 @@ if (doughnutChartColors) {
       }
     }
   });
-} // polarArea chart
+} 
+
+//Superadmin
+var isdoughnutchart = document.getElementById('grafica');
+doughnutChartColors = getChartColorsArray('grafica');
+if(document.getElementById('totalAdministradores')){
+  var totalAdministradores = document.getElementById('totalAdministradores').value;
+  var totalColaboradores = document.getElementById('totalColaboradores').value;
+}
+
+if (doughnutChartColors) {
+  var lineChart = new Chart(isdoughnutchart, {
+    type: 'doughnut',
+    data: {
+      labels: ["Administradores", "Colaboradores"],
+      datasets: [{
+        data: [totalAdministradores, totalColaboradores],
+        backgroundColor: doughnutChartColors,
+        hoverBackgroundColor: doughnutChartColors,
+        hoverBorderColor: "#fff"
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              family: 'Poppins'
+            }
+          }
+        }
+      }
+    }
+  });
+} 
+//Verificar que exista un elemento con el id tipos
+if(document.getElementById('tipos')){
+  var tipos = document.getElementById('tipos').value;
+  var cantdidadEventos = document.getElementById('cantdidadEventos').value;
+}
+var isbarchart = document.getElementById('graficaTiposEventos');
+barChartColor = getChartColorsArray('graficaTiposEventos');
+if (barChartColor) {
+  isbarchart.setAttribute("width", isbarchart.parentElement.offsetWidth);
+  var barChart = new Chart(isbarchart, {
+    type: 'bar',
+    data: {
+      labels : tipos.split(','),
+      //labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "June", "Julio"],
+      datasets: [{
+        label: "Total de eventos",
+        backgroundColor: barChartColor[0],
+        borderColor: barChartColor[0],
+        borderWidth: 1,
+        hoverBackgroundColor: barChartColor[1],
+        hoverBorderColor: barChartColor[1],
+        data: cantdidadEventos.split(',')
+        //data: [65, 59, 81, 45, 56, 80, 50, 20]
+      }]
+    },
+    options: {
+      x: {
+        ticks: {
+          font: {
+            family: 'Poppins'
+          }
+        }
+      },
+      y: {
+        ticks: {
+          font: {
+            family: 'Poppins'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              family: 'Poppins'
+            }
+          }
+        }
+      }
+    }
+  });
+} 
+
+//Admin
+if(document.getElementById('tiposString')){
+  var tipos_de = document.getElementById('tiposString').value;
+  var cantdidadEventos_de = document.getElementById('cantdidadEventosString').value;
+  console.log(tipos_de);
+  console.log(cantdidadEventos_de);
+}
+var isbarchart = document.getElementById('Eventosclub');
+barChartColor = getChartColorsArray('Eventosclub');
+if (barChartColor) {
+  isbarchart.setAttribute("width", isbarchart.parentElement.offsetWidth);
+  var barChart = new Chart(isbarchart, {
+    type: 'bar',
+    data: {
+      labels : tipos_de.split(','),
+      //labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "June", "Julio"],
+      datasets: [{
+        label: "Total de eventos",
+        backgroundColor: barChartColor[0],
+        borderColor: barChartColor[0],
+        borderWidth: 1,
+        hoverBackgroundColor: barChartColor[1],
+        hoverBorderColor: barChartColor[1],
+        data: cantdidadEventos_de.split(',')
+        //data: [65, 59, 81, 45, 56, 80, 50, 20]
+      }]
+    },
+    options: {
+      x: {
+        ticks: {
+          font: {
+            family: 'Poppins'
+          }
+        }
+      },
+      y: {
+        ticks: {
+          font: {
+            family: 'Poppins'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              family: 'Poppins'
+            }
+          }
+        }
+      }
+    }
+  });
+} 
+
+var isdoughnutchart = document.getElementById('genero');
+doughnutChartColors = getChartColorsArray('genero');
+if(document.getElementById('nes')){
+  var nes = document.getElementById('nes').value;
+  var masculinos = document.getElementById('masculinos').value;
+  var femeninos = document.getElementById('femeninos').value;
+}
+
+if (doughnutChartColors) {
+  var lineChart = new Chart(isdoughnutchart, {
+    type: 'doughnut',
+    data: {
+      labels: ["Hombres", "Mujeres", "No especificado"],
+      datasets: [{
+        data: [masculinos, femeninos, nes],
+        backgroundColor: doughnutChartColors,
+        hoverBackgroundColor: doughnutChartColors,
+        hoverBorderColor: "#fff"
+      }]
+    },
+    options: {
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              family: 'Poppins'
+            }
+          }
+        }
+      }
+    }
+  });
+} 
+
+if(document.getElementById('tagsclub')){
+  var tipos_de = document.getElementById('tagsclub').value;
+  var cantdidadEventos_de = document.getElementById('numTags').value;
+}
+var isbarchart = document.getElementById('tags');
+barChartColor = getChartColorsArray('tags');
+if (barChartColor) {
+  isbarchart.setAttribute("width", isbarchart.parentElement.offsetWidth);
+  var barChart = new Chart(isbarchart, {
+    type: 'bar',
+    data: {
+      labels : tipos_de.split(','),
+      //labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "June", "Julio"],
+      datasets: [{
+        label: "Participantes",
+        backgroundColor: barChartColor[0],
+        borderColor: barChartColor[0],
+        borderWidth: 1,
+        hoverBackgroundColor: barChartColor[1],
+        hoverBorderColor: barChartColor[1],
+        data: cantdidadEventos_de.split(',')
+        //data: [65, 59, 81, 45, 56, 80, 50, 20]
+      }]
+    },
+    options: {
+      x: {
+        ticks: {
+          font: {
+            family: 'Poppins'
+          }
+        }
+      },
+      y: {
+        ticks: {
+          font: {
+            family: 'Poppins'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              family: 'Poppins'
+            }
+          }
+        }
+      }
+    }
+  });
+} 
+
+
+//Alumnos
+if(document.getElementById('tiposAlumnoString')){
+  var tipos_de = document.getElementById('tiposAlumnoString').value;
+  var cantdidadEventos_de = document.getElementById('asistenciasTotalesString').value;
+}
+var isbarchart = document.getElementById('HorasxEvento');
+barChartColor = getChartColorsArray('HorasxEvento');
+if (barChartColor) {
+  isbarchart.setAttribute("width", isbarchart.parentElement.offsetWidth);
+  var barChart = new Chart(isbarchart, {
+    type: 'bar',
+    data: {
+      labels : tipos_de.split(','),
+      //labels: ["Enero", "Febrero", "Marzo", "Abril", "Mayo", "June", "Julio"],
+      datasets: [{
+        label: "Horas totales",
+        backgroundColor: barChartColor[0],
+        borderColor: barChartColor[0],
+        borderWidth: 1,
+        hoverBackgroundColor: barChartColor[1],
+        hoverBorderColor: barChartColor[1],
+        data: cantdidadEventos_de.split(',')
+        //data: [65, 59, 81, 45, 56, 80, 50, 20]
+      }]
+    },
+    options: {
+      x: {
+        ticks: {
+          font: {
+            family: 'Poppins'
+          }
+        }
+      },
+      y: {
+        ticks: {
+          font: {
+            family: 'Poppins'
+          }
+        }
+      },
+      plugins: {
+        legend: {
+          labels: {
+            font: {
+              family: 'Poppins'
+            }
+          }
+        }
+      }
+    }
+  });
+} 
+
+// line chart
+
+// polarArea chart
 
 
 var ispolarAreachart = document.getElementById('polarArea');

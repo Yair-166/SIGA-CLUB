@@ -17,10 +17,26 @@
         <?php $__env->endSlot(); ?>
     <?php echo $__env->renderComponent(); ?>
     <?php
-        //Obtener los usuarios de la base de datos 
-        $users = DB::table('users')->get();
+        //$users = DB::table('users')->get();
         $eliminar = 0;
         $inscrito = 0;
+        $type = 'todos';
+        $string = '';
+        //Checar si se envio algun parametro por la url
+        if(isset($_GET['type'])){
+            //Obtener el valor del parametro
+            $type = $_GET['type'];
+        }
+        if($type == 'todos')
+            $users = DB::table('users')->where('rol', '!=', 'super')->where('active', 1)->get();
+        else if($type == 'admins')
+            $users = DB::table('users')->where('rol', 'administrador')->where('active', 1)->get();
+        else
+            $users = DB::table('users')->where('rol', 'colaborador')->where('active', 1)->get();
+        
+        echo $string;
+        echo $type;
+
     ?>
     <div class="row">
 
@@ -41,94 +57,90 @@
                             <table class="table align-middle table-nowrap mb-0" id="customerTable">
                                 <thead class="table-light">
                                     <tr>
-                                        <th class="sort" data-sort="name" scope="col">Nombre del usuario</th>
-                                        <th class="sort" data-sort="owner" scope="col">Correo electronico</th>
-                                        <th class="sort" data-sort="rol" scope="col">Tipo de usuario</th>
+                                        <th  scope="col">Nombre del usuario</th>
+                                        <th  scope="col">Correo electronico</th>
+                                        <th  scope="col">Tipo de usuario</th>
                                         <th scope="col">Acciones</th>
                                     </tr>
                                 </thead>
                                 <tbody class="list form-check-all">
                                 
                                 <?php $__currentLoopData = $users; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $user): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                    <?php if($user->active == 1 && $user->rol != "super"): ?>
-                                        <tbody class="list form-check-all">
-                                        <tr>
-                                            <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ001</a>
-                                            </td>
-                                            <td>
-                                                <div class="d-flex align-items-center">
-                                                    <div class="flex-shrink-0">
-                                                        <img src="<?php echo e(URL::asset('images/' . $user->avatar)); ?>" alt="" class="avatar-xxs rounded-circle image_src object-cover">
-                                                    </div>
-                                                    <div class="flex-grow-1 ms-2 name">
-                                                        <?php echo e($user->name); ?> <?php echo e($user->apaterno); ?> <?php echo e($user->amaterno); ?>
-
-                                                    </div>
+                                    <tbody class="list form-check-all">
+                                    <tr>
+                                        <td class="id" style="display:none;"><a href="javascript:void(0);" class="fw-medium link-primary">#VZ001</a>
+                                        </td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <div class="flex-shrink-0">
+                                                    <img src="<?php echo e(URL::asset('images/' . $user->avatar)); ?>" alt="" class="avatar-xxs rounded-circle image_src object-cover">
                                                 </div>
-                                            </td>
-                                            <td class="owner">
-                                                <?php echo e($user->email); ?>
+                                                <div class="flex-grow-1 ms-2 name">
+                                                    <?php echo e($user->name); ?> <?php echo e($user->apaterno); ?> <?php echo e($user->amaterno); ?>
 
-                                            </td>
-                                            <td class="rol">
-                                                <?php echo e($user->rol); ?>
+                                                </div>
+                                            </div>
+                                        </td>
+                                        <td class="owner">
+                                            <?php echo e($user->email); ?>
 
-                                            </td>
-                                            <td>
-                                                <?php
-                                                    //juntar toda la información del user en un solo string
-                                                    $userData = $user->avatar . ';' . $user->name . ';' . $user->descripcion;
-                                                    //Convertir a json el string
-                                                    $userData = json_encode($userData);
-                                                ?>
-                                                <ul class="list-inline hstack gap-2 mb-0">
+                                        </td>
+                                        <td class="rol">
+                                            <?php echo e($user->rol); ?>
+
+                                        </td>
+                                        <td>
+                                            <?php
+                                                //juntar toda la información del user en un solo string
+                                                $userData = $user->avatar . ';' . $user->name . ';' . $user->descripcion;
+                                                //Convertir a json el string
+                                                $userData = json_encode($userData);
+                                            ?>
+                                            <ul class="list-inline hstack gap-2 mb-0">
+                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                    data-bs-placement="top" title="Ver más">
+                                                    <a href="javascript:mostrar(<?php echo e($userData); ?>);" class="view-item-btn">
+                                                        <i class="ri-eye-fill align-bottom text-muted"></i>
+                                                    </a>
+                                                </li>
+
+                                                <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                    data-bs-placement="top" title="Eliminar">
+                                                    <a id="adelete" class="delete-item-btn" href="#deleteRecordModal" data-bs-toggle="modal" data-bs-id="<?php echo e($user->id); ?>">
+                                                        <button onClick="eliminarid(<?php echo e($user->id); ?>)" style="border: none; background: none;">
+                                                            <i class="ri-delete-bin-fill align-bottom text-muted"></i>
+                                                        </button>
+                                                    </a>
+                                                </li>
+                                                <?php if($user->rol != "administrador"): ?>
                                                     <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                        data-bs-placement="top" title="Ver más">
-                                                        <a href="javascript:mostrar(<?php echo e($userData); ?>);" class="view-item-btn">
-                                                            <i class="ri-eye-fill align-bottom text-muted"></i>
+                                                        data-bs-placement="top" title="Dar admin">
+                                                        <a href="<?php echo e(route('darAdmin', $user->id)); ?>" class="view-item-btn">
+                                                            <i class="ri-user-star-fill align-bottom text-muted"></i>
                                                         </a>
                                                     </li>
-
+                                                <?php else: ?>
                                                     <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                        data-bs-placement="top" title="Eliminar">
-                                                        <a id="adelete" class="delete-item-btn" href="#deleteRecordModal" data-bs-toggle="modal" data-bs-id="<?php echo e($user->id); ?>">
-                                                            <button onClick="eliminarid(<?php echo e($user->id); ?>)" style="border: none; background: none;">
-                                                                <i class="ri-delete-bin-fill align-bottom text-muted"></i>
+                                                        data-bs-placement="top" title="Quitar admin">
+                                                        <a href="<?php echo e(route('darAdmin', $user->id)); ?>" class="view-item-btn">
+                                                            <i class="ri-user-unfollow-fill align-bottom text-muted"></i>
+                                                        </a>                                                        </li>
+                                                    <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
+                                                        data-bs-placement="top" title="Clubes permitidos">
+                                                        <form action="<?php echo e(route('clubesPermitidos')); ?>" method="POST">
+                                                            <?php echo csrf_field(); ?>
+                                                            <input type="hidden" name="id" value="<?php echo e($user->id); ?>">
+                                                            <input type="text" name="nums" value="<?php echo e($user->clubes); ?>" required>
+                                                            <button type="submit" class="view-item-btn">
+                                                                <i class="ri-checkbox-circle-fill align-bottom text-muted"></i>
                                                             </button>
-                                                        </a>
+                                                        </form>
                                                     </li>
+                                                <?php endif; ?>
 
-                                                    <?php if($user->rol != "administrador"): ?>
-                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                            data-bs-placement="top" title="Dar admin">
-                                                            <a href="<?php echo e(route('darAdmin', $user->id)); ?>" class="view-item-btn">
-                                                                <i class="ri-user-star-fill align-bottom text-muted"></i>
-                                                            </a>
-                                                        </li>
-                                                    <?php else: ?>
-                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                            data-bs-placement="top" title="Quitar admin">
-                                                            <a href="<?php echo e(route('darAdmin', $user->id)); ?>" class="view-item-btn">
-                                                                <i class="ri-user-unfollow-fill align-bottom text-muted"></i>
-                                                            </a>
-                                                        </li>
-                                                        <li class="list-inline-item" data-bs-toggle="tooltip" data-bs-trigger="hover"
-                                                            data-bs-placement="top" title="Clubes permitidos">
-                                                            <form action="<?php echo e(route('clubesPermitidos')); ?>" method="POST">
-                                                                <?php echo csrf_field(); ?>
-                                                                <input type="hidden" name="id" value="<?php echo e($user->id); ?>">
-                                                                <input type="text" name="nums" value="<?php echo e($user->clubes); ?>" required>
-                                                                <button type="submit" class="view-item-btn">
-                                                                    <i class="ri-checkbox-circle-fill align-bottom text-muted"></i>
-                                                                </button>
-                                                            </form>
-                                                        </li>
-                                                    <?php endif; ?>
-
-                                                </ul>
-                                            </td>
-                                        </tr>
-                                    <?php endif; ?>
+                                            </ul>
+                                        </td>
+                                    </tr>
                                 <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
                                 </tbody>
                             </table>
