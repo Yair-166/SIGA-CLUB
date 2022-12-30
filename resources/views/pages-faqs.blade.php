@@ -55,8 +55,13 @@
                                 </h2>
                                 <div id="genques-collapseOne" class="accordion-collapse collapse collapsed" aria-labelledby="genques-headingOne" data-bs-parent="#genques-accordion">
                                     <div class="accordion-body">
-                                        Somos el TT 2021-B004 de la Escuela Superior de Cómputo del Instituto Politécnico Nacional.
-                                        El equipo esta conformado por 2 integrantes y 1 director.
+                                        Somos Omar Moreno Lozano y Omar Yair Mejía Díaz, estudiantes de la ESCOM, IPN. Este sistema web es el TT 2021-B004 bajo la dirección 
+                                        del maestro Edgardo Adrián Franco Martínez. Como estudiantes de ingeniería en sistemas computacionales, estamos siempre buscando 
+                                        nuevas oportunidades para aplicar nuestros conocimientos y habilidades en proyectos prácticos. Estamos emocionados de poder compartir 
+                                        nuestro trabajo y esperamos poder seguir creciendo y aprendiendo a medida que avanzamos en nuestras carreras.
+                                        <br>
+                                        <img src="https://sigaclub.com/assets/images/omi.png" alt="Omar Yair Mejía Díaz" class="img-fluid col-sm-5">
+                                        <img src="https://sigaclub.com/assets/images/oml.png" alt="Omar Moreno Lozano" class="img-fluid col-sm-5">
                                     </div>
                                 </div>
                             </div>
