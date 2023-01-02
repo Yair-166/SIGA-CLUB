@@ -109,6 +109,33 @@
 
         //Contar $inscripciones
         $inscripcionesCount = DB::table('inscripciones')->where('id_alumno', $idUsuario)->count();
+        //Obtener todas las filas de la tabla inscripciones donde el id_alumno sea igual a $idUsuario
+        $inscripciones = DB::table('inscripciones')->where('id_alumno', $idUsuario)->get();
+        //Obtener los nombres de los clubes a los que está inscrito el usuario
+        $clubes = array();
+        $clubesid = array();
+        foreach($inscripciones as $inscripcion){
+            $club = DB::table('clubes')->where('id', $inscripcion->id_club)->first();
+            array_push($clubes, $club->nombre);
+            array_push($clubesid, $club->id);
+        }
+        
+        $horasxclub = array();
+        foreach($clubesid as $club){
+            $horasClub = 0;
+            foreach($asistencias as $asistencia){
+                $evento = DB::table('eventos')->where('id', $asistencia->idEvento)->first();
+                if($evento->id_club == $club){
+                    $horasClub = $horasClub + $asistencia->asistenciaTotal;
+                }
+            }
+            array_push($horasxclub, $horasClub);
+        }
+        //Pasar a string el arreglo de clubes y horasxclub
+        $clubes = implode(",", $clubes);
+        $horasxclub = implode(",", $horasxclub);
+
+
         //Crear arreglo con tipos de eventos campamento, clase, Concurso, Conferencia, Curso, Entrenamiento, Evaluación, Exhibición, Exposición, Seminario, Torneo
         $tipos = "Campamento,Clase,Concurso,Conferencia,Curso,Entrenamiento,Evaluación,Exhibición,Exposición,Seminario,Torneo,";
         //Convertir el string en un arreglo
@@ -294,6 +321,9 @@
             </div>
 
             <div><p> </p></div>
+            <input type="hidden" id ="clubesAlumno" value ="{{$clubes}}">
+            <input type="hidden" id ="horasxclub" value ="{{$horasxclub}}">
+
 
         </div><!--end col-->
     </div><!--end row-->

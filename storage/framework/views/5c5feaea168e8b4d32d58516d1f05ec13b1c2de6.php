@@ -324,31 +324,31 @@
                         </a>
                     </div><!-- end col -->
 
-                    <div class="col-xl-9">
-                        <div class="card">
-                            <div class="card-header border-0 align-items-center d-flex">
-                                <h4 class="card-title mb-0 flex-grow-1">Constancias expedidas</h4>
-                            </div><!-- end card header -->
-
-                            <div class="card-header p-0 border-0 bg-soft-light">
-                                <div class="row g-0 text-center">
-                                    <?php $__currentLoopData = $clubs; $__env->addLoop($__currentLoopData); foreach($__currentLoopData as $club): $__env->incrementLoopIndices(); $loop = $__env->getLastLoop(); ?>
-                                        <div class="col-3">
-                                            <div class="p-3">
-                                                <h5 class="font-size-16 mb-1">
-                                                    <?php echo e($club->nombre); ?>
-
-                                                </h5>
-                                                <p class="text-muted mb-0">
-                                                    <?php echo e($club->constanciasExpedidas); ?>
-
-                                                </p>
-                                            </div>
+                    <div class="col-xl-3 col-md-6">
+                        <a href="admin-dashboard" class="link-secondary">
+                            <!-- card -->
+                            <div class="card card-animate">
+                                <div class="card-body">
+                                    <div class="d-flex align-items-center">
+                                        <div class="flex-grow-1 overflow-hidden">
+                                            <p
+                                                class="text-uppercase fw-medium text-muted text-truncate mb-0">
+                                                Estadisticas</p>
                                         </div>
-                                    <?php endforeach; $__env->popLoop(); $loop = $__env->getLastLoop(); ?>
-                                </div>
-                            </div><!-- end card header -->
-                        </div><!-- end card -->
+                                    </div>
+                                    <div class="d-flex align-items-end justify-content-between mt-4">
+                                        <div>
+                                            Estadisticas de tus clubes
+                                        </div>
+                                        <div class="avatar-sm flex-shrink-0">
+                                            <span class="avatar-title bg-soft-primary rounded fs-3">
+                                                <i class="bx bx-stats text-primary"></i>
+                                            </span>
+                                        </div>
+                                    </div>
+                                </div><!-- end card body -->
+                            </div><!-- end card -->
+                        </a>
                     </div><!-- end col -->
                 </div>
 
