@@ -204,6 +204,7 @@ class HomeController extends Controller
         $user->email = $request->post('email');
         $user->descripcion = $request->post('descripcion');
         $user->boleta = $request->post('boleta');
+        $user->telefono = $request->post('telefono');
 
         $user->save();
 

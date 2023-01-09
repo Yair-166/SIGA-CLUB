@@ -118,6 +118,7 @@
                                                 id="genero" required>
                                                 <option value="Masculino">Masculino</option>
                                                 <option value="Femenino">Femenino</option>
+                                                <option value="No binario">No binario</option>
                                                 <option value="Otro">No especificar</option>
                                             </select>
                                             @error('genero')
@@ -127,6 +128,21 @@
                                             @enderror
                                             <div class="invalid-feedback">
                                                 Por favor introduce el genero.
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-2">
+                                            <label for="fechaNac" class="form_label"> Fecha de nacimiento <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="date" class="form-control @error('fechaNac') is-invalid @enderror"
+                                                name="fechaNac" value="{{ old('fechaNac') }}" id="fechaNac" required>
+                                            @error('fechaNac')
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong>{{ $message }}</strong>
+                                                </span>
+                                            @enderror
+                                            <div class="invalid-feedback">
+                                                Por favor introduce la fecha de nacimiento.
                                             </div>
                                         </div>
 

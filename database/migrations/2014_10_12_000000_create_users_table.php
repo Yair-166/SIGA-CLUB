@@ -30,6 +30,8 @@ class CreateUsersTable extends Migration
             $table->text('avatar');
             $table->string('active')->default('1');
             $table->string('clubes')->nullable();
+            $table->date('fechaNac')->nullable();
+            $table->string('telefono')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

@@ -128,6 +128,16 @@
                                         </div>
                                     </div>
                                     <!--end col-->
+                                    <div class="col-lg-6">
+                                        <div class="mb-3">
+                                            <label for="telefono" class="form-label">
+                                                Télefono celular
+                                            </label>
+                                            <input name="telefono" type="text" class="form-control" id="telefono"
+                                                placeholder="<?php echo e($user->telefono); ?>" value="<?php echo e($user->telefono); ?>">
+                                        </div>
+                                    </div>
+                                    <!--end col-->
                                     <div class="col-lg-12">
                                         <div class="mb-3">
                                             <input name="created_at" type="text" class="form-control" data-provider="flatpickr"

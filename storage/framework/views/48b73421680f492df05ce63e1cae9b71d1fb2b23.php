@@ -92,7 +92,7 @@
                                         <td>
                                             <?php
                                                 //juntar toda la información del user en un solo string
-                                                $userData = $user->avatar . ';' . $user->name . ';' . $user->descripcion;
+                                                $userData = $user->avatar .';'. $user->name .';'. $user->descripcion .";". $user->telefono;
                                                 //Convertir a json el string
                                                 $userData = json_encode($userData);
                                             ?>
@@ -129,10 +129,14 @@
                                                         data-bs-placement="top" title="Clubes permitidos">
                                                         <form action="<?php echo e(route('clubesPermitidos')); ?>" method="POST">
                                                             <?php echo csrf_field(); ?>
+                                                            <button type="button" class="ri-subtract-fill align-center text-muted" onclick="decrementar(<?php echo e($user->id); ?>)" style="background-color: transparent; border: 0px solid #3498db;"></button>
                                                             <input type="hidden" name="id" value="<?php echo e($user->id); ?>">
-                                                            <input type="text" name="nums" value="<?php echo e($user->clubes); ?>" required>
-                                                            <button type="submit" class="view-item-btn">
-                                                                <i class="ri-checkbox-circle-fill align-bottom text-muted"></i>
+                                                            <label id="clubesAlMomento<?php echo e($user->id); ?>" value="<?php echo e($user->clubes); ?>" style="display:none;"><?php echo e($user->clubes); ?></label>
+                                                            <label id="nums<?php echo e($user->id); ?>"><?php echo e($user->clubes); ?></label>
+                                                            <button type="button" class="ri-add-fill align-center text-muted" onclick="incrementar(<?php echo e($user->id); ?>)" style="background-color: transparent; border: 0px solid #3498db;"></button>
+                                                            <input type="hidden" id="finalnums<?php echo e($user->id); ?>" name="nums" value="<?php echo e($user->clubes); ?>" required>
+                                                            <button type="submit" class="view-item-btn" style="background-color: transparent; border: 0px">
+                                                                <i class="ri-checkbox-circle-fill text-muted"></i>
                                                             </button>
                                                         </form>
                                                     </li>
@@ -229,8 +233,14 @@
                 <div class="card-body">
                     <h6 class="text-muted text-uppercase fw-semibold mb-3">Información</h6>
                     <p id="info-description" class="text-muted mb-4">
-                        Descripción del user
+                        Descripción del usuario
                     </p>
+                    <a id="walink">
+                        <img id="wa" src="https://upload.wikimedia.org/wikipedia/commons/thumb/6/6b/WhatsApp.svg/1200px-WhatsApp.svg.png" class="avatar-sm object-cover">
+                    </a>
+                    <a id="telelink">
+                        <img id="tele" src="https://upload.wikimedia.org/wikipedia/commons/thumb/8/82/Telegram_logo.svg/1200px-Telegram_logo.svg.png" class="avatar-sm object-cover">
+                    </a>
                 </div>
             </div><!--end card-->
         </div><!--end col-->
@@ -250,12 +260,23 @@
             document.getElementById("idelimnar").value = userid;
         }
         function mostrar(data){
+            console.log(data);
             //Separar los datos
             let datos = data.split(";");
             //Asignar los datos a los campos
             document.getElementById("info-foto").src = "/images/" + datos[0];
             document.getElementById("info-name").innerHTML = datos[1];
-            document.getElementById("info-description").innerHTML = datos[3];
+            document.getElementById("info-description").innerHTML = datos[2];
+            if(datos[3] == "")
+            {
+                document.getElementById("walink").removeAttribute('href');
+                document.getElementById("telelink").removeAttribute('href');
+            }
+            else
+            {
+                document.getElementById("walink").setAttribute('href', 'https://wa.me/'+datos[3]);
+                document.getElementById("telelink").setAttribute('href', 'https://t.me/+52'+datos[3]);
+            }
             
         }
         function editarModal(data){
@@ -269,6 +290,14 @@
             document.getElementById("editar-description").placeholder = dats[3];
             document.getElementById("editar-location").placeholder = datos[4];
             document.getElementById("editar-nomenclatura").placeholder = datos[5];
+        }
+        function incrementar(id){
+            document.getElementById("nums".concat(id)).innerHTML = parseInt(document.getElementById("nums".concat(id)).innerHTML) + 1;
+            document.getElementById("finalnums".concat(id)).value = parseInt(document.getElementById("nums".concat(id)).innerHTML);
+        }
+        function decrementar(id){
+            document.getElementById("nums".concat(id)).innerHTML = parseInt(document.getElementById("nums".concat(id)).innerHTML) - 1;
+            document.getElementById("finalnums".concat(id)).value = parseInt(document.getElementById("nums".concat(id)).innerHTML);
         }
     </script>
 <?php $__env->stopSection(); ?>

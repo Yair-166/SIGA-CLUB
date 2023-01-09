@@ -181,6 +181,7 @@ unset($__errorArgs, $__bag); ?>" name="genero"
                                                 id="genero" required>
                                                 <option value="Masculino">Masculino</option>
                                                 <option value="Femenino">Femenino</option>
+                                                <option value="No binario">No binario</option>
                                                 <option value="Otro">No especificar</option>
                                             </select>
                                             <?php $__errorArgs = ['genero'];
@@ -197,6 +198,35 @@ endif;
 unset($__errorArgs, $__bag); ?>
                                             <div class="invalid-feedback">
                                                 Por favor introduce el genero.
+                                            </div>
+                                        </div>
+                                        
+                                        <div class="mb-2">
+                                            <label for="fechaNac" class="form_label"> Fecha de nacimiento <span
+                                                    class="text-danger">*</span></label>
+                                            <input type="date" class="form-control <?php $__errorArgs = ['fechaNac'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?> is-invalid <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>"
+                                                name="fechaNac" value="<?php echo e(old('fechaNac')); ?>" id="fechaNac" required>
+                                            <?php $__errorArgs = ['fechaNac'];
+$__bag = $errors->getBag($__errorArgs[1] ?? 'default');
+if ($__bag->has($__errorArgs[0])) :
+if (isset($message)) { $__messageOriginal = $message; }
+$message = $__bag->first($__errorArgs[0]); ?>
+                                                <span class="invalid-feedback" role="alert">
+                                                    <strong><?php echo e($message); ?></strong>
+                                                </span>
+                                            <?php unset($message);
+if (isset($__messageOriginal)) { $message = $__messageOriginal; }
+endif;
+unset($__errorArgs, $__bag); ?>
+                                            <div class="invalid-feedback">
+                                                Por favor introduce la fecha de nacimiento.
                                             </div>
                                         </div>
 

@@ -373,6 +373,7 @@ var isdoughnutchart = document.getElementById('genero');
 doughnutChartColors = getChartColorsArray('genero');
 if(document.getElementById('nes')){
   var nes = document.getElementById('nes').value;
+  var nob = document.getElementById('nob').value;
   var masculinos = document.getElementById('masculinos').value;
   var femeninos = document.getElementById('femeninos').value;
 }
@@ -381,9 +382,9 @@ if (doughnutChartColors) {
   var lineChart = new Chart(isdoughnutchart, {
     type: 'doughnut',
     data: {
-      labels: ["Hombres", "Mujeres", "No especificado"],
+      labels: ["Hombres", "Mujeres", "No binario", "No especificado"],
       datasets: [{
-        data: [masculinos, femeninos, nes],
+        data: [masculinos, femeninos, nob, nes],
         backgroundColor: doughnutChartColors,
         hoverBackgroundColor: doughnutChartColors,
         hoverBorderColor: "#fff"

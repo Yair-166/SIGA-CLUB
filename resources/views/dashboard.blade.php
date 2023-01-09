@@ -129,14 +129,29 @@
         array_push($asistenciasxusuario, $totalAsistencias);
     }
 
+    //Obtener la fecha actual - 6 horas
+    $fecha_actual = date("Y-m-d H:i:s", strtotime("-6 hours"));
+    //Quitar las horas de la fecha actual
+    $fecha_actual = date("Y-m-d", strtotime($fecha_actual));
+
     //Crear un mapa con los usuarios y sus asistencias
     $mapa = array();
+    $edades = array();
     for($i = 0; $i < count($usuarios); $i++)
     {
         $mapa[$usuarios[$i]->name." ".$usuarios[$i]->apaterno." ".$usuarios[$i]->amaterno] = $asistenciasxusuario[$i];
+        //Guardar en un tipo date la fecha de nacimiento
+        $fecha_nacimiento = date("Y-m-d", strtotime($usuarios[$i]->fechaNac));
+        //Restar la fecha actual - la fecha de nacimiento
+        $dateDifference = abs(strtotime($fecha_actual) - strtotime($fecha_nacimiento));
+        //Convertir la edad a años
+        $edad  = floor($dateDifference / (365 * 60 * 60 * 24));
+        //Agregar la edad al arreglo
+        array_push($edades, $edad);
     }
     //Ordenar el mapa de mayor a menor
     arsort($mapa);
+    asort($edades);
 
 
 @endphp
@@ -347,6 +362,7 @@
                                                                         $hombresTipo=0;
                                                                         $mujeresTipo=0;
                                                                         $neTipo=0;
+                                                                        $nobTipo=0;
 
                                                                         //Obtener cuantos "Masculino" hay en el arreglo
                                                                         for($i=0; $i<count($generosTipo); $i++){
@@ -355,6 +371,9 @@
                                                                             }
                                                                             else if ($generosTipo[$i] == 'Femenino') {
                                                                                 $mujeresTipo++;
+                                                                            }
+                                                                            else if ($generosTipo[$i] == 'No binario') {
+                                                                                $nobTipo++;
                                                                             }
                                                                             else {
                                                                                 $neTipo++;
@@ -366,6 +385,7 @@
                                                                         }else{
                                                                             echo "H: ".$hombresTipo/count($eventosTipo). " | ";
                                                                             echo "M: ".$mujeresTipo/count($eventosTipo). " | ";
+                                                                            echo "N.E.: ".$nobTipo/count($eventosTipo). " | ";
                                                                             echo "N.E.: ".$neTipo/count($eventosTipo);
                                                                         }
                                                                     @endphp
@@ -410,6 +430,7 @@
                                                             <th scope="col">Etiquetas</th>
                                                             <th scope="col">Hombres</th>
                                                             <th scope="col">Mujeres</th>
+                                                            <th scope="col">No binario</th>
                                                             <th scope="col">No especificado</th>
                                                             <th scope="col">Total</th>
                                                         </tr>
@@ -418,6 +439,7 @@
                                                         @php
                                                             $masculinos = array();
                                                             $femeninos = array();
+                                                            $nob = array();
                                                             $nes = array();
 
                                                             foreach ($usuarios as $usuario) {
@@ -428,15 +450,24 @@
                                                                 else if ($usuario->genero == 'Femenino') {
                                                                     array_push($femeninos, $inscripcionTMP);
                                                                 }
+                                                                else if($usuario->genero == 'No binario'){
+                                                                    array_push($nob, $inscripcionTMP);
+                                                                }
                                                                 else {
                                                                     array_push($nes, $inscripcionTMP);
                                                                 }
                                                             }
+                                                            $mConTag = 0;
+                                                            $fConTag = 0;
+                                                            $nobConTag = 0;
+                                                            $nesConTag = 0;
+                                                            $totalConTag = 0;
 
                                                             //Escribir los tags
                                                             foreach($tags as $tag){
                                                                 $thismtag = 0;
                                                                 $thisftag = 0;
+                                                                $thisnobtag = 0;
                                                                 $thisnetag = 0;
 
                                                                 foreach($masculinos as $masculino){
@@ -448,6 +479,12 @@
                                                                 foreach($femeninos as $femenino){
                                                                     if(strpos($femenino->tags, $tag) !== false){
                                                                         $thisftag++;
+                                                                    }
+                                                                }
+
+                                                                foreach($nob as $no){
+                                                                    if(strpos($no->tags, $tag) !== false){
+                                                                        $thisnobtag++;
                                                                     }
                                                                 }
 
@@ -463,14 +500,32 @@
                                                                 echo "<td>".$tag."</td>";
                                                                 echo "<td>" . $thismtag . "</td>";
                                                                 echo "<td>" . $thisftag . "</td>";
+                                                                echo "<td>" . $thisnobtag . "</td>";
                                                                 echo "<td>" . $thisnetag . "</td>";
-                                                                echo "<td>" . $thismtag + $thisftag + $thisnetag . "</td>";
+                                                                echo "<td>" . $thismtag + $thisftag + $thisnobtag + $thisnetag . "</td>";
+
+                                                                $mConTag += $thismtag;
+                                                                $fConTag += $thisftag;
+                                                                $nobConTag += $thisnobtag;
+                                                                $nesConTag += $thisnetag;
+                                                                $totalConTag += $thismtag + $thisftag + $thisnobtag + $thisnetag;
+
+
                                                             }
                                                         @endphp
+                                                        <tr>
+                                                            <td>Sin tag</td>
+                                                            <td>{{ count($masculinos) - $mConTag }}</td>
+                                                            <td>{{ count($femeninos) - $fConTag }}</td>
+                                                            <td>{{ count($nob) - $nobConTag }}</td>
+                                                            <td>{{ count($nes) - $nesConTag }}</td>
+                                                            <td>{{ $totalInscripciones - $totalConTag}}</td>
+                                                        </tr>
                                                         <tr>
                                                             <td>Totales *Incluye sin tag</td>
                                                             <td>{{ count($masculinos) }}</td>
                                                             <td>{{ count($femeninos) }}</td>
+                                                            <td>{{ count($nob) }}</td>
                                                             <td>{{ count($nes) }}</td>
                                                             <td>{{ $totalInscripciones }}</td>
                                                         </tr>
@@ -496,17 +551,39 @@
                                                     echo "<p class='text-muted mb-4'>No hay participantes</p>";
                                                 }
                                             @endphp
+                                            <h5 class="card-title mb-4">Edades de participantes</h5>
+                                            @php
+                                                //Si el mapa es mayor a 0, entonces hay participantes
+                                                if(count($edades) > 0){
+                                                    //Ordenar el mapa de mayor a menor
+                                                    arsort($edades);                                               
+                                                    //Imprimir el mayor
+                                                    echo "<p class='text-muted mb-4'><span class='text-primary'>Mayor</span> - " . $edades[count($edades) - 1] . " años</p>";
+                                                    echo "<p class='text-muted mb-4'><span class='text-primary'>Menor</span> - " . $edades[0] . " años</p>";
+                                                    //Imprimir el promedio
+                                                    $promedio = 0;
+                                                    foreach($edades as $edad){
+                                                        $promedio += $edad;
+                                                    }
+                                                    $promedio = $promedio / count($edades);
+                                                    echo "<p class='text-muted mb-4'><span class='text-primary'>Promedio</span> - " . $promedio . " años</p>";
+                                                }
+                                                else{
+                                                    echo "<p class='text-muted mb-4'>No hay participantes</p>";
+                                                }
+                                            @endphp
                                         </div>
                                         <input type="hidden" id="masculinos" value="{{ count($masculinos) }}">
                                         <input type="hidden" id="femeninos" value="{{ count($femeninos) }}">
                                         <input type="hidden" id="nes" value="{{ count($nes) }}">
+                                        <input type="hidden" id="nob" value="{{ count($nob) }}">
                                         <div class="col-sm-6">
                                             <div class="card">
                                                 <div class="card-header">
                                                     <h4 class="card-title mb-0">Participantes por género</h4>
                                                 </div>
                                                 <div class="card-body">
-                                                    <canvas id="genero" class="chartjs-chart" data-colors='["#344D67", "#6ECCAF", "#ADE792"]'></canvas>
+                                                    <canvas id="genero" class="chartjs-chart" data-colors='["#344D67", "#6ECCAF", "#ADE792", "#F3ECB0"]'></canvas>
                                                 </div>
                                             </div> 
                                         </div> <!-- end col -->
@@ -530,7 +607,7 @@
                             <!--end Participantes-->
 
                             <div><br><p>
-                            <b style="color:red;">*</b> H: Hombres, M: Mujeres, N.E.: No especificado.
+                            <b style="color:red;">*</b> H: Hombres, M: Mujeres, N.B.: No binario, N.E.: No especificado.
                             </p></div>
 
                         </div>

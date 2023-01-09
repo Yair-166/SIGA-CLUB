@@ -264,8 +264,30 @@
                                             </a>
                                         </td>
                                         <td>
-                                            <?php echo e($asistencia->asistenciaTotal); ?>
+                                            <?php
+                                                $horaTotal = $asistencia->asistenciaTotal;
+                                                $horaTotal = (float)$horaTotal;
+                                                //Verificar si la hora total es un numero entero
+                                                if(is_int($horaTotal)){
+                                                    echo $horaTotal . " horas";
+                                                    continue;
+                                                }
+                                                else{
+                                                    //Obtener el valor entero antes del punto decimal
+                                                    $horas = floor($horaTotal);
+                                                    //Obtener el valor del decimal
+                                                    $minutos = $horaTotal - $horas;
+                                                    //Castear $minutos a entero
+                                                    $minutos = (float)$minutos;
+                                                    //Obtener el valor de los minutos
+                                                    $minutos = $minutos * 60;
+                                                    //Truncar los decimales
+                                                    $minutos = floor($minutos);
 
+                                                    echo $horas . " horas y " . $minutos . " minutos";
+                                                }
+                                               
+                                            ?>
                                         </td>
                                         <td>
                                             <?php echo e($asistencia->rolUsuario); ?>
