@@ -157,12 +157,27 @@
                                     <!--end col-->
                                     <div class="col-lg-6">
                                         <div class="form-check form-switch form-switch-md" dir="ltr">
-                                            <input type="checkbox" class="form-check-input" id="customSwitchsizemd" onclick="habilitar()">
+                                            <?php
+                                                $boleta = $user->boleta;
+                                                if($boleta == null){
+                                                    echo '<input type="checkbox" class="form-check-input" id="customSwitchsizemd" onclick="habilitar()">';
+                                                }
+                                                else{
+                                                    echo '<input type="checkbox" class="form-check-input" id="flexSwitchCheckChecked" onclick="habilitar()" checked>';
+                                                }
+                                            ?>
                                             <label class="form-check-label" for="customSwitchsizemd">Soy Politécnico</label>
                                         </div>
                                     </div>
                                     <!--end col-->
-                                    <div class="col-lg-6" id="boletatinha" style="display: none;">
+                                    <?php
+                                        if($boleta == null || $boleta == ""){
+                                            echo '<div class="col-lg-6" id="boletatinha" style="display: none;">';
+                                        } 
+                                        else{
+                                            echo '<div class="col-lg-6" id="boletatinha" style="display: block;">';
+                                        }
+                                    ?>
                                         <div class="mb-3">
                                             <label for="exampleFormControlTextarea"
                                                 class="form-label">Boleta o número de empleado</label>
