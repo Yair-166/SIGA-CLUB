@@ -32,7 +32,7 @@
         $eventos = DB::table('eventos')->get();
         $totalEventos = count($eventos);
         //Crear arreglo con tipos de eventos campamento, clase, Concurso, Conferencia, Curso, Entrenamiento, Evaluación, Exhibición, Exposición, Seminario, Torneo
-        $tipos = "Campamento,Clase,Concurso,Conferencia,Curso,Entrenamiento,Evaluación,Exhibición,Exposición,Seminario,Torneo,";
+        $tipos = "Campamento,Clase,Concurso,Conferencia,Curso,Entrenamiento,Evaluación,Exhibición,Exposición,Seminario,Torneo,Otro,";
         //Convertir el string en un arreglo
         $tipos = explode(",", $tipos);
         //Eliminar el ultimo elemento del array

@@ -168,6 +168,7 @@
                                                 <option value="Conferencia">Conferencia</option>
                                                 <option value="Exposición">Exposición</option>
                                                 <option value="Exhibición">Exhibición</option>
+                                                <option value="Otro">Otro</option>
                                             </select>
                                             <div class="invalid-feedback">Por favor, seleccione una categoria valida</div>
                                         </div>
