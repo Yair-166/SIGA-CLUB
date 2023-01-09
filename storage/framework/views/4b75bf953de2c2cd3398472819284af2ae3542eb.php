@@ -390,7 +390,7 @@
                                                                         }else{
                                                                             echo "H: ".$hombresTipo/count($eventosTipo). " | ";
                                                                             echo "M: ".$mujeresTipo/count($eventosTipo). " | ";
-                                                                            echo "N.E.: ".$nobTipo/count($eventosTipo). " | ";
+                                                                            echo "N.B.: ".$nobTipo/count($eventosTipo). " | ";
                                                                             echo "N.E.: ".$neTipo/count($eventosTipo);
                                                                         }
                                                                     ?>
