@@ -305,7 +305,7 @@
             <div class="accordion-item">
                 <h2 class="accordion-header" id="genques-headingOne">
                     <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#genques-collapseOne" aria-expanded="false" aria-controls="genques-collapseOne">
-                        Desgloce de horas por tipo de evento (Horas totales: <?php echo e($horasTotales); ?>)
+                        Desglose de horas por tipo de evento (Horas totales: <?php echo e($horasTotales); ?>)
                     </button>
                 </h2>
                 <div id="genques-collapseOne" class="accordion-collapse collapse collapsed" aria-labelledby="genques-headingOne" data-bs-parent="#genques-accordion">
@@ -328,9 +328,9 @@
                 </div>
             </div>
 
-            <div><p> </p></div>
-            <input type="hidden" id ="clubesAlumno" value ="<?php echo e($clubes); ?>">
-            <input type="hidden" id ="horasxclub" value ="<?php echo e($horasxclub); ?>">
+            <div id="extension"><p> </p></div>
+            <input type="hidden" id="clubesAlumno" value="<?php echo e($clubes); ?>">
+            <input type="hidden" id="horasxclub" value="<?php echo e($horasxclub); ?>">
 
 
         </div><!--end col-->

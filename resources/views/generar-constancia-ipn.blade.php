@@ -3,8 +3,29 @@
     $dia = date('d');
     //Obtener mes actual
     $mes = date('m');
-    $meses = array(1 => 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
-    'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
+    //Obtener el tamaño de la cadena del mes
+    $tamanoMes = strlen($mes);
+    //Si el tamaño del mes es igual a 2 y el primer caracter es un 0
+    if($tamanoMes == 2 && substr($mes, 0, 1) == '0'){
+        //Obtener el mes sin el 0
+        $mes = substr($mes, 1, 1);
+    }
+    //Crear arreglo con los meses del año
+    $meses = array();
+    $meses[1] = 'Enero';
+    $meses[2] = 'Febrero';
+    $meses[3] = 'Marzo';
+    $meses[4] = 'Abril';
+    $meses[5] = 'Mayo';
+    $meses[6] = 'Junio';
+    $meses[7] = 'Julio';
+    $meses[8] = 'Agosto';
+    $meses[9] = 'Septiembre';
+    $meses[10] = 'Octubre';
+    $meses[11] = 'Noviembre';
+    $meses[12] = 'Diciembre';
+    //$meses = array(1 => 'Enero', 'Febrero', 'Marzo', 'Abril', 'Mayo', 'Junio', 
+    //'Julio', 'Agosto', 'Septiembre', 'Octubre', 'Noviembre', 'Diciembre');
     $mes = $meses[$mes];
     //Obtener el año actual
     $anio = date('Y');
